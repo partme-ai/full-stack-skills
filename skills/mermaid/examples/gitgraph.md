@@ -73,7 +73,7 @@ For a given commit you may decorate it as a **tag**, similar to the concept of t
 ```mermaid
 gitGraph
     commit
-    commit id: "Normal" tag: "v1.0.0"
+    commit id: "Normal" tag: "V1.0.0"
     commit
     commit id: "Reverse" type: REVERSE tag: "RC_1"
     commit

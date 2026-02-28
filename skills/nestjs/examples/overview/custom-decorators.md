@@ -90,7 +90,7 @@ import { SetMetadata } from '@nestjs/common';
 export const ApiVersion = (version: string) => SetMetadata('apiVersion', version);
 
 // Usage
-@ApiVersion('v1')
+@ApiVersion('V1')
 @Controller('users')
 export class UsersController {
   @Get()

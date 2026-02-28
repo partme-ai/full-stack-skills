@@ -183,7 +183,7 @@ spring:
       dashscope:
         embedding:
           options:
-            model: text-embedding-v1
+            model: text-embedding-V1
 ```
 
 **使用 EmbeddingClient**：
@@ -323,7 +323,7 @@ spring:
             top-p: 0.9
         embedding:
           options:
-            model: text-embedding-v1
+            model: text-embedding-V1
 ```
 
 ## 示例 Prompt
