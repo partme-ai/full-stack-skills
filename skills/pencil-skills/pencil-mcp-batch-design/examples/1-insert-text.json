@@ -1,0 +1,13 @@
+{
+  "operations": [
+    {
+      "type": "insert",
+      "node": {
+        "type": "text",
+        "content": "Hello World",
+        "style": { "fill": "#000000" }
+      },
+      "bind": "textNode"
+    }
+  ]
+}

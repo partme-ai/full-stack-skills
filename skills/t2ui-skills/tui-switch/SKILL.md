@@ -1,0 +1,289 @@
+---
+name: tui-switch
+description: Generate pixel-precise ASCII TUI for Switch u-switch with strict output blocks TUI_RENDER COMPONENT_SPEC PENCIL_SPEC PENCIL_BATCH_DESIGN suitable for Pencil MCP drawing workflows.
+---
+
+
+## Purpose
+
+- Produce an ASCII Text UI (TUI) representation of **Switch**.
+- Always output layout attributes (top/left/width/height, spacing, colors, typography, zIndex).
+- Always output Pencil MCP–ready specs and a `batch_design` plan (≤25 operations per call).
+
+## Source Documentation
+
+This skill intentionally does not embed external documentation links.
+If you need a canonical reference, use your team's component documentation or design system source.
+## Input Model (Recommended)
+
+```json
+{
+  "widthCols": 70,
+  "grid": { "cellWidthPx": 8, "cellHeightPx": 16 },
+  "props": {},
+  "modelValue": null,
+  "state": { "focused": false, "disabled": false, "loading": false, "error": null },
+  "style": {
+    "fillColor": "#ffffff",
+    "textColor": "#111111",
+    "strokeColor": "#e5e7eb",
+    "strokeThickness": 1,
+    "cornerRadius": 12
+  },
+  "typography": { "fontFamily": "Inter", "fontSize": 14, "fontWeight": 400, "lineHeight": 20 },
+  "layout": { "paddingPx": 16, "gapPx": 8 },
+  "hotkeys": []
+}
+```
+
+## Output Contract (Mandatory)
+
+### OUTPUT: TUI_RENDER
+
+```text
+...monospace-only text...
+```
+
+### OUTPUT: COMPONENT_SPEC
+
+```json
+{
+  "id": "tui-switch_1",
+  "name": "Switch",
+  "type": "tui-switch",
+  "bbox": { "topPx": 0, "leftPx": 0, "widthPx": 0, "heightPx": 0 },
+  "zIndex": 1,
+  "layout": { "paddingPx": 16, "gapPx": 8, "align": "left", "valign": "top" },
+  "style": {
+    "fillColor": "#ffffff",
+    "textColor": "#111111",
+    "strokeColor": "#e5e7eb",
+    "strokeThickness": 1,
+    "cornerRadius": 12,
+    "opacity": 1
+  },
+  "typography": { "fontFamily": "Inter", "fontSize": 14, "fontWeight": 400, "lineHeight": 20 },
+  "overflow": { "mode": "truncate", "ellipsis": "…", "maxLines": 1 },
+  "state": { "focused": false, "disabled": false, "loading": false, "error": null },
+  "hotkeys": []
+}
+```
+
+### OUTPUT: PENCIL_SPEC
+
+```json
+{
+  "canvas": { "widthPx": 390, "heightPx": 844, "backgroundColor": "#ffffff" },
+  "grid": { "cellWidthPx": 8, "cellHeightPx": 16 },
+  "nodes": [],
+  "components": []
+}
+```
+
+### OUTPUT: PENCIL_BATCH_DESIGN
+
+```text
+CALL 1:
+root=G()
+screen=I(root,{type:"frame",name:"Screen"})
+U(screen,{width:390,height:844,x:0,y:0})
+
+CALL 2:
+cmpBg=I(screen,{type:"rect",name:"Switch/Background"})
+U(cmpBg,{x:24,y:24,width:342,height:96,fillColor:"#ffffff",strokeColor:"#e5e7eb",strokeThickness:1,cornerRadius:12})
+cmpText=I(screen,{type:"text",name:"Switch/Text",content:"Switch"})
+U(cmpText,{x:40,y:56,width:310,height:20,textColor:"#111111",fontFamily:"Inter",fontSize:14,fontWeight:600})
+```
+
+## Rendering Rules (Component-Level)
+
+Follow the shared rules from `tui-front-ui`:
+- No TAB characters.
+- Do not exceed `widthCols`.
+- Provide a header row, body area, and minimal hotkeys if interactive.
+- `disabled=true` must suppress interaction hints.
+- `loading=true` must show a stable placeholder.
+- `error!=null` must be printed in a single line footer (truncated to width).
+
+## Examples (Must include all output blocks)
+
+### Example 1 — Minimal / default
+
+### OUTPUT: TUI_RENDER
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ [Switch]                                                    │
+├──────────────────────────────────────────────────────────────┤
+│ Enable feature:  [ OFF ]                                     │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### OUTPUT: COMPONENT_SPEC
+
+```json
+{
+  "id": "tui-switch_ex1",
+  "name": "Switch",
+  "type": "tui-switch",
+  "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 96 },
+  "zIndex": 1,
+  "layout": { "paddingPx": 16, "gapPx": 8, "align": "left", "valign": "top" },
+  "style": { "fillColor": "#ffffff", "textColor": "#111111", "strokeColor": "#e5e7eb", "strokeThickness": 1, "cornerRadius": 12, "opacity": 1 },
+  "typography": { "fontFamily": "Inter", "fontSize": 14, "fontWeight": 400, "lineHeight": 20 },
+  "overflow": { "mode": "truncate", "ellipsis": "…", "maxLines": 1 },
+  "state": { "focused": false, "disabled": false, "loading": false, "error": null },
+  "hotkeys": []
+}
+```
+
+### OUTPUT: PENCIL_SPEC
+
+```json
+{
+  "canvas": { "widthPx": 390, "heightPx": 844, "backgroundColor": "#ffffff" },
+  "grid": { "cellWidthPx": 8, "cellHeightPx": 16 },
+  "nodes": [],
+  "components": [
+    { "id": "tui-switch_ex1", "name": "Switch", "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 96 }, "zIndex": 1 }
+  ]
+}
+```
+
+### OUTPUT: PENCIL_BATCH_DESIGN
+
+```text
+CALL 1:
+root=G()
+screen=I(root,{type:"frame",name:"Screen"})
+U(screen,{width:390,height:844,x:0,y:0})
+
+CALL 2:
+cmpBg=I(screen,{type:"rect",name:"Switch/Background"})
+U(cmpBg,{x:24,y:24,width:342,height:96,fillColor:"#ffffff",strokeColor:"#e5e7eb",strokeThickness:1,cornerRadius:12})
+cmpText=I(screen,{type:"text",name:"Switch/Text",content:"Switch"})
+U(cmpText,{x:40,y:56,width:310,height:20,textColor:"#111111",fontFamily:"Inter",fontSize:14,fontWeight:600})
+```
+
+### Example 2 — Styled / customized
+
+### OUTPUT: TUI_RENDER
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ [Switch]                                                    │
+├──────────────────────────────────────────────────────────────┤
+│ Enable feature:  [ ON ]                                      │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### OUTPUT: COMPONENT_SPEC
+
+```json
+{
+  "id": "tui-switch_ex2",
+  "name": "Switch",
+  "type": "tui-switch",
+  "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 104 },
+  "zIndex": 1,
+  "layout": { "paddingPx": 20, "gapPx": 10, "align": "left", "valign": "top" },
+  "style": { "fillColor": "#ffffff", "textColor": "#111111", "strokeColor": "#111111", "strokeThickness": 2, "cornerRadius": 12, "opacity": 1 },
+  "typography": { "fontFamily": "Inter", "fontSize": 14, "fontWeight": 600, "lineHeight": 20 },
+  "overflow": { "mode": "truncate", "ellipsis": "…", "maxLines": 1 },
+  "state": { "focused": false, "disabled": false, "loading": false, "error": null },
+  "hotkeys": []
+}
+```
+
+### OUTPUT: PENCIL_SPEC
+
+```json
+{
+  "canvas": { "widthPx": 390, "heightPx": 844, "backgroundColor": "#ffffff" },
+  "grid": { "cellWidthPx": 8, "cellHeightPx": 16 },
+  "nodes": [],
+  "components": [
+    { "id": "tui-switch_ex2", "name": "Switch", "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 104 }, "zIndex": 1 }
+  ]
+}
+```
+
+### OUTPUT: PENCIL_BATCH_DESIGN
+
+```text
+CALL 1:
+root=G()
+screen=I(root,{type:"frame",name:"Screen"})
+U(screen,{width:390,height:844,x:0,y:0})
+
+CALL 2:
+cmpBg=I(screen,{type:"rect",name:"Switch/Background"})
+U(cmpBg,{x:24,y:24,width:342,height:104,fillColor:"#ffffff",strokeColor:"#111111",strokeThickness:2,cornerRadius:12})
+cmpText=I(screen,{type:"text",name:"Switch/Text",content:"Switch"})
+U(cmpText,{x:40,y:60,width:310,height:20,textColor:"#111111",fontFamily:"Inter",fontSize:14,fontWeight:600})
+```
+
+### Example 3 — Disabled / error / edge-case
+
+### OUTPUT: TUI_RENDER
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ [Switch] Disabled                                           │
+├──────────────────────────────────────────────────────────────┤
+│ Enable feature:  [ ON ]                                      │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### OUTPUT: COMPONENT_SPEC
+
+```json
+{
+  "id": "tui-switch_ex3",
+  "name": "Switch",
+  "type": "tui-switch",
+  "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 112 },
+  "zIndex": 1,
+  "layout": { "paddingPx": 16, "gapPx": 8, "align": "left", "valign": "top" },
+  "style": { "fillColor": "#ffffff", "textColor": "#6b7280", "strokeColor": "#e5e7eb", "strokeThickness": 1, "cornerRadius": 12, "opacity": 1 },
+  "typography": { "fontFamily": "Inter", "fontSize": 14, "fontWeight": 400, "lineHeight": 20 },
+  "overflow": { "mode": "truncate", "ellipsis": "…", "maxLines": 1 },
+  "state": { "focused": false, "disabled": true, "loading": false, "error": "Something went wrong" },
+  "hotkeys": []
+}
+```
+
+### OUTPUT: PENCIL_SPEC
+
+```json
+{
+  "canvas": { "widthPx": 390, "heightPx": 844, "backgroundColor": "#ffffff" },
+  "grid": { "cellWidthPx": 8, "cellHeightPx": 16 },
+  "nodes": [],
+  "components": [
+    { "id": "tui-switch_ex3", "name": "Switch", "bbox": { "topPx": 24, "leftPx": 24, "widthPx": 342, "heightPx": 112 }, "zIndex": 1 }
+  ]
+}
+```
+
+### OUTPUT: PENCIL_BATCH_DESIGN
+
+```text
+CALL 1:
+root=G()
+screen=I(root,{type:"frame",name:"Screen"})
+U(screen,{width:390,height:844,x:0,y:0})
+
+CALL 2:
+cmpBg=I(screen,{type:"rect",name:"Switch/Background"})
+U(cmpBg,{x:24,y:24,width:342,height:112,fillColor:"#ffffff",strokeColor:"#e5e7eb",strokeThickness:1,cornerRadius:12,opacity:1})
+cmpText=I(screen,{type:"text",name:"Switch/Error",content:"Error: Something went wrong…"})
+U(cmpText,{x:40,y:60,width:310,height:20,textColor:"#6b7280",fontFamily:"Inter",fontSize:14,fontWeight:400})
+```
+
+## Component Summary Row (for page aggregation)
+
+```text
+| id | name | top | left | width | height | z | keyProps | state | hotkeys |
+| tui-switch | Switch | 0 | 0 | 0 | 0 | 0 | keyProps=... | state=... | hotkeys=... |
+```

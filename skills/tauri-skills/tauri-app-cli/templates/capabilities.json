@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for CLI args",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "cli:default"
+  ]
+}

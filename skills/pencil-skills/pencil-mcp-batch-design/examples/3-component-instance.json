@@ -1,0 +1,28 @@
+{
+  "operations": [
+    {
+      "type": "insert",
+      "node": {
+        "type": "ref",
+        "ref": "ButtonComponentID",
+        "name": "Submit Button"
+      },
+      "bind": "btnInstance"
+    },
+    {
+      "type": "update",
+      "targetId": "btnInstance/label",
+      "props": {
+        "content": "Submit Now"
+      }
+    },
+    {
+      "type": "update",
+      "targetId": "btnInstance",
+      "props": {
+        "x": 100,
+        "y": 200
+      }
+    }
+  ]
+}

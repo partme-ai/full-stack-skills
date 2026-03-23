@@ -1,0 +1,8 @@
+This skill is based on the official Cocos2d-x v4 documentation.
+
+Official Documentation: https://docs.cocos.com/cocos2d-x/v4/manual/zh/
+
+Cocos2d-x is licensed under the MIT License.
+
+For complete license terms, please refer to:
+https://github.com/cocos2d/cocos2d-x/blob/v4/LICENSE

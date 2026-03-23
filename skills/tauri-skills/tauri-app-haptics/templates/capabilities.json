@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "mobile-capability",
+  "description": "Capability for Haptics",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "haptics:default",
+    "haptics:allow-vibrate",
+    "haptics:allow-impact",
+    "haptics:allow-notification",
+    "haptics:allow-selection"
+  ]
+}

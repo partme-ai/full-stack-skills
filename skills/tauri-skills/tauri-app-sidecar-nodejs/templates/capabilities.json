@@ -1,0 +1,20 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Node.js sidecar",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "shell:default",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "binaries/my-node-app",
+          "sidecar": true,
+          "args": true
+        }
+      ]
+    }
+  ]
+}

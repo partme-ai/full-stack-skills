@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "mobile-capability",
+  "description": "Capability for Geolocation",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "geolocation:default",
+    "geolocation:allow-get-current-position",
+    "geolocation:allow-watch-position",
+    "geolocation:allow-clear-watch",
+    "geolocation:allow-check-permissions",
+    "geolocation:allow-request-permissions"
+  ]
+}
