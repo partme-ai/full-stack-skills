@@ -1,6 +1,8 @@
 # Generated output directories
 examples/
 adapters-output/
+dist/
+node_modules/
 *.pyc
 __pycache__/
 .DS_Store

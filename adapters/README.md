@@ -1,188 +1,155 @@
-# Platform Adapters
+# Cross-Platform Skills Adapter
 
-本目录包含将 Agent Skills 转换为不同平台格式的适配器工具。
+`adapters/` is the repository’s only cross-platform converter. It ships an independent CLI named `fskill`, exports the grouped repository structure in `skills/<group>/<skill>/` as standard skill directories, and installs them into the path layout required by each supported platform.
 
-## ⚠️ 重要说明
+## Compatibility baseline
 
-**这些适配器工具为理论性实现，尚未经过实际平台验证。**
+- **Skill format**: standard `SKILL.md`-based directory layout
+- **Platform paths**: aligned to the current `vercel-labs/skills` compatibility matrix
+- **Repository source layout**: `skills/<group>/<skill>/`
 
-- 转换脚本基于平台的一般特性和常见适配模式
-- 生成的配置文件格式可能需要根据实际平台 API 调整
-- **建议在实际使用前查阅目标平台的官方文档并进行测试**
+The adapter does not generate platform-specific manifests, plugins, or workflow wrappers. It preserves the original skill directory and changes only the destination path for each platform.
 
-## 支持的平台
+## Install
 
-- **Cursor** - 转换为 Cursor 自定义指令格式
-- **Trae** - 转换为 Trae 插件格式
-- **Qoder** - 转换为 Qoder Agent 格式
-- **CodeBuddy** - 转换为 CodeBuddy Workflow 格式
-- **Windsurf** - 转换为 Windsurf Cascade Skills 格式
+```bash
+git clone https://github.com/partme-ai/full-stack-skills.git
+cd full-stack-skills
+npm install -g ./adapters
+```
 
-## 快速开始
-
-### 转换所有技能到所有平台
+Or, for repository-local development:
 
 ```bash
 cd adapters
-python convert_all.py ../skills ../adapters-output
+npm install
+npm link
 ```
 
-### 转换单个平台
-
-#### Cursor
-
-```bash
-cd adapters/cursor
-python convert_to_cursor.py --all ../../skills ../../adapters-output/cursor
-```
-
-#### Trae
-
-```bash
-cd adapters/trae
-python convert_to_trae.py --all ../../skills ../../adapters-output/trae
-```
-
-#### Qoder
-
-```bash
-cd adapters/qoder
-python convert_to_qoder.py --all ../../skills ../../adapters-output/qoder
-```
-
-#### CodeBuddy
-
-```bash
-cd adapters/codebuddy
-python convert_to_codebuddy.py --all ../../skills ../../adapters-output/codebuddy
-```
-
-#### Windsurf
-
-```bash
-cd adapters/windsurf
-python convert_to_windsurf.py --all ../../skills ../../adapters-output/windsurf
-```
-
-## 目录结构
-
-```
-adapters/
-├── README.md                    # 本文件
-├── convert_all.py              # 主转换工具（转换到所有平台）
-├── cursor/                     # Cursor 适配器
-│   ├── README.md
-│   └── convert_to_cursor.py
-├── trae/                       # Trae 适配器
-│   ├── README.md
-│   └── convert_to_trae.py
-├── qoder/                      # Qoder 适配器
-│   ├── README.md
-│   └── convert_to_qoder.py
-├── codebuddy/                  # CodeBuddy 适配器
-│   ├── README.md
-│   └── convert_to_codebuddy.py
-└── windsurf/                   # Windsurf 适配器
-    ├── README.md
-    └── convert_to_windsurf.py
-```
-
-## 输出格式
-
-转换后的文件将保存在 `adapters-output/` 目录下，按平台分类：
-
-```
-adapters-output/
-├── cursor/
-│   └── .cursor/
-│       └── rules/
-│           ├── course-designer.md
-│           ├── code-generator.md
-│           └── ...
-├── trae/
-│   ├── course-designer/
-│   │   ├── trae-plugin.json
-│   │   └── SKILL.md
-│   └── ...
-├── qoder/
-│   ├── course-designer-agent/
-│   │   ├── qoder-agent-config.json
-│   │   ├── SKILL.md
-│   │   └── course_designer_agent.py
-│   └── ...
-└── codebuddy/
-    ├── course-designer/
-    │   ├── manifest.json
-    │   ├── workflows/
-    │   └── skills/
-    └── ...
-└── windsurf/
-    ├── course-designer/
-    │   ├── SKILL.md
-    │   └── ...
-    └── ...
-```
-
-## 依赖要求
-
-转换脚本需要以下 Python 包：
-
-```bash
-pip install pyyaml
-```
-
-## 使用示例
-
-### 示例 1: 转换单个技能到 Cursor
-
-```bash
-cd adapters/cursor
-python convert_to_cursor.py ../../skills/course-designer .cursor/rules/
-```
-
-### 示例 2: 转换所有技能到 Qoder
-
-```bash
-cd adapters/qoder
-python convert_to_qoder.py --all ../../skills qoder-agents/
-```
-
-### 示例 3: 转换所有技能到所有平台
+Or, inside the adapter package only:
 
 ```bash
 cd adapters
-python convert_all.py ../skills ../adapters-output
+npm install -g ./adapters
 ```
 
-## 验证状态
+After installation, call `fskill` directly.
 
-| 平台 | 转换脚本 | 格式验证 | 平台验证 |
-|------|---------|---------|---------|
-| Cursor | ✅ 完成 | ⚠️ 需要验证 | ⚠️ 需要验证 |
-| Trae | ✅ 完成 | ⚠️ 需要验证 | ⚠️ 需要验证 |
-| Qoder | ✅ 完成 | ⚠️ 需要验证 | ⚠️ 需要验证 |
-| CodeBuddy | ✅ 完成 | ⚠️ 需要验证 | ⚠️ 需要验证 |
-| Windsurf | ✅ 完成 | ⚠️ 需要验证 | ⚠️ 需要验证 |
+## Commands
 
-## 贡献
+```bash
+fskill --version
+fskill platforms
+fskill audit
+fskill convert --platform all --output ./adapters-output
+fskill install
+```
 
-如果你验证了某个平台的适配方案，欢迎贡献：
+`fskill install` defaults to the current project's `.agents/skills/`, which is the standard Agent Skills-compatible path.
 
-1. 测试转换脚本生成的输出
-2. 在实际平台上验证功能
-3. 报告问题和改进建议
-4. 提交 Pull Request
+## Command reference
 
-## 注意事项
+### List supported platforms
 
-- 转换脚本会自动提取 `SKILL.md` 中的 frontmatter 和内容
-- 脚本会尝试提取工作流步骤，但可能需要手动调整
-- 生成的配置文件格式可能需要根据实际平台 API 调整
-- 建议在实际使用前查阅目标平台的官方文档
+```bash
+fskill platforms
+```
 
-## 参考资源
+### Show CLI version
 
-- [Agent Skills 规范](https://agentskills.io/)
-- [Cursor 文档](https://docs.cursor.com/)
-- [Qoder 官网](https://qoder.com/)
-- 各平台官方文档
+```bash
+fskill --version
+```
+
+### Audit the repository skills
+
+```bash
+fskill audit
+```
+
+### Export all platforms
+
+```bash
+fskill convert --platform all --output ./adapters-output
+```
+
+### Export one platform
+
+```bash
+fskill convert --platform claude-code --output ./adapters-output
+```
+
+### Install into a project
+
+```bash
+fskill install --platform claude-code --scope project
+```
+
+### Install globally
+
+```bash
+fskill install --platform antigravity --scope global
+```
+
+### Install selected skills only
+
+```bash
+fskill install --platform codex --scope global --skill react --skill vue3
+```
+
+### Preview without writing
+
+```bash
+fskill convert --platform all --output ./adapters-output --dry-run
+fskill install --platform windsurf --scope project --dry-run
+```
+
+## Supported platforms
+
+Run `fskill platforms --markdown` for the generated Markdown table that matches the CLI registry.
+
+## Discovery rules
+
+- A directory is treated as a skill only when it contains `SKILL.md`
+- `skills/pencil-skills/docs` is treated as supporting documentation, not a skill
+- `__pycache__`, `.pyc`, `.DS_Store`, and hidden garbage files are excluded
+- `references/`, `examples/`, `scripts/`, `assets/`, and `templates/` are preserved
+
+## Output layout
+
+The converter writes standard skill directories under:
+
+```text
+adapters-output/<platform>/<project-path>/<skill-name>/
+```
+
+Examples:
+
+```text
+adapters-output/claude-code/.claude/skills/react/
+adapters-output/cursor/.agents/skills/react/
+adapters-output/openclaw/skills/react/
+adapters-output/antigravity/.agents/skills/react/
+```
+
+## Install behavior
+
+- `fskill install` defaults to `<cwd>/.agents/skills/`
+- `--scope project` installs into `<cwd>/<projectPath>`
+- `--scope global` installs into the platform’s global directory
+- default mode copies directories
+- `--link` creates symlinks instead of copying
+- existing destination directories are replaced to keep installs deterministic
+
+## Source of truth
+
+- Platform registry: `adapters/src/platform-registry.ts`
+- Skill discovery and audit: `adapters/src/skills.ts`
+- CLI entry: `adapters/src/index.ts`
+
+## Validation expectations
+
+- `platforms` lists every supported platform and path mapping
+- `audit` reports actual skill counts, missing `SKILL.md` directories, and platform totals
+- `convert --dry-run` shows the exact destination layout before writing
+- `install --dry-run` shows exact project or global install targets before writing

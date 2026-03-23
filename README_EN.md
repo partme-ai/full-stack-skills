@@ -1,12 +1,18 @@
-# PartMeAI Skills Marketplace
+# Full Stack Skills (Alpha)
 
-A free skills marketplace providing various practical AI skill collections that can be used in Claude Code.
+A grouped Agent Skills repository for Claude Code, Claude.ai, and compatible Agent Skills ecosystems.
 
-> **Note:** This repository merges Anthropic's example skills and Agent Skills collections, providing various practical AI skills that can be used in Claude Code, Claude.ai, and the API. For information about the Agent Skills standard, see [agentskills.io](http://agentskills.io).
+![Version](https://img.shields.io/badge/Version-0.0.1-red)
+![License](https://img.shields.io/badge/License-Apache%202.0-green)
+![Skill%20Docs](https://img.shields.io/badge/SKILL.md-421-orange)
+![Skill%20Groups](https://img.shields.io/badge/Groups-42-blue)
+![Marketplace%20Plugins](https://img.shields.io/badge/Plugins-40-brightgreen)
+
+> **Note:** This repository is maintained as a grouped skills catalog. The current documentation follows the actual `skills/` directory layout and `.claude-plugin/marketplace.json` rather than older category-based packaging.
 
 ## What are Skills?
 
-Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. Skills teach Claude how to complete specific tasks in a repeatable way, whether that's creating documents with your company's brand guidelines, analyzing data using your organization's specific workflows, or automating personal tasks.
+Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. Skills teach Claude how to complete repeatable tasks in a reusable way, whether that means documentation workflows, frontend implementation, system design, testing, or delivery automation.
 
 ### More Information
 
@@ -18,13 +24,54 @@ Skills are folders of instructions, scripts, and resources that Claude loads dyn
 
 ## About This Repository
 
-This repository contains skills that demonstrate what's possible with Claude's skills system. These skills range from creative applications (art, music, design) to technical tasks (testing web apps, MCP server generation) to enterprise workflows (communications, branding, etc.), as well as teaching and education scenarios.
+This repository is PartMeAI’s grouped Agent Skills catalog. The current repository snapshot contains **42** skill-group directories and **421** `SKILL.md` files. `.claude-plugin/marketplace.json` currently publishes **40** plugins with **410** skill paths.
 
-Each skill is self-contained in its own folder with a `SKILL.md` file containing the instructions and metadata that Claude uses. You can browse through these skills to get inspiration for your own skills or to understand different patterns and approaches.
+The main repo now covers frontend, backend, mobile, cross-platform development, testing, DevOps, documentation, OCR, Tauri, Stitch, Pencil, T2UI, OpenSpec, and Spec Kit workflows.
 
-Many skills in this repo are open source (Apache 2.0). We've also included the document creation & editing skills that power [Claude's document capabilities](https://www.anthropic.com/news/create-files) under the hood in the [`skills/docx`](skills/docx), [`skills/pdf`](skills/pdf), [`skills/pptx`](skills/pptx), and [`skills/xlsx`](skills/xlsx) subfolders. These are source-available, not open source, but we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application.
+### Repository Snapshot
+
+| Metric | Current Value |
+|---|---:|
+| Skill-group directories under `skills/` | 42 |
+| `SKILL.md` files on disk | 421 |
+| Plugins in `.claude-plugin/marketplace.json` | 40 |
+| Published skill refs in Marketplace | 410 |
+| Repo-only groups not published | 2 |
+
+### Coverage Map
+
+| Domain | Representative Groups | Scope |
+|---|---|---|
+| Frontend and UI | `vue-skills`, `react-skills`, `angular-skills`, `svelte-skills`, `antd-skills`, `vue-ui-skills`, `build-skills` | Frameworks, component libraries, build systems, UI implementation |
+| Backend and cross-platform | `spring-skills`, `nodejs-skills`, `python-skills`, `go-skills`, `electron-skills`, `tauri-skills`, `uniapp-skills`, `flutter-skills` | Service development, desktop, mobile, hybrid delivery |
+| Engineering delivery | `dev-utils-skills`, `ddd-skills`, `testing-skills`, `devops-skills`, `docker-skills`, `database-skills`, `nvm-skills` | Project scaffolding, architecture, test strategy, release workflows |
+| Design and documents | `design-skills`, `document-skills`, `ocrmypdf-skills`, `drawio-skills`, `ascii-skills` | Design execution, documentation, OCR, diagramming, text visuals |
+| Spec and design systems | `speckit-skills`, `openspec-skills`, `t2ui-skills`, `stitch-skills`, `pencil-skills` | Spec-driven delivery, UI generation, design workflows, structured handoff |
+| Shared support | `social-skills`, `teaching-skills`, `utility-skills` | Communication, education, utility workflows |
+
+### Publication Status
+
+- `threejs-skills` exists in the repository with 18 skills and is not currently published in Marketplace.
+- `vscode-skills` exists in the repository with 4 skills and is not currently published in Marketplace.
+- `document-skills` has 5 skill directories on disk, while Marketplace still references 9 entries, including missing paths for `docx`, `pptx`, `pdf`, and `xlsx`.
+- `tauri-skills` has 52 skill directories on disk, while Marketplace currently publishes 51 entries; `tauri-app-updater` remains repo-only.
+
+### Recommended Reading Path
+
+- **Start with repository scope**: read this README together with `docs/repository-map.md` to understand structure, publication state, and catalog drift.
+- **Navigate by skill group**: if you already know the technical domain, move directly into `docs/skill-group-mapping.md` and the relevant `skills/<group>-skills/` subtree.
+- **Navigate by delivery stage**: if you care about end-to-end flow, use `docs/pipeline-stage-to-skills.md` first.
+- **Navigate by design workflow**: for design-system and spec-driven work, prioritize `stitch-skills`, `pencil-skills`, `t2ui-skills`, `speckit-skills`, and `openspec-skills`.
+
+For the current source of truth, use:
+
+- [docs/repository-map.md](docs/repository-map.md)
+- [docs/skill-group-mapping.md](docs/skill-group-mapping.md)
+- [docs/pipeline-stage-to-skills.md](docs/pipeline-stage-to-skills.md)
+- [docs/skills-ecosystem.md](docs/skills-ecosystem.md)
 
 ### Disclaimer
+
 
 **These skills are provided for demonstration and educational purposes only.** While some of these capabilities may be available in Claude, the implementations and behaviors you receive from Claude may differ from what is shown in these skills. These skills are meant to illustrate patterns and possibilities. Always test skills thoroughly in your own environment before relying on them for critical tasks.
 
@@ -62,13 +109,13 @@ There are two ways to install plugins:
 Install plugins directly using commands:
 
 ```
-/plugin install teaching-skills@full-stack-skills
-/plugin install document-skills@full-stack-skills
-/plugin install markdown-skills@full-stack-skills
-/plugin install development-skills@full-stack-skills
-/plugin install design-skills@full-stack-skills
-/plugin install social-skills@full-stack-skills
-/plugin install utility-skills@full-stack-skills
+/plugin install vue-skills@full-stack-skills
+/plugin install react-skills@full-stack-skills
+/plugin install spring-skills@full-stack-skills
+/plugin install dev-utils-skills@full-stack-skills
+/plugin install testing-skills@full-stack-skills
+/plugin install stitch-skills@full-stack-skills
+/plugin install tauri-skills@full-stack-skills
 ```
 
 #### 3. Use Skills
@@ -87,311 +134,165 @@ You can use Anthropic's pre-built skills, and upload custom skills, via the Clau
 
 ### Using on Other Platforms
 
-These skills can also be used on other AI platforms such as Cursor, Trae, Qoder, CodeBuddy, etc. For detailed instructions, please refer to the [Cross-Platform Usage Guide](PLATFORM_GUIDE.md).
+This repository now ships a **TypeScript standard converter**. It exports `skills/<group>/<skill>/` into standard skill directories and installs them into the project-level or global-level path required by each supported platform. The converter does not generate platform-specific plugin wrappers; it preserves the original skill directory and switches only the destination path.
+
+**Install and run commands**
+
+```bash
+git clone https://github.com/partme-ai/full-stack-skills.git
+cd full-stack-skills
+npm install -g ./adapters
+fskill --version
+fskill platforms
+fskill audit
+fskill convert --platform all --output ./adapters-output
+fskill install
+```
+
+By default, `fskill install` installs into the current project's `.agents/skills/` directory, which is the standard Agent Skills-compatible path. Use `--platform` and `--scope` when you need a platform-specific destination.
+For repository-local development, you can also run `npm install && npm link` inside `adapters/` and then call `fskill ...` directly.
+
+**Platform coverage**
+
+- **Shared `.agents/skills/` family**: `amp`, `kimi-cli`, `replit`, `universal`, `antigravity`, `cline`, `warp`, `codex`, `cursor`, `deepagents`, `gemini-cli`, `github-copilot`, `opencode`
+- **Dedicated directory family**: `augment`, `claude-code`, `openclaw`, `codebuddy`, `command-code`, `continue`, `cortex`, `crush`, `droid`, `goose`, `junie`, `iflow-cli`, `kilo`, `kiro-cli`, `kode`, `mcpjam`, `mistral-vibe`, `mux`, `openhands`, `pi`, `qoder`, `qwen-code`, `roo`, `trae`, `trae-cn`, `windsurf`, `zencoder`, `neovate`, `pochi`, `adal`
+- **Antigravity baseline**: project-level `.agents/skills/`, global `~/.gemini/antigravity/skills/`
+
+For the full platform matrix, installation paths, and workflow details, see [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md) and [adapters/README.md](adapters/README.md).
+
+## Repository Governance
+
+### Inventory Rules
+
+- Treat `skills/` as the source of truth for what exists in the repository.
+- Treat `.claude-plugin/marketplace.json` as the source of truth for what is published.
+- Record any drift explicitly in README and `docs/repository-map.md` instead of hiding it.
+- Prefer extending an existing group over introducing a new one unless the capability boundary is clearly independent.
 
 ## Available Plugins and Skills
 
-The skills in this repository are organized into 7 plugin categories, containing a total of 23 skills:
+The table below reflects the current `skills/` directory and `.claude-plugin/marketplace.json` state.
+
+| Group | Skills on Disk | Published | Marketplace Refs | Notes |
+|---|---:|---|---:|---|
+| `angular-skills` | 1 | Yes | 1 | Aligned with current published surface |
+| `antd-skills` | 4 | Yes | 4 | Aligned with current published surface |
+| `ascii-skills` | 13 | Yes | 13 | Aligned with current published surface |
+| `avue-skills` | 3 | Yes | 3 | Aligned with current published surface |
+| `build-skills` | 6 | Yes | 6 | Aligned with current published surface |
+| `chart-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `cocos-skills` | 1 | Yes | 1 | Aligned with current published surface |
+| `database-skills` | 5 | Yes | 5 | Aligned with current published surface |
+| `ddd-skills` | 6 | Yes | 6 | Aligned with current published surface |
+| `design-skills` | 12 | Yes | 12 | Aligned with current published surface |
+| `dev-utils-skills` | 13 | Yes | 13 | Aligned with current published surface |
+| `devops-skills` | 6 | Yes | 6 | Aligned with current published surface |
+| `docker-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `document-skills` | 5 | Yes | 9 | On-disk count differs from Marketplace refs; see repository-map |
+| `drawio-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `electron-skills` | 3 | Yes | 3 | Aligned with current published surface |
+| `flutter-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `go-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `mobile-native-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `nodejs-skills` | 4 | Yes | 4 | Aligned with current published surface |
+| `nvm-skills` | 15 | Yes | 15 | Aligned with current published surface |
+| `ocrmypdf-skills` | 5 | Yes | 5 | Aligned with current published surface |
+| `openspec-skills` | 15 | Yes | 15 | Aligned with current published surface |
+| `pencil-skills` | 28 | Yes | 28 | Aligned with current published surface |
+| `python-skills` | 3 | Yes | 3 | Aligned with current published surface |
+| `react-skills` | 6 | Yes | 6 | Aligned with current published surface |
+| `social-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `speckit-skills` | 13 | Yes | 13 | Aligned with current published surface |
+| `spring-skills` | 7 | Yes | 7 | Aligned with current published surface |
+| `stitch-skills` | 28 | Yes | 28 | Aligned with current published surface |
+| `svelte-skills` | 1 | Yes | 1 | Aligned with current published surface |
+| `t2ui-skills` | 97 | Yes | 97 | Aligned with current published surface |
+| `tauri-skills` | 52 | Yes | 51 | On-disk count differs from Marketplace refs; see repository-map |
+| `teaching-skills` | 3 | Yes | 3 | Aligned with current published surface |
+| `testing-skills` | 9 | Yes | 9 | Aligned with current published surface |
+| `threejs-skills` | 18 | No | 0 | Present in repo, not currently published |
+| `uniapp-skills` | 13 | Yes | 13 | Aligned with current published surface |
+| `utility-skills` | 3 | Yes | 3 | Aligned with current published surface |
+| `uview-skills` | 2 | Yes | 2 | Aligned with current published surface |
+| `vscode-skills` | 4 | No | 0 | Present in repo, not currently published |
+| `vue-skills` | 7 | Yes | 7 | Aligned with current published surface |
+| `vue-ui-skills` | 4 | Yes | 4 | Aligned with current published surface |
+
+### Current Consistency Notes
+
+- Treat the `skills/` directory as the authoritative repository inventory.
+- Treat `.claude-plugin/marketplace.json` as the authoritative published plugin surface.
+- The two intentional states visible today are repo-only groups (`threejs-skills`, `vscode-skills`) and published catalog drift (`document-skills`, `tauri-skills`).
+- The README tables above already reflect those differences explicitly, so the documentation matches the current repository state rather than masking discrepancies.
+
+### Suggested Installation Paths
+
+- For frontend and UI: `vue-skills`, `react-skills`, `build-skills`, `antd-skills`, `vue-ui-skills`
+- For backend and cross-platform development: `spring-skills`, `nodejs-skills`, `python-skills`, `go-skills`, `tauri-skills`, `uniapp-skills`
+- For design and documentation: `design-skills`, `document-skills`, `ocrmypdf-skills`, `drawio-skills`
+- For engineering delivery: `dev-utils-skills`, `testing-skills`, `devops-skills`, `docker-skills`, `database-skills`, `nvm-skills`
+- For spec-driven and design workflows: `speckit-skills`, `openspec-skills`, `t2ui-skills`, `stitch-skills`, `pencil-skills`
+
+### Installation by Scenario
+
+- **Frontend application delivery**: start with `vue-skills` or `react-skills`, then add `build-skills`, `antd-skills`, or `vue-ui-skills` as needed.
+- **Backend and service development**: pair one runtime group such as `spring-skills`, `nodejs-skills`, `python-skills`, or `go-skills` with `testing-skills` and `database-skills`.
+- **Desktop or hybrid product work**: use `tauri-skills`, `electron-skills`, `uniapp-skills`, or `flutter-skills` depending on delivery target.
+- **Spec-first product workflows**: install `speckit-skills`, `openspec-skills`, `t2ui-skills`, `stitch-skills`, and `pencil-skills` together.
+- **Documentation and diagramming**: combine `document-skills`, `ocrmypdf-skills`, `drawio-skills`, and `ascii-skills`.
+
+### Domain Navigation Matrix
+
+| Goal | Read First | Recommended Bundle |
+|---|---|---|
+| Web frontend delivery | `vue-skills`, `react-skills`, `build-skills` | `vue-skills` / `react-skills` + `build-skills` + `testing-skills` |
+| Backend and platform services | `spring-skills`, `nodejs-skills`, `database-skills` | `spring-skills` / `nodejs-skills` + `database-skills` + `devops-skills` |
+| Desktop and cross-platform apps | `tauri-skills`, `electron-skills`, `uniapp-skills`, `flutter-skills` | Choose 1–2 runtime groups, then add `testing-skills` |
+| Spec-driven product work | `speckit-skills`, `openspec-skills`, `t2ui-skills` | `speckit-skills` + `openspec-skills` + `t2ui-skills` |
+| Design-system and UI production | `stitch-skills`, `pencil-skills`, `design-skills` | `stitch-skills` + `pencil-skills` + `design-skills` |
+| Documents, OCR, and diagrams | `document-skills`, `ocrmypdf-skills`, `drawio-skills`, `ascii-skills` | `document-skills` + `ocrmypdf-skills` + `drawio-skills` |
 
-### 1. teaching-skills (Teaching Skills Collection)
-
-Teaching and education-related skills collection, including course design, learning assessment, and teaching resource generation.
-
-#### course-designer (Course Design Skill)
-
-Helps design and plan course content, including course outlines, learning objectives, teaching plans, and assessment schemes.
-
-**Usage Examples:**
-- "Use the course design skill to help me design a Python programming course"
-- "Design an 8-week machine learning introductory course"
-- "Create a course outline for web development"
-
-#### learning-assessor (Learning Assessment Skill)
-
-Helps create learning assessment tools, including quiz questions, assessment criteria, scoring rubrics, and learning analytics.
-
-**Usage Examples:**
-- "Use the learning assessment skill to create a set of quiz questions for my course"
-- "Design a rubric to assess student learning outcomes"
-- "Generate a learning analytics report"
-
-#### teaching-resource-generator (Teaching Resource Generator Skill)
-
-Helps generate various teaching resources, including courseware, exercises, teaching cases, and study guides.
-
-**Usage Examples:**
-- "Use the teaching resource generator skill to create courseware for my course"
-- "Generate some exercises about data structures"
-- "Create a teaching case for explaining design patterns"
-
-### 2. document-skills (Document Processing Skills Collection)
-
-Document processing skills collection, supporting creation, editing, and processing of office documents including Excel, Word, PowerPoint, and PDF.
-
-#### docx (Word Document Processing)
-
-Create, edit, and process Microsoft Word documents.
-
-**Usage Examples:**
-- "Use the DOCX skill to create a new Word document"
-- "Extract text from this Word document"
-- "Format this document with headings and styles"
-
-#### pptx (PowerPoint Presentation Processing)
-
-Create, edit, and process Microsoft PowerPoint presentations.
-
-**Usage Examples:**
-- "Use the PPTX skill to create a presentation"
-- "Add slides to this PowerPoint file"
-- "Apply a theme to this presentation"
-
-#### pdf (PDF Document Processing)
-
-Process PDF documents, including text extraction, form filling, merging, and splitting.
-
-**Usage Examples:**
-- "Use the PDF skill to extract the form fields from `path/to/some-file.pdf`"
-- "Fill out this PDF form"
-- "Merge multiple PDF files"
-
-#### xlsx (Excel Spreadsheet Processing)
-
-Create, edit, and process Microsoft Excel spreadsheets.
-
-**Usage Examples:**
-- "Use the XLSX skill to create a spreadsheet"
-- "Analyze data in this Excel file"
-- "Generate charts from this spreadsheet"
-
-#### doc-coauthoring (Document Co-authoring)
-
-Supports multi-user collaborative document editing.
-
-**Usage Examples:**
-- "Use the doc-coauthoring skill to prepare this document for collaboration"
-- "Add comments and suggestions to this document"
-
-### 3. markdown-skills (Markdown Skills Collection)
-
-Markdown-related skills collection, including Mermaid diagram creation.
-
-#### mermaid (Mermaid Diagram Creation)
-
-Create various types of Mermaid diagrams, including flowcharts, sequence diagrams, class diagrams, state diagrams, Gantt charts, and more.
-
-**Usage Examples:**
-- "Use Mermaid to create a flowchart"
-- "Draw a C4 diagram for system architecture"
-- "Generate a Gantt chart for project timeline"
-- "Create a user journey diagram"
-
-**Supported Diagram Types:**
-- Flowcharts
-- Sequence diagrams
-- Class diagrams
-- State diagrams
-- Entity relationship diagrams (ER diagrams)
-- User journey diagrams
-- Gantt charts
-- Pie charts
-- Quadrant charts
-- Git graphs
-- C4 architecture diagrams
-- Mindmaps
-- Timelines
-- Sankey diagrams
-- And many other diagram types
-
-### 4. development-skills (Development Skills Collection)
-
-Development skills collection, including code generation, test writing, documentation building, MCP builder, web development, frontend design, and more.
-
-#### code-generator (Code Generation Skill)
-
-Helps generate high-quality code, supporting multiple programming languages, following best practices and design patterns.
-
-**Usage Examples:**
-- "Use the code generation skill to generate a user authentication Python class"
-- "Create a RESTful API implementation in Node.js"
-- "Generate a Java class following SOLID principles"
-
-#### test-writer (Test Writing Skill)
-
-Helps write unit tests, integration tests, and end-to-end tests.
-
-**Usage Examples:**
-- "Write unit tests for this function"
-- "Create integration tests to verify API endpoints"
-- "Generate end-to-end test cases"
-
-#### documentation-builder (Documentation Builder Skill)
-
-Helps generate technical documentation, including API documentation, user manuals, development guides, and README files.
-
-**Usage Examples:**
-- "Use the documentation builder skill to generate API documentation for my project"
-- "Create a user manual"
-- "Write a development environment setup guide"
-
-#### mcp-builder (MCP Builder)
-
-Helps create and configure Model Context Protocol (MCP) servers.
-
-**Usage Examples:**
-- "Use the MCP builder to create a new MCP server"
-- "Configure tools and resources for an MCP server"
-- "Generate code templates for an MCP server"
-
-#### webapp-testing (Web Application Testing)
-
-Helps test web applications, including functional testing and performance testing.
-
-**Usage Examples:**
-- "Test the functionality of this web application"
-- "Check the response time of this website"
-- "Verify cross-browser compatibility of this application"
-
-#### frontend-design (Frontend Design)
-
-Create high-quality frontend interfaces, avoiding generic AI aesthetics, generating code with unique design sense.
-
-**Usage Examples:**
-- "Use the frontend design skill to create a login page"
-- "Design a modern dashboard interface"
-- "Create a responsive product showcase page"
-
-#### web-artifacts-builder (Web Artifacts Builder)
-
-Create complex multi-component HTML artifacts using modern frontend technologies (React, Tailwind CSS, shadcn/ui).
-
-**Usage Examples:**
-- "Use the web artifacts builder to create an interactive data visualization tool"
-- "Build a single-page application with state management"
-- "Create a complex interface using shadcn/ui components"
-
-#### theme-factory (Theme Factory)
-
-Apply theme styles to artifacts, including 10 preset themes that can be applied to slides, documents, reports, HTML landing pages, and more.
-
-**Usage Examples:**
-- "Apply the Ocean Depths theme to this presentation"
-- "Style this document with the Modern Minimalist theme"
-- "Apply the Golden Hour theme to this webpage"
-
-### 5. design-skills (Design Skills Collection)
-
-Design and creative skills collection, including algorithmic art, brand guidelines, and canvas design.
-
-#### algorithmic-art (Algorithmic Art)
-
-Create algorithmic art using p5.js with seeded randomness and interactive parameter exploration.
-
-**Usage Examples:**
-- "Use the algorithmic art skill to create a generative artwork"
-- "Generate a visualization based on particle systems"
-- "Create a flow field effect artwork"
-
-#### brand-guidelines (Brand Guidelines)
-
-Apply Anthropic's official brand colors and typography to any artifact.
-
-**Usage Examples:**
-- "Use the brand guidelines skill to apply brand styles to this document"
-- "Apply brand colors to this presentation"
-- "Format this document using brand fonts"
-
-#### canvas-design (Canvas Design)
-
-Create high-quality designs and visualizations on HTML Canvas.
-
-**Usage Examples:**
-- "Use the canvas design skill to create a data visualization chart"
-- "Draw an interactive graphic on Canvas"
-- "Create a Canvas animation effect"
-
-### 6. social-skills (Social Skills Collection)
-
-Social and collaboration skills collection, including internal communications and Slack GIF creation.
-
-#### internal-comms (Internal Communications)
-
-Helps write various internal communication documents, including status reports, leadership updates, 3P updates, company newsletters, FAQs, and more.
-
-**Usage Examples:**
-- "Use the internal communications skill to write a project status report"
-- "Create a company newsletter"
-- "Write an FAQ document"
-
-#### slack-gif-creator (Slack GIF Creator)
-
-Create GIF animations for use in Slack.
-
-**Usage Examples:**
-- "Use the Slack GIF creator to create a welcome animation"
-- "Generate a GIF for Slack messages"
-- "Create a notification animation GIF"
-
-### 7. utility-skills (Utility Skills Collection)
-
-Utility and practical skills collection, including skill creator.
-
-#### skill-creator (Skill Creator)
-
-Guides how to create effective skills to extend Claude's capabilities.
-
-**Usage Examples:**
-- "Use the skill creator to help me create a new skill"
-- "How to design the structure of a skill"
-- "What are the best practices for creating a skill"
 
 ## Project Structure
 
-```
-.
+```text
+full-stack-skills/
 ├── .claude-plugin/
-│   └── marketplace.json          # Marketplace configuration file
-├── skills/                        # Skills directory
-│   ├── teaching-skills/          # Teaching skills
-│   │   ├── course-designer/
-│   │   ├── learning-assessor/
-│   │   └── teaching-resource-generator/
-│   ├── document-skills/          # Document processing skills
-│   │   ├── docx/
-│   │   ├── pptx/
-│   │   ├── pdf/
-│   │   ├── xlsx/
-│   │   └── doc-coauthoring/
-│   ├── markdown-skills/          # Markdown skills
-│   │   └── mermaid/
-│   ├── development-skills/       # Development skills
-│   │   ├── code-generator/
-│   │   ├── test-writer/
-│   │   ├── documentation-builder/
-│   │   ├── mcp-builder/
-│   │   ├── webapp-testing/
-│   │   ├── frontend-design/
-│   │   ├── web-artifacts-builder/
-│   │   └── theme-factory/
-│   ├── design-skills/            # Design skills
-│   │   ├── algorithmic-art/
-│   │   ├── brand-guidelines/
-│   │   └── canvas-design/
-│   ├── social-skills/            # Social skills
-│   │   ├── internal-comms/
-│   │   └── slack-gif-creator/
-│   └── utility-skills/           # Utility skills
-│       └── skill-creator/
-├── spec/                          # Agent Skills specification
-├── template/                      # Skill template
-└── README.md                      # This file
+│   └── marketplace.json          # Marketplace configuration
+├── adapters/                     # TypeScript standard converter and platform registry
+├── agents/                       # Agent roles and orchestration entry points
+├── bundles/                      # Bundled or aggregated outputs
+├── dist/                         # Distribution artifacts
+├── docs/                         # Repo map, ecosystem docs, stage mapping
+├── media/                        # Screenshots and visual assets
+├── skills/                       # Grouped skills layout
+│   ├── vue-skills/
+│   │   └── vue3/
+│   │       └── SKILL.md
+│   ├── react-skills/
+│   ├── spring-skills/
+│   ├── tauri-skills/
+│   └── ...
+├── spec/                         # Specifications and standards references
+├── template/                     # Skill templates
+├── tools/                        # Helper tools
+├── AGENTS.md                     # Repo-level agent instructions
+├── README.md
+└── README_EN.md
 ```
+
+### Directory Model
+
+- `skills/<group>-skills/<skill>/SKILL.md` is the primary storage model for every skill in this repository.
+- `references/` is the preferred place for long-form technical context so that `SKILL.md` stays concise and load-efficient.
+- `scripts/` should hold repeatable automation instead of embedding large inline command sequences in `SKILL.md`.
+- `docs/` contains the current repository map, stage-to-skill mapping, and ecosystem documentation used to understand the catalog at the repo level.
 
 ## How to Create a New Skill
 
 ### Creating a Basic Skill
 
-Skills are simple to create - just a folder with a `SKILL.md` file containing YAML frontmatter and instructions. You can use the **template-skill** in this repository as a starting point:
+Skills are simple to create: add a skill under the correct group directory and include a `SKILL.md` file with YAML frontmatter and clear instructions. You can use the repository template as a starting point:
 
 ```markdown
 ---
@@ -422,18 +323,34 @@ The markdown content below contains the instructions, examples, and guidelines t
 
 Each skill contains:
 - `SKILL.md` - Instructions for the agent (required)
+- `examples/` - Focused usage examples (optional)
 - `scripts/` - Helper scripts for automation (optional)
 - `references/` - Supporting documentation (optional)
 - `assets/` - Resource files (optional)
+
+### Authoring Rules
+
+- Keep `SKILL.md` lean; move large reference material into `references/` when depth is required.
+- Use a concrete `description` so the agent can activate the skill reliably.
+- Match directory names, frontmatter names, and published Marketplace paths.
+- Prefer task-oriented instructions over encyclopedic background text.
+- Keep helper scripts deterministic and machine-friendly.
+
+### Documentation Maintenance Rules
+
+- Update README snapshot counts whenever group counts, `SKILL.md` totals, or Marketplace refs change.
+- Update README and `docs/repository-map.md` together when repo-only groups or Marketplace drift changes.
+- Use only real published plugin names in installation examples.
+- Keep path examples aligned with `skills/<group>-skills/<skill>/`.
 
 ### Steps to Add a New Skill
 
 #### 1. Create Skill Directory
 
-Create a new skill directory under the `skills/` directory:
+Create a new skill directory under the correct group inside `skills/`:
 
 ```bash
-mkdir -p skills/your-skill-name
+mkdir -p skills/vue-skills/my-skill-name
 ```
 
 #### 2. Create SKILL.md File
@@ -442,18 +359,18 @@ Each skill must contain a `SKILL.md` file with the format shown above.
 
 #### 3. Update marketplace.json
 
-Add the new skill to the appropriate plugin in `.claude-plugin/marketplace.json`:
+Add the new skill path to the matching grouped plugin in `.claude-plugin/marketplace.json`:
 
 ```json
 {
   "plugins": [
     {
-      "name": "your-plugin-name",
-      "description": "Plugin description",
+      "name": "vue-skills",
+      "description": "Vue ecosystem skills",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/your-skill-name"
+        "./skills/vue-skills/my-skill-name"
       ]
     }
   ]
@@ -466,7 +383,7 @@ Commit and push changes to the GitHub repository:
 
 ```bash
 git add .
-git commit -m "Add new skill: your-skill-name"
+git commit -m "Add skill: my-skill-name"
 git push
 ```
 
@@ -492,8 +409,8 @@ The `.claude-plugin/marketplace.json` file defines the marketplace metadata and 
       "source": "./",                // Source code path
       "strict": false,               // Strict mode
       "skills": [                    // Skills list
-        "./skills/skill1",
-        "./skills/skill2"
+        "./skills/vue-skills/vue3",
+        "./skills/react-skills/react-hooks"
       ]
     }
   ]
@@ -526,16 +443,26 @@ The `.claude-plugin/marketplace.json` file defines the marketplace metadata and 
 - **Structured Organization**: Use clear sections and structure
 - **Practical Examples**: Provide practical, usable examples
 - **Progressive Disclosure**: Put detailed reference materials in separate files and load them as needed
+- **Path Discipline**: Keep the repository path, frontmatter `name`, and Marketplace path aligned
+- **Task Orientation**: Write instructions around workflows, trigger phrases, expected inputs, and outputs
 
 ### Marketplace Organization
 
 - **Logical Grouping**: Organize related skills into the same plugin
 - **Clear Naming**: Use clear, descriptive names
 - **Version Management**: Maintain version numbers in `metadata`
+- **Catalog Hygiene**: Audit published refs against `skills/` regularly to prevent drift
+
+### Pre-Submission Checklist
+
+- Confirm the skill directory, frontmatter `name`, and actual capability are aligned.
+- Confirm `SKILL.md` is concise and large technical detail is moved into `references/`.
+- Confirm scripts, examples, and resource paths resolve inside the repository.
+- Confirm README, mapping docs, and Marketplace metadata do not introduce new drift.
 
 ## License
 
-Many skills in this repository are licensed under Apache 2.0. Document processing skills (docx, pdf, pptx, xlsx) are source-available but not open source. See LICENSE files in each skill directory for details.
+Many skills in this repository are licensed under Apache 2.0. Document processing skills in `skills/document-skills/docx`, `skills/document-skills/pdf`, `skills/document-skills/pptx`, and `skills/document-skills/xlsx` are source-available but not open source. See the corresponding license files for details.
 
 ## Contributing
 

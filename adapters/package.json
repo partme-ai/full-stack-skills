@@ -1,0 +1,49 @@
+{
+  "name": "fskill",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Standard cross-platform skills CLI for full-stack-skills.",
+  "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/partme-ai/full-stack-skills.git",
+    "directory": "adapters"
+  },
+  "homepage": "https://github.com/partme-ai/full-stack-skills",
+  "bugs": {
+    "url": "https://github.com/partme-ai/full-stack-skills/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "claude",
+    "codex",
+    "cursor",
+    "ai-agents",
+    "converter"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "fskill": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "fskill",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "platforms": "node dist/index.js platforms",
+    "audit": "node dist/index.js audit",
+    "convert": "node dist/index.js convert",
+    "cli:install": "node dist/index.js install"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  }
+}

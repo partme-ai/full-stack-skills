@@ -2,26 +2,27 @@
 
 # Full Stack Skills（Alpha）
 
-**基于 Agent Skills 规范的全栈技能集合**
+**基于 Agent Skills 规范的分组式全栈技能仓库**
 
 ![Version](https://img.shields.io/badge/Version-0.0.1-red)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
-![Skills](https://img.shields.io/badge/Skills-176-orange)
-![Plugins](https://img.shields.io/badge/Plugins-12-brightgreen)
+![Skill Docs](https://img.shields.io/badge/SKILL.md-421-orange)
+![Skill Groups](https://img.shields.io/badge/Groups-42-blue)
+![Marketplace Plugins](https://img.shields.io/badge/Plugins-40-brightgreen)
 
 </div>
 
 ## 📖 简介
 
-**Full-Stack-Skills（Alpha）** 是一个开源的 Agent Skills 集合，严格遵循 Agent Skills 规范，提供 **176 个技能集合**，按**技能种类**组织为 **12 个插件类别**，覆盖软件开发全生命周期。在 AI 时代，它赋能全栈独立开发者，通过 AI 助手掌握专业技能，实现**"一个人 = 一个公司"**的愿景，让独立开发者能够独立完成从产品设计、开发、测试到部署运维的全流程工作。
+**Full-Stack-Skills（Alpha）** 是一个开源的 Agent Skills 仓库，面向 Claude Code、Claude.ai 与兼容 Agent Skills 生态的平台。当前仓库采用 `skills/<group>/<skill>/SKILL.md` 的分组式结构，覆盖产品、设计、前端、后端、测试、运维、文档、Spec 驱动开发等全链路场景。
 
-> **⚠️ 注意：** 当前项目处于 Alpha 阶段，尚未经过严格测试，还在自测中。欢迎反馈问题和建议。
+> **⚠️ 注意：** 当前文档口径以仓库内 `skills/` 实际目录和 `.claude-plugin/marketplace.json` 为准。
 
-> **说明：** 本仓库合并了 Anthropic 的示例技能和 Agent Skills 的技能集合，提供各种实用的 AI 技能，可以在 Claude Code、Claude.ai 和 API 中使用。关于 Agent Skills 标准，请参见 [agentskills.io](http://agentskills.io)。
+> **说明：** 当前仓库内共有 **42 个技能组目录**、**421 个 `SKILL.md` 文件**；其中 Marketplace 当前发布 **40 个插件**、共 **410 条技能路径**。未进入 Marketplace 的仓库内技能组为 `threejs-skills` 与 `vscode-skills`。
 
 ## 什么是 Skills？
 
-Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态加载它们，以提升在特定任务上的表现。Skills 用于以可复用的方式教会 Claude 完成具体工作，例如：按你公司的品牌规范创建文档、用你组织的既定流程分析数据，或自动化个人任务。
+Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态加载它们，以提升在特定任务上的表现。Skills 用于以可复用的方式教会 Claude 完成具体工作，例如：按团队规范创建文档、执行特定技术流程、沉淀设计系统知识，或自动化重复性工程任务。
 
 ### 更多信息
 
@@ -44,127 +45,152 @@ Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态
 
 ## 关于本仓库
 
-**full-stack-skills** 是一个面向**期望成为全栈技能人才的群体**的开源技能集合，严格遵循 [Agent Skills 规范](https://agentskills.io/)，按**技能种类**组织技能库，而非按岗位划分。
+**full-stack-skills** 是一个面向团队与独立开发者的开源技能仓库与 Marketplace 发布源。它不再采用早期的少量大类聚合方式，而是按技能组进行目录拆分与发布管理。
+
+### 📊 仓库快照
+
+| 指标 | 当前值 |
+|---|---:|
+| `skills/` 下技能组目录 | 42 |
+| 仓库内 `SKILL.md` 文件 | 421 |
+| Marketplace 插件数 | 40 |
+| Marketplace 技能路径数 | 410 |
+| 仓库内未发布技能组 | 2 |
 
 ### ✨ 核心特性
 
-#### 1. 开源免费
-- **Apache 2.0 许可证**：所有技能采用 Apache 2.0 许可证，完全开源
-- **规范标准**：严格遵循 Agent Skills 规范，确保技能质量和兼容性
-- **持续更新**：社区驱动，持续添加新技能和改进现有技能
+#### 1. 分组式组织
+- **42 个技能组目录**：按领域、框架和工作流拆分，便于维护与扩展
+- **40 个 Marketplace 插件**：按技能组发布，便于按需安装与组合使用
+- **421 个 `SKILL.md` 文件**：沉淀可复用的 Agent Skills 资产
 
-#### 2. 全栈覆盖
-- **176 个技能集合**：覆盖前端、后端、移动端、数据库、测试、DevOps、云平台、设计等全栈开发领域
-- **12 个插件类别**：按技能种类组织，而非按岗位划分，便于灵活组合使用
-- **跨平台支持**：支持 Claude Code、Claude.ai、Claude API 及其他 AI 平台
+#### 2. 全链路覆盖
+- **前端与 UI**：Vue、React、Angular、Svelte、各类 UI 组件库与构建工具
+- **后端与跨端**：Spring、Node.js、Python、Go、Electron、Tauri、UniApp、Flutter
+- **工程化与交付**：测试、DevOps、Docker、数据库、nvm、Spec 驱动开发
+- **设计与文档**：Figma、流程图、OCR、Mermaid、PlantUML、Pencil、Stitch、T2UI
 
-#### 3. AI 赋能
-- **智能识别**：Claude 会根据技能描述自动判断何时使用该技能
-- **即插即用**：安装插件后，只需提到技能名称即可使用
-- **专业指导**：每个技能都包含详细的官方文档链接和使用示例
-
-#### 4. 灵活组织
-- **按技能种类组织**：12 个插件类别，可按需安装
-- **独立技能**：每个技能自包含，可单独使用
-- **跨平台适配**：提供适配器工具，支持多种 AI 平台
+#### 3. 工程友好
+- **统一规范**：严格遵循 Agent Skills 规范
+- **结构清晰**：统一使用 `SKILL.md`、`examples/`、`references/`、`scripts/`、`assets/` 等结构
+- **跨平台适配**：提供 TypeScript 标准转换器，覆盖 43 个平台并统一输出标准 skills 目录
 
 ### 技能组织方式
 
-本仓库的技能按**技能种类**分为 12 个插件类别：
+当前仓库按**技能组**组织，核心分布如下：
 
-- **开发类**：前端开发（Vue、React、Angular）、后端开发（Spring、Node.js、Python、Go）、移动端开发（UniApp、React Native、Flutter）、开发工具
-- **设计类**：UI设计工具、AI设计工具、原型工具
-- **文档类**：文档生成、文档处理、OCR 识别（OCRmyPDF）、图表绘制（Mermaid、PlantUML）
-- **架构类**：DDD、微服务、事件驱动、六边形架构、整洁架构、COLA
-- **测试类**：单元测试、集成测试、E2E测试、移动端测试
-- **运维类**：CI/CD、容器化、IaC
-- **数据库类**：关系型数据库、NoSQL数据库、数据库工具
-- **云平台类**：AWS、Azure、阿里云、腾讯云、华为云
-- **其他**：社交协作、教学教育、工具技能
+- **前端与 UI**：`vue-skills`、`react-skills`、`angular-skills`、`svelte-skills`、`build-skills`、`vue-ui-skills`、`antd-skills`、`uview-skills`、`avue-skills`
+- **后端与跨端开发**：`spring-skills`、`nodejs-skills`、`python-skills`、`go-skills`、`electron-skills`、`tauri-skills`、`uniapp-skills`、`flutter-skills`、`mobile-native-skills`、`cocos-skills`、`chart-skills`
+- **工程化与架构**：`dev-utils-skills`、`ddd-skills`、`testing-skills`、`devops-skills`、`docker-skills`、`database-skills`、`nvm-skills`
+- **设计、文档与流程**：`design-skills`、`document-skills`、`ocrmypdf-skills`、`drawio-skills`、`ascii-skills`
+- **Spec 与设计生态**：`speckit-skills`、`openspec-skills`、`t2ui-skills`、`stitch-skills`、`pencil-skills`
+- **通用支持**：`social-skills`、`teaching-skills`、`utility-skills`
 
-每个技能都自包含在单独的文件夹中，并包含一个 `SKILL.md` 文件，里面有 Claude 使用的说明和元数据。你可以浏览这些技能来获取灵感，或理解不同的模式与实现方式。
+### 能力覆盖矩阵
+
+| 领域 | 代表技能组 | 覆盖重点 |
+|---|---|---|
+| 前端与 UI | `vue-skills`、`react-skills`、`angular-skills`、`svelte-skills`、`antd-skills`、`vue-ui-skills`、`build-skills` | 框架开发、组件库、构建体系、界面实现 |
+| 服务端与跨端 | `spring-skills`、`nodejs-skills`、`python-skills`、`go-skills`、`electron-skills`、`tauri-skills`、`uniapp-skills`、`flutter-skills` | 服务开发、桌面应用、移动与混合交付 |
+| 工程化与交付 | `dev-utils-skills`、`ddd-skills`、`testing-skills`、`devops-skills`、`docker-skills`、`database-skills`、`nvm-skills` | 脚手架、架构模式、测试体系、交付与运维 |
+| 设计与文档 | `design-skills`、`document-skills`、`ocrmypdf-skills`、`drawio-skills`、`ascii-skills` | 设计执行、文档处理、OCR、图表与文本可视化 |
+| Spec 与设计协同 | `speckit-skills`、`openspec-skills`、`t2ui-skills`、`stitch-skills`、`pencil-skills` | Spec 驱动交付、界面生成、设计系统协作 |
+| 通用支持 | `social-skills`、`teaching-skills`、`utility-skills` | 沟通协作、教学资源、通用工具能力 |
+
+### 当前发布面说明
+
+- `threejs-skills` 当前在仓库中包含 18 个技能，但未进入 Marketplace 发布面。
+- `vscode-skills` 当前在仓库中包含 4 个技能，但未进入 Marketplace 发布面。
+- `document-skills` 当前目录中有 5 个技能，而 Marketplace 仍引用 9 个条目，其中 `docx`、`pptx`、`pdf`、`xlsx` 为缺失目录引用。
+- `tauri-skills` 当前目录中有 52 个技能，而 Marketplace 当前发布 51 个条目；`tauri-app-updater` 目前仅存在于仓库目录中。
+
+### 阅读路径建议
+
+- **先理解仓库全貌**：先阅读本 README 与 `docs/repository-map.md`，快速掌握目录结构、发布面和当前差异。
+- **按技能组导航**：如果你关心某一技术域，直接从 `docs/skill-group-mapping.md` 与对应 `skills/<group>-skills/` 目录进入。
+- **按研发流程导航**：如果你关心需求、设计、开发、测试、交付的串联关系，优先阅读 `docs/pipeline-stage-to-skills.md`。
+- **按设计生态导航**：如果你关注界面生成、设计系统与 Spec 驱动协作，优先阅读 `stitch-skills`、`pencil-skills`、`t2ui-skills`、`speckit-skills`、`openspec-skills`。
 
 ### 技能生态与主文档入口
 
-本仓库提供全链路**阶段→技能**权威映射与**基础技能**（文档、DDD/架构、测试、部署、nvm 等）。关联技能库：t2ui-skills、stitch-skills、pencil-skills、tauri-skills。阶段与技能映射见 [docs/pipeline-stage-to-skills.md](docs/pipeline-stage-to-skills.md)，生态总览见 [docs/skills-ecosystem.md](docs/skills-ecosystem.md)。
+本仓库提供全链路**阶段→技能**映射，以及面向 Spec 驱动开发、界面设计、全栈开发、测试与交付的基础技能集合。请优先参考以下文档：
 
-本仓库中的许多技能是开源的（Apache 2.0）。我们还在 [`skills/docx`](skills/docx)、[`skills/pdf`](skills/pdf)、[`skills/pptx`](skills/pptx) 和 [`skills/xlsx`](skills/xlsx) 子目录中包含了用于支撑 [Claude 文档能力](https://www.anthropic.com/news/create-files) 的文档创建与编辑技能。这些技能是"可查看源码"的（source-available），但并非开源；我们希望将其作为更复杂技能的参考示例，因为它们已在生产级 AI 应用中实际使用。
+- [docs/repository-map.md](docs/repository-map.md)
+- [docs/skill-group-mapping.md](docs/skill-group-mapping.md)
+- [docs/pipeline-stage-to-skills.md](docs/pipeline-stage-to-skills.md)
+- [docs/skills-ecosystem.md](docs/skills-ecosystem.md)
 
 ### 🎯 核心设计理念
 
 #### **技能标准化**
-- **Agent Skills 规范**：严格遵循 [Agent Skills 规范](https://agentskills.io/)，确保技能质量和兼容性
-- **统一格式**：所有技能采用统一的 Markdown 格式和 YAML Frontmatter 元数据
-- **渐进式披露**：通过 `SKILL.md`、`examples/`、`templates/`、`api/` 等目录实现渐进式信息披露
+- **Agent Skills 规范**：严格遵循 [Agent Skills 规范](https://agentskills.io/)
+- **统一格式**：统一采用 `SKILL.md` 与结构化子目录
+- **渐进式披露**：通过 `examples/`、`references/`、`scripts/`、`assets/` 承载增量内容
 
-#### **按技能种类组织**
-- **灵活组合**：按技能种类而非岗位划分，便于灵活组合使用
-- **独立技能**：每个技能自包含，可单独使用
-- **插件化**：12 个插件类别，可按需安装
+#### **按组发布**
+- **目录与发布面解耦**：目录结构以 `skills/` 为准，发布面以 Marketplace 为准
+- **灵活组合**：按技能组安装，不绑定单一岗位模型
+- **可扩展**：支持在仓库内继续引入未发布技能组
 
-#### **全栈覆盖**
-- **176 个技能**：覆盖前端、后端、移动端、数据库、测试、DevOps、云平台、设计等全栈开发领域
-- **跨平台支持**：支持 Claude Code、Claude.ai、Claude API 及其他 AI 平台
-- **持续更新**：社区驱动，持续添加新技能和改进现有技能
-
-#### **AI 赋能**
-- **智能识别**：Claude 会根据技能描述自动判断何时使用该技能
-- **即插即用**：安装插件后，只需提到技能名称即可使用
-- **专业指导**：每个技能都包含详细的官方文档链接和使用示例
+#### **面向交付**
+- **覆盖需求到部署**：支持从需求、设计到研发、测试、交付的全过程
+- **支持多生态协作**：兼容 T2UI、Stitch、Pencil、Tauri、OpenSpec、SpecKit 等流程
+- **适合团队沉淀**：可作为技能资产库与内部标准库使用
 
 ### 📦 项目定位
 
-**Full-Stack-Skills** 是面向**期望成为全栈技能人才的群体**的开源技能市场，旨在：
+**Full-Stack-Skills** 是一个以实际技能目录为核心、以 Marketplace 为发布面的技能基础设施仓库，适用于：
 
-- **统一技能库**：为全栈开发者提供统一的技能集合，降低学习成本
-- **规范标准**：严格遵循 Agent Skills 规范，确保技能质量和兼容性
-- **灵活组合**：按技能种类组织，可根据需求灵活组合使用
-- **技术栈统一**：覆盖主流技术栈，统一技能格式和文档结构
+- 团队内部技能资产沉淀
+- Claude Code Marketplace 发布
+- Agent Skills 设计参考与模板复用
+- Spec 驱动研发与设计协作流程落地
 
 ### 🏗️ 项目架构
 
-**Full-Stack-Skills 技能组织结构**：
+**当前仓库结构**：
 
-```
+```text
 full-stack-skills/
 ├── .claude-plugin/
-│   └── marketplace.json          # 插件市场配置
-├── skills/                       # 技能目录
-│   ├── vue2/                     # 单个技能目录
-│   │   ├── SKILL.md              # 技能主文档
-│   │   ├── examples/             # 示例文件
-│   │   ├── templates/            # 模板文件
-│   │   ├── api/                  # API 参考
-│   │   └── LICENSE.txt           # 许可证
-│   ├── vue3/
-│   ├── react/
-│   └── ...                       # 176 个技能
-├── adapters/                     # 跨平台适配器
-│   ├── cursor/                   # Cursor 适配器
-│   ├── trae/                     # Trae 适配器
+│   └── marketplace.json          # Marketplace 配置
+├── adapters/                     # TypeScript 标准转换器与平台路径注册表
+├── agents/                       # 代理角色与编排入口
+├── bundles/                      # 打包与聚合产物
+├── dist/                         # 分发产物
+├── docs/                         # 目录映射、阶段映射、生态说明
+├── media/                        # 截图与展示素材
+├── skills/                       # 技能主目录（按组拆分）
+│   ├── vue-skills/
+│   │   └── vue3/
+│   │       └── SKILL.md
+│   ├── react-skills/
+│   ├── spring-skills/
+│   ├── tauri-skills/
 │   └── ...
-├── ROLE_DEFINITIONS.md           # 角色定义
-├── AGENTS_PROMPT.md              # 智能体提示词
+├── spec/                         # 规范与规格说明
+├── template/                     # 技能模板
+├── tools/                        # 辅助工具
+├── AGENTS.md                     # 仓库级 Agent 约束
 └── README.md                     # 项目说明
 ```
 
-**插件类别组织**：
+**目录模型说明**：
 
-| 插件类别 | 技能数量 | 说明 |
-|---|---|---|
-| development-skills | 76 | 全栈开发技能集合 |
-| development-skills-utils | 12 | 开发工具技能集合 |
-| design-skills | 16 | 设计技能集合 |
-| document-skills | 15 | 文档处理技能集合 |
-| architecture-skills | 7 | 架构技能集合 |
-| testing-skills | 9 | 测试技能集合 |
-| devops-skills | 9 | 运维技能集合 |
-| database-skills | 8 | 数据库技能集合 |
-| cloud-skills | 16 | 云平台技能集合 |
-| markdown-skills | 1 | Markdown 技能集合 |
-| social-skills | 2 | 社交技能集合 |
-| teaching-skills | 3 | 教学技能集合 |
-| utility-skills | 1 | 工具技能集合 |
+- 本仓库统一采用 `skills/<group>-skills/<skill>/SKILL.md` 作为技能存储模型。
+- `references/` 用于承载较长的技术说明与官方资料，避免 `SKILL.md` 过长。
+- `scripts/` 用于固化可复用的自动化流程，优先替代大段内联命令。
+- `docs/` 用于描述仓库级结构、阶段映射、技能生态与发布状态。
+
+**当前状态**：
+
+| 项目 | 当前值 |
+|---|---:|
+| 技能组目录 | 42 |
+| `SKILL.md` 文件 | 421 |
+| Marketplace 插件 | 40 |
+| Marketplace 技能路径 | 410 |
+| 仓库内未发布技能组 | 2 |
 
 ### 免责声明
 
@@ -176,7 +202,7 @@ full-stack-skills/
 
 - **Claude Code** 或 **Claude.ai**（付费套餐）或 **Claude API**
 - **Git**（用于克隆仓库，可选）
-- **Python 3.7+**（用于跨平台适配器，可选）
+- **Node.js LTS 与 npm**（用于 TypeScript 跨平台转换器，可选）
 
 ### 在 Claude Code 中使用
 
@@ -218,19 +244,15 @@ full-stack-skills/
 直接使用命令安装插件：
 
 ```
-# 按技能种类安装（12个插件类别）
-/plugin install development-skills@full-stack-skills
-/plugin install development-skills-utils@full-stack-skills
-/plugin install design-skills@full-stack-skills
-/plugin install document-skills@full-stack-skills
-/plugin install architecture-skills@full-stack-skills
+# 按当前技能组安装示例
+/plugin install vue-skills@full-stack-skills
+/plugin install react-skills@full-stack-skills
+/plugin install spring-skills@full-stack-skills
+/plugin install dev-utils-skills@full-stack-skills
 /plugin install testing-skills@full-stack-skills
-/plugin install devops-skills@full-stack-skills
-/plugin install database-skills@full-stack-skills
-/plugin install cloud-skills@full-stack-skills
-/plugin install social-skills@full-stack-skills
-/plugin install teaching-skills@full-stack-skills
-/plugin install utility-skills@full-stack-skills
+/plugin install tauri-skills@full-stack-skills
+/plugin install t2ui-skills@full-stack-skills
+/plugin install stitch-skills@full-stack-skills
 ```
 
 ![install-development-skills-frontend.png](media/install-development-skills-frontend.png)
@@ -251,23 +273,36 @@ full-stack-skills/
 
 ### 在其他平台使用
 
-这些 skills 也可以在其他 AI 平台使用，如 Cursor、Trae、Qoder、CodeBuddy 等。
+本仓库提供一个 **TypeScript 标准转换器**，将 `skills/<group>/<skill>/` 导出为标准 skills 目录，并按目标平台写入其项目级或全局级路径。转换器不再生成 Cursor rule、Trae plugin、Qoder agent、CodeBuddy workflow 这类平台专有包装物，统一以标准技能目录作为输出。
 
-**详细说明：**
-- [跨平台使用指南](PLATFORM_GUIDE.md) - 完整的平台适配说明
-- [平台适配器工具](adapters/README.md) - 自动转换工具和示例
-- [适配器示例](adapters/EXAMPLES.md) - 转换后的示例文件
-
-**快速转换：**
+**安装与执行命令：**
 ```bash
-cd adapters
-python convert_all.py ../skills ../adapters-output
+git clone https://github.com/partme-ai/full-stack-skills.git
+cd full-stack-skills
+npm install -g ./adapters
+fskill --version
+fskill platforms
+fskill audit
+fskill convert --platform all --output ./adapters-output
+fskill install
 ```
+
+默认情况下，`fskill install` 会把技能安装到当前项目的 `.agents/skills/` 目录；这是标准 Agent Skills 兼容路径。如需其他平台目录，再显式传入 `--platform` 与 `--scope`。
+如果只想在仓库开发态使用，也可以进入 `adapters/` 执行 `npm install && npm link`，随后直接运行 `fskill ...`。
+
+**平台覆盖：**
+- **共享 `.agents/skills/` 路径族**：`amp`、`kimi-cli`、`replit`、`universal`、`antigravity`、`cline`、`warp`、`codex`、`cursor`、`deepagents`、`gemini-cli`、`github-copilot`、`opencode`
+- **专属目录路径族**：`augment`、`claude-code`、`openclaw`、`codebuddy`、`command-code`、`continue`、`cortex`、`crush`、`droid`、`goose`、`junie`、`iflow-cli`、`kilo`、`kiro-cli`、`kode`、`mcpjam`、`mistral-vibe`、`mux`、`openhands`、`pi`、`qoder`、`qwen-code`、`roo`、`trae`、`trae-cn`、`windsurf`、`zencoder`、`neovate`、`pochi`、`adal`
+- **Antigravity 基线**：项目级使用 `.agents/skills/`，全局级使用 `~/.gemini/antigravity/skills/`
+
+**详细文档：**
+- [跨平台使用指南](PLATFORM_GUIDE.md) - 完整平台矩阵、安装路径与执行示例
+- [平台适配器工具](adapters/README.md) - CLI 命令、审计规则、导出与安装说明
 
 ## 📝 核心功能
 
 ### 1. 技能管理
-- **技能分类**：按技能种类组织为 12 个插件类别
+- **技能分类**：按技能组组织，并通过 Marketplace 插件发布
 - **技能搜索**：通过技能名称快速查找所需技能
 - **技能安装**：支持按插件类别批量安装或单独安装技能
 
@@ -275,7 +310,9 @@ python convert_all.py ../skills ../adapters-output
 - **Claude Code**：原生支持，通过插件市场安装
 - **Claude.ai**：支持上传自定义技能
 - **Claude API**：通过 API 使用技能
-- **其他平台**：提供适配器工具，支持 Cursor、Trae、Qoder、CodeBuddy、Windsurf 等
+- **标准目录兼容**：统一导出标准 skills 目录，并按平台路径矩阵安装
+- **43 平台覆盖**：覆盖 `.agents/skills/` 共享路径平台与各类专属目录平台
+- **可审计与可安装**：内置 `platforms`、`audit`、`convert`、`install` 命令
 
 ### 3. 技能创建
 - **规范指导**：提供技能创建规范和最佳实践
@@ -293,268 +330,95 @@ python convert_all.py ../skills ../adapters-output
 - **项目构建**：支持 DDD 项目构建（单体单模块、单体多模块、微服务）
 - **文档生成**：支持全栈文档生成（14种文档模板）
 
+### 6. 仓库治理
+- **目录即事实**：`skills/` 目录代表仓库中的真实技能资产
+- **Marketplace 即发布面**：`.claude-plugin/marketplace.json` 代表对外可安装范围
+- **差异需显式记录**：目录与发布面不一致时，README 与 `docs/repository-map.md` 需要同步说明
+- **结构优先稳定**：新增技能优先归入已有技能组，只有在职责明显独立时才引入新技能组
+
 ## 可用插件和技能
 
-本仓库的技能按**技能种类**分为 **12 个插件类别**，共包含 **176 个技能**。
+以下表格以当前 `skills/` 实际目录与 `.claude-plugin/marketplace.json` 为准，展示仓库中的技能组、目录技能数与当前发布状态。
+
+| 技能组 | 目录内技能数 | 已发布 | Marketplace 引用数 | 说明 |
+|---|---:|---|---:|---|
+| `angular-skills` | 1 | 是 | 1 | 已与当前发布面对应 |
+| `antd-skills` | 4 | 是 | 4 | 已与当前发布面对应 |
+| `ascii-skills` | 13 | 是 | 13 | 已与当前发布面对应 |
+| `avue-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
+| `build-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
+| `chart-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `cocos-skills` | 1 | 是 | 1 | 已与当前发布面对应 |
+| `database-skills` | 5 | 是 | 5 | 已与当前发布面对应 |
+| `ddd-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
+| `design-skills` | 12 | 是 | 12 | 已与当前发布面对应 |
+| `dev-utils-skills` | 13 | 是 | 13 | 已与当前发布面对应 |
+| `devops-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
+| `docker-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `document-skills` | 5 | 是 | 9 | 目录技能数与 Marketplace 引用数不一致，详见 repository-map |
+| `drawio-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `electron-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
+| `flutter-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `go-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `mobile-native-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `nodejs-skills` | 4 | 是 | 4 | 已与当前发布面对应 |
+| `nvm-skills` | 15 | 是 | 15 | 已与当前发布面对应 |
+| `ocrmypdf-skills` | 5 | 是 | 5 | 已与当前发布面对应 |
+| `openspec-skills` | 15 | 是 | 15 | 已与当前发布面对应 |
+| `pencil-skills` | 28 | 是 | 28 | 已与当前发布面对应 |
+| `python-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
+| `react-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
+| `social-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `speckit-skills` | 13 | 是 | 13 | 已与当前发布面对应 |
+| `spring-skills` | 7 | 是 | 7 | 已与当前发布面对应 |
+| `stitch-skills` | 28 | 是 | 28 | 已与当前发布面对应 |
+| `svelte-skills` | 1 | 是 | 1 | 已与当前发布面对应 |
+| `t2ui-skills` | 97 | 是 | 97 | 已与当前发布面对应 |
+| `tauri-skills` | 52 | 是 | 51 | 目录技能数与 Marketplace 引用数不一致，详见 repository-map |
+| `teaching-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
+| `testing-skills` | 9 | 是 | 9 | 已与当前发布面对应 |
+| `threejs-skills` | 18 | 否 | 0 | 仓库内存在，当前未写入 Marketplace |
+| `uniapp-skills` | 13 | 是 | 13 | 已与当前发布面对应 |
+| `utility-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
+| `uview-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
+| `vscode-skills` | 4 | 否 | 0 | 仓库内存在，当前未写入 Marketplace |
+| `vue-skills` | 7 | 是 | 7 | 已与当前发布面对应 |
+| `vue-ui-skills` | 4 | 是 | 4 | 已与当前发布面对应 |
+
+### 当前一致性说明
+
+- 对仓库内容的理解，应以 `skills/` 目录为准。
+- 对外发布面的理解，应以 `.claude-plugin/marketplace.json` 为准。
+- 当前真实存在的差异仅有三类：仓库内未发布技能组、Marketplace 缺失目录引用、仓库内新增但未发布的单个技能。
+- 上表已经明确标识这些差异，因此 README 现在对应的是“当前仓库状态”，而不是历史分类口径。
+
+### 安装建议
+
+- 需要前端能力：优先安装 `vue-skills`、`react-skills`、`build-skills`、`antd-skills`、`vue-ui-skills`
+- 需要后端与跨端能力：优先安装 `spring-skills`、`nodejs-skills`、`python-skills`、`go-skills`、`tauri-skills`、`uniapp-skills`
+- 需要设计与文档能力：优先安装 `design-skills`、`document-skills`、`ocrmypdf-skills`、`drawio-skills`
+- 需要交付与工程化能力：优先安装 `dev-utils-skills`、`testing-skills`、`devops-skills`、`docker-skills`、`database-skills`、`nvm-skills`
+- 需要 Spec / 设计工作流：优先安装 `speckit-skills`、`openspec-skills`、`t2ui-skills`、`stitch-skills`、`pencil-skills`
+
+### 场景化安装路径
+
+- **前端应用开发**：先安装 `vue-skills` 或 `react-skills`，再按需要补充 `build-skills`、`antd-skills`、`vue-ui-skills`。
+- **后端服务开发**：将 `spring-skills`、`nodejs-skills`、`python-skills`、`go-skills` 与 `testing-skills`、`database-skills` 组合使用。
+- **桌面与跨端产品**：按目标平台选择 `tauri-skills`、`electron-skills`、`uniapp-skills`、`flutter-skills`。
+- **Spec 驱动协作**：建议成套安装 `speckit-skills`、`openspec-skills`、`t2ui-skills`、`stitch-skills`、`pencil-skills`。
+- **文档与图形表达**：建议组合 `document-skills`、`ocrmypdf-skills`、`drawio-skills`、`ascii-skills`。
+
+### 业务域导航
+
+| 目标 | 建议优先阅读 | 建议安装组合 |
+|---|---|---|
+| Web 前端交付 | `vue-skills`、`react-skills`、`build-skills` | `vue-skills` / `react-skills` + `build-skills` + `testing-skills` |
+| 企业后台与服务 | `spring-skills`、`nodejs-skills`、`database-skills` | `spring-skills` / `nodejs-skills` + `database-skills` + `devops-skills` |
+| 桌面与跨端应用 | `tauri-skills`、`electron-skills`、`uniapp-skills`、`flutter-skills` | 按目标平台选 1–2 个运行时组，再补 `testing-skills` |
+| Spec 驱动产品研发 | `speckit-skills`、`openspec-skills`、`t2ui-skills` | `speckit-skills` + `openspec-skills` + `t2ui-skills` |
+| 设计系统与界面生产 | `stitch-skills`、`pencil-skills`、`design-skills` | `stitch-skills` + `pencil-skills` + `design-skills` |
+| 文档、OCR 与图表 | `document-skills`、`ocrmypdf-skills`、`drawio-skills`、`ascii-skills` | `document-skills` + `ocrmypdf-skills` + `drawio-skills` |
 
----
-
-### 📦 development-skills（全栈开发技能集合）
-
-**安装命令：** `/plugin install development-skills@full-stack-skills`
-
-**技能数量：** 76 个技能
-
-**描述：** 全栈开发技能集合，覆盖前端、后端、移动端、桌面应用全平台开发。帮助 AI 助手掌握全栈开发技能。
-
-#### 前端框架与构建工具
-- **框架：** `vue2`、`vue3`、`react`、`react-hooks`、`nextjs`、`angular`、`svelte`
-- **构建工具：** `vite`、`webpack`、`rollup`、`parcel`、`rspack`
-- **状态管理：** `vue-router`、`vue-router-v3`、`vue-router-v4`、`pinia`、`vuex`、`vuex-vue2`、`redux`
-- **样式工具：** `dart-sass`
-
-#### UI 组件库
-- **Vue 生态：** `element-plus`、`element-plus-vue3`、`ant-design-vue`、`bootstrap-vue3`、`vant-vue3`、`uview-vue2`、`uview-pro-vue3`、`layui-vue3`
-- **React 生态：** `ant-design-react`、`ant-design-mobile`、`ant-design-mini`
-- **其他：** `avue`、`avue-crud`、`avue-form`
-
-#### 桌面应用框架
-- `electron`、`electron-egg`、`tauri`
-
-#### 后端框架
-- **Java 生态：** `spring-boot`、`spring-cloud`、`spring-cloud-alibaba`、`spring-ai`、`spring-ai-alibaba`、`spring-security`、`spring-data-jpa`
-- **Node.js 生态：** `express`、`nestjs`、`koa`、`fastify`
-- **Python 生态：** `django`、`fastapi`、`flask`
-- **Go 生态：** `gin`、`gin-gonic`
-
-#### 移动端开发
-- **跨平台框架：** `uniapp-project-creator`、`uniapp-project`、`uniappx-project-creator`、`uniappx-project`、`react-native`、`react-native-project-creater`、`flutter`、`flutter-project-creater`
-- **原生开发：** `android-kotlin`、`ios-swift`
-- **游戏引擎：** `cocos2d-x`
-- **UniApp 生态：** `uniapp-uview`、`uniappx-uview-pro`、`uniapp-ucharts`、`uniapp-ad`、`uniapp-cloud`、`uniapp-mini-guide`、`uniapp-native-app`、`uniapp-native-plugin`、`uniapp-plugin`
-- **图表组件：** `lime-echart`、`ucharts`、`upgradeLink`
-
----
-
-### 🛠️ development-skills-utils（开发工具技能集合）
-
-**安装命令：** `/plugin install development-skills-utils@full-stack-skills`
-
-**技能数量：** 13 个技能
-
-**描述：** 开发工具技能集合，包含代码生成、测试编写、文档构建等基础工具；DDD 项目构建器、项目文档生成、MCP 构建器；Maven 组件检索等。帮助 AI 助手掌握开发工具链和工程化实践。
-
-**技能列表：**
-- `code-generator` - 代码生成器
-- `test-writer` - 测试编写工具
-- `ddd4j-project-creator` - DDD4j 项目创建器（基于 ddd4j-boot，支持单体单模块、单体多模块、微服务架构）
-- `documentation-builder` - 文档构建工具
-- `full-stack-doc` - 全栈文档生成（14种文档模板，覆盖产品到运维全生命周期）
-- `mcp-builder` - MCP 构建器
-- `webapp-testing` - Web 应用测试
-- `frontend-design` - 前端设计工具
-- `web-artifacts-builder` - Web 工件构建器
-- `theme-factory` - 主题工厂
-- `nvm` - Node.js 版本管理
-- `agent-browser` - 浏览器自动化
-- `maven-search` - Maven 组件检索（从 Maven Central Repository 搜索和检索 Maven 依赖）
-
----
-
-### 🎨 design-skills（设计技能集合）
-
-**安装命令：** `/plugin install design-skills@full-stack-skills`
-
-**技能数量：** 16 个技能
-
-**描述：** 设计与创意技能集合，包含专业设计工具、AI 设计工具、创意工具等。帮助 AI 助手掌握 UI/UX 设计、原型设计、AI 绘图等设计技能。
-
-#### 专业设计工具
-- `figma`、`sketch`、`adobe-xd`、`axure`、`modao`、`framer`
-
-#### AI 设计工具
-- `midjourney`、`dalle`、`stable-diffusion`、`runway-ml`、`galileo-ai`、`uizard`、`figma-ai`
-
-#### 创意工具
-- `algorithmic-art`、`brand-guidelines`、`canvas-design`
-
----
-
-### 📄 document-skills（文档处理技能集合）
-
-**安装命令：** `/plugin install document-skills@full-stack-skills`
-
-**技能数量：** 15 个技能
-
-**描述：** 文档处理技能集合，包含办公文档的创建、编辑和处理；OCRmyPDF 扫描件 OCR 识别（核心 OCR、图像处理、优化压缩、批量处理、Python API 及插件）；文档协作；API 文档生成；流程图和思维导图绘制；Mermaid 和 PlantUML 图表绘制等。帮助 AI 助手掌握文档处理、OCR 识别、图表绘制、文档协作等办公自动化技能。
-
-#### 办公文档处理
-- `docx` - Word 文档处理
-- `pptx` - PowerPoint 演示文稿处理
-- `pdf` - PDF 文档处理
-- `xlsx` - Excel 电子表格处理
-
-#### OCR 识别（OCRmyPDF）
-- `ocrmypdf` - OCRmyPDF 核心 OCR（安装、基本 OCR、多语言、OCR 模式）
-- `ocrmypdf-image` - 图像处理（纠偏、旋转、去噪、清理扫描件）
-- `ocrmypdf-optimize` - 优化与输出（压缩级别、PDF/A、JBIG2 编码）
-- `ocrmypdf-batch` - 批量处理与自动化（Shell 脚本、Docker、CI/CD）
-- `ocrmypdf-api` - Python API 与插件（编程调用、EasyOCR、PaddleOCR）
-
-#### 文档协作与生成
-- `doc-coauthoring` - 文档协作（多人协作编辑）
-- `api-doc-generator` - API 文档生成器
-
-#### 图表绘制工具
-- `drawio-flowchart` - Draw.io 流程图绘制
-- `processon-mindmap` - ProcessOn 思维导图绘制
-- `mermaid` - Mermaid 图表绘制（支持 23 种图表类型）
-- `plantuml` - PlantUML 架构图绘制（支持 UML 和非 UML 图表）
-
----
-
-### 🏗️ architecture-skills（架构技能集合）
-
-**安装命令：** `/plugin install architecture-skills@full-stack-skills`
-
-**技能数量：** 7 个技能
-
-**描述：** 架构技能集合，包含领域驱动设计（DDD）、各种架构模式、架构图绘制工具等。帮助 AI 助手掌握企业级架构设计、领域建模、架构图绘制等架构设计技能。
-
-#### 架构模式
-- `ddd` - 领域驱动设计
-- `ddd-cola` - COLA 架构
-- `ddd-microservices` - DDD 微服务架构
-- `ddd-event-driven` - DDD 事件驱动架构
-- `ddd-hexagonal-architecture` - DDD 六边形架构
-- `ddd-clean-architecture` - DDD 整洁架构
-
-#### 架构图工具
-- `drawio-architecture` - Draw.io 架构图绘制
-
----
-
-### 🧪 testing-skills（测试技能集合）
-
-**安装命令：** `/plugin install testing-skills@full-stack-skills`
-
-**技能数量：** 9 个技能
-
-**描述：** 测试技能集合，包含单元测试框架、E2E 测试工具、移动端测试工具等。帮助 AI 助手掌握单元测试、集成测试、端到端测试、移动端测试等测试技能，提升代码质量和测试覆盖率。
-
-#### 单元测试框架
-- `jest`、`vitest`、`pytest`、`junit`
-
-#### E2E 测试工具
-- `cypress`、`playwright`、`selenium`
-
-#### 移动端测试工具
-- `appium`、`detox`
-
----
-
-### 🚀 devops-skills（运维技能集合）
-
-**安装命令：** `/plugin install devops-skills@full-stack-skills`
-
-**技能数量：** 9 个技能
-
-**描述：** 运维技能集合，包含 CI/CD 工具、容器化和容器编排工具、基础设施即代码（IaC）工具等。帮助 AI 助手掌握 DevOps 实践、自动化部署、容器化、基础设施管理等运维技能。
-
-#### CI/CD 工具
-- `jenkins`、`gitlab-ci`、`github-actions`
-
-#### 容器化与编排
-- `docker`、`docker-compose`、`kubernetes`
-
-#### 基础设施即代码（IaC）
-- `terraform`、`ansible`、`cloudformation`
-
----
-
-### 💾 database-skills（数据库技能集合）
-
-**安装命令：** `/plugin install database-skills@full-stack-skills`
-
-**技能数量：** 8 个技能
-
-**描述：** 数据库技能集合，包含关系型数据库、NoSQL 数据库、搜索引擎、数据库管理工具等。帮助 AI 助手掌握数据库设计、SQL 优化、数据存储、数据检索等数据库技能。
-
-#### 关系型数据库
-- `mysql`、`postgresql`、`oracle`
-
-#### NoSQL 数据库与搜索引擎
-- `mongodb`、`redis`、`elasticsearch`
-
-#### 数据库管理工具
-- `navicat`、`dbeaver`
-
----
-
-### ☁️ cloud-skills（云平台技能集合）
-
-**安装命令：** `/plugin install cloud-skills@full-stack-skills`
-
-**技能数量：** 16 个技能
-
-**描述：** 云平台技能集合，包含 AWS、Azure、阿里云、腾讯云、华为云等主流云平台的核心服务。帮助 AI 助手掌握云计算、云服务使用、云架构设计等云平台技能，支持多云部署和云原生应用开发。
-
-#### AWS
-- `cloud-aws-ec2`、`cloud-aws-s3`、`cloud-aws-rds`、`cloud-aws-lambda`
-
-#### Azure
-- `cloud-azure-vm`、`cloud-azure-storage`、`cloud-azure-sql`
-
-#### 阿里云
-- `cloud-aliyun-ecs`、`cloud-aliyun-oss`、`cloud-aliyun-rds`
-
-#### 腾讯云
-- `cloud-tencent-cvm`、`cloud-tencent-cos`、`cloud-tencent-cdb`
-
-#### 华为云
-- `cloud-huawei-ecs`、`cloud-huawei-obs`、`cloud-huawei-rds`
-
----
-
-### 👥 social-skills（社交技能集合）
-
-**安装命令：** `/plugin install social-skills@full-stack-skills`
-
-**技能数量：** 2 个技能
-
-**描述：** 社交与协作技能集合，包含内部沟通、Slack GIF 创建器等。帮助 AI 助手掌握团队协作、内部沟通、社交工具使用等协作技能。
-
-**技能列表：**
-- `internal-comms` - 内部沟通（状态报告、领导更新、公司通讯、FAQ 等内部文档编写）
-- `slack-gif-creator` - Slack GIF 创建器（为 Slack 消息创建 GIF 动图）
-
----
-
-### 📚 teaching-skills（教学技能集合）
-
-**安装命令：** `/plugin install teaching-skills@full-stack-skills`
-
-**技能数量：** 3 个技能
-
-**描述：** 教学与教育相关技能集合，包含课程设计、学习评估、教学资源生成等。帮助 AI 助手掌握教学资源设计、课程规划、学习评估等教育技能。
-
-**技能列表：**
-- `course-designer` - 课程设计（课程大纲、学习目标、教学计划、评估方案）
-- `learning-assessor` - 学习评估（测验题目、评估标准、评分 rubric、学习分析）
-- `teaching-resource-generator` - 教学资源生成（课件、练习题、教学案例、学习指南）
-
----
-
-### 🔧 utility-skills（工具技能集合）
-
-**安装命令：** `/plugin install utility-skills@full-stack-skills`
-
-**技能数量：** 1 个技能
-
-**描述：** 工具与实用技能集合，包含技能创建器，指导如何创建有效的 Agent Skills，扩展 Claude 的能力。帮助 AI 助手和开发者掌握技能设计、技能结构、最佳实践等技能创建技能，支持自定义技能开发。
-
-**技能列表：**
-- `skill-creator` - 技能创建器（指导如何创建有效的 Agent Skills）
 
 ## 🛠️ 技术栈
 
@@ -566,24 +430,39 @@ python convert_all.py ../skills ../adapters-output
 ### 技能结构
 - **SKILL.md**：技能主文档，包含描述、使用说明、示例等
 - **examples/**：示例文件目录，包含各种使用场景的示例
-- **templates/**：模板文件目录，包含可复用的模板
+- **references/**：参考资料目录，用于承载较长说明与官方链接
 - **scripts/**：脚本文件目录，包含自动化脚本
-- **api/**：API 参考文档目录
-- **reference/**：参考文档目录
+- **assets/**：资源文件目录，用于存放图片、素材或辅助文件
+
+### 编写原则
+- **描述准确**：`description` 必须明确说明技能的触发场景与适用任务
+- **正文精简**：`SKILL.md` 保持精炼，复杂材料优先放入 `references/`
+- **路径一致**：目录名、frontmatter 中的 `name` 与 Marketplace 路径保持一致
+- **任务导向**：优先描述工作流、输入输出、边界条件，而不是泛化概念说明
+- **脚本优先**：可复用流程优先沉淀到 `scripts/`，减少内联命令噪音
+
+### 文档维护规则
+- **计数更新同步**：当技能组数量、`SKILL.md` 数量或 Marketplace 路径变化时，需同步更新 README 中的快照数据
+- **状态说明同步**：当出现 repo-only 技能组或 Marketplace 漂移时，README 与 `docs/repository-map.md` 必须同时更新
+- **示例命令同步**：安装命令示例只能使用当前 Marketplace 中实际存在的插件名
+- **路径说明同步**：路径示例必须遵循 `skills/<group>-skills/<skill>/` 结构，避免回退到历史写法
 
 ### 跨平台支持
 - **Claude Code**：原生支持，通过插件市场安装
 - **Claude.ai**：支持上传自定义技能
 - **Claude API**：通过 API 使用技能
-- **其他平台**：提供适配器工具，支持 Cursor、Trae、Qoder、CodeBuddy、Windsurf 等
+- **标准转换器**：以 TypeScript CLI 统一导出标准 skills 目录
+- **路径矩阵**：覆盖 43 个平台的项目级与全局级安装路径
 
 ## 📦 版本信息
 
 | 项目 | 当前版本          |
 |---|---------------|
 | full-stack-skills | 0.0.1 (Alpha) |
-| 技能总数 | 176           |
-| 插件类别 | 12            |
+| 技能组目录 | 42            |
+| `SKILL.md` 文件 | 421           |
+| Marketplace 插件 | 40            |
+| Marketplace 技能路径 | 410           |
 | Agent Skills 规范 | 最新版本          |
 
 ## 🔗 相关链接
@@ -623,15 +502,23 @@ python convert_all.py ../skills ../adapters-output
 
 ### 技能创建规范
 - 严格遵循 [Agent Skills 规范](https://agentskills.io/)
+- 路径遵循 `skills/<group>-skills/<skill>/SKILL.md`
 - 参考现有技能的结构和格式
 - 包含完整的官方文档链接
 - 提供清晰的使用示例
+- 需要发布时同步更新 `.claude-plugin/marketplace.json`
+
+### 提交前检查清单
+- 确认技能目录名、frontmatter `name` 与实际用途一致
+- 确认 `SKILL.md` 足够精炼，长说明已移动至 `references/`
+- 确认脚本、示例、资源文件路径可被仓库内直接解析
+- 确认 README、映射文档、Marketplace 配置之间没有新的口径差异
 
 ## 📄 许可证
 
 本项目采用 [Apache License 2.0](LICENSE) 许可证。
 
-**注意**：本仓库中的许多技能是开源的（Apache 2.0）。我们还在 [`skills/docx`](skills/docx)、[`skills/pdf`](skills/pdf)、[`skills/pptx`](skills/pptx) 和 [`skills/xlsx`](skills/xlsx) 子目录中包含了用于支撑 [Claude 文档能力](https://www.anthropic.com/news/create-files) 的文档创建与编辑技能。这些技能是"可查看源码"的（source-available），但并非开源；我们希望将其作为更复杂技能的参考示例，因为它们已在生产级 AI 应用中实际使用。
+**注意**：本仓库中的许多技能是开源的（Apache 2.0）。我们还在 [`skills/document-skills/docx`](skills/document-skills/docx)、[`skills/document-skills/pdf`](skills/document-skills/pdf)、[`skills/document-skills/pptx`](skills/document-skills/pptx) 和 [`skills/document-skills/xlsx`](skills/document-skills/xlsx) 子目录中包含了用于支撑 [Claude 文档能力](https://www.anthropic.com/news/create-files) 的文档创建与编辑技能。这些技能是“可查看源码”的（source-available），但并非开源；它们同时也是构建复杂文档类技能的参考实现。
 
 ## 🙏 致谢
 
