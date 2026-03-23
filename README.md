@@ -275,6 +275,54 @@ full-stack-skills/
 
 本仓库提供一个 **TypeScript 标准转换器**，将 `skills/<group>/<skill>/` 导出为标准 skills 目录，并按目标平台写入其项目级或全局级路径。转换器不再生成 Cursor rule、Trae plugin、Qoder agent、CodeBuddy workflow 这类平台专有包装物，统一以标准技能目录作为输出。
 
+#### 适配器说明
+
+- **命令行名称**：`fskill`
+- **仓库位置**：`adapters/`
+- **输入结构**：仓库内的 `skills/<group>/<skill>/`
+- **输出结构**：标准技能目录 `SKILL.md` + 资源目录
+- **核心命令**：`platforms`、`audit`、`convert`、`install`
+- **默认安装目标**：当前项目 `.agents/skills/`
+- **平台安装方式**：通过 `--platform` 切换目标平台，通过 `--scope project|global` 切换项目级或全局级路径
+- **适配原则**：保留原始技能目录内容，只变更安装路径，不生成平台专有包装文件
+
+#### 适配器工作流
+
+1. 用 `fskill audit` 检查仓库技能是否完整、数量是否正确
+2. 用 `fskill platforms` 查看支持的平台 ID、项目路径和全局路径
+3. 用 `fskill convert --platform <id|all>` 生成可分发的标准输出目录
+4. 用 `fskill install` 或 `fskill install --platform <id>` 直接安装到目标平台目录
+
+#### 常用适配命令
+
+```bash
+# 查看支持的平台与路径
+fskill platforms
+
+# 审计仓库技能
+fskill audit
+
+# 导出到 Cursor 结构
+fskill convert --platform cursor --output ./adapters-output
+
+# 安装到当前项目的 Cursor 路径
+fskill install --platform cursor --scope project
+
+# 安装到 Cursor 全局路径 ~/.cursor/skills/
+fskill install --platform cursor --scope global
+
+# 默认安装到当前项目 .agents/skills/
+fskill install
+```
+
+#### Cursor 与其他平台的关系
+
+- **Cursor**：项目级使用 `.agents/skills/`，全局级使用 `~/.cursor/skills/`
+- **Claude Code**：项目级使用 `.claude/skills/`
+- **OpenClaw**：项目级使用 `skills/`
+- **Antigravity**：项目级使用 `.agents/skills/`，全局级使用 `~/.gemini/antigravity/skills/`
+- **其它平台**：全部由 `fskill platforms` 输出的平台注册表统一管理
+
 **安装与执行命令：**
 ```bash
 git clone https://github.com/partme-ai/full-stack-skills.git

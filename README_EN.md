@@ -136,6 +136,54 @@ You can use Anthropic's pre-built skills, and upload custom skills, via the Clau
 
 This repository now ships a **TypeScript standard converter**. It exports `skills/<group>/<skill>/` into standard skill directories and installs them into the project-level or global-level path required by each supported platform. The converter does not generate platform-specific plugin wrappers; it preserves the original skill directory and switches only the destination path.
 
+#### Adapter overview
+
+- **CLI name**: `fskill`
+- **Location**: `adapters/`
+- **Input layout**: `skills/<group>/<skill>/`
+- **Output layout**: standard skill directories with `SKILL.md` and resource folders
+- **Core commands**: `platforms`, `audit`, `convert`, `install`
+- **Default install target**: current project `.agents/skills/`
+- **Platform switch**: use `--platform` for the target platform and `--scope project|global` for install scope
+- **Adapter rule**: preserve the original skill contents and change only the destination path
+
+#### Adapter workflow
+
+1. Run `fskill audit` to verify the repository skill inventory
+2. Run `fskill platforms` to inspect supported platform IDs and install paths
+3. Run `fskill convert --platform <id|all>` to generate distributable standard outputs
+4. Run `fskill install` or `fskill install --platform <id>` to install directly into the target platform path
+
+#### Common adapter commands
+
+```bash
+# List supported platforms and paths
+fskill platforms
+
+# Audit repository skills
+fskill audit
+
+# Export Cursor-compatible output
+fskill convert --platform cursor --output ./adapters-output
+
+# Install into the current project's Cursor path
+fskill install --platform cursor --scope project
+
+# Install into Cursor global path ~/.cursor/skills/
+fskill install --platform cursor --scope global
+
+# Install into the default .agents/skills/ path
+fskill install
+```
+
+#### Cursor and other platforms
+
+- **Cursor**: project-level `.agents/skills/`, global `~/.cursor/skills/`
+- **Claude Code**: project-level `.claude/skills/`
+- **OpenClaw**: project-level `skills/`
+- **Antigravity**: project-level `.agents/skills/`, global `~/.gemini/antigravity/skills/`
+- **Other platforms**: all managed through the unified platform registry exposed by `fskill platforms`
+
 **Install and run commands**
 
 ```bash
