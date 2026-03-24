@@ -1,0 +1,39 @@
+id: qa-testing
+title: 测试（QA / 自动化）岗位包
+description: 面向单测/集成测试/E2E/移动端自动化的常用技能组合。
+tags: [qa, testing, e2e, automation]
+recommended:
+  platforms: [cursor, claude, codex, trae]
+  scope: project
+skills:
+  - name: pytest
+  - name: junit
+  - name: jest
+  - name: vitest
+  - name: cypress
+  - name: playwright
+  - name: selenium
+  - name: appium
+  - name: detox
+prompts:
+  - title: Python 单测与夹具
+    prompt: |
+      Use pytest skill.
+      给这个 Python 模块补齐 pytest 单测：包含 fixture、参数化、mock 外部依赖，并说明最佳实践。
+  - title: Java 单测
+    prompt: |
+      Use junit skill.
+      给这个 Java Service 写 JUnit5 单测，覆盖异常、边界条件，并提供合理的测试命名与结构。
+  - title: Web E2E（Playwright）
+    prompt: |
+      Use playwright skill.
+      给登录-下单-支付流程写 Playwright E2E，用 Page Object 模式组织，并在 CI 中稳定运行。
+  - title: Web E2E（Cypress）
+    prompt: |
+      Use cypress skill.
+      设计一套 Cypress 测试覆盖关键路径与回归点，并给出 flaky case 的治理方法。
+  - title: 移动端自动化
+    prompt: |
+      Use appium skill.
+      我需要对 iOS/Android 做跨端自动化测试，给出 Appium 的工程结构、capabilities 配置与稳定性策略。
+

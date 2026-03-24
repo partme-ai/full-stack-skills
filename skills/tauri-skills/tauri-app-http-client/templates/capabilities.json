@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for HTTP Client",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "http:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://api.example.com/*"
+        },
+        {
+          "url": "https://*.tauri.app/*"
+        }
+      ]
+    }
+  ]
+}

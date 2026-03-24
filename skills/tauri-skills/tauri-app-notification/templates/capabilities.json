@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Notifications",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "notification:default",
+    "notification:allow-request-permission",
+    "notification:allow-notify"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for OS Info",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "os:default",
+    "os:allow-platform",
+    "os:allow-version",
+    "os:allow-type",
+    "os:allow-arch",
+    "os:allow-hostname"
+  ]
+}

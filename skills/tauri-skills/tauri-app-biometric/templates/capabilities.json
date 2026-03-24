@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "mobile-capability",
+  "description": "Capability for Biometric Authentication",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "biometric:default",
+    "biometric:allow-authenticate",
+    "biometric:allow-status"
+  ]
+}

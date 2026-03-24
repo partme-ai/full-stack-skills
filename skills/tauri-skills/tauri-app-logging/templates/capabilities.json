@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Logging",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "log:default",
+    "log:allow-log"
+  ]
+}

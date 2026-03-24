@@ -1,0 +1,7 @@
+{
+  "patterns": ["Card", "Header"],
+  "nodeIds": ["node:123", "node:456"],
+  "searchDepth": 3,
+  "includePathGeometry": true,
+  "resolveVariables": true
+}

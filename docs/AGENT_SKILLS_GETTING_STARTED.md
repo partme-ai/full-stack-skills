@@ -737,7 +737,7 @@ def call_api(endpoint, params):
    - [Agent Skills 规范文档](https://agentskills.io/specification)
 
 2. **示例技能**：
-   - 浏览 [full-stack-skills](https://github.com/teachingai/full-stack-skills) 仓库
+   - 浏览 [full-stack-skills](https://github.com/partme-ai/full-stack-skills) 仓库
    - 学习现有技能的实现方式
    - 参考 `mermaid`、`maven-search` 等技能
 
@@ -787,4 +787,4 @@ Agent Skills 不仅仅是一种功能扩展方式，更是一种**从"指令驱�
 **相关资源**：
 - [Agent Skills 规范](https://agentskills.io/)
 - [Claude Skills 开发指南](https://support.claude.com/zh-CN/articles/12512198)
-- [Full-Stack-Skills 仓库](https://github.com/teachingai/full-stack-skills)
+- [Full-Stack-Skills 仓库](https://github.com/partme-ai/full-stack-skills)

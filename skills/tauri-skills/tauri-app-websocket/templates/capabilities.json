@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for WebSocket",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "websocket:default",
+    {
+      "identifier": "websocket:allow-connect",
+      "allow": [
+        {
+          "url": "ws://localhost:8080"
+        },
+        {
+          "url": "wss://echo.websocket.org"
+        }
+      ]
+    }
+  ]
+}

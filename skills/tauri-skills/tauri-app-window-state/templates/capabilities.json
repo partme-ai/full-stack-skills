@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Window State",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "window-state:default"
+  ]
+}

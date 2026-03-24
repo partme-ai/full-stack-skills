@@ -1,0 +1,23 @@
+{
+  "name": "skill-installer",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "skill-installer": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "@types/node": "^25.0.10",
+    "typescript": "^5.9.3",
+    "zod": "^4.3.6"
+  }
+}

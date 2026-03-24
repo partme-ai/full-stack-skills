@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "mobile-capability",
+  "description": "Capability for NFC",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "nfc:default"
+  ]
+}

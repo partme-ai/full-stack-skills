@@ -1,0 +1,42 @@
+id: 3d-threejs
+title: 3D（三维 / Three.js）岗位包
+description: 面向 Three.js 场景搭建、交互、性能优化与资源加载的常用技能组合。
+tags: [3d, threejs, webgl, performance]
+recommended:
+  platforms: [cursor, claude, codex, trae]
+  scope: project
+skills:
+  - name: threejs-fundamentals
+    repo: threejs-skills
+  - name: threejs-loaders
+    repo: threejs-skills
+  - name: threejs-lighting
+    repo: threejs-skills
+  - name: threejs-shaders
+    repo: threejs-skills
+  - name: threejs-postprocessing
+    repo: threejs-skills
+  - name: threejs-interaction
+    repo: threejs-skills
+prompts:
+  - title: 创建基础场景
+    prompt: |
+      Use threejs-fundamentals.
+      帮我创建一个基础 Three.js 场景（renderer/camera/resize/animation loop），并渲染一个旋转立方体。
+  - title: 加载 GLTF 并播放动画
+    prompt: |
+      Use threejs-loaders.
+      加载一个 GLTF 模型（包含动画），创建 AnimationMixer 播放动画，并处理加载失败与资源释放。
+  - title: 灯光与阴影
+    prompt: |
+      Use threejs-lighting.
+      给我的场景添加真实感灯光与阴影（阴影参数建议、性能注意事项、调试 helper）。
+  - title: 自定义 Shader 效果
+    prompt: |
+      Use threejs-shaders.
+      写一个 ShaderMaterial 实现 Fresnel 边缘光效果，并说明 uniform 与坐标空间注意点。
+  - title: 后期效果链
+    prompt: |
+      Use threejs-postprocessing.
+      用 EffectComposer 添加 bloom + FXAA，并解释如何与透明物体/性能做平衡。
+

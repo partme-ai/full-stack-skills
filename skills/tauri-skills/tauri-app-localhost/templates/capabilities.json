@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Localhost",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "localhost:default"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for Persisted Scope",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "persisted-scope:default"
+  ]
+}

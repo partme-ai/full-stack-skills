@@ -1,0 +1,23 @@
+{
+  "operations": [
+    {
+      "type": "insert",
+      "node": {
+        "type": "frame",
+        "name": "Card",
+        "layout": "vertical",
+        "itemSpacing": 16,
+        "padding": 24,
+        "fills": [{ "color": "#FFFFFF" }],
+        "children": [
+          {
+            "type": "text",
+            "content": "Card Title",
+            "fontSize": 18
+          }
+        ]
+      },
+      "bind": "cardFrame"
+    }
+  ]
+}

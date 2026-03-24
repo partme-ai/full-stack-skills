@@ -6,17 +6,22 @@
 
 面向 Claude.ai 与 Claude Code 的一组技能集合，用于处理与 Vercel 部署相关的工作。技能是经过打包的说明与脚本，用于扩展 Claude 的能力。
 
+本仓库为全链路**阶段映射**与**基础技能**的主入口；关联 t2ui-skills、stitch-skills、pencil-skills、tauri-skills 等。阶段与技能映射见 [docs/pipeline-stage-to-skills.md](docs/pipeline-stage-to-skills.md)，生态总览见 [docs/skills-ecosystem.md](docs/skills-ecosystem.md)。已整合 Spec Kit（speckit-*）技能，见 [docs/speckit-agent-skills.md](docs/speckit-agent-skills.md)。
+
 ## 创建新技能
 
 ### 目录结构
 
+本仓库技能路径为 **`skills/<组目录>/<技能名>/`**（例如 `skills/vue-skills/vue3/`、`skills/threejs-skills/threejs-animation/`），与 `marketplace.json` 中 `skills[]` 路径一致。
+
 ```
 skills/
-  {skill-name}/           # kebab-case directory name
-    SKILL.md              # Required: skill definition
-    scripts/              # Required: executable scripts
-      {script-name}.sh    # Bash scripts (preferred)
-  {skill-name}.zip        # Required: packaged for distribution
+  <group>-skills/         # 组目录，如 vue-skills、tauri-skills、document-skills
+    {skill-name}/         # kebab-case，与 SKILL.md frontmatter name 一致
+      SKILL.md            # 必需
+      examples/           # 可选
+      references/         # 可选
+      scripts/            # 可选
 ```
 
 ### 命名规范

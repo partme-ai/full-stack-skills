@@ -1,0 +1,37 @@
+id: frontend-vue
+title: 前端（Vue）岗位包
+description: 面向 Vue 3 前端开发的常用技能组合（Vue/Pinia/Vite/测试/工程化）。
+tags: [frontend, vue, typescript, testing]
+recommended:
+  platforms: [cursor, claude, codex, trae]
+  scope: project
+skills:
+  - name: vue3
+  - name: pinia
+  - name: vite
+  - name: vitest
+  - name: jest
+  - name: webpack
+  - name: rspack
+prompts:
+  - title: 新建 Vue 3 页面
+    prompt: |
+      Use vue3 skill.
+      帮我用 Vue 3 + TypeScript 写一个可复用的表格组件，支持排序、分页、空状态，并给出示例用法。
+  - title: 修复 Vue 类型报错
+    prompt: |
+      Use vue3 skill.
+      我在 <template> 里访问 props 的字段时报 TS 报错，请给出正确的 props 定义与模板写法，并解释原因。
+  - title: Pinia 状态设计
+    prompt: |
+      Use pinia skill.
+      设计一个 Pinia store 管理用户登录态（token、profile、刷新、退出），并提供单测示例。
+  - title: Vite 构建优化
+    prompt: |
+      Use vite skill.
+      我的 Vite 项目首屏慢，请给出可操作的优化清单（分包、预构建、懒加载、资源压缩）并说明验证方法。
+  - title: 组件测试
+    prompt: |
+      Use vitest skill.
+      给这个 Vue 组件写 Vitest 单元测试，覆盖 props、事件、异步请求与快照（如适用）。
+

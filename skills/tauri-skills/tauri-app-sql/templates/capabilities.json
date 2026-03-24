@@ -1,0 +1,42 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for SQL Database",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "sql:default",
+    {
+      "identifier": "sql:allow-load",
+      "allow": [
+        {
+          "name": "sqlite:test.db",
+          "create": true,
+          "readonly": false
+        }
+      ]
+    },
+    {
+      "identifier": "sql:allow-execute",
+      "allow": [
+        {
+          "name": "sqlite:test.db",
+          "sql": "INSERT INTO *"
+        },
+        {
+          "name": "sqlite:test.db",
+          "sql": "UPDATE *"
+        }
+      ]
+    },
+    {
+      "identifier": "sql:allow-select",
+      "allow": [
+        {
+          "name": "sqlite:test.db",
+          "sql": "SELECT * FROM *"
+        }
+      ]
+    }
+  ]
+}
