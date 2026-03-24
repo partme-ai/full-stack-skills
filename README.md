@@ -330,8 +330,7 @@ full-stack-skills/
 /plugin install stitch-skills@full-stack-skills
 ```
 
-![install-development-skills-frontend.png](media/install-development-skills-frontend.png)
-
+![install-tauri-skills.png](media/install-tauri-skills.png)
 #### 3. 使用技能
 
 安装插件后，您只需提到该技能即可使用。Claude 会根据技能描述自动判断何时使用该技能。
