@@ -1,6 +1,6 @@
 ---
 name: ascii-text-art-library
-description: Generate a reusable ASCII-only text template library (titles, dividers, notice boxes, slogans/CTA), with naming conventions and selection rules for consistent CLI/log/README output.
+description: "Generate a reusable ASCII-only text template library (titles, dividers, notice boxes, slogans/CTA), with naming conventions and selection rules for consistent CLI/log/README output. Use when the user needs ASCII art templates, text banners, console formatting, or decorative text elements."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -34,6 +34,66 @@ dependencies:
 - templates: grouped by category (>= 2 variants per category)
 - namingRules: e.g. `TITLE_COMPACT_A`, `WARN_BOX_B`
 - usageRules: selection guidance + anti-spam thresholds
+
+### Inline Example Output
+
+Running `scripts/generate_templates.py --width 60`:
+
+```
+--- TITLE_COMPACT_A ---
+============================================================
+  Section Title
+============================================================
+
+--- WARN_BOX_B ---
++----------------------------------------------------------+
+| WARNING: Check disk space before proceeding              |
++----------------------------------------------------------+
+
+--- DIVIDER_THIN_A ---
+------------------------------------------------------------
+```
+
+### Workflow
+
+1. **Generate**: Run `python3 scripts/generate_templates.py --width 80 --language en --tone serious`
+2. **Review**: Check generated templates grouped by category
+3. **Validate**: Run `python3 scripts/generate_templates.py --width 80 --validate` — confirms all lines <= width, no trailing spaces, correct naming
+4. **Integrate**: Copy chosen variants into project; reference by naming convention (e.g., `TITLE_COMPACT_A`)
+
+### Script Usage
+
+```bash
+# Generate all template categories at 80 columns
+python3 scripts/generate_templates.py --width 80
+
+# Generate only warning and error templates
+python3 scripts/generate_templates.py --width 60 --categories warn,error
+
+# Generate with fun tone
+python3 scripts/generate_templates.py --width 80 --tone fun
+```
+
+### Template Generation Logic (inline fallback)
+
+When the script is unavailable, generate templates using these rules:
+
+```python
+def title_compact(text, width=80, char='='):
+    rule = char * width
+    centered = text.center(width)
+    return f"{rule}\n{centered}\n{rule}"
+
+def warn_box(text, width=80):
+    inner_w = width - 4  # account for "| " and " |"
+    top = '+' + '-' * (width - 2) + '+'
+    line = f'| {text:<{inner_w}} |'
+    return f"{top}\n{line}\n{top}"
+
+# Usage:
+# title_compact("My Section Title", 60)
+# warn_box("WARNING: Check disk space", 60)
+```
 
 ## Script
 - `scripts/generate_templates.py`: generate a baseline template set for a given width (local preview)

@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-search-all-unique-properties
-description: Global property search. Use for design audit, e.g., 'Find all nodes using red background #FF0000 '.
+description: "Search and list all unique values for specific properties (fills, fonts, spacing) across nodes in a Pencil .pen file via the search_all_unique_properties MCP tool. Use when the user explicitly mentions Pencil and needs to audit design consistency, find all colors or font sizes used, or identify inconsistent styles."
 license: Complete terms in LICENSE.txt
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: spring-boot
-description: Provides comprehensive guidance for Spring Boot development including project creation, auto-configuration, dependency injection, web development, data access, security, testing, and deployment. Use when the user asks about Spring Boot, needs to create Spring Boot applications, configure Spring Boot, or implement Spring Boot features.
+description: "Provides comprehensive guidance for Spring Boot development including project creation, auto-configuration, dependency injection, web development, data access, security, testing, and deployment. Use when the user asks about Spring Boot, needs to create Spring Boot applications, configure Spring Boot, or implement Spring Boot features."
 ---
 
 # Spring Boot 开发指南

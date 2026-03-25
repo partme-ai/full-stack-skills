@@ -1,6 +1,6 @@
 ---
 name: tauri-app-localhost
-description: Guidance for Tauri v2 localhost plugin with local service access and minimal exposure.
+description: "Serve your Tauri v2 frontend via a localhost server using the localhost plugin for frameworks requiring a server. Use when your frontend framework needs a local HTTP server, separating dev/production localhost behavior, or controlling port exposure."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,42 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Accessing localhost services from the app / 应用访问本地服务
-- Local server exposure and safety / 本地服务暴露与安全
-- Dev vs production localhost behavior / 开发与生产本地行为
+- Serving frontend via localhost in a Tauri app
+- Local server exposure and port configuration
+- Dev vs production localhost behavior differences
 
 **Trigger phrases include:**
-- "localhost", "local service", "dev server", "ports"
-- "本地服务", "localhost", "端口", "开发服务器"
+- "localhost", "local server", "localhost plugin", "port", "serve frontend"
 
 ## How to use this skill
 
-1. Identify local services and their access requirements
-2. Configure localhost plugin capabilities and allowed ports
-3. Separate dev-mode access from production constraints
-4. Validate minimal exposure and audit access patterns
+1. **Install the localhost plugin**:
+   ```bash
+   cargo add tauri-plugin-localhost
+   ```
+2. **Register the plugin** with a specific port in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_localhost::Builder::new(3030).build())
+   ```
+3. **Configure the frontend URL** in `tauri.conf.json` for production:
+   ```json
+   { "build": { "frontendDist": "../dist" } }
+   ```
+4. **Bind only to 127.0.0.1** to prevent external access to the local server
+5. **Separate dev-mode access** (Vite dev server on port 5173) from production (localhost plugin on a fixed port)
+6. **Audit access patterns** to ensure minimal exposure in production builds
 
 ## Outputs
 
-- Localhost access policy / 本地服务访问策略
-- Dev/prod separation checklist / 开发生产分离清单
-
-## Scope
-
-- Boundary: Localhost plugin usage only
-- Key points: Controlled access and environment separation
+- Localhost plugin configuration with fixed port
+- Dev vs production server separation
+- Security checklist for minimal exposure
 
 ## References
 
 - https://v2.tauri.app/plugin/localhost/
-- https://v2.tauri.app/zh-cn/plugin/localhost/
 
 ## Keywords
 
-tauri localhost, local service, dev server, security
+tauri localhost, local server, port, serve frontend, dev server

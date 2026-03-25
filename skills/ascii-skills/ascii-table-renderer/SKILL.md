@@ -1,6 +1,6 @@
 ---
 name: ascii-table-renderer
-description: Render structured data as aligned ASCII tables (column width rules, truncate/wrap, border styles, compact/readable variants) for terminal/log/email.
+description: "Render structured data as aligned ASCII tables (column width rules, truncate/wrap, border styles, compact/readable variants) for terminal/log/email."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -48,6 +48,27 @@ dependencies:
 
 ## Script
 - `scripts/render_table.py`: render tables from JSON stdin (compact/readable)
+
+### Inline Example
+
+Input: `headers=["Name", "Role", "Status"]`, `rows=[["Alice", "Engineer", "Active"], ["Bob", "Designer", "Away"]]`
+
+**tableCompact:**
+```
+Name   Role      Status
+Alice  Engineer  Active
+Bob    Designer  Away
+```
+
+**tableReadable:**
+```
++-------+----------+--------+
+| Name  | Role     | Status |
++-------+----------+--------+
+| Alice | Engineer | Active |
+| Bob   | Designer | Away   |
++-------+----------+--------+
+```
 
 ## Examples
 - `examples/basic.md`

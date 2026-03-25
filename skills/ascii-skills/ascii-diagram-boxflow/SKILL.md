@@ -1,6 +1,6 @@
 ---
 name: ascii-diagram-boxflow
-description: Generate plain ASCII box-flow diagrams (boxes + arrows) for environments without renderers, with alignment rules and split strategies for complex graphs.
+description: "Generate plain ASCII box-flow diagrams (boxes + arrows) for environments without renderers, with alignment rules and split strategies for complex graphs."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -41,6 +41,28 @@ dependencies:
 
 ## Examples
 - `examples/login-flow.md`
+
+### Inline Example
+
+Input: `nodes=[Login, Validate, Dashboard]`, `edges=[Login->Validate, Validate->Dashboard]`, `direction=TB`:
+
+```
++----------------+
+|     Login      |
++----------------+
+        |
+        v
++----------------+
+|   Validate     |
++----------------+
+        |
+        v
++----------------+
+|   Dashboard    |
++----------------+
+```
+
+Long name truncation (boxWidth=16): `"Authentication Service"` becomes `"Authenticati..."`.
 
 ## Quality checklist
 1. Arrow direction is unambiguous; avoid crossings

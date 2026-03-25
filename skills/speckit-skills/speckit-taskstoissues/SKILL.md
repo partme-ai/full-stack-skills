@@ -1,6 +1,6 @@
 ---
 name: speckit-taskstoissues
-description: Convert existing tasks into actionable, dependency-ordered GitHub issues for the feature based on available design artifacts.
+description: "Convert tasks.md entries into GitHub issues in the matching remote repository using gh issue create, preserving task IDs for traceability. Use when the user wants to create GitHub issues from an existing tasks.md, needs issue tracking for implementation tasks, or wants to sync task progress with GitHub project boards."
 ---
 
 # Spec Kit Tasks-to-Issues Skill

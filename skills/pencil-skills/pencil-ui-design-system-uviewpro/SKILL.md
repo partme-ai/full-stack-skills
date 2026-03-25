@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-uviewpro
-description: Initialize uView Pro. design system components in Pencil variables and component overview.
+description: "Initialize uView Pro design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with uView Pro or uviewpro, needs to set up uView Pro color palette and typography variables, or wants to create component library frames for Button, Form, Tabs, Navbar, and other uView Pro components."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on uView Pro specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize uView Pro tokens (primary, error, warning, success colors) in a Pencil .pen file
+- The user needs a component overview frame for uView Pro components in Pencil
+- The user mentions "Pencil" together with "uView Pro", "uviewpro", or uView Pro-specific components (Button, Form, Tabs, Navbar)
+- An orchestrator skill (pencil-ui-designer) routes a uView Pro initialization request
 
 ## How to use this skill
 
@@ -94,11 +98,34 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame containi
 
 Organize component frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations; split by logical sections if needed.
 
+### Example: Initialize uView Pro Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "u-type-primary": "#2979ff",
+      "u-type-error": "#fa3534",
+      "u-type-warning": "#ff9900",
+      "u-type-success": "#19be6b",
+      "u-main-color": "#303133",
+      "u-bg-color": "#f3f4f6",
+      "u-border-color": "#e4e7ed",
+      "u-font-md": "14px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Always verify color values against the latest uView Pro documentation if unsure.
 - Use `set_variables` with `replace: false` to merge into existing variables unless a full reset is requested.
 - Organize component frames using Auto Layout for easy expansion.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

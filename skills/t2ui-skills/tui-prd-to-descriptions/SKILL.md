@@ -1,6 +1,6 @@
 ---
 name: tui-prd-to-descriptions
-description: From PRD interface/screen descriptions, output ASCII UI (for PRD supplement), Stitch-executable prompt (for stitch-skills), and Pencil-executable plan (for pencil-skills). Does not call Stitch or Pencil MCP.
+description: "Generate and render a pixel-precise ASCII TUI PRD to Descriptions component with complete output blocks (TUI_RENDER, COMPONENT_SPEC, PENCIL_SPEC, PENCIL_BATCH_DESIGN) for Pencil MCP drawing workflows. Use when the user asks to create a PRD to descriptions in a terminal UI, text-based interface, or Pencil MCP project."
 ---
 
 # PRD 界面 → 多格式描述

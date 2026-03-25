@@ -1,28 +1,75 @@
 ---
 name: oracle
-description: Provides comprehensive guidance for Oracle database including SQL, PL/SQL, database administration, and Oracle-specific features. Use when the user asks about Oracle, needs to write Oracle SQL, work with PL/SQL, or manage Oracle databases.
+description: "Guides Oracle database development including SQL, PL/SQL stored procedures, triggers, EXPLAIN PLAN optimization, AWR analysis, RMAN backup, RAC clustering, and Data Guard. Use when the user needs to write Oracle SQL, create PL/SQL procedures, tune query performance, or manage Oracle database administration."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 编写 PL/SQL、设计表与索引、优化 SQL 与执行计划
-- 使用 SQL*Plus、SQL Developer、连接与权限管理
-- 处理 RAC、Data Guard、备份与迁移
+- Write Oracle SQL or PL/SQL (stored procedures, functions, triggers, packages)
+- Design tables, indexes, partitions, or constraints in Oracle
+- Tune query performance with EXPLAIN PLAN, AWR, or ASH reports
+- Manage Oracle administration (users, roles, tablespaces, RMAN backup)
+- Configure RAC, Data Guard, or Oracle replication
 
 ## How to use this skill
 
-1. **SQL/PL-SQL**：DDL、DML、存储过程、触发器；EXPLAIN PLAN 与 AWR 分析性能。
-2. **工具**：SQL*Plus、SQL Developer；TNS 或 Easy Connect；用户、角色与权限。
-3. **环境**：版本与兼容（如 19c）；生产常用 RAC 与 Data Guard；许可与补丁策略。
+### Workflow
+
+1. **Identify the task** - SQL writing, PL/SQL development, performance tuning, or DBA operations
+2. **Write the code** - Use the patterns below matching Oracle syntax
+3. **Analyze performance** - Run EXPLAIN PLAN or review AWR snapshots
+4. **Apply Oracle-specific best practices** - Bind variables, partitioning, RMAN
+
+### Quick-Start Example: PL/SQL Procedure with Error Handling
+
+```sql
+CREATE OR REPLACE PROCEDURE transfer_funds(
+    p_from_acct  IN NUMBER,
+    p_to_acct    IN NUMBER,
+    p_amount     IN NUMBER
+) AS
+    v_balance NUMBER;
+BEGIN
+    -- Check source balance
+    SELECT balance INTO v_balance
+    FROM accounts WHERE account_id = p_from_acct
+    FOR UPDATE;
+
+    IF v_balance < p_amount THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Insufficient funds');
+    END IF;
+
+    UPDATE accounts SET balance = balance - p_amount WHERE account_id = p_from_acct;
+    UPDATE accounts SET balance = balance + p_amount WHERE account_id = p_to_acct;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
+END transfer_funds;
+/
+```
+
+### Performance Analysis
+
+```sql
+EXPLAIN PLAN FOR
+SELECT /*+ INDEX(o idx_orders_date) */ * FROM orders o WHERE order_date > SYSDATE - 30;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+```
 
 ## Best Practices
 
-- 绑定变量防 SQL 注入与硬解析；索引与分区策略按负载设计。
-- 权限与审计配置完善；备份 RMAN 与恢复演练。
-- 监控等待事件与表空间；升级与迁移前充分测试。
+1. **Use bind variables** - Prevent SQL injection and hard parsing; never concatenate user input into SQL
+2. **Partition large tables** - Range partition on date columns; hash partition for even distribution
+3. **RMAN backup strategy** - Full weekly + incremental daily; test restore procedures quarterly
+4. **Monitor wait events** - Use AWR/ASH to identify I/O, latch, or lock contention
+5. **Audit and secure** - Use Oracle Audit Vault; grant least-privilege roles; encrypt sensitive columns
 
 ## Keywords
 
-oracle, PL/SQL, SQL*Plus, 关系型数据库, RAC, Data Guard
+oracle, PL/SQL, SQL*Plus, SQL Developer, RMAN, RAC, Data Guard, AWR, 关系型数据库, stored procedure, EXPLAIN PLAN, tablespace, 索引, 分区

@@ -1,36 +1,53 @@
 ---
 name: nvm-troubleshooting-macos
-description: Diagnose common nvm issues on macOS, including profile loading, PATH priority, and permissions.
+description: "Diagnose and fix nvm issues on macOS, including zsh/bash profile not loading, PATH priority conflicts, permission errors, and Homebrew Node conflicts. Use when the user reports nvm not found on macOS, nvm command not working in zsh or Terminal, or PATH priority issues after macOS updates."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm Troubleshooting (macOS)
 
-**ALWAYS use this skill when the user mentions:**
-- nvm not working on macOS after installation
-- zsh/bash profile not loading
-- PATH priority or permission issues on macOS
+Diagnose and fix common nvm problems on macOS including profile loading and PATH conflicts.
 
-**Trigger phrases include:**
-- "macOS nvm not found", "zshrc", "bash_profile"
-- "PATH 优先级", "权限问题", "兼容性"
+## Workflow
 
-## How to use this skill
+1. **Run diagnostic checks:**
+   ```bash
+   echo "Shell: $SHELL"
+   echo "NVM_DIR: $NVM_DIR"
+   cat ~/.zshrc | grep -n nvm
+   echo $PATH | tr ':' '\n' | head -10
+   ```
 
-**CRITICAL: This skill is macOS-specific troubleshooting.** General verification belongs to nvm-verify.
+2. **Check profile load order** (macOS zsh reads these in order):
+   - `~/.zshenv` (always)
+   - `~/.zprofile` (login shells)
+   - `~/.zshrc` (interactive shells)
 
-1. Confirm the active shell and profile load order.
-2. Follow macOS troubleshooting steps to locate the failure.
-3. Apply compatibility issue guidance when needed.
-4. Re-test in a new shell session.
+3. **Fix the most common issue** (nvm lines missing from `~/.zshrc`):
+   ```bash
+   # Add to ~/.zshrc:
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+   ```
+
+4. **Verify the fix:**
+   ```bash
+   source ~/.zshrc
+   command -v nvm   # Should print "nvm"
+   nvm --version
+   node -v
+   ```
+
+**Note:** General verification belongs to nvm-verify. For Linux/WSL issues, use nvm-troubleshooting-linux.
 
 ### Example file map
 
-- examples/troubleshooting-macos.md
-- examples/macos-troubleshooting.md
-- examples/problems.md
-- examples/compatibility-issues.md
+- `examples/troubleshooting-macos.md` - macOS-specific troubleshooting
+- `examples/macos-troubleshooting.md` - Additional macOS guidance
+- `examples/problems.md` - Common problems and solutions
+- `examples/compatibility-issues.md` - Known compatibility issues
 
 ## Keywords
 
-macos, zsh, bash, PATH, permissions, troubleshooting, profile
+macos, zsh, bash, PATH, permissions, troubleshooting, profile, nvm not found

@@ -1,6 +1,6 @@
 ---
 name: tauri-app-positioner
-description: Guidance for Tauri v2 positioner plugin with multi-display alignment strategies.
+description: "Position windows relative to the system tray or screen using the Tauri v2 positioner plugin with multi-display support. Use when aligning popup or tray windows, handling multi-monitor positioning, or ensuring consistent placement across platforms."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,49 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Aligned popup or tray windows / 对齐弹窗或托盘窗口
-- Multi-monitor positioning / 多显示器定位
-- Consistent placement across platforms / 跨平台一致位置
+- Positioning windows near the system tray
+- Multi-monitor or multi-display window alignment
+- Consistent window placement across platforms
 
 **Trigger phrases include:**
-- "positioner", "align", "multi-monitor", "tray window"
-- "定位", "对齐", "多显示器", "托盘窗口"
+- "positioner", "window position", "tray window", "multi-monitor", "align window"
 
 ## How to use this skill
 
-1. Define window alignment and anchor points
-2. Configure positioner plugin capabilities
-3. Handle multi-display coordinates and scaling factors
-4. Validate behavior on macOS, Windows, and Linux
+1. **Install the positioner plugin**:
+   ```bash
+   cargo add tauri-plugin-positioner
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   use tauri_plugin_positioner::Position;
+   tauri::Builder::default()
+       .plugin(tauri_plugin_positioner::init())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["positioner:allow-move-window"] }
+   ```
+4. **Position a window from the frontend**:
+   ```typescript
+   import { moveWindow, Position } from '@tauri-apps/plugin-positioner';
+   await moveWindow(Position.TrayCenter);    // center below tray icon
+   await moveWindow(Position.TopRight);      // top-right corner of screen
+   await moveWindow(Position.BottomRight);   // bottom-right corner
+   ```
+5. **Handle multi-display** by checking which monitor the tray icon is on and positioning relative to it
+6. **Account for scaling factors** on HiDPI displays that affect coordinate calculations
 
 ## Outputs
 
-- Window positioning plan / 窗口定位方案
-- Multi-display scaling checklist / 多显示器缩放清单
-
-## Scope
-
-- Boundary: Positioner plugin usage only
-- Key points: Multi-display and scaling differences
+- Positioner plugin setup with Position enum
+- Tray-relative and screen-relative positioning
+- Multi-display and HiDPI scaling guidance
 
 ## References
 
 - https://v2.tauri.app/plugin/positioner/
-- https://v2.tauri.app/zh-cn/plugin/positioner/
 
 ## Keywords
 
-tauri positioner, window alignment, multi-display, scaling
+tauri positioner, window position, tray window, multi-monitor, align

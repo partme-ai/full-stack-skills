@@ -1,6 +1,6 @@
 ---
 name: tauri-app-logging
-description: Guidance for Tauri v2 logging plugin with levels, filtering, and safe diagnostics.
+description: "Add unified logging across Rust and frontend using the Tauri v2 logging plugin with configurable levels, filtering, and file output. Use when setting up app-wide logging, configuring log levels for dev vs release, or implementing safe diagnostics without leaking secrets."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,51 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Unified logging for dev and release builds / 开发与发布统一日志
-- Log filtering or persistence / 日志过滤或持久化
-- Safe diagnostics without leaking secrets / 安全诊断不泄露敏感信息
+- Unified logging for Tauri apps (dev and release)
+- Log level configuration, filtering, or file output
+- Safe diagnostics without leaking sensitive data
 
 **Trigger phrases include:**
-- "logging", "log levels", "filtering", "persistence", "diagnostics"
-- "日志", "级别", "过滤", "持久化", "诊断"
+- "logging", "log levels", "log plugin", "diagnostics", "log file", "debug logs"
 
 ## How to use this skill
 
-1. Define log levels and redaction rules
-2. Configure logging plugin outputs and filters
-3. Implement diagnostic toggles for release builds
-4. Validate log storage location and rotation policy
+1. **Install the logging plugin**:
+   ```bash
+   cargo add tauri-plugin-log
+   ```
+2. **Register the plugin** with level and target configuration:
+   ```rust
+   use tauri_plugin_log::{Target, TargetKind};
+   tauri::Builder::default()
+       .plugin(tauri_plugin_log::Builder::new()
+           .targets([Target::new(TargetKind::Stdout), Target::new(TargetKind::LogDir { file_name: None })])
+           .level(log::LevelFilter::Info)
+           .build())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["log:default"] }
+   ```
+4. **Log from the frontend**:
+   ```typescript
+   import { info, warn, error } from '@tauri-apps/plugin-log';
+   await info('App started');
+   await error('Something went wrong');
+   ```
+5. **Use different log levels** for dev (Debug/Trace) vs release (Info/Warn) builds
+6. **Redact sensitive data** before logging (never log tokens, passwords, or PII)
 
 ## Outputs
 
-- Logging strategy and configuration / 日志策略与配置
-- Redaction and rotation checklist / 脱敏与滚动清单
-
-## Scope
-
-- Boundary: Logging plugin usage only
-- Key points: Redaction and environment-specific verbosity
+- Logging plugin setup with file and stdout targets
+- Level-based filtering for dev vs release
+- Redaction rules for sensitive data
 
 ## References
 
 - https://v2.tauri.app/plugin/logging/
-- https://v2.tauri.app/zh-cn/plugin/logging/
 
 ## Keywords
 
-tauri logging, log levels, diagnostics, redaction
+tauri logging, log levels, log plugin, diagnostics, log file, redaction

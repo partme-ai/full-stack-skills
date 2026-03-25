@@ -1,8 +1,6 @@
 ---
 name: threejs-math
-description: >-
-  three.js math library: Vector2/3/4, Matrix3/4, Quaternion, Euler, Color, Box2/Box3, Sphere, Plane, Ray, Line3, Triangle, Frustum, Cylindrical/Spherical coords, MathUtils, and Interpolant base classes; addon math utilities such as OBB, Octree, Capsule, ConvexHull, MeshSurfaceSampler.
-  Use for transforms, intersection tests, and spatial queries; for keyframe interpolation tied to AnimationMixer use threejs-animation; for picking implementation use threejs-objects with Raycaster.
+description: "three.js math library: Vector2/3/4, Matrix3/4, Quaternion, Euler, Color, Box2/Box3, Sphere, Plane, Ray, Line3, Triangle, Frustum, Cylindrical/Spherical coords, MathUtils, and Interpolant base classes; addon math utilities such as OBB, Octree, Capsule, ConvexHull, MeshSurfaceSampler. Use for transforms, intersection tests, and spatial queries; for keyframe interpolation tied to AnimationMixer use threejs-animation; for picking implementation use threejs-objects with Raycaster."
 ---
 
 ## When to use this skill
@@ -34,6 +32,26 @@ description: >-
 4. **Addon structures**: `Octree`/`OBB` for games—cite addon pages, avoid copying full API tables here.
 5. **Color**: `Color` conversions relate to materials/textures—cross-link.
 6. **Random sampling**: `MeshSurfaceSampler` for distributing points on meshes.
+
+### Example: Ray-AABB intersection test
+
+```javascript
+import * as THREE from 'three';
+
+const ray = new THREE.Ray(
+  new THREE.Vector3(0, 1, 0),  // origin
+  new THREE.Vector3(0, 0, -1)  // direction
+);
+const box = new THREE.Box3(
+  new THREE.Vector3(-1, -1, -5),
+  new THREE.Vector3(1, 1, -3)
+);
+
+const hit = ray.intersectBox(box, new THREE.Vector3());
+if (hit) {
+  console.log('Intersection at:', hit);
+}
+```
 
 See [examples/workflow-ray-aabb.md](examples/workflow-ray-aabb.md).
 

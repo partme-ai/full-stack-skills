@@ -1,13 +1,7 @@
 ---
 name: pencil-design-from-stitch-html
 description: "When you need to turn Stitch page HTML (or a Stitch URL) into a Pencil .pen design. Parses DOM and Tailwind, applies HTML→Pencil mapping and execution order, outputs sequential batch_design for layout and style fidelity (background, color, size, margin, padding, shadow). Supports multi-framework tokens."
-allowed-tools:
-  - "stitch*:*"
-  - "mcp_pencil*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+allowed-tools: "stitch*:*, mcp_pencil*, Bash, Read, Write, web_fetch"
 ---
 
 

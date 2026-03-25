@@ -1,6 +1,6 @@
 ---
 name: uniapp-cloud
-description: A comprehensive skill for uniCloud cloud development in the uni-app ecosystem. Use this skill when you need uniCloud project setup, cloud database CRUD, cloud functions, storage, or datacom components, following official uniCloud documentation.
+description: "Guides uniCloud cloud development in uni-app including project setup, cloud database CRUD operations, cloud function deployment, cloud storage file management, and datacom component data binding. Use when the user needs to integrate uniCloud services, work with cloud databases, create cloud functions, or manage cloud storage in a uni-app project."
 license: Complete terms in LICENSE.txt
 ---
 

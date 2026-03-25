@@ -1,32 +1,49 @@
 ---
 name: nvm-global-packages
-description: Migrate global packages between Node versions and define a default global packages file for consistency.
+description: "Migrate npm global packages between Node versions using reinstall-packages-from, and define a default-packages file to auto-install globals on every new version. Use when the user asks about keeping global packages after switching Node versions, setting up default npm packages, or troubleshooting missing global packages after nvm install."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm Global Packages
 
-**ALWAYS use this skill when the user mentions:**
-- Reinstalling global packages while installing a new version
-- Using a default-packages file
-- Keeping global package consistency across versions
+Manage global npm packages across Node version switches to avoid losing tools like eslint, typescript, or pm2.
 
-**Trigger phrases include:**
-- "reinstall-packages-from", "迁移全局包"
-- "default-packages", "默认全局包文件"
+## Workflow
 
-## How to use this skill
+1. **Migrate global packages** when installing a new version:
+   ```bash
+   # Install Node 20 and copy global packages from Node 18
+   nvm install 20 --reinstall-packages-from=18
 
-**CRITICAL: This skill handles global packages strategy.** Version install/use belongs to usage basics.
+   # Verify packages migrated
+   npm list -g --depth=0
+   ```
 
-1. Use reinstall-packages-from to migrate global packages.
-2. Configure default-packages file and validate scope.
-3. Call out risks of conflicting global packages across versions.
+2. **Configure default-packages** for automatic installation on every new version:
+   ```bash
+   # Create the default-packages file
+   cat > "$NVM_DIR/default-packages" << 'EOF'
+   typescript
+   eslint
+   pm2
+   nodemon
+   EOF
+
+   # New installs will auto-install these packages
+   nvm install 22  # typescript, eslint, pm2, nodemon installed automatically
+   ```
+
+3. **Verify and validate** global packages:
+   ```bash
+   npm list -g --depth=0
+   ```
+
+**Warning:** Global packages are version-specific. Switching versions without `--reinstall-packages-from` means previously installed globals will not be available.
 
 ### Example file map
 
-- examples/migrate-global-packages.md
-- examples/default-global-packages.md
+- `examples/migrate-global-packages.md` - Migration between versions
+- `examples/default-global-packages.md` - Default packages file setup
 
 ## Keywords
 

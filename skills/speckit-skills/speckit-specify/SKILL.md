@@ -1,6 +1,6 @@
 ---
 name: speckit-specify
-description: Create or update a feature specification from a natural language feature description.
+description: "Create or update a feature specification from a natural language description by generating a branch, filling the spec template with user stories, functional requirements, success criteria, and running quality validation. Use when the user provides a feature idea and needs a structured, technology-agnostic spec ready for planning."
 ---
 
 # Spec Kit Specify Skill

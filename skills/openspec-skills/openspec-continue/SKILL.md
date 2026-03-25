@@ -20,7 +20,7 @@ Use **`/opsx:continue`** to create the next artifact in the dependency chain. Th
 ## Workflow
 
 1. **Query the dependency graph**
-   - The agent runs `openspec status --change <name> --json` to see which artifacts are done, ready, or blocked.
+   - Run `openspec status --change <name> --json` to see which artifacts are done, ready, or blocked.
 
 2. **Identify ready artifacts**
    - In the default `spec-driven` schema: `proposal` -> `specs` / `design` -> `tasks`.
@@ -28,11 +28,11 @@ Use **`/opsx:continue`** to create the next artifact in the dependency chain. Th
 
 3. **Create one artifact**
    - Read dependency files for context.
+   - Run `openspec instructions <artifact> --change <name> --json` to get enriched instructions and templates.
    - Create the first ready artifact (e.g. proposal, then specs, then design, then tasks).
-   - Use `openspec instructions <artifact> --change <name> --json` to get enriched instructions and templates.
 
 4. **Show what's unlocked**
-   - After creating an artifact, show what becomes available next.
+   - After creating an artifact, report what becomes available next.
 
 5. **Repeat**
    - User reviews, optionally edits, then runs `/opsx:continue` again for the next artifact.

@@ -1,6 +1,6 @@
 ---
 name: vscode-deploy-package
-description: Package the extension into a .vsix file for distribution.
+description: "Package a VS Code extension into a .vsix file for distribution using vsce, verify pre-flight checklist (publisher, README, CHANGELOG), and install locally via CLI or GUI. Use when development is complete and the user wants to package, distribute, or install a VS Code extension."
 license: Complete terms in LICENSE.txt
 ---
 

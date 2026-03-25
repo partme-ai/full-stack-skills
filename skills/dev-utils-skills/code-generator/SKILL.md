@@ -1,89 +1,90 @@
 ---
 name: code-generator
-description: Provides comprehensive guidance for code generation including template-based generation, code scaffolding, and automated code creation. Use when the user asks about code generation, needs to generate code from templates, create code scaffolds, or automate code creation.
+description: "Generates production-ready code scaffolds, functions, classes, and project structures across Python, TypeScript, Java, and Go. Use when the user asks to generate code from templates, scaffold a new project, create boilerplate classes or modules, or automate repetitive code creation tasks."
 ---
 
-# 代码生成技能
+## When to use this skill
 
-## 概述
+Use this skill whenever the user wants to:
+- Generate functions, classes, or modules with proper documentation and error handling
+- Scaffold a new project with configuration files and directory structure
+- Create boilerplate code (CRUD controllers, service layers, data models)
+- Refactor or optimize existing code structure
+- Generate code from templates or specifications
 
-本技能帮助您生成高质量的代码，支持多种编程语言，遵循最佳实践和设计模式。
+## How to use this skill
 
-**关键词**: 代码生成、编程、函数、类、模块、项目开发、代码示例
+### Workflow
 
-## 核心功能
+1. **Clarify requirements** - Identify the target language, framework, and coding conventions
+2. **Choose the generation type** - Function/class, module/package, or full project scaffold
+3. **Generate code** - Produce complete, documented, tested code following the patterns below
+4. **Validate output** - Ensure the code compiles/runs and follows project conventions
 
-### 1. 函数和类生成
+### Code Generation Patterns
 
-- 生成符合规范的函数和类
-- 添加完整的文档注释
-- 实现错误处理和边界检查
-- 遵循语言特定的最佳实践
+**Function generation (Python example):**
+```python
+def calculate_order_total(
+    items: list[OrderItem],
+    discount_pct: float = 0.0,
+    tax_rate: float = 0.08,
+) -> Decimal:
+    """Calculate the total price for an order including tax and discount.
 
-### 2. 模块和包开发
+    Args:
+        items: List of order items with price and quantity.
+        discount_pct: Discount percentage (0.0 to 1.0).
+        tax_rate: Tax rate to apply after discount.
 
-- 创建结构化的模块和包
-- 设计清晰的 API 接口
-- 实现模块间的依赖管理
-- 创建配置文件和初始化代码
+    Returns:
+        Final order total as a Decimal rounded to 2 places.
 
-### 3. 项目脚手架
+    Raises:
+        ValueError: If discount_pct is not between 0 and 1.
+    """
+    if not 0 <= discount_pct <= 1:
+        raise ValueError(f"discount_pct must be 0-1, got {discount_pct}")
 
-- 生成完整的项目结构
-- 创建配置文件（package.json, requirements.txt 等）
-- 设置构建和测试环境
-- 添加 README 和文档
+    subtotal = sum(item.price * item.quantity for item in items)
+    discounted = subtotal * Decimal(1 - discount_pct)
+    total = discounted * Decimal(1 + tax_rate)
+    return total.quantize(Decimal("0.01"))
+```
 
-### 4. 代码优化和重构
+**Project scaffold (TypeScript/Node):**
+```
+my-service/
+├── src/
+│   ├── controllers/    # Route handlers
+│   ├── services/       # Business logic
+│   ├── models/         # Data models / DTOs
+│   ├── middleware/      # Auth, logging, error handling
+│   └── index.ts        # Entry point
+├── tests/
+│   ├── unit/
+│   └── integration/
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-- 优化代码性能和可读性
-- 应用设计模式和最佳实践
-- 重构代码结构
-- 添加单元测试
+### Supported Languages
 
-## 使用指南
+- Python (with type hints, docstrings, pytest)
+- JavaScript / TypeScript (ESM, JSDoc or TSDoc)
+- Java (JavaDoc, Maven/Gradle)
+- Go (godoc, modules)
+- Rust (rustdoc, Cargo)
 
-### 代码生成原则
+## Best Practices
 
-1. **清晰性**: 代码应清晰易懂，命名规范
-2. **可维护性**: 结构良好，易于修改和扩展
-3. **健壮性**: 包含错误处理和边界检查
-4. **文档化**: 提供完整的注释和文档
-5. **测试性**: 代码应易于测试
+1. **Always include error handling** - Validate inputs, use typed exceptions, return meaningful error messages
+2. **Add documentation** - Every public function/class gets a docstring with params, returns, and raises
+3. **Follow language conventions** - PEP 8 for Python, gofmt for Go, Prettier for TypeScript
+4. **Generate tests alongside code** - At minimum, one happy-path and one error-path test per function
+5. **Use type annotations** - Catch bugs early with static typing where the language supports it
 
-### 支持的编程语言
+## Keywords
 
-- Python
-- JavaScript/TypeScript
-- Java
-- Go
-- Rust
-- 其他常见编程语言
-
-### 代码结构要求
-
-- **导入部分**: 清晰的导入语句
-- **文档字符串**: 函数和类的文档
-- **实现代码**: 核心逻辑实现
-- **测试代码**: 单元测试（如需要）
-- **示例代码**: 使用示例（如需要）
-
-## 输出格式
-
-生成的代码应包含：
-
-- **代码文件**: 完整的源代码文件
-- **文档注释**: 函数、类、模块的文档
-- **使用示例**: 代码使用示例
-- **依赖说明**: 所需的依赖和版本
-- **测试代码**: 相关的测试用例
-
-## 最佳实践
-
-- 遵循语言的编码规范和风格指南
-- 使用有意义的变量和函数名
-- 添加类型提示（如适用）
-- 实现适当的错误处理
-- 编写清晰的文档注释
-- 考虑性能和可扩展性
-- 遵循 SOLID 原则和设计模式
+代码生成, code generation, scaffold, boilerplate, template, 函数, 类, 模块, project structure, code scaffold, 项目脚手架

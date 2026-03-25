@@ -1,10 +1,7 @@
 ---
 name: stitch-mcp-list-projects
-description: Lists all Stitch projects accessible to the user.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "List all Stitch projects accessible to the user, returning project names, titles, update times, and thumbnails. Use when the user wants to resume work on an existing Stitch project, browse available projects, or obtain a projectId for screen generation. Supports owned and shared project filters."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

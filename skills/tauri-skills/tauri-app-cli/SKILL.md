@@ -1,6 +1,6 @@
 ---
 name: tauri-app-cli
-description: Guidance for Tauri v2 CLI plugin with argument schema and app command routing.
+description: "Configure the Tauri v2 CLI plugin to parse command-line arguments using a JSON schema and route them to app behavior. Use when defining CLI argument schemas, handling startup arguments, or integrating CLI with single-instance mode."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,61 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- CLI arguments for a Tauri app / Tauri 应用的命令行参数
-- Schema-based argument parsing / 基于 schema 的参数解析
-- Triggering app behaviors from CLI / CLI 触发应用行为
+- CLI arguments for a Tauri application
+- Schema-based argument parsing at app launch
+- Routing CLI commands to app behavior or windows
 
 **Trigger phrases include:**
-- "cli", "arguments", "schema", "command routing"
-- "命令行", "参数", "schema", "命令路由"
+- "cli", "arguments", "command line", "schema", "command routing", "cli plugin"
 
 ## How to use this skill
 
-1. Define the CLI argument schema and command map
-2. Configure CLI plugin capabilities and parsing
-3. Route startup and second-launch arguments to the app
-4. Validate CLI behaviors with single-instance mode
+1. **Install the CLI plugin**:
+   ```bash
+   cargo add tauri-plugin-cli
+   ```
+2. **Define the CLI schema** in `tauri.conf.json`:
+   ```json
+   {
+     "plugins": {
+       "cli": {
+         "description": "My Tauri App",
+         "args": [
+           { "name": "input", "short": "i", "takesValue": true, "description": "Input file path" }
+         ],
+         "subcommands": {
+           "open": { "description": "Open a specific view", "args": [] }
+         }
+       }
+     }
+   }
+   ```
+3. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_cli::init())
+   ```
+4. **Handle CLI matches** on the frontend:
+   ```typescript
+   import { getMatches } from '@tauri-apps/plugin-cli';
+   const matches = await getMatches();
+   if (matches.args.input?.value) {
+     console.log('Input file:', matches.args.input.value);
+   }
+   ```
+5. **Combine with single-instance plugin** to forward second-launch arguments to the running instance
+6. **Configure capabilities**: `"cli:default"`
 
 ## Outputs
 
-- CLI schema and routing plan / CLI schema 与路由方案
-- Second-launch integration checklist / 二次启动集成清单
-
-## Scope
-
-- Boundary: CLI plugin usage only
-- Key points: Schema definition and argument routing
+- CLI argument schema in tauri.conf.json
+- Frontend argument parsing and routing logic
+- Second-launch argument forwarding pattern
 
 ## References
 
 - https://v2.tauri.app/plugin/cli/
-- https://v2.tauri.app/zh-cn/plugin/cli/
 
 ## Keywords
 
-tauri cli, arguments, schema, command routing
+tauri cli, arguments, schema, command routing, command line

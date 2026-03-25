@@ -1,142 +1,28 @@
 ---
 name: uview-pro-vue3
-description: Provides comprehensive guidance for uView Pro Vue 3 component library including components, tools, layouts, and templates. Use when the user asks about uView Pro, needs to build Vue 3 applications with uView Pro, or implement mobile-first UI components.
+description: "Builds Vue 3 mobile UIs in uni-app using the uView Pro component library (100+ components). Covers Button, Form, List, Modal, Tabs, NavBar, plus built-in HTTP, storage, router, and validator utilities. Use when the user needs to create uni-app interfaces with uView Pro, configure themes, or use uView Pro utility tools."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- Install and set up uView Pro in a uni-app project
-- Use uView Pro components in Vue 3 / uni-app applications
-- Configure uView Pro (theme, i18n, etc.)
-- Use form components (Button, Input, Form, etc.)
-- Use data display components (List, Card, etc.)
-- Use feedback components (Toast, Modal, etc.)
-- Use navigation components (Tabs, NavBar, etc.)
-- Use uView Pro tools and utilities
-- Use uView Pro layout templates
-- Customize component styles and themes
-- Handle component events
-- Understand uView Pro API and methods
-- Troubleshoot uView Pro issues
+- Build Vue 3 / uni-app mobile interfaces with uView Pro components
+- Use form, data display, feedback, or navigation components
+- Configure uView Pro theme, internationalization, or global settings
+- Use built-in tools (HTTP requests, storage, routing, validation, formatting)
+- Set up uView Pro in a new uni-app project
 
 ## How to use this skill
 
-This skill is organized to match the uView Pro official documentation structure (https://uviewpro.cn/, https://uviewpro.cn/zh/guide/intro.html, https://uviewpro.cn/zh/components/intro.html, https://uviewpro.cn/zh/tools/intro.html, https://uviewpro.cn/zh/layout/intro.html). When working with uView Pro:
+### Workflow
 
-1. **Identify the topic** from the user's request:
-   - Installation/安装 → `examples/guide/installation.md`
-   - Quick Start/快速开始 → `examples/guide/quick-start.md`
-   - Components/组件 → `examples/components/`
-   - Tools/工具 → `examples/tools/`
-   - Layout/布局 → `examples/layout/`
-   - API/API 文档 → `api/`
+1. **Install** - `npm install uview-pro` and register in main.js
+2. **Choose component** - Match the UI need to component from reference below
+3. **Load example file** - Each component has a detailed example in `examples/components/`
+4. **Use tools** - Leverage built-in utilities from `examples/tools/`
 
-2. **Load the appropriate example file** from the `examples/` directory:
-
-   **Guide (使用指南)**:
-   - `examples/guide/intro.md` - Introduction
-   - `examples/guide/installation.md` - Installation guide
-   - `examples/guide/quick-start.md` - Quick start guide
-   - `examples/guide/theme.md` - Theme customization
-   - `examples/guide/i18n.md` - Internationalization
-   - `examples/guide/config.md` - Configuration
-
-   **Components (组件)**:
-   - `examples/components/intro.md` - Components introduction
-   - `examples/components/button.md` - Button component
-   - `examples/components/input.md` - Input component
-   - `examples/components/form.md` - Form component
-   - `examples/components/list.md` - List component
-   - `examples/components/card.md` - Card component
-   - `examples/components/toast.md` - Toast component
-   - `examples/components/modal.md` - Modal component
-   - `examples/components/tabs.md` - Tabs component
-   - `examples/components/navbar.md` - NavBar component
-   - `examples/components/date-picker.md` - DatePicker component
-   - `examples/components/select.md` - Select component
-   - `examples/components/switch.md` - Switch component
-   - `examples/components/checkbox.md` - Checkbox component
-   - `examples/components/radio.md` - Radio component
-   - `examples/components/upload.md` - Upload component
-   - `examples/components/pagination.md` - Pagination component
-   - `examples/components/avatar.md` - Avatar component
-   - `examples/components/badge.md` - Badge component
-   - `examples/components/tag.md` - Tag component
-   - `examples/components/empty.md` - Empty component
-   - `examples/components/loading.md` - Loading component
-   - `examples/components/popup.md` - Popup component
-   - `examples/components/dropdown.md` - Dropdown component
-   - `examples/components/drawer.md` - Drawer component
-
-   **Tools (工具)**:
-   - `examples/tools/intro.md` - Tools introduction
-   - `examples/tools/http.md` - HTTP request
-   - `examples/tools/storage.md` - Storage utilities
-   - `examples/tools/router.md` - Router utilities
-   - `examples/tools/validator.md` - Validator utilities
-   - `examples/tools/format.md` - Format utilities
-   - `examples/tools/color.md` - Color utilities
-
-   **Layout (布局)**:
-   - `examples/layout/intro.md` - Layout introduction
-   - `examples/layout/grid.md` - Grid layout
-   - `examples/layout/flex.md` - Flex layout
-   - `examples/layout/container.md` - Container layout
-
-3. **Follow the specific instructions** in that example file for syntax, structure, and best practices
-
-   **Important Notes**:
-   - uView Pro is for Vue 3 and uni-app
-   - Components use Vue 3 Composition API
-   - Examples include both Options API and Composition API
-   - Each example file includes key concepts, code examples, and key points
-
-4. **Reference API documentation** in the `api/` directory when needed:
-   - `api/component-api.md` - Component API reference
-   - `api/props-and-events.md` - Props and events reference
-   - `api/tools-api.md` - Tools API reference
-   - `api/config-api.md` - Configuration API
-
-5. **Use templates** from the `templates/` directory:
-   - `templates/installation.md` - Installation templates
-   - `templates/component-usage.md` - Component usage templates
-   - `templates/project-setup.md` - Project setup templates
-
-### 1. Understanding uView Pro
-
-uView Pro is a Vue 3 component library designed for uni-app development, providing rich components and utility methods.
-
-**Key Concepts**:
-- **Vue 3 Support**: Built for Vue 3 with Composition API
-- **uni-app Support**: Optimized for uni-app development
-- **Rich Components**: 100+ components for various use cases
-- **Theme Customization**: Support for theme customization
-- **i18n**: Internationalization support
-- **Tools**: Rich utility methods
-
-### 2. Installation
-
-**Using npm**:
-
-```bash
-npm install uview-pro
-```
-
-**Using yarn**:
-
-```bash
-yarn add uview-pro
-```
-
-**Using pnpm**:
-
-```bash
-pnpm add uview-pro
-```
-
-### 3. Basic Setup
+### Quick-Start: Installation and Basic Usage
 
 ```javascript
 // main.js
@@ -147,87 +33,79 @@ import App from './App.vue'
 export function createApp() {
   const app = createSSRApp(App)
   app.use(uView)
-  return {
-    app
-  }
+  return { app }
 }
 ```
 
+### Example: Form with Validation
 
-### Doc mapping (one-to-one with official documentation)
+```vue
+<template>
+  <u-form :model="form" :rules="rules" ref="formRef">
+    <u-form-item label="Username" prop="name">
+      <u-input v-model="form.name" placeholder="Enter username" />
+    </u-form-item>
+    <u-form-item label="Email" prop="email">
+      <u-input v-model="form.email" placeholder="Enter email" />
+    </u-form-item>
+    <u-button type="primary" @click="submit">Submit</u-button>
+  </u-form>
+</template>
 
-**Guide (指南)**:
-- See guide files in `examples/guide/` or `examples/getting-started/` → https://uviewpro.cn/zh/guide/intro.html
+<script setup>
+import { ref, reactive } from 'vue'
 
-**Components (组件)**:
-- See component files in `examples/components/` → https://uviewpro.cn/zh/components/intro.html
+const formRef = ref(null)
+const form = reactive({ name: '', email: '' })
+const rules = {
+  name: [{ required: true, message: 'Name is required' }],
+  email: [{ required: true, message: 'Email is required' }, { type: 'email', message: 'Invalid email' }]
+}
 
-## Examples and Templates
+const submit = () => {
+  formRef.value.validate(valid => {
+    if (valid) uni.showToast({ title: 'Success!' })
+  })
+}
+</script>
+```
 
-This skill includes detailed examples organized to match the official documentation structure. All examples are in the `examples/` directory (see mapping above).
+### Component Categories
 
-**To use examples:**
-- Identify the topic from the user's request
-- Load the appropriate example file from the mapping above
-- Follow the instructions, syntax, and best practices in that file
-- Adapt the code examples to your specific use case
+| Category | Components | Example Files |
+|----------|-----------|---------------|
+| Form | Button, Input, Form, Select, Switch, Checkbox, Radio, Upload | `examples/components/form.md` |
+| Display | List, Card, Avatar, Badge, Tag, Empty | `examples/components/list.md` |
+| Feedback | Toast, Modal, Loading, Popup, Drawer | `examples/components/modal.md` |
+| Navigation | Tabs, NavBar, Pagination, Dropdown | `examples/components/tabs.md` |
 
-**To use templates:**
-- Reference templates in `templates/` directory for common scaffolding
-- Adapt templates to your specific needs and coding style
+### Tools Reference
 
-## API Reference
+| Tool | File | Purpose |
+|------|------|---------|
+| HTTP | `examples/tools/http.md` | Request wrapper with interceptors |
+| Storage | `examples/tools/storage.md` | Local storage utilities |
+| Router | `examples/tools/router.md` | Navigation helpers |
+| Validator | `examples/tools/validator.md` | Form validation |
 
-Detailed API documentation is available in the `api/` directory, organized to match the official uView Pro API documentation structure:
+### API Reference
 
-### Component API (`api/component-api.md`)
-- Component props and events
-- Component methods
-- Component slots
-
-### Props and Events (`api/props-and-events.md`)
-- Common props
-- Common events
-- Event handling
-
-### Tools API (`api/tools-api.md`)
-- HTTP request methods
-- Storage methods
-- Router methods
-- Validator methods
-- Format methods
-- Color methods
-
-### Configuration API (`api/config-api.md`)
-- Global configuration options
-- Theme configuration
-- i18n configuration
-
-**To use API reference:**
-1. Identify the API you need help with
-2. Load the corresponding API file from the `api/` directory
-3. Find the API signature, parameters, return type, and examples
-4. Reference the linked example files for detailed usage patterns
-5. All API files include links to relevant example files in the `examples/` directory
+- `api/component-api.md` - Component props, events, methods, and slots
+- `api/tools-api.md` - Utility function signatures and parameters
+- `api/config-api.md` - Global and theme configuration
 
 ## Best Practices
 
-1. **Use on-demand import**: Import only the components you need to reduce bundle size
-2. **Use Composition API**: Prefer Composition API for better code organization
-3. **Handle events properly**: Use proper event handlers for component interactions
-4. **Customize theme**: Use theme variables for customization
-5. **Follow design specs**: Follow uView Pro design specifications
-6. **Use tools**: Leverage uView Pro tools for common operations
-7. **Use layouts**: Use layout templates for consistent page structure
+1. **On-demand import** - Import only used components to reduce bundle size
+2. **Composition API** - Prefer `<script setup>` for cleaner Vue 3 code
+3. **Theme variables** - Customize via uView theme config rather than overriding CSS
+4. **Use built-in tools** - Leverage HTTP, storage, and router utilities instead of adding extra dependencies
+5. **Test on device** - Verify uni-app behavior on actual mobile devices, not just H5
 
 ## Resources
 
-- **Official Documentation**: https://uviewpro.cn/
-- **Guide**: https://uviewpro.cn/zh/guide/intro.html
-- **Components**: https://uviewpro.cn/zh/components/intro.html
-- **Tools**: https://uviewpro.cn/zh/tools/intro.html
-- **Layout**: https://uviewpro.cn/zh/layout/intro.html
+- **Official Docs**: https://uviewpro.cn/
 
 ## Keywords
 
-uView Pro, uview-pro, Vue 3, Vue3, uni-app, UI components, component library, 组件库, 按钮, 表单, 列表, 卡片, 提示, 弹窗, 标签页, 导航栏, 日期选择器, 选择器, 开关, 复选框, 单选框, 上传, 分页, 头像, 徽标, 标签, 空状态, 加载, 弹出层, 下拉菜单, 抽屉, HTTP, 存储, 路由, 验证, 格式化, 颜色, 网格布局, 弹性布局, 容器布局, Button, Form, List, Card, Toast, Modal, Tabs, NavBar, DatePicker, Select, Switch, Checkbox, Radio, Upload, Pagination, Avatar, Badge, Tag, Empty, Loading, Popup, Dropdown, Drawer
+uView Pro, uview-pro, Vue 3, uni-app, component library, 组件库, Button, Form, List, Modal, Tabs, NavBar, mobile UI, 表单, 列表

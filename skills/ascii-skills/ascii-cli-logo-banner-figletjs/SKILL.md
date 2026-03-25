@@ -1,6 +1,6 @@
 ---
 name: ascii-cli-logo-banner-figletjs
-description: Generate TAAG/FIGlet-style ASCII art banners using figlet.js (FIGfont spec), with layout controls (horizontal/vertical layout, width, whitespaceBreak) and optional ANSI 256 coloring.
+description: "Generate TAAG/FIGlet-style ASCII art banners using figlet.js (FIGfont spec), with layout controls (horizontal/vertical layout, width, whitespaceBreak) and optional ANSI 256 coloring."
 license: Complete terms in LICENSE.txt
 dependencies:
   - node>=18
@@ -44,6 +44,26 @@ dependencies:
 - bannerPlain: banner text (no-color)
 - coloredText: when `colorMode=ansi256`, provide colored logo output
 - plainTextFallback: when colored, also provide a no-color fallback (same layout)
+
+### Inline Example
+
+Input: `brand="Hello"`, `font="Standard"`, `horizontalLayout="default"`:
+
+```
+  _   _      _ _
+ | | | | ___| | | ___
+ | |_| |/ _ \ | |/ _ \
+ |  _  |  __/ | | (_) |
+ |_| |_|\___|_|_|\___/
+```
+
+### Workflow
+
+1. Install dependency: `npm install figlet`
+2. Choose font and layout options
+3. Run `scripts/figlet_banner.mjs` or call figlet.js API
+4. **Validate**: Verify output fits within `width` columns; check no trailing spaces
+5. If `colorMode=ansi256`, generate colored variant and verify alignment matches plain
 
 ## Script
 - `scripts/figlet_banner.mjs`

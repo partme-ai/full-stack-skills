@@ -1,32 +1,52 @@
 ---
-name: 10、Company Manger-comms
-description: A set of resources to help me write all kinds of 10、Company Manger communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of 10、Company Manger communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
+name: internal-comms
+description: "Draft internal company communications including 3P updates, newsletters, FAQ responses, status reports, leadership updates, incident reports, and project updates using company-standard formats. Use when the user asks to write internal communications, draft status reports, create newsletters, prepare leadership updates, or compose any company-wide messaging."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
-To write internal communications, use this skill for:
-- 3P updates (Progress, Plans, Problems)
-- Company newsletters
-- FAQ responses
-- Status reports
-- Leadership updates
-- Project updates
-- Incident reports
+# Internal Communications Writer
 
-## How to use this skill
+Draft polished internal company communications using standardized formats for consistent, professional messaging.
 
-To write any internal communication:
+## Workflow
 
-1. **Identify the communication type** from the request
-2. **Load the appropriate guideline file** from the `examples/` directory:
-    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates
-    - `examples/company-newsletter.md` - For company-wide newsletters
-    - `examples/faq-answers.md` - For answering frequently asked questions
-    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above
-3. **Follow the specific instructions** in that file for formatting, tone, and content gathering
+1. **Identify communication type** from the user's request:
+   - 3P updates (Progress, Plans, Problems)
+   - Company newsletters
+   - FAQ responses
+   - Status reports or leadership updates
+   - Incident reports or project updates
 
-If the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.
+2. **Load the matching guideline** from the `examples/` directory:
+   - `examples/3p-updates.md` - Progress/Plans/Problems team updates
+   - `examples/company-newsletter.md` - Company-wide newsletters
+   - `examples/faq-answers.md` - Frequently asked questions
+   - `examples/general-comms.md` - Other communication types
+
+3. **Gather context** from the user:
+   - Key updates, metrics, or decisions to communicate
+   - Target audience and desired tone
+   - Any deadlines or distribution channels
+
+4. **Draft the communication** following the guideline's format, then iterate based on feedback.
+
+### Example: 3P Update
+
+```markdown
+## Progress
+- Shipped v2.1 authentication module ahead of schedule
+- Completed API migration for 3 downstream services
+
+## Plans
+- Begin load testing for Q3 launch (target: 10k concurrent users)
+- Finalize design review for notification system
+
+## Problems
+- CI pipeline flakiness causing 15% build failure rate — investigating root cause
+```
+
+If the communication type doesn't match any existing guideline, ask for clarification about the desired format.
 
 ## Keywords
-3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
+
+3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms, status report, leadership update, incident report

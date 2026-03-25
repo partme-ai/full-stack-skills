@@ -1,6 +1,6 @@
 ---
 name: tauri-app-websocket
-description: Guidance for Tauri v2 websocket plugin with Rust-managed connections and lifecycle handling.
+description: "Establish WebSocket connections from the Rust side using the Tauri v2 websocket plugin, bypassing WebView limitations. Use when implementing real-time messaging, managing WebSocket connection lifecycle, or configuring host allowlists for secure connections."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,51 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- WebSocket connections without WebView limits / 绕开 WebView 限制的 WebSocket
-- Connect, message, and disconnect events / 连接、消息与断开事件
-- Realtime updates in a Tauri app / Tauri 应用实时更新
+- WebSocket connections in a Tauri app
+- Real-time messaging or live updates
+- WebSocket connect/disconnect lifecycle
 
 **Trigger phrases include:**
-- "websocket", "realtime", "connect", "disconnect"
-- "WebSocket", "实时", "连接", "断开"
+- "websocket", "realtime", "live updates", "ws connection", "socket"
 
 ## How to use this skill
 
-1. Define WebSocket endpoints and reconnect strategy
-2. Configure plugin capabilities and allowed hosts
-3. Handle connect, message, and disconnect lifecycle events
-4. Validate error handling and network recovery
+1. **Install the websocket plugin**:
+   ```bash
+   cargo add tauri-plugin-websocket
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_websocket::init())
+   ```
+3. **Configure capabilities** with allowed hosts in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["websocket:default"] }
+   ```
+4. **Connect and send messages from the frontend**:
+   ```typescript
+   import WebSocket from '@tauri-apps/plugin-websocket';
+   const ws = await WebSocket.connect('wss://api.example.com/ws');
+   ws.addListener((msg) => {
+     console.log('Received:', msg.data);
+   });
+   await ws.send('Hello server!');
+   await ws.disconnect();
+   ```
+5. **Implement reconnection logic** to handle network interruptions gracefully
+6. **Restrict allowed hosts** in capabilities to prevent connections to unauthorized servers
 
 ## Outputs
 
-- Realtime communication plan / 实时通信方案
-- Host allowlist and recovery checklist / 主机白名单与恢复清单
-
-## Scope
-
-- Boundary: WebSocket plugin usage only
-- Key points: Lifecycle management and host allowlisting
+- WebSocket plugin setup with connection lifecycle
+- Message send/receive pattern with listeners
+- Reconnection and error handling strategy
 
 ## References
 
 - https://v2.tauri.app/plugin/websocket/
-- https://v2.tauri.app/zh-cn/plugin/websocket/
 
 ## Keywords
 
-tauri websocket, realtime, connect, disconnect
+tauri websocket, realtime, live updates, WebSocket connection, socket

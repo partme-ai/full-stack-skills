@@ -1,6 +1,6 @@
 ---
 name: vscode-feature-command
-description: Add a new command to the VS Code extension.
+description: "Register a new command in a VS Code extension by updating package.json contributes.commands and src/extension.ts activate function. Use when the user wants to add a functional command (e.g., text formatting, code generation, UI action) to a VS Code extension."
 license: Complete terms in LICENSE.txt
 ---
 

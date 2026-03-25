@@ -1,8 +1,6 @@
 ---
 name: threejs-postprocessing
-description: >-
-  Addon screen-space post-processing for three.js using EffectComposer, Pass base class, RenderPass, and stock passes such as UnrealBloomPass, SSAOPass, SSRPass, BokehPass, OutlinePass, FXAAPass/SMAAPass, TAARenderPass, and ShaderPass; references the Shaders addon group for underlying shader modules; contrasts with core PostProcessing class used in node/WebGPU stacks (see threejs-node-tsl and threejs-renderers).
-  Use when building composer chains—not for basic renderer tone mapping alone (threejs-renderers).
+description: "Addon screen-space post-processing for three.js using EffectComposer, Pass base class, RenderPass, and stock passes such as UnrealBloomPass, SSAOPass, SSRPass, BokehPass, OutlinePass, FXAAPass/SMAAPass, TAARenderPass, and ShaderPass; references the Shaders addon group for underlying shader modules. Use when building composer chains for bloom, SSAO, or other screen-space effects; not for basic renderer tone mapping alone (threejs-renderers)."
 ---
 
 ## When to use this skill
@@ -28,13 +26,46 @@ description: >-
 
 ## How to use this skill
 
-1. **Chain**: `RenderPass` → effect passes → output; ensure size matches renderer and DPR changes.
-2. **Resize**: call `composer.setSize` alongside renderer resize workflows.
-3. **Half-float**: many passes expect appropriate render target types—cite docs for your version.
-4. **Performance**: each pass has cost—profile with `renderer.info` sparingly.
-5. **Shader modules**: link Addons **Shaders** list instead of inlining huge GLSL in SKILL.
-6. **Output**: final pass should align color management with renderer (**threejs-renderers**).
-7. **Contrast**: mention core `PostProcessing` class separately to avoid name collision confusion.
+1. **Chain** — `RenderPass` → effect passes → output; ensure size matches renderer and DPR changes.
+2. **Resize** — call `composer.setSize` alongside renderer resize workflows.
+3. **Half-float** — many passes expect appropriate render target types; cite docs for your version.
+4. **Performance** — each pass has cost; profile with `renderer.info` to check draw calls and triangles.
+5. **Validate output** — render a simple test scene through the composer first to verify passes work before adding complexity.
+6. **Shader modules** — link Addons **Shaders** list instead of inlining huge GLSL in SKILL.
+7. **Output** — final pass should align color management with renderer (**threejs-renderers**).
+8. **Contrast** — mention core `PostProcessing` class separately to avoid name collision confusion.
+
+### Example: EffectComposer with bloom and debugging
+
+```javascript
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  1.5, // strength
+  0.4, // radius
+  0.85 // threshold
+);
+composer.addPass(bloomPass);
+
+// Resize handler — must match renderer size
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Render loop: use composer.render() instead of renderer.render()
+function animate() {
+  composer.render();
+}
+renderer.setAnimationLoop(animate);
+```
 
 See [examples/workflow-composer-bloom.md](examples/workflow-composer-bloom.md).
 

@@ -1,6 +1,6 @@
 ---
 name: speckit-checklist
-description: Generate a custom checklist for the current feature based on user requirements.
+description: "Generate a requirements-quality checklist ('unit tests for English') that validates completeness, clarity, consistency, and measurability of spec/plan/tasks artifacts. Use when the user needs a quality gate before implementation, wants to audit requirement coverage, or needs domain-specific checklists (UX, API, security, performance)."
 ---
 
 # Spec Kit Checklist Skill

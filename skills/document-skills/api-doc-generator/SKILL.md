@@ -1,48 +1,14 @@
 ---
 name: api-doc-generator
-description: |
-  Provides comprehensive guidance for generating API documentation by scanning code interfaces, extracting request/response 
-  information, and creating standardized API documentation. Use ONLY when the user explicitly mentions generating API 
-  documentation, creating API docs, scanning interfaces, or documenting APIs. The skill scans Controller classes, extracts 
-  interface information (URL, method, parameters, response), and generates documentation following standard templates. 
-  Do NOT trigger for generic documentation requests without explicit API documentation mention.
+description: "Generate API documentation by scanning Controller classes, extracting endpoint URLs, HTTP methods, parameters, and response structures, then producing standardized docs from templates. Use when the user explicitly mentions generating API documentation, creating API docs, scanning interfaces, or documenting REST APIs. Do not trigger for generic documentation requests without explicit API mention."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
-
-**CRITICAL: This skill should ONLY be triggered when the user explicitly mentions generating API documentation, creating API docs, scanning interfaces, or documenting APIs.**
-
-**ALWAYS use this skill when the user mentions:**
-- Generating API documentation (explicitly mentions "API documentation" or "API docs")
-- Creating API documentation from code
-- Scanning interfaces to generate documentation
-- Documenting REST APIs
-- 生成接口文档 (explicitly mentions "接口文档")
-- 扫描接口生成文档 (scan interfaces to generate documentation)
-- 创建API文档 (create API documentation)
-
-**Trigger phrases include:**
-- "生成接口文档" (generate API documentation) - **must include "接口文档"**
-- "扫描接口生成文档" (scan interfaces to generate documentation)
-- "创建API文档" (create API documentation)
-- "为接口生成文档" (generate documentation for interfaces)
-- "接口文档生成" (API documentation generation)
-
-**DO NOT trigger this skill for:**
-- Generic documentation requests without mentioning API/interfaces
-- Code comments generation
-- README file generation
-- Other types of documentation (user guides, technical specs, etc.)
-- "生成文档" without "接口" or "API" (too generic)
-
 ## How to use this skill
 
-**CRITICAL: This skill should ONLY be triggered when the user explicitly mentions generating API documentation. Do NOT trigger for generic documentation requests without API context.**
+Scan code for API endpoints, extract interface details, and generate standardized documentation. Do NOT trigger for generic documentation requests without explicit API/interface mention.
 
-### Workflow Overview
-
-This skill follows a systematic 4-step workflow:
+### Workflow
 
 1. **Scan Code** - Check current project or specified objects for Controller classes and API interfaces
 2. **Extract Information** - Scan interfaces to collect request URL, method, parameters, and response information
@@ -265,82 +231,22 @@ Similar to Java, but check for:
 - Nullable types (`String?`, `Int?`)
 - Kotlin-specific annotations
 
-### Documentation Template Structure
+### Templates and References
 
-The generated documentation follows this structure (available in both Chinese and English):
+- `templates/接口文档模板.md` - Chinese API documentation template
+- `templates/api-documentation-template-en.md` - English API documentation template
+- `examples/scan-and-generate-example.md` - Complete workflow example
 
-**Chinese Template** (`templates/接口文档模板.md`):
-1. **文档概览** (Document Overview)
-   - Version history table
-   - Responsibility table
-
-2. **接口一览表** (Interface List Table)
-   - Summary table of all interfaces
-
-3. **接口定义** (Interface Definitions)
-   - Detailed definition for each interface
-   - Request and Response sections
-   - Field definitions and examples
-
-4. **统一响应结构** (Standard Response Structure)
-   - Standard response format
-   - Pagination format
-   - Error codes
-
-5. **请求头规范** (Request Header Specifications)
-
-6. **注意事项** (Important Notes)
-
-**English Template** (`templates/api-documentation-template-en.md`):
-1. **Document Overview**
-   - Version history table
-   - Responsibility table
-
-2. **API Interface List**
-   - Summary table of all interfaces
-
-3. **Interface Definitions**
-   - Detailed definition for each interface
-   - Request and Response sections
-   - Field definitions and examples
-
-4. **Standard Response Structure**
-   - Standard response format
-   - Pagination format
-   - Error codes
-
-5. **Request Header Specifications**
-
-6. **Important Notes**
-
-**Template Selection**:
-- Ask user for preferred language (Chinese/English)
-- If not specified, detect from project context
-- Both templates follow the same structure, only language differs
+Ask user for preferred language (Chinese/English). If not specified, detect from project context.
 
 ### Best Practices
 
-1. **Complete Information**: Extract all available information from code, including annotations and comments
-2. **Standard Format**: Follow the template structure strictly
-3. **Clear Descriptions**: Use meaningful descriptions from code comments or annotations
-4. **Examples**: Include realistic response examples
-5. **Error Handling**: Document common error scenarios
-6. **Grouping**: Organize interfaces by module or Controller class
-7. **Validation**: Verify all extracted information is accurate
-
-### Reference Documentation
-
-- **Templates**:
-  - `templates/接口文档模板.md` - Standard API documentation template (Chinese)
-  - `templates/api-documentation-template-en.md` - Standard API documentation template (English)
-- **Example**: `examples/scan-and-generate-example.md` - Complete workflow example showing how to scan and generate API documentation
+1. Extract all available information from code annotations and comments
+2. Follow the template structure strictly
+3. Include realistic response examples with proper JSON formatting
+4. Document common error scenarios and codes
+5. Organize interfaces by module or Controller class
 
 ## Keywords
 
-**English keywords:**
-api documentation, api docs, generate api documentation, create api docs, scan interfaces, document apis, rest api documentation, interface documentation, api doc generator, scan controllers, extract api information
-
-**Chinese keywords (中文关键词):**
-接口文档, API文档, 生成接口文档, 创建接口文档, 扫描接口, 接口文档生成, API文档生成, 接口文档生成器, 扫描Controller, 提取接口信息, 接口文档模板
-
-**IMPORTANT**: All keywords must include "接口文档" (API documentation) or "API" to avoid false triggers. Generic terms like "生成文档" (generate documentation) without "接口" or "API" should NOT trigger this skill.
+api documentation, api docs, generate api docs, scan interfaces, REST API, 接口文档, API文档, 生成接口文档, 扫描接口

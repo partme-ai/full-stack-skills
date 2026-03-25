@@ -1,6 +1,6 @@
 ---
 name: ascii-image-to-ascii
-description: Convert an image into ASCII art (readable + detail variants, width/charset controls, optional ANSI), for terminal previews and plain-text “image substitutes”.
+description: “Convert an image into ASCII art (readable + detail variants, width/charset controls, optional ANSI), for terminal previews and plain-text image substitutes.”
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -56,6 +56,32 @@ dependencies:
 - `scripts/image_to_ascii.py`
   - Requires Python + Pillow (`pip install pillow`)
   - Supports: readable/detail variants, optional `--ansi256`
+
+### Sample Output Comparison
+
+**Readable variant** (fewer levels, clearer silhouette):
+```
+        .:::.
+      .=*##*=.
+     .+######+.
+    .:########:.
+    .+########+.
+     :*######*:
+      .=*##*=.
+        .:::.
+```
+
+**Detail variant** (more levels, richer texture):
+```
+        .:=+:.
+      .-+*##*+-.
+     .=*######*=.
+    .:*########*:.
+    .=*########*=.
+     :+*######*+:
+      .-+*##*+-.
+        .:=+:.
+```
 
 ## Examples
 - `examples/readable-vs-detail.md`

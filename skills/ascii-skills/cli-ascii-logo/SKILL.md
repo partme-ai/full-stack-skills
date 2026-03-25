@@ -1,6 +1,6 @@
 ---
 name: cli-ascii-logo
-description: 生成 CLI 的 ASCII 艺术 Logo/Banner（支持 box drawing 边框、█ 块字符、ANSI 24-bit 渐变色）并提供可运行脚本与集成代码。适用于“做一个像 Spec Kit CLI 的终端 Logo / 彩色 ASCII banner / figlet 风格标题 / CLI 启动欢迎页”等需求。
+description: “Generate CLI ASCII art logos and banners with box drawing borders, block characters, and ANSI 24-bit gradients, plus runnable scripts and integration code. Use when the user needs a terminal logo, colored ASCII banner, figlet-style title, or CLI startup welcome page.”
 ---
 
 # CLI ASCII Logo
@@ -63,6 +63,13 @@ python3 scripts/generate_logo.py \
   - `banner.ansi.txt`（带颜色）
   - `renderBanner()`（在你的 CLI 里按环境输出）
 
-## 参考
+## Validation
 
-- 配色与兼容性建议见 [palettes.md](references/palettes.md)
+- **Test in terminal**: Run `cat banner.ansi.txt` to verify color rendering
+- **Test plain text**: Run `cat banner.txt` to verify alignment without ANSI
+- **Width check**: Ensure no line exceeds the target width (default 80)
+- **NO_COLOR compliance**: Verify the CLI respects `NO_COLOR=1` and `--no-color`
+
+## Reference
+
+- Color palettes and compatibility notes: [palettes.md](references/palettes.md)

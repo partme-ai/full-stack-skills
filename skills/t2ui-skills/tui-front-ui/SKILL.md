@@ -1,6 +1,6 @@
 ---
 name: tui-front-ui
-description: Define strict, example-rich rules for generating pixel-precise ASCII Text UI (TUI) with layout attributes (top/left/width/height/colors/typography) and Pencil MCP–ready specs + batch_design operation plans.
+description: "Generate and render a pixel-precise ASCII TUI Front UI Framework component with complete output blocks (TUI_RENDER, COMPONENT_SPEC, PENCIL_SPEC, PENCIL_BATCH_DESIGN) for Pencil MCP drawing workflows. Use when the user asks to create a front UI in a terminal UI, text-based interface, or Pencil MCP project."
 ---
 
 
@@ -10,6 +10,16 @@ Produce TUI designs that are accurate enough to be treated like product design a
 - Render a copy-pastable ASCII TUI.
 - Output a complete layout/spec block with geometry and style tokens.
 - Output a Pencil MCP–ready plan: JSON spec + `batch_design` operations (chunked to ≤25 ops).
+
+## Workflow
+
+1. **Parse input** — Read the input model JSON (widthCols, grid, props, state, style, typography, layout, hotkeys).
+2. **Calculate layout** — Convert column/row positions to pixel coordinates using the grid (cellWidthPx=8, cellHeightPx=16).
+3. **Render TUI_RENDER** — Build the monospace ASCII art with box-drawing characters, respecting widthCols.
+4. **Build COMPONENT_SPEC** — Emit the JSON spec with bbox, style, typography, state, and hotkeys.
+5. **Build PENCIL_SPEC** — Emit the canvas and component list for Pencil MCP.
+6. **Plan PENCIL_BATCH_DESIGN** — Emit batch_design calls (max 25 ops per call) to create the design in Pencil.
+7. **Validate** — Verify bbox dimensions in COMPONENT_SPEC match the TUI_RENDER grid; confirm batch ops stay within the 25-op limit.
 
 ## Output Contract (Mandatory)
 

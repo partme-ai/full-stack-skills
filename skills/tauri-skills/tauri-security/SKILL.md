@@ -1,6 +1,6 @@
 ---
 name: tauri-security
-description: Guidance for Tauri v2 capabilities, scope configuration, and ACL-based permission control.
+description: "Configure Tauri v2 capabilities, scoped access rules, and ACL-based permission control for production apps. Use when generating capabilities/default.json, defining scoped access per plugin, or auditing permissions for minimum-privilege compliance."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,39 +8,50 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Capability/Scope design or ACL permission control / 能力、Scope、ACL 权限控制
-- Building capabilities/default.json / 生成或校验 capabilities/default.json
-- Tightening plugin access in production / 生产环境权限收敛
+- Capability or scope design for Tauri v2
+- Building or editing capabilities/default.json
+- ACL-based permission control or audit
 
 **Trigger phrases include:**
-- "capabilities", "scope", "acl", "permissions file"
-- "权限配置", "能力文件", "Scope 配置", "ACL"
+- "capabilities", "scope", "ACL", "permissions", "capabilities json", "minimum privilege"
 
 ## How to use this skill
 
-1. Translate features into plugin capabilities / 业务功能映射为插件能力
-2. Define scoped access rules per capability / 为能力定义 Scope 规则
-3. Generate and validate capabilities/default.json / 生成并校验能力文件
-4. Verify runtime behavior matches minimum-privilege policy / 验证最小权限运行效果
+1. **Create capabilities/default.json** in `src-tauri/capabilities/`:
+   ```json
+   {
+     "identifier": "default",
+     "description": "Main window capabilities",
+     "windows": ["main"],
+     "permissions": [
+       "core:default",
+       "dialog:allow-open",
+       { "identifier": "fs:allow-read-text-file", "allow": [{ "path": "$APPDATA/**" }] },
+       { "identifier": "http:default", "allow": [{ "url": "https://api.example.com/**" }] }
+     ]
+   }
+   ```
+2. **Map features to capabilities**: Each feature should use the minimum permissions required
+3. **Define scoped access** to restrict file paths, URLs, and other resources:
+   ```json
+   { "identifier": "fs:allow-write-text-file", "allow": [{ "path": "$APPDATA/config/**" }] }
+   ```
+4. **Assign capabilities per window** -- different windows can have different permission sets
+5. **Audit permissions** before release: remove any unused permissions, verify scope restrictions
+6. **Validate at runtime** by testing that restricted operations correctly fail outside their scope
 
 ## Outputs
 
-- Capability-to-scope mapping / 能力到 Scope 的映射
-- Validated capabilities/default.json / 可直接使用的能力文件
-- Permission audit checklist / 权限审计清单
-
-## Scope
-
-- Boundary: Capabilities, scope, and ACL configuration only / 仅限权限配置
-- v2 focus: Capabilities & scope are mandatory controls / v2 强制配置
-- Out of scope: app feature design or backend auth / 不含功能设计与后端鉴权
+- capabilities/default.json with minimal permissions
+- Feature-to-capability mapping
+- Scoped access rules for files, URLs, and plugins
+- Permission audit checklist
 
 ## References
 
 - https://v2.tauri.app/security/capabilities/
 - https://v2.tauri.app/security/scope/
-- https://v2.tauri.app/security/acl/
 
 ## Keywords
 
-tauri security, capabilities, scope, acl, permissions, 权限配置, 能力文件, 最小权限
+tauri security, capabilities, scope, ACL, permissions, minimum privilege

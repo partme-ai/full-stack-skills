@@ -1,10 +1,7 @@
 ---
 name: stitch-mcp-list-screens
-description: Lists all screens contained within a specific project.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "List all screens within a specific Stitch project, returning screen names, titles, thumbnails, and device types. Use when the user wants to browse generated designs, find a specific screen to iterate on, or select a screenId for export via get_screen. Requires projectId in projects/{id} format."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

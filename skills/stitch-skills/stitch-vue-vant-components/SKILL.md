@@ -1,12 +1,7 @@
 ---
 name: stitch-vue-vant-components
-description: Convert Stitch designs into modular Vite/Vue 3 and Vant 4 mobile components. Uses Stitch MCP get_screen for retrieval; high-reliability fetch via scripts; enforces Vue SFC structure and Vant 4 component contracts van-button van-field van-nav-bar etc..
-allowed-tools:
-  - "stitch*:*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+description: "Convert Stitch designs into modular Vite + Vue 3 + Vant 4 mobile components. Use when the user mentions Vant or Vue Mobile conversion from Stitch. Retrieves screen HTML via Stitch MCP get_screen, maps Tailwind to Vant tokens (mobile-first 375px, safe area), enforces Vue SFC structure with Vant 4 components (van-button, van-field, van-nav-bar, van-tabbar)."
+allowed-tools: "stitch*:*, Bash, Read, Write, web_fetch"
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 name: vscode-feature-webview
-description: Add a Webview panel to display custom HTML content.
+description: "Add a Webview panel to a VS Code extension for displaying custom HTML content (forms, charts, complex layouts) using vscode.window.createWebviewPanel. Use when the user needs custom UI that cannot be achieved with standard VS Code UI elements, such as dashboards, settings forms, or rich previews."
 license: Complete terms in LICENSE.txt
 ---
 

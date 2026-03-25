@@ -1,9 +1,6 @@
 ---
 name: threejs-dev-setup
-description: >-
-  Bootstrap and toolchain guidance for three.js applications using npm, Vite/Webpack/Rollup, bare ESM import maps, and TypeScript.
-  Covers canonical import paths for `three` core versus `three/addons/` (examples/jsm re-exports), version alignment with https://threejs.org/docs/, and fixing "module not found" for loaders and controls.
-  Use when scaffolding a new 3D project, migrating bundler, or debugging resolution of addons—do not use for rendering API details (see threejs-renderers) or asset loading logic (see threejs-loaders).
+description: "Bootstrap and toolchain guidance for three.js applications using npm, Vite/Webpack/Rollup, bare ESM import maps, and TypeScript. Covers canonical import paths for three core versus three/addons/ (examples/jsm re-exports), version alignment with threejs.org docs, and fixing module not found for loaders and controls. Use when scaffolding a new 3D project, migrating bundler, or debugging resolution of addons; do not use for rendering API details (see threejs-renderers) or asset loading logic (see threejs-loaders)."
 ---
 
 ## When to use this skill
@@ -30,10 +27,39 @@ description: >-
 1. **Confirm delivery model**: SPA bundler (Vite/Webpack), Node tooling, or static HTML with `importmap`—each affects how `three/addons/` resolves.
 2. **Pin `three` version** to a release compatible with the docs the user cites; note that addon paths follow the published package layout.
 3. **Show canonical imports**: core from `three`; controls/loaders/effects from `three/addons/...` (mapped to `examples/jsm` in source tree). See [examples/workflow-scaffold.md](examples/workflow-scaffold.md).
-4. **Minimal loop**: create renderer + scene + camera + one mesh; `requestAnimationFrame`—enough to verify toolchain without duplicating threejs-renderers depth.
+4. **Minimal loop**: create renderer + scene + camera + one mesh to verify toolchain works.
 5. **TypeScript**: enable `moduleResolution` appropriate for bundler; reference types from `three` package typings; avoid duplicating global script tag patterns unless user targets no-bundler HTML.
 6. **On failure**: distinguish missing dependency vs wrong path vs SSR context (no `window`/`document`).
 7. **Deepening**: link user to [three.js manual](https://threejs.org/manual/) first chapter after scaffold works.
+
+### Example: Vite + three.js minimal verification
+
+```bash
+npm create vite@latest my-3d-app -- --template vanilla && cd my-3d-app
+npm install three
+```
+
+```javascript
+// main.js — canonical imports and minimal render loop
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 100);
+camera.position.z = 3;
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const mesh = new THREE.Mesh(
+  new THREE.BoxGeometry(),
+  new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+);
+scene.add(mesh, new THREE.AmbientLight(0xffffff, 0.5));
+
+renderer.setAnimationLoop(() => renderer.render(scene, camera));
+```
 
 ## Doc map (official)
 
@@ -68,12 +94,6 @@ When answering under this skill, prefer responses that:
 3. Distinguish **threejs-dev-setup** (resolution) from **threejs-renderers** (runtime API) failures.
 4. Never assume global script tags unless the user explicitly uses CDN/no-bundler HTML.
 5. Recommend deduplicating `three` in `package.json` / lockfile when duplicate singleton issues appear.
-
-## References
-
-- https://threejs.org/manual/
-- https://threejs.org/docs/
-- https://www.npmjs.com/package/three
 
 ## Keywords
 

@@ -1,34 +1,45 @@
 ---
 name: nvm-uninstall
-description: Remove nvm cleanly, including NVM_DIR cleanup, profile edits, and PATH restoration.
+description: "Remove nvm completely by deleting NVM_DIR, cleaning nvm lines from shell profiles, and restoring system Node PATH priority. Use when the user asks to uninstall nvm, remove node version manager, clean up nvm installation, or restore their system to use the system-installed Node."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# Uninstall nvm
 
-**ALWAYS use this skill when the user mentions:**
-- Uninstalling or removing nvm
-- Cleaning NVM_DIR or profile entries
-- Restoring system node priority
+Completely remove nvm and restore the system to its pre-nvm state.
 
-**Trigger phrases include:**
-- "uninstall nvm", "移除 nvm", "cleanup"
-- "restore PATH", "恢复系统 Node"
+## Workflow
 
-## How to use this skill
+1. **Remove the nvm directory:**
+   ```bash
+   rm -rf "$NVM_DIR"
+   # Usually: rm -rf ~/.nvm
+   ```
 
-**CRITICAL: This skill is for removal and cleanup only.** Installation or usage belongs to other nvm-* skills.
+2. **Remove nvm lines from shell profile** (`~/.bashrc`, `~/.zshrc`, or `~/.profile`):
+   ```bash
+   # Delete these lines from your profile:
+   # export NVM_DIR="$HOME/.nvm"
+   # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+   # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+   ```
 
-1. Remove NVM_DIR and delete nvm profile entries.
-2. Restore PATH to prioritize the system Node.
-3. Validate that nvm commands are no longer available.
+3. **Verify nvm is removed:**
+   ```bash
+   # Open a new terminal, then:
+   command -v nvm    # Should return nothing
+   which node        # Should show system Node path (e.g., /usr/local/bin/node)
+   node -v           # Should show system Node version
+   ```
+
+**Warning:** This permanently removes all nvm-managed Node versions. Back up any global packages first with `npm list -g --depth=0`.
 
 ### Example file map
 
-- examples/uninstall.md
-- examples/restore-path.md
-- examples/system-node.md
+- `examples/uninstall.md` - Step-by-step uninstall guide
+- `examples/restore-path.md` - PATH restoration details
+- `examples/system-node.md` - Switching to system Node
 
 ## Keywords
 
-nvm uninstall, remove, cleanup, PATH restore, system node, 卸载
+nvm uninstall, remove, cleanup, PATH restore, system node

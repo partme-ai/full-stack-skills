@@ -1,6 +1,6 @@
 ---
 name: spring-ai
-description: Provides comprehensive guidance for Spring AI including AI model integration, prompt templates, vector stores, and AI applications. Use when the user asks about Spring AI, needs to integrate AI models, implement RAG applications, or work with AI services in Spring.
+description: "Provides comprehensive guidance for Spring AI including AI model integration, prompt templates, vector stores, and AI applications. Use when the user asks about Spring AI, needs to integrate AI models, implement RAG applications, or work with AI services in Spring."
 ---
 
 # Spring AI 开发指南

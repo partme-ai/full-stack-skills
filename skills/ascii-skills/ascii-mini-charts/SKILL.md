@@ -1,6 +1,6 @@
 ---
 name: ascii-mini-charts
-description: Generate ASCII mini charts (sparkline/bar/simple line) for plain-text trend inspection, with minimal + annotated variants and normalization notes.
+description: "Generate ASCII mini charts (sparkline/bar/simple line) for plain-text trend inspection, with minimal and annotated variants and normalization notes. Use when the user needs text-based data visualization, terminal charts, or ASCII graphs for CLI output."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -35,6 +35,42 @@ dependencies:
 - chartMinimal
 - chartAnnotated (with min/max/current)
 - scaleNotes (normalization + outlier strategy)
+
+### Inline Example
+
+Input: `series=[3, 7, 2, 9, 5, 8, 1, 6]`, `type=sparkline`:
+
+**chartMinimal:**
+```
+▂▅▁▇▃▆ ▄
+```
+
+**chartAnnotated:**
+```
+▂▅▁▇▃▆ ▄  min:1 max:9 current:6
+```
+
+Input: `series=[10, 25, 15, 30]`, `type=bar`, `height=5`:
+
+**chartAnnotated:**
+```
+     ##
+  ## ##
+  ## ##
+  ## ## ##
+## ## ## ##
+10 25 15 30
+```
+
+### Script Usage
+
+```bash
+# Generate sparkline from JSON data
+echo '{"series": [3, 7, 2, 9, 5, 8, 1, 6], "type": "sparkline"}' | python3 scripts/mini_charts.py
+
+# Generate bar chart with annotations
+echo '{"series": [10, 25, 15, 30], "type": "bar", "height": 5, "showLabels": true}' | python3 scripts/mini_charts.py
+```
 
 ## Script
 - `scripts/mini_charts.py`: generate ASCII mini charts from JSON stdin

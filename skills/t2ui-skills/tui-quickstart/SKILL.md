@@ -1,6 +1,6 @@
 ---
 name: tui-quickstart
-description: Generate pixel-precise ASCII TUI for Quickstart (u-quickstart) with strict output blocks (TUI_RENDER, COMPONENT_SPEC, PENCIL_SPEC, PENCIL_BATCH_DESIGN) suitable for Pencil MCP drawing workflows.
+description: "Generate and render a pixel-precise ASCII TUI Quickstart component with complete output blocks (TUI_RENDER, COMPONENT_SPEC, PENCIL_SPEC, PENCIL_BATCH_DESIGN) for Pencil MCP drawing workflows. Use when the user asks to create a quickstart in a terminal UI, text-based interface, or Pencil MCP project."
 ---
 
 
@@ -9,6 +9,16 @@ description: Generate pixel-precise ASCII TUI for Quickstart (u-quickstart) with
 - Produce an ASCII Text UI (TUI) representation of **Quickstart**.
 - Always output layout attributes (top/left/width/height, spacing, colors, typography, zIndex).
 - Always output Pencil MCP–ready specs and a `batch_design` plan (≤25 operations per call).
+
+## Workflow
+
+1. **Parse input** — Read the input model JSON (widthCols, grid, props, state, style, typography, layout, hotkeys).
+2. **Calculate layout** — Convert column/row positions to pixel coordinates using the grid (cellWidthPx=8, cellHeightPx=16).
+3. **Render TUI_RENDER** — Build the monospace ASCII art with box-drawing characters, respecting widthCols.
+4. **Build COMPONENT_SPEC** — Emit the JSON spec with bbox, style, typography, state, and hotkeys.
+5. **Build PENCIL_SPEC** — Emit the canvas and component list for Pencil MCP.
+6. **Plan PENCIL_BATCH_DESIGN** — Emit batch_design calls (max 25 ops per call) to create the design in Pencil.
+7. **Validate** — Verify bbox dimensions in COMPONENT_SPEC match the TUI_RENDER grid; confirm batch ops stay within the 25-op limit.
 
 ## Source Documentation
 

@@ -1,9 +1,7 @@
 ---
 name: stitch-ui-prompt-architect
-description: Builds Stitch-ready prompts from vague UI ideas or from Design Spec and User Request. Outputs sectioned Context, Layout, and Components. Supports DESIGN.md and framework contract prefix.
-allowed-tools:
-  - "Read"
-  - "Write"
+description: "Build Stitch-ready prompts from vague UI ideas (Path A) or from a Design Spec plus user request (Path B). Use when polishing a UI prompt before Stitch generation, improving a prompt that produced poor results, or merging a Design Spec with framework contracts (uView, Element Plus, Layui, Bootstrap, Vant) into a sectioned Context/Layout/Components prompt."
+allowed-tools: "Read, Write"
 ---
 
 

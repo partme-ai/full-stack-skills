@@ -1,43 +1,56 @@
 ---
 name: nvm-usage-basics
-description: Cover everyday nvm usage for installing, switching, and listing Node versions, including LTS and system node.
+description: "Manage Node.js versions with everyday nvm commands: install specific versions, switch active versions, list installed and remote versions, and use LTS releases. Use when the user asks about nvm install, nvm use, nvm ls, listing available Node versions, or switching between Node versions."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm Usage Basics
 
-**ALWAYS use this skill when the user mentions:**
-- Installing a Node version with nvm
-- Switching active Node versions
-- Listing installed or remote versions
-- Using LTS or system node
+Install, switch, and list Node.js versions using core nvm commands.
 
-**Trigger phrases include:**
-- "nvm install", "nvm use", "nvm ls", "ls-remote"
-- "LTS", "长期支持", "system node", "io.js"
+## Workflow
 
-## How to use this skill
+1. **List available remote versions:**
+   ```bash
+   nvm ls-remote              # All available versions
+   nvm ls-remote --lts        # Only LTS releases
+   nvm ls-remote | grep v20   # Filter specific major version
+   ```
 
-**CRITICAL: This skill focuses on basic version management commands.** For default version or .nvmrc, use the defaults skill.
+2. **Install a Node version:**
+   ```bash
+   nvm install 20             # Latest v20.x
+   nvm install 20.11.0        # Exact version
+   nvm install --lts          # Latest LTS release
+   nvm install node           # Latest current release
+   ```
 
-1. Select the required command: install, use, ls, or ls-remote.
-2. Choose LTS or specific versions based on stability needs.
-3. Confirm available versions before switching.
-4. Use system node only when required by the OS.
+3. **Switch between versions:**
+   ```bash
+   nvm use 20                 # Switch to v20.x
+   nvm use --lts              # Switch to latest LTS
+   nvm use system             # Use system-installed Node
+   ```
 
-**Important notes:**
-- LTS is recommended for production stability.
+4. **List installed versions and verify:**
+   ```bash
+   nvm ls                     # Show installed versions
+   nvm current                # Show active version
+   node -v                    # Confirm active version
+   ```
+
+**Note:** For default version or .nvmrc, use the nvm-defaults-and-nvmrc skill. LTS is recommended for production stability.
 
 ### Example file map
 
-- examples/usage.md
-- examples/install-version.md
-- examples/use-version.md
-- examples/list-versions.md
-- examples/long-term-support.md
-- examples/system-node.md
-- examples/iojs.md
+- `examples/usage.md` - General usage overview
+- `examples/install-version.md` - Version installation details
+- `examples/use-version.md` - Switching versions
+- `examples/list-versions.md` - Listing and filtering versions
+- `examples/long-term-support.md` - LTS management
+- `examples/system-node.md` - System Node usage
+- `examples/iojs.md` - io.js compatibility
 
 ## Keywords
 
-nvm use, nvm install, nvm ls, ls-remote, LTS, system node, node versions, 日常使用
+nvm use, nvm install, nvm ls, ls-remote, LTS, system node, node versions

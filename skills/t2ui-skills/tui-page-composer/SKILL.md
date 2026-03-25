@@ -1,6 +1,6 @@
 ---
 name: tui-page-composer
-description: Compose multiple ASCII TUI components into a full page with a consolidated layout summary and Pencil MCP–ready batch_design plans, including validation steps via snapshot_layout and get_screenshot.
+description: "Generate and render a pixel-precise ASCII TUI Page Composer component with complete output blocks (TUI_RENDER, COMPONENT_SPEC, PENCIL_SPEC, PENCIL_BATCH_DESIGN) for Pencil MCP drawing workflows. Use when the user asks to create a page composer in a terminal UI, text-based interface, or Pencil MCP project."
 ---
 
 
@@ -12,6 +12,16 @@ Turn product design descriptions into a full-page text UI (TUI) that is also mac
 - Output a consolidated `PENCIL_SPEC` and `PENCIL_BATCH_DESIGN` plan (≤25 ops per call).
 
 This skill assumes you follow the shared contract and grid→pixel mapping from `tui-front-ui`.
+
+## Workflow
+
+1. **Parse input** — Read the input model JSON (widthCols, grid, props, state, style, typography, layout, hotkeys).
+2. **Calculate layout** — Convert column/row positions to pixel coordinates using the grid (cellWidthPx=8, cellHeightPx=16).
+3. **Render TUI_RENDER** — Build the monospace ASCII art with box-drawing characters, respecting widthCols.
+4. **Build COMPONENT_SPEC** — Emit the JSON spec with bbox, style, typography, state, and hotkeys.
+5. **Build PENCIL_SPEC** — Emit the canvas and component list for Pencil MCP.
+6. **Plan PENCIL_BATCH_DESIGN** — Emit batch_design calls (max 25 ops per call) to create the design in Pencil.
+7. **Validate** — Verify bbox dimensions in COMPONENT_SPEC match the TUI_RENDER grid; confirm batch ops stay within the 25-op limit.
 
 ## Inputs (Recommended)
 

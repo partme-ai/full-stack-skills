@@ -1,69 +1,53 @@
 ---
 name: course-designer
-description: Provides comprehensive guidance for course design including curriculum development, learning objectives, and course structure. Use when the user asks about course design, needs to design courses, create learning objectives, or structure educational content.
+description: "Design structured courses including syllabi, learning objectives using Bloom's taxonomy, lesson plans, and assessment rubrics. Use when the user asks about course design, needs to create a curriculum, write learning objectives, structure educational modules, or build assessment plans."
 ---
 
 # 课程设计技能
 
-## 概述
+Create structured course designs with learning objectives, lesson plans, and assessments.
 
-本技能帮助您创建结构化的课程内容，包括课程大纲、学习目标、教学计划和评估方案。
+## Workflow
 
-**关键词**: 课程设计、教学大纲、学习目标、教学计划、课程规划、教育设计
-
-## 核心功能
-
-### 1. 课程大纲设计
-
-- 分析学习需求和目标受众
-- 设计课程结构和模块划分
-- 确定课程时长和进度安排
-- 规划知识点的递进关系
-
-### 2. 学习目标制定
-
-- 使用 Bloom 分类法制定认知目标
-- 设计可测量的学习成果
-- 确保目标与评估方式对齐
-- 区分不同层次的学习目标（记忆、理解、应用、分析、评价、创造）
-
-### 3. 教学计划编写
-
-- 设计每节课的教学流程
-- 规划教学活动和互动环节
-- 准备教学资源和材料清单
-- 安排实践练习和作业
-
-### 4. 评估方案设计
-
-- 设计形成性评估（过程评估）
-- 设计总结性评估（最终评估）
-- 创建评估标准和评分 rubric
-- 规划多种评估方式（测验、项目、报告等）
-
-## 使用指南
-
-### 课程设计流程
-
-1. **需求分析**
+1. **需求分析** - Gather requirements:
    - 明确目标受众和学习需求
    - 确定课程目标和预期成果
    - 分析现有资源和约束条件
 
-2. **内容规划**
+2. **内容规划** - Structure the curriculum:
    - 划分课程模块和单元
    - 确定每个模块的核心知识点
    - 规划知识点的学习顺序
 
-3. **活动设计**
+3. **活动设计** - Design teaching activities:
    - 为每个知识点设计教学活动
    - 规划实践练习和项目
    - 设计互动和讨论环节
 
-4. **评估设计**
+4. **评估设计** - Build assessment plan:
    - 设计评估方式和标准
    - 创建评估工具和 rubric
    - 规划评估时间点
+
+### Example: Learning Objective (Bloom's Taxonomy)
+
+```markdown
+## Module 3: REST API Design
+
+**Learning Objective:** By the end of this module, students will be able to:
+- [Remember] List the HTTP methods and their idempotency properties
+- [Understand] Explain the difference between PUT and PATCH
+- [Apply] Design a RESTful API for a given resource with proper status codes
+- [Analyze] Evaluate an existing API design for REST compliance violations
+
+**Assessment:** Design a REST API for a library management system (rubric below)
+
+| Criteria          | Excellent (4)                    | Good (3)              | Needs Work (2)         |
+|-------------------|----------------------------------|-----------------------|------------------------|
+| Resource naming   | Consistent plural nouns          | Mostly consistent     | Inconsistent naming    |
+| HTTP methods      | Correct methods, idempotent      | Minor method misuse   | Incorrect methods      |
+| Status codes      | Appropriate codes for all cases  | Missing edge cases    | Generic 200/500 only   |
+```
 
 ## 输出格式
 
@@ -78,9 +62,11 @@ description: Provides comprehensive guidance for course design including curricu
 
 ## 最佳实践
 
-- 确保学习目标清晰、可测量
+- 确保学习目标清晰、可测量（使用 Bloom 动词）
 - 保持内容递进，由浅入深
 - 平衡理论学习和实践应用
-- 设计多样化的教学活动
 - 评估方式应与学习目标对齐
-- 考虑不同学习风格和需求
+
+## Keywords
+
+课程设计, 教学大纲, 学习目标, 教学计划, 课程规划, course design, syllabus, curriculum, learning objectives, Bloom's taxonomy

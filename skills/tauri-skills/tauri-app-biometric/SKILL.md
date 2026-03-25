@@ -1,6 +1,6 @@
 ---
 name: tauri-app-biometric
-description: Guidance for Tauri v2 biometric plugin with authentication flow and fallback strategy.
+description: "Implement Tauri v2 biometric authentication using TouchID, FaceID, or fingerprint sensors with fallback strategies. Use when adding biometric login, securing sensitive actions with biometric confirmation, or handling devices without biometric support."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,49 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Biometric authentication / 生物识别认证
-- Face ID or fingerprint integration / Face ID 或指纹集成
-- Fallback when biometric is unavailable / 生物识别不可用时的回退
+- Biometric authentication (TouchID, FaceID, fingerprint)
+- Securing sensitive actions with biometric confirmation
+- Fallback when biometric hardware is unavailable
 
 **Trigger phrases include:**
-- "biometric", "Face ID", "fingerprint", "auth"
-- "生物识别", "Face ID", "指纹", "认证"
+- "biometric", "Face ID", "Touch ID", "fingerprint", "biometric login"
 
 ## How to use this skill
 
-1. Define authentication flows and fallback requirements
-2. Configure biometric plugin capabilities and permissions
-3. Implement auth prompts and error handling
-4. Pair biometric auth with secure storage for secrets
+1. **Install the biometric plugin**:
+   ```bash
+   cargo add tauri-plugin-biometric
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_biometric::init())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["biometric:allow-authenticate", "biometric:allow-status"] }
+   ```
+4. **Check availability and authenticate from the frontend**:
+   ```typescript
+   import { authenticate, status } from '@tauri-apps/plugin-biometric';
+   const bioStatus = await status();
+   if (bioStatus.isAvailable) {
+     await authenticate('Confirm your identity', { allowDeviceCredential: true });
+   }
+   ```
+5. **Implement fallback** for devices without biometric support (PIN or password entry)
+6. **Pair with stronghold plugin** for unlocking encrypted secrets after biometric confirmation
 
 ## Outputs
 
-- Biometric auth flow plan / 生物识别认证流程方案
-- Fallback and recovery checklist / 回退与恢复清单
-
-## Scope
-
-- Boundary: Biometric authentication only
-- Key points: Auth flow and fallback strategy
+- Biometric authentication flow with availability check
+- Fallback strategy for unsupported devices
+- Integration pattern with secure storage
 
 ## References
 
 - https://v2.tauri.app/plugin/biometric/
-- https://v2.tauri.app/zh-cn/plugin/biometric/
 
 ## Keywords
 
-tauri biometric, face id, fingerprint, authentication
+tauri biometric, face id, touch id, fingerprint, authentication, fallback

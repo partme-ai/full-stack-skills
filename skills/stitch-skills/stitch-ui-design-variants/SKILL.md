@@ -1,10 +1,7 @@
 ---
 name: stitch-ui-design-variants
-description: Logic skill that generates prompts for alternative design variants e.g. A B testing options.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Generate alternative Stitch design variant prompts for A/B testing and creative exploration. Use when the user wants multiple style, layout, or content options for a Stitch screen. Takes a base Design Spec or prompt and produces 3 distinct variants (layout, style, or content variations)."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 
@@ -34,12 +31,19 @@ A list of 3 distinct prompts.
 *   *Variant B*: Inverted Theme (Light <-> Dark).
 *   *Variant C*: High Contrast / Monochromatic.
 
-## Usage Example
-**User**: "Give me 3 style options for this dashboard."
+## Validation
+
+Ensure each variant is **sufficiently distinct**: different layout structure (for LAYOUT), different color palette (for STYLE), or different content/copy (for CONTENT). If two variants look too similar, regenerate the weaker one.
+
+## Example: Style Variants for a Dashboard
+
+**Input**: "Desktop SaaS dashboard. Dark mode. Blue primary (#2563EB). Sidebar nav."
+
 **Output**:
-1.  "Desktop Dashboard... **Dark Mode**... Blue accents..."
-2.  "Desktop Dashboard... **Light Mode**... Clean white/grey..."
-3.  "Desktop Dashboard... **High Contrast**... Black and White..."
+
+1. "Desktop SaaS dashboard. Dark mode with deep navy background (#0f172a). Primary blue (#2563EB) for CTAs. Sidebar navigation. Cards with subtle border glow. High-contrast text (#f8fafc)."
+2. "Desktop SaaS dashboard. Light mode with clean white background (#ffffff). Primary blue (#2563EB) for CTAs. Sidebar navigation. Cards with soft gray (#f1f5f9) backgrounds and subtle shadows."
+3. "Desktop SaaS dashboard. High-contrast monochrome with pure black background (#000000). Accent electric blue (#3b82f6) for active states only. Sidebar navigation. Minimal chrome, maximum data density."
 
 ## References
 

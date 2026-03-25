@@ -53,6 +53,8 @@ Use **`/opsx:onboard`** for a guided, interactive tutorial through the complete 
 
 - **"Commands not recognized"**: Ensure OpenSpec is initialized (`openspec init`). See **openspec-initial**.
 - **Takes too long**: The tutorial covers the full workflow; expect 15-30 minutes.
+- **No suitable improvements found**: If the codebase is well-maintained, suggest a documentation improvement or a small refactor as the tutorial change.
+- **Implementation fails**: Review the generated tasks for scope — simplify the change if needed, or discard and pick a smaller improvement.
 
 ## References
 

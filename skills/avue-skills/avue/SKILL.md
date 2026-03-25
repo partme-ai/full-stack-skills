@@ -1,24 +1,52 @@
 ---
 name: avue
-description: Provides comprehensive guidance for Avue framework including CRUD operations, form components, and data management. Use when the user asks about Avue, needs to build admin interfaces, implement CRUD operations, or work with Avue components.
+description: "Builds data-driven admin interfaces with the Avue framework (based on Vue 2 + Element UI). Covers CRUD tables, forms, global APIs ($DialogForm, $Clipboard, $ImagePreview, $Export), Tree, Upload, and Select components. Use when the user needs to build management systems, data-driven views, or configuration-based admin UIs with Avue."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- Build management systems with Avue
-- Use Avue table and form components
-- Implement data-driven views
-- Use Avue global APIs ($DialogForm, $Clipboard, $ImagePreview, etc.)
-- Configure Avue forms and tables
-- Use Avue components (Tree, Upload, Select, etc.)
-- Implement CRUD operations with Avue
-- Customize Avue components
-- Configure internationalization
-- Use Avue plugins and extensions
+- Build admin management systems with Avue
+- Use Avue data-driven tables, forms, and CRUD components
+- Use global APIs ($DialogForm, $Clipboard, $ImagePreview, $Export, $Print)
+- Configure Avue components (Tree, Upload, Select, Input)
+- Set up internationalization or custom plugins
 
 ## How to use this skill
+
+### Quick-Start Example: Avue Form with Global API
+
+```vue
+<template>
+  <div>
+    <avue-form :option="option" v-model="form" @submit="handleSubmit" />
+    <el-button @click="openDialog">Open Dialog Form</el-button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: {},
+      option: {
+        column: [
+          { label: 'Name', prop: 'name', type: 'input', rules: [{ required: true }] },
+          { label: 'Category', prop: 'category', type: 'tree', dicUrl: '/api/categories' }
+        ]
+      }
+    }
+  },
+  methods: {
+    handleSubmit(form, done) { console.log(form); done() },
+    openDialog() {
+      this.$DialogForm.show({ option: this.option, callback: (form) => console.log(form) })
+    }
+  }
+}
+</script>
+```
 
 This skill is organized to match the Avue official documentation structure (https://avuejs.com/). When working with Avue:
 

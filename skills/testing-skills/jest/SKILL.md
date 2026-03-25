@@ -1,6 +1,6 @@
 ---
 name: jest
-description: Provides comprehensive guidance for Jest testing framework including test writing, matchers, async testing, mocking, snapshots, configuration, and CLI. Use when the user asks about Jest, needs to write JavaScript/TypeScript tests, mock dependencies, or configure Jest for projects.
+description: "Provides comprehensive guidance for Jest testing framework including test writing, matchers, async testing, mocking, snapshots, configuration, and CLI. Use when the user asks about Jest, needs to write JavaScript/TypeScript tests, mock dependencies, or configure Jest for projects."
 license: Complete terms in LICENSE.txt
 ---
 

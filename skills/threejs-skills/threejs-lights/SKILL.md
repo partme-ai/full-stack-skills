@@ -1,8 +1,6 @@
 ---
 name: threejs-lights
-description: >-
-  three.js lighting: AmbientLight, HemisphereLight, DirectionalLight, PointLight, SpotLight, RectAreaLight, LightProbe, IESSpotLight, ProjectorLight, shadow subtypes, and addon helpers such as RectAreaLightUniformsLib, RectAreaLightTexturesLib, LightProbeGenerator, TiledLighting.
-  Use when configuring direct/indirect light, shadows, probes, or area lights; for IES file loading use threejs-loaders; for node-based light graphs use threejs-node-tsl; for debug helpers use threejs-helpers.
+description: "three.js lighting: AmbientLight, HemisphereLight, DirectionalLight, PointLight, SpotLight, RectAreaLight, LightProbe, IESSpotLight, ProjectorLight, shadow subtypes, and addon helpers such as RectAreaLightUniformsLib, RectAreaLightTexturesLib, LightProbeGenerator, TiledLighting. Use when configuring direct/indirect light, shadows, probes, or area lights; for IES file loading use threejs-loaders; for node-based light graphs use threejs-node-tsl; for debug helpers use threejs-helpers."
 ---
 
 ## When to use this skill
@@ -34,6 +32,24 @@ description: >-
 4. **Probes**: place probes; generate data via addon generator when applicable; relate to materials env reflections (**threejs-materials**, **threejs-textures**).
 5. **IES**: load profile via loader skill, attach to `IESSpotLight` per docs.
 6. **Performance**: limit shadow-casting lights; use layers (**threejs-objects**) to exclude objects.
+
+### Example: Shadow setup with validation
+
+```javascript
+// 1. Enable shadows on renderer
+renderer.shadowMap.enabled = true;
+
+// 2. Configure light as shadow caster
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.castShadow = true;
+light.shadow.mapSize.set(2048, 2048);
+light.shadow.bias = -0.0001; // Adjust to remove shadow acne
+
+// 3. Validate: verify shadow appears before tuning bias
+// Set castShadow on meshes, receiveShadow on ground
+mesh.castShadow = true;
+ground.receiveShadow = true;
+```
 
 See [examples/workflow-directional-shadow.md](examples/workflow-directional-shadow.md).
 

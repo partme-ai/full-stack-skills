@@ -1,8 +1,6 @@
 ---
 name: threejs-animation
-description: >-
-  three.js keyframe animation system: AnimationMixer, AnimationClip, AnimationAction, KeyframeTrack variants, PropertyBinding, PropertyMixer, AnimationObjectGroup, AnimationUtils; mixing and crossfading clips, loop modes, timeScale, weight; addon AnimationClipCreator and CCDIKSolver for procedural rigs.
-  Use when playing glTF clips, blending actions, or authoring procedural tracks; for skin deformation rigging on meshes see threejs-objects; for math interpolants without clips see threejs-math only when not tied to AnimationMixer.
+description: "three.js keyframe animation system: AnimationMixer, AnimationClip, AnimationAction, KeyframeTrack variants, PropertyBinding, PropertyMixer, AnimationObjectGroup, AnimationUtils; mixing and crossfading clips, loop modes, timeScale, weight; addon AnimationClipCreator and CCDIKSolver for procedural rigs. Use when playing glTF clips, blending actions, or authoring procedural tracks; for skin deformation rigging on meshes see threejs-objects; for math interpolants without clips see threejs-math only when not tied to AnimationMixer."
 ---
 
 ## When to use this skill

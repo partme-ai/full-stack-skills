@@ -24,15 +24,36 @@ license: Complete terms in LICENSE.txt
 2. Open the matching example file.
 3. Follow the example commands and notes exactly unless the user requests changes.
 
+### Quick reference
+
+```bash
+# Customize nvm output colors
+export NVM_COLORS='yMeBg'    # Set color scheme
+nvm ls                        # See colorized output
+nvm set-colors yMeBg          # Persist color settings
+
+# Suppress colors entirely
+nvm --no-colors ls
+
+# Run nvm tests
+cd "$NVM_DIR" && npm test
+
+# Ansible: install nvm in a playbook
+# - name: Install nvm
+#   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+```
+
 ### Example file map
 
-- examples/intro.md
-- examples/about.md
-- examples/ansible.md
-- examples/colors.md
-- examples/colors-persist.md
-- examples/colors-suppress.md
-- examples/tests.md
+- `examples/intro.md` - nvm overview and introduction
+- `examples/about.md` - About nvm project
+- `examples/ansible.md` - Ansible automation tasks
+- `examples/colors.md` - Color customization
+- `examples/colors-persist.md` - Persisting color settings
+- `examples/colors-suppress.md` - Suppressing colors
+- `examples/tests.md` - Running nvm tests
 
 ## Keywords
 

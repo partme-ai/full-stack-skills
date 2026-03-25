@@ -1,8 +1,6 @@
 ---
 name: threejs-materials
-description: >-
-  Classic three.js materials (non-Node): MeshStandardMaterial, MeshPhysicalMaterial, Phong/Lambert/Toon/Basic, Line/Points/Sprite materials, MeshMatcapMaterial, MeshNormalMaterial, depth/distance materials, ShaderMaterial and RawShaderMaterial.
-  Use when tuning PBR maps, transparency, depth write, skinning flags, or writing GLSL in ShaderMaterial; for TSL/NodeMaterial/WebGPU shader graphs use threejs-node-tsl instead—not both for the same authoring path unless migrating.
+description: "Classic three.js materials (non-Node): MeshStandardMaterial, MeshPhysicalMaterial, Phong/Lambert/Toon/Basic, Line/Points/Sprite materials, MeshMatcapMaterial, MeshNormalMaterial, depth/distance materials, ShaderMaterial and RawShaderMaterial. Use when tuning PBR maps, transparency, depth write, skinning flags, or writing GLSL in ShaderMaterial; for TSL/NodeMaterial/WebGPU shader graphs use threejs-node-tsl instead."
 ---
 
 ## When to use this skill
@@ -36,6 +34,22 @@ description: >-
 5. **ShaderMaterial**: minimize re-lit work unless intentional; document required lights and `lights: true` flag behavior per version docs.
 6. **Performance**: share materials across meshes; avoid cloning per frame.
 7. **Skinning/morph**: set `skinning`/`morphTargets` where applicable—mesh side in **threejs-objects**.
+
+### Example: Transparency with alphaTest vs depthWrite
+
+```javascript
+// Option A: alphaTest — hard cutoff, no sorting issues
+const matA = new THREE.MeshStandardMaterial({
+  map: texture, alphaMap: alphaTexture,
+  alphaTest: 0.5, transparent: true
+});
+
+// Option B: depthWrite false — soft transparency, needs manual sorting
+const matB = new THREE.MeshStandardMaterial({
+  map: texture, transparent: true, opacity: 0.6,
+  depthWrite: false // prevents depth-fighting but requires back-to-front sorting
+});
+```
 
 See [examples/workflow-pbr-transparent.md](examples/workflow-pbr-transparent.md).
 

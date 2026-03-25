@@ -1,8 +1,6 @@
 ---
 name: threejs-loaders
-description: >-
-  three.js asset I/O using LoadingManager, Cache, FileLoader, image and texture loaders, GLTFLoader with DRACOLoader and KTX2Loader, and common format loaders under Addons; symmetric exporters such as GLTFExporter and texture/buffer exporters.
-  Use when loading or exporting models, HDR, LUT, fonts, or compressed textures; for runtime Texture object parameters after load use threejs-textures; for scene graph placement use threejs-objects.
+description: "three.js asset I/O using LoadingManager, Cache, FileLoader, image and texture loaders, GLTFLoader with DRACOLoader and KTX2Loader, and common format loaders under Addons; symmetric exporters such as GLTFExporter and texture/buffer exporters. Use when loading or exporting models, HDR, LUT, fonts, or compressed textures; for runtime Texture object parameters after load use threejs-textures; for scene graph placement use threejs-objects."
 ---
 
 ## When to use this skill

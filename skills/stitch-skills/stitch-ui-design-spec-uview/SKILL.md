@@ -1,10 +1,7 @@
 ---
 name: stitch-ui-design-spec-uview
-description: uView 2 design spec for Stitch. Outputs hard-constraints prefix or selector JSON and assembled prompt.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "uView 2.0 (uni-app/Vue 2) design spec for Stitch screen generation. Use when the user mentions uview, uview2, or u-view in a Stitch design request. Do NOT use for uView Pro requests. Outputs a hard-constraints prefix with uView 2 tokens (Primary #3c9cff, u-row/u-col/u-button components) or a CONTRACT_SELECTION_JSON_V1 selector."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

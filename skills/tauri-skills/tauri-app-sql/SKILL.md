@@ -1,6 +1,6 @@
 ---
 name: tauri-app-sql
-description: Guidance for Tauri v2 SQL plugin setup, migrations, and safe query access.
+description: "Access SQLite, MySQL, or PostgreSQL databases from the frontend using the Tauri v2 SQL plugin with migrations. Use when setting up a database connection, running SQL migrations, or executing queries with scoped access from the frontend."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,53 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Using SQLite, MySQL, or PostgreSQL in Tauri / 在 Tauri 中使用 SQLite、MySQL 或 PostgreSQL
-- SQL migrations or connection configuration / SQL 迁移或连接配置
-- Secure frontend query access / 前端安全查询访问
+- Using SQLite, MySQL, or PostgreSQL in a Tauri app
+- SQL migrations or database schema setup
+- Running queries from the frontend
 
 **Trigger phrases include:**
-- "sql", "sqlite", "postgres", "mysql", "migration"
-- "数据库", "迁移", "连接配置", "SQL"
+- "sql", "sqlite", "database", "postgres", "mysql", "migration", "db plugin"
 
 ## How to use this skill
 
-1. Select the database engine and connection string
-2. Configure migrations in tauri.conf.json
-3. Enable SQL plugin capabilities with scoped access
-4. Validate queries and error handling in the app flow
+1. **Install the SQL plugin** (with SQLite feature):
+   ```bash
+   cargo add tauri-plugin-sql --features sqlite
+   ```
+2. **Register the plugin** with migrations in your Tauri builder:
+   ```rust
+   use tauri_plugin_sql::{Migration, MigrationKind};
+   let migrations = vec![Migration {
+       version: 1, description: "create_users", sql: "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL);",
+       kind: MigrationKind::Up,
+   }];
+   tauri::Builder::default()
+       .plugin(tauri_plugin_sql::Builder::new().add_migrations("sqlite:app.db", migrations).build())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["sql:allow-load", "sql:allow-execute", "sql:allow-select"] }
+   ```
+4. **Query from the frontend**:
+   ```typescript
+   import Database from '@tauri-apps/plugin-sql';
+   const db = await Database.load('sqlite:app.db');
+   await db.execute('INSERT INTO users (name) VALUES (?)', ['Alice']);
+   const users = await db.select<{ id: number; name: string }[]>('SELECT * FROM users');
+   ```
+5. **Use parameterized queries** to prevent SQL injection
+6. **Keep migrations versioned** and run them automatically on app startup
 
 ## Outputs
 
-- Database integration plan / 数据库集成方案
-- Minimal-permission capability checklist / 最小权限能力清单
-
-## Scope
-
-- Boundary: SQL plugin configuration and usage only
-- Key points: Migrations setup and capability scoping
+- SQL plugin setup with SQLite/Postgres/MySQL
+- Migration system with versioned schemas
+- Frontend query patterns with parameterized inputs
 
 ## References
 
 - https://v2.tauri.app/plugin/sql/
-- https://v2.tauri.app/zh-cn/plugin/sql/
 
 ## Keywords
 
-tauri sql, sqlite, postgres, mysql, migrations, database
+tauri sql, sqlite, database, postgres, mysql, migrations, queries

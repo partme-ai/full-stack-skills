@@ -1,88 +1,61 @@
 ---
 name: learning-assessor
-description: Provides comprehensive guidance for learning assessment including assessment creation, evaluation methods, and assessment best practices. Use when the user asks about learning assessment, needs to create assessments, evaluate learning, or implement assessment strategies.
+description: "Create learning assessments including quizzes, exams, rubrics, and evaluation criteria aligned with learning objectives. Supports multiple question types, difficulty levels, and learning analytics. Use when the user asks to create quizzes, design tests, build grading rubrics, evaluate student learning, or generate assessment questions."
 ---
 
 # 学习评估技能
 
-## 概述
+Create assessments, rubrics, and evaluation tools aligned with learning objectives.
 
-本技能帮助您创建各种学习评估工具，包括测验题目、评估标准、评分 rubric 和学习分析。
+## Workflow
 
-**关键词**: 学习评估、测验设计、评分标准、rubric、学习分析、考试题目
+1. **Identify learning objectives** the assessment must measure
+2. **Select question types** appropriate for each objective's cognitive level
+3. **Draft questions** with answer keys and scoring criteria
+4. **Create rubric** for subjective assessments
+5. **Validate alignment** - each question maps to a specific objective
 
-## 核心功能
+### Example: Multiple Choice Question
 
-### 1. 测验题目设计
+```markdown
+**Q: Which HTTP status code indicates a resource was created successfully?**
 
-- 设计多种题型（选择题、填空题、简答题、论述题等）
-- 确保题目与学习目标对齐
-- 设计不同难度级别的题目
-- 创建题目解析和参考答案
+A) 200 OK
+B) 201 Created ✓
+C) 204 No Content
+D) 301 Moved Permanently
 
-### 2. 评估标准制定
+**Objective:** [Remember] Recall HTTP status codes and their meanings
+**Difficulty:** Easy
+**Explanation:** 201 Created is returned when a POST request successfully creates a new resource.
+```
 
-- 制定清晰的评估标准
-- 设计评分细则和权重分配
-- 创建评分 rubric（评分量规）
-- 确保评估的客观性和一致性
+### Example: Rubric Template
 
-### 3. 学习分析
+```markdown
+| Criteria          | Excellent (4)                     | Good (3)                | Developing (2)         | Beginning (1)         |
+|-------------------|-----------------------------------|-------------------------|------------------------|-----------------------|
+| Code correctness  | All tests pass, handles edge cases| All tests pass          | Most tests pass        | Few tests pass        |
+| Code style        | Clean, well-documented, DRY       | Readable, some comments | Inconsistent style     | Difficult to read     |
+| Problem solving   | Optimal solution, explains tradeoffs| Working solution       | Partial solution       | Minimal attempt       |
 
-- 分析学习数据和学习趋势
-- 识别学习难点和薄弱环节
-- 提供个性化学习建议
-- 生成学习报告和反馈
+**Scoring:** Total = Sum of criteria scores. A: 10-12, B: 7-9, C: 4-6, D: below 4
+```
 
-### 4. 评估工具创建
-
-- 创建在线测验和问卷
-- 设计项目评估表
-- 创建同伴评估工具
-- 设计自我评估工具
-
-## 使用指南
-
-### 题目设计原则
+## 题目设计原则
 
 1. **目标对齐**: 每道题目都应对应明确的学习目标
-2. **难度梯度**: 题目应覆盖不同认知层次（记忆、理解、应用、分析、评价、创造）
+2. **难度梯度**: 覆盖不同认知层次（记忆、理解、应用、分析、评价、创造）
 3. **清晰明确**: 题目表述清晰，避免歧义
-4. **公平性**: 确保题目对所有学习者公平
-5. **有效性**: 题目应能有效测量目标知识和技能
-
-### Rubric 设计
-
-Rubric 应包含：
-
-- **评估维度**: 要评估的具体方面
-- **表现等级**: 不同表现水平的描述
-- **评分标准**: 每个等级的评分标准
-- **权重分配**: 各维度的权重
-
-### 学习分析维度
-
-- **知识掌握度**: 对知识点的掌握情况
-- **技能应用**: 技能的应用水平
-- **学习进度**: 学习进度和完成情况
-- **学习困难**: 识别学习中的困难点
-- **改进建议**: 提供针对性的改进建议
+4. **有效性**: 题目应能有效测量目标知识和技能
 
 ## 输出格式
 
-评估工具应包含：
-
 - **评估目标**: 明确要评估的内容
-- **评估方式**: 使用的评估方法和工具
+- **评估题目**: 具体的题目、答案和解析
 - **评估标准**: 详细的评分标准或 rubric
-- **评估题目**: 具体的评估题目（如适用）
 - **分析报告**: 学习分析和反馈建议
 
-## 最佳实践
+## Keywords
 
-- 使用多种评估方式，避免单一化
-- 设计形成性评估，及时反馈
-- 确保评估标准清晰、可操作
-- 提供建设性的反馈意见
-- 关注学习过程，不仅看结果
-- 鼓励自我评估和同伴评估
+学习评估, 测验设计, 评分标准, rubric, 考试题目, quiz, test, exam, grading, assessment, evaluation

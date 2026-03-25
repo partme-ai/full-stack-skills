@@ -1,6 +1,6 @@
 ---
 name: ascii-cli-logo-banner
-description: Entry point for ASCII CLI banners. Choose the Python built-in font skill or the figlet.js/FIGfont skill depending on needs.
+description: "Entry point for ASCII CLI banners that routes to the Python built-in font skill or figlet.js/FIGfont skill. Use when the user wants a startup banner, ASCII logo, terminal welcome screen, or CLI branding for a service."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -61,6 +61,15 @@ license: Complete terms in LICENSE.txt
 4. Optional ANSI coloring (must not break alignment):
    - Colorize visible characters only; do not colorize spaces
    - Always provide `plainTextFallback`
+
+### Routing Decision
+
+| Need | Skill to use | Why |
+|------|-------------|-----|
+| Simple built-in font, no npm/node deps | `ascii-cli-logo-banner-python` | Uses a built-in 5x5 font, Python only |
+| TAAG/FIGlet fonts, layout smushing | `ascii-cli-logo-banner-figletjs` | Full FIGfont spec via figlet.js |
+
+**Example**: For a quick startup banner with `brandName="MyApp"` and no external font engine needed, route to `ascii-cli-logo-banner-python`. For a FIGlet "Standard" or "Big" font banner with horizontal smushing, route to `ascii-cli-logo-banner-figletjs`.
 
 ## Script (optional)
 - Use `ascii-cli-logo-banner-python` for the Python implementation.

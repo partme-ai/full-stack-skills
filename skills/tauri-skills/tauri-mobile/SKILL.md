@@ -1,6 +1,6 @@
 ---
 name: tauri-mobile
-description: Guidance for Tauri v2 mobile development setup, debugging, and bundle identifiers.
+description: "Set up Tauri v2 for Android and iOS development including build configuration, bundle identifiers, and mobile debugging. Use when adding mobile targets to a Tauri app, configuring Android/iOS bundle IDs, or debugging on mobile devices and emulators."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,30 +8,42 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Android or iOS builds / Android 或 iOS 构建
-- Mobile debugging or run flows / 移动端调试与运行流程
-- Bundle identifier configuration / 包名与 Bundle ID 配置
+- Android or iOS builds for a Tauri app
+- Mobile debugging or running on devices/emulators
+- Bundle identifier (bundle ID) configuration
 
 **Trigger phrases include:**
-- "mobile", "android", "ios", "bundle id", "debugging"
-- "移动端", "Android", "iOS", "包名", "调试"
+- "mobile", "android", "ios", "bundle id", "mobile debug", "emulator"
 
 ## How to use this skill
 
-1. Confirm mobile prerequisites and target platforms
-2. Configure bundle identifiers and platform settings
-3. Set up mobile debugging workflow
-4. Validate responsive UI behavior and platform constraints
+1. **Initialize mobile support**:
+   ```bash
+   npm run tauri android init
+   npm run tauri ios init
+   ```
+2. **Configure bundle identifiers** in `tauri.conf.json`:
+   ```json
+   { "identifier": "com.example.myapp" }
+   ```
+3. **Run on Android emulator or device**:
+   ```bash
+   npm run tauri android dev
+   ```
+4. **Run on iOS simulator**:
+   ```bash
+   npm run tauri ios dev
+   ```
+5. **Debug mobile**: Use Chrome DevTools for Android WebView debugging or Safari Web Inspector for iOS
+6. **Prerequisites**: Android Studio with NDK installed for Android; Xcode for iOS
+7. **Handle responsive UI** by testing across different screen sizes and orientations
 
 ## Outputs
 
-- Mobile development checklist / 移动端开发清单
-- Bundle ID and platform settings plan / 包名与平台配置方案
-
-## Scope
-
-- Boundary: Mobile-specific setup and workflow only
-- Key points: Bundle ID and mobile debugging
+- Mobile project initialization commands
+- Bundle identifier configuration
+- Dev/debug workflow for Android and iOS
+- Prerequisite checklist (Android Studio, Xcode)
 
 ## References
 
@@ -40,4 +52,4 @@ license: Complete terms in LICENSE.txt
 
 ## Keywords
 
-tauri mobile, android, ios, bundle id, debugging
+tauri mobile, android, ios, bundle id, mobile debugging, emulator

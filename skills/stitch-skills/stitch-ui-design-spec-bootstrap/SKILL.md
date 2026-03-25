@@ -1,6 +1,6 @@
 ---
 name: stitch-ui-design-spec-bootstrap
-description: Bootstrap-Vue design spec for Stitch. Outputs hard-constraints prefix or selector JSON and assembled prompt.
+description: "Bootstrap-Vue (Bootstrap 5/Vue) design spec for Stitch screen generation. Use when the user mentions Bootstrap, bootstrap-vue, bs-vue, or bs5 in a Stitch design request. Outputs a hard-constraints prefix with Bootstrap tokens (Primary #0d6efd, b-container/b-row/b-col/b-button components, mobile-first grid) or a CONTRACT_SELECTION_JSON_V1 selector."
 ---
 
 

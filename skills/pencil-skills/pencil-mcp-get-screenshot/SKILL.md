@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-get-screenshot
-description: Get node visual screenshot. Visual Verification. Use to capture screenshots after operations to verify if the design meets expectations.
+description: "Capture a visual screenshot of a specific node in a Pencil .pen file via the get_screenshot MCP tool. Use when the user explicitly mentions Pencil and needs to visually verify a design operation, check for alignment or spacing issues, or review a component after batch_design changes."
 license: Complete terms in LICENSE.txt
 ---
 

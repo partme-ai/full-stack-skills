@@ -1,6 +1,6 @@
 ---
 name: speckit-plan
-description: Execute the implementation planning workflow using the plan template to generate design artifacts.
+description: "Generate a technical implementation plan from a feature spec by filling the plan template, resolving unknowns via research, producing data-model.md, API contracts, and quickstart.md artifacts. Use when the feature spec is ready and the user needs architecture decisions, data models, API schemas, or a structured plan before task generation."
 ---
 
 # Spec Kit Plan Skill

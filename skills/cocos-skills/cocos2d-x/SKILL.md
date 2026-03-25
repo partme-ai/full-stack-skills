@@ -1,6 +1,6 @@
 ---
 name: cocos2d-x
-description: Provides comprehensive guidance for Cocos2d-x v4 game engine including scene graph, nodes, sprites, actions, animations, physics, rendering, shaders, and platform deployment. Use when the user asks about Cocos2d-x, needs to create games, implement game features, set up development environments, or deploy games to multiple platforms.
+description: "Provides comprehensive guidance for Cocos2d-x v4 game engine including scene graph, nodes, sprites, actions, animations, physics, rendering, shaders, and platform deployment. Use when the user asks about Cocos2d-x, needs to create games, implement game features, set up development environments, or deploy games to multiple platforms."
 license: Complete terms in LICENSE.txt
 ---
 

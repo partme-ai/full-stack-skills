@@ -1,6 +1,6 @@
 ---
 name: speckit-baseline
-description: Generate feature specifications by analyzing existing source code.
+description: "Generate a technology-agnostic feature specification by analyzing existing source code, extracting user stories, functional requirements, and acceptance criteria from code patterns. Use when the user needs to document an existing or legacy codebase, create a spec before refactoring, or reverse-engineer requirements from source files."
 ---
 
 # Spec Kit Baseline Skill

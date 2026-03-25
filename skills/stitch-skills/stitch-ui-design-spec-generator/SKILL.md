@@ -1,10 +1,7 @@
 ---
 name: stitch-ui-design-spec-generator
-description: Translates user requirements into structured Design Specs for Theme, Color, and Typography.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Translate user requirements into a structured Stitch Design Spec JSON covering theme, primaryColor, font, roundness, density, designMode, styleKeywords, and deviceType. Use when starting a new Stitch design task to determine visual direction before prompt assembly. Supports one-shot user requests and PRD documents as input."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 
@@ -51,5 +48,24 @@ The skill must produce a JSON block like this:
     *   "Sketch/Blueprint/Draft" -> WIREFRAME.
     *   Default to HIGH_FIDELITY.
 
+## Example
+
+**User request**: "A cyberpunk login page"
+
+**Output**:
+```json
+{
+  "theme": "DARK",
+  "primaryColor": "#00FFFF",
+  "font": "Orbitron",
+  "roundness": "Low",
+  "density": "COMFORTABLE",
+  "designMode": "HIGH_FIDELITY",
+  "styleKeywords": ["Cyberpunk", "Neon", "High Contrast", "Glitch"],
+  "deviceType": "MOBILE"
+}
+```
+
 ## Usage
-Call this skill *internally* (by thinking) before creating a project or generating a prompt.
+
+Call this skill internally before creating a project or generating a prompt. The output JSON feeds into `stitch-ui-prompt-architect` (Path B) for final prompt assembly.

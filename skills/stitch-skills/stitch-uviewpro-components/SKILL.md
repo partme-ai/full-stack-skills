@@ -1,12 +1,7 @@
 ---
 name: stitch-uviewpro-components
-description: Convert Stitch designs into uni-app and Vue 3 and uView Pro pages and components. Uses Stitch MCP get_screen for retrieval; high-reliability fetch via scripts; enforces uni-app page structure and uView Pro u-* component contracts, rpx, script setup.
-allowed-tools:
-  - "stitch*:*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+description: "Convert Stitch designs into uni-app + Vue 3 + uView Pro pages and components. Use when the user mentions uView Pro, uviewpro, or uni-app Vue 3 conversion from Stitch. Retrieves screen HTML via Stitch MCP get_screen, maps Tailwind to rpx/theme, enforces u-* component contracts (u-tabs, u-form, u-picker, u-card) with script setup."
+allowed-tools: "stitch*:*, Bash, Read, Write, web_fetch"
 ---
 
 

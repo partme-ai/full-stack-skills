@@ -1,8 +1,6 @@
 ---
 name: threejs-webxr
-description: >-
-  WebXR integration for three.js: WebXRManager and XRManager on the renderer, session initialization patterns, VRButton and ARButton helpers, XRControllerModelFactory and hand model families, XREstimatedLight, XRPlanes, and related addon Webxr utilities.
-  Use for immersive sessions and controller/hand tracking—not for standard desktop camera projection (threejs-camera) or composer post effects (threejs-postprocessing).
+description: "WebXR integration for three.js: WebXRManager and XRManager on the renderer, session initialization patterns, VRButton and ARButton helpers, XRControllerModelFactory and hand model families, XREstimatedLight, XRPlanes, and related addon Webxr utilities. Use for immersive sessions and controller/hand tracking—not for standard desktop camera projection (threejs-camera) or composer post effects (threejs-postprocessing)."
 ---
 
 ## When to use this skill
@@ -34,6 +32,27 @@ description: >-
 5. **Hands**: opt-in hand models when runtime supports; performance implications.
 6. **Lighting**: `XREstimatedLight` for AR realism—combine with **threejs-lights** cautiously.
 7. **Exit**: restore non-XR render loop and resize handling on session end.
+
+### Example: VR session with error handling
+
+```javascript
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+// Feature detection and session start
+if ('xr' in navigator) {
+  renderer.xr.enabled = true;
+  document.body.appendChild(VRButton.createButton(renderer));
+
+  renderer.xr.addEventListener('sessionstart', () => {
+    console.log('XR session started');
+  });
+  renderer.xr.addEventListener('sessionend', () => {
+    console.log('XR session ended — restoring desktop view');
+  });
+} else {
+  console.warn('WebXR not supported in this browser');
+}
+```
 
 See [examples/workflow-xr-button.md](examples/workflow-xr-button.md).
 

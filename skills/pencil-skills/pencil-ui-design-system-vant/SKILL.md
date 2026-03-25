@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-vant
-description: Initialize Vant. design system components in Pencil variables and component overview.
+description: "Initialize Vant 4 design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with Vant or Vant 4, needs to set up Vant color palette and typography variables, or wants to create component library frames for Button, Cell, Form, Dialog, and other Vant components."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on Vant specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize Vant 4 tokens (primary, success, warning, danger colors) in a Pencil .pen file
+- The user needs a component overview frame for Vant components in Pencil
+- The user mentions "Pencil" together with "Vant", "Vant 4", or Vant-specific components (Cell, Form, Dialog, Tabbar)
+- An orchestrator skill (pencil-ui-designer) routes a Vant initialization request
 
 ## How to use this skill
 
@@ -57,11 +61,33 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize Vant Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "van-primary-color": "#1989fa",
+      "van-success-color": "#07c160",
+      "van-warning-color": "#ff976a",
+      "van-danger-color": "#ee0a24",
+      "van-text-color": "#323233",
+      "van-border-color": "#ebedf0",
+      "van-font-size-md": "14px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against Vant theme documentation.
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

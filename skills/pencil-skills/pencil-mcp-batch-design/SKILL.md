@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-batch-design
-description: Batch execute design changes. The Agent's 'Hands'. Core capability for inserting, updating, moving, or deleting nodes.
+description: "Batch execute insert, update, replace, move, and delete operations on Pencil .pen design nodes via the batch_design MCP tool. Use when the user explicitly mentions Pencil and needs to draw, insert, change, remove, or move elements on the canvas."
 license: Complete terms in LICENSE.txt
 ---
 

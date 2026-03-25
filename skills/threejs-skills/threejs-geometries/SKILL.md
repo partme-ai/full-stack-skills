@@ -1,8 +1,6 @@
 ---
 name: threejs-geometries
-description: >-
-  three.js geometry authoring: BufferGeometry, typed BufferAttribute and interleaved layouts, InstancedBufferGeometry, primitive Geometries (box/sphere/torus/etc.), ExtrudeGeometry and Shape/Path/Curve from Extras, WireframeGeometry, and addon geometries such as TextGeometry, DecalGeometry, RoundedBoxGeometry.
-  Covers merged scope of procedural curves and extrusion formerly split as extras-curves; for animation morph targets see threejs-animation; for merging buffers utilities see official BufferGeometryUtils module in docs Utils addons.
+description: "three.js geometry authoring: BufferGeometry, typed BufferAttribute and interleaved layouts, InstancedBufferGeometry, primitive Geometries (box/sphere/torus/etc.), ExtrudeGeometry and Shape/Path/Curve from Extras, WireframeGeometry, and addon geometries such as TextGeometry, DecalGeometry, RoundedBoxGeometry. Use when building custom buffer geometries, extruding shapes, or using primitive geometry constructors; for animation morph targets see threejs-animation; for merging buffers see BufferGeometryUtils addon."
 ---
 
 ## When to use this skill
@@ -26,12 +24,40 @@ description: >-
 
 ## How to use this skill
 
-1. Prefer built-in primitives when they fit before custom buffers.
-2. For custom meshes: create `BufferGeometry`, set `position`, `normal`, `uv`, optional `index`; compute bounding volumes for culling.
-3. For instancing attributes, align divisor/count with `InstancedMesh` patterns in **threejs-objects**.
-4. For 2D profiles: build `Shape`/`Path`, extrude or lathe per docs; consult Extras **Curve** family for path sampling.
-5. For addon NURBS knots, follow Addons **Curves** pages sparingly—cite docs instead of copying full APIs.
-6. Dispose geometries when replacing meshes to avoid leaks.
+1. **Choose geometry type** — prefer built-in primitives (`BoxGeometry`, `SphereGeometry`, etc.) when they fit before custom buffers.
+2. **Custom BufferGeometry** — create geometry, set `position`, `normal`, `uv`, optional `index`; compute bounding volumes for frustum culling.
+3. **Validate normals** — verify normals exist before adding to scene; missing normals break lighting silently.
+4. **Instancing** — align instanced attribute divisor/count with `InstancedMesh` patterns in **threejs-objects**.
+5. **Extrusion** — build `Shape`/`Path`, extrude or lathe per docs; consult Extras **Curve** family for path sampling.
+6. **Addon geometries** — for NURBS, text, decals, follow Addons pages; cite docs instead of copying full APIs.
+7. **Dispose** — call `geometry.dispose()` when replacing meshes to avoid GPU memory leaks.
+
+### Example: Custom BufferGeometry with validation
+
+```javascript
+import * as THREE from 'three';
+
+// Create a simple triangle with custom BufferGeometry
+const geometry = new THREE.BufferGeometry();
+const vertices = new Float32Array([
+  -1, -1, 0,   1, -1, 0,   0, 1, 0
+]);
+geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+geometry.computeVertexNormals(); // Always compute normals for correct lighting
+
+// Validate: ensure bounding sphere exists for frustum culling
+geometry.computeBoundingSphere();
+if (!geometry.boundingSphere) {
+  console.warn('Bounding sphere computation failed — check vertex data');
+}
+
+const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+// Cleanup when done
+// geometry.dispose(); material.dispose();
+```
 
 See [examples/workflow-extrude-shape.md](examples/workflow-extrude-shape.md).
 

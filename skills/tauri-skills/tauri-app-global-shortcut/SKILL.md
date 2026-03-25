@@ -1,6 +1,6 @@
 ---
 name: tauri-app-global-shortcut
-description: Guidance for Tauri v2 global-shortcut plugin with conflict handling and release.
+description: "Register system-wide keyboard shortcuts using the Tauri v2 global-shortcut plugin. Use when adding global hotkeys that work outside app focus, handling shortcut conflicts, or triggering app focus/commands via keyboard shortcuts."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,50 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Global hotkeys outside app focus / 应用外全局快捷键
-- Shortcut conflicts and cleanup / 快捷键冲突与清理
-- Shortcut actions to focus the app / 快捷键聚焦应用
+- Global hotkeys or keyboard shortcuts outside app focus
+- Shortcut conflict detection and resolution
+- Triggering app focus or commands via keyboard shortcuts
 
 **Trigger phrases include:**
-- "global shortcut", "hotkey", "conflict", "focus"
-- "全局快捷键", "热键", "冲突", "聚焦"
+- "global shortcut", "hotkey", "keyboard shortcut", "keybinding", "accelerator"
 
 ## How to use this skill
 
-1. Define global shortcuts and user-configurable settings
-2. Register shortcuts and resolve conflict scenarios
-3. Route shortcuts to window focus or command actions
-4. Release shortcuts on app exit
+1. **Install the global-shortcut plugin**:
+   ```bash
+   cargo add tauri-plugin-global-shortcut
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["global-shortcut:allow-register", "global-shortcut:allow-unregister"] }
+   ```
+4. **Register shortcuts from the frontend**:
+   ```typescript
+   import { register, unregister } from '@tauri-apps/plugin-global-shortcut';
+   await register('CommandOrControl+Shift+K', (event) => {
+     if (event.state === 'Pressed') {
+       console.log('Shortcut triggered!');
+     }
+   });
+   ```
+5. **Handle conflicts** by catching registration errors when another app holds the shortcut
+6. **Unregister shortcuts** on app exit to clean up system-level registrations
 
 ## Outputs
 
-- Global shortcut registration plan / 全局快捷键注册方案
-- Conflict handling checklist / 冲突处理清单
-
-## Scope
-
-- Boundary: Global shortcut plugin usage only
-- Key points: Conflict handling and cleanup
+- Global shortcut registration with conflict handling
+- Shortcut-to-action routing pattern
+- Cleanup on app exit
 
 ## References
 
 - https://v2.tauri.app/plugin/global-shortcut/
-- https://v2.tauri.app/zh-cn/plugin/global-shortcut/
 
 ## Keywords
 
-tauri global shortcut, hotkeys, focus, conflicts
+tauri global shortcut, hotkey, keyboard shortcut, keybinding, accelerator

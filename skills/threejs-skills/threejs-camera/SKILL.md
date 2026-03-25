@@ -1,8 +1,6 @@
 ---
 name: threejs-camera
-description: >-
-  three.js cameras: Camera base, PerspectiveCamera, OrthographicCamera, CubeCamera, ArrayCamera, StereoCamera; projection matrices, aspect, FOV, orthographic frustum sizes, near/far planes, and dynamic environment maps with CubeCamera.
-  Use when placing views, rendering reflections, or multi-view splits; for XR projections and eye matrices use threejs-webxr; for post pass camera tricks use threejs-postprocessing alongside threejs-renderers.
+description: "three.js cameras: Camera base, PerspectiveCamera, OrthographicCamera, CubeCamera, ArrayCamera, StereoCamera; projection matrices, aspect, FOV, orthographic frustum sizes, near/far planes, and dynamic environment maps with CubeCamera. Use when placing views, rendering reflections, or multi-view splits; for XR projections and eye matrices use threejs-webxr; for post pass camera tricks use threejs-postprocessing alongside threejs-renderers."
 ---
 
 ## When to use this skill
@@ -35,6 +33,16 @@ description: >-
 5. **Stereo/Array**: advanced; cite docs for eye parameters; defer XR to **threejs-webxr**.
 6. **Projection matrix**: call `updateProjectionMatrix()` after parameter edits.
 7. **Helpers**: `CameraHelper` lives in **threejs-helpers**.
+
+### Example: Resize handler with updateProjectionMatrix
+
+```javascript
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+```
 
 See [examples/workflow-perspective-resize.md](examples/workflow-perspective-resize.md).
 

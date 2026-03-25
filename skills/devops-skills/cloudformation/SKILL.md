@@ -1,31 +1,92 @@
 ---
 name: cloudformation
-description: Provides comprehensive guidance for AWS CloudFormation including templates, stacks, parameters, and infrastructure automation. Use when the user asks about CloudFormation, needs to create AWS infrastructure as code, manage CloudFormation stacks, or implement AWS IaC best practices.
+description: "Provides comprehensive guidance for AWS CloudFormation including templates, stacks, parameters, and infrastructure automation. Use when the user asks about CloudFormation, needs to create AWS infrastructure as code, manage stacks, or implement AWS IaC best practices."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 编写或调试 CloudFormation 模板（YAML/JSON）
-- 创建和管理 AWS 资源（EC2、S3、RDS、Lambda 等）
-- 配置 CloudFormation stacks、nested stacks、stack sets
-- 使用 CloudFormation 最佳实践实现基础设施自动化
+- Write or debug CloudFormation templates (YAML/JSON)
+- Create and manage AWS resources (EC2, S3, RDS, Lambda, etc.)
+- Configure CloudFormation stacks, nested stacks, or stack sets
+- Implement infrastructure automation with CloudFormation best practices
+- Use cross-stack references with Export/ImportValue
 
 ## How to use this skill
 
-1. **模板结构**：AWSTemplateFormatVersion、Description、Parameters、Resources、Outputs。
-2. **工作流**：创建堆栈 → 更新堆栈 → 删除堆栈；使用变更集预览变更。
-3. **嵌套堆栈**：将重复使用的资源封装为 nested stack，提高复用性。
-4. **Cross-stack references**：通过 Export/Import-Value 在堆栈间共享资源。
+### Workflow
+
+1. **Define template** — write YAML with Parameters, Resources, and Outputs
+2. **Create change set** — preview changes before applying
+3. **Deploy stack** — create or update the stack
+4. **Validate** — check stack events and outputs
+
+### Quick Start Example
+
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple S3 bucket with versioning
+
+Parameters:
+  Environment:
+    Type: String
+    AllowedValues: [dev, staging, prod]
+    Default: dev
+
+Resources:
+  AppBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'myapp-${Environment}-assets'
+      VersioningConfiguration:
+        Status: Enabled
+
+Outputs:
+  BucketArn:
+    Value: !GetAtt AppBucket.Arn
+    Export:
+      Name: !Sub '${Environment}-AppBucketArn'
+```
+
+```bash
+# Validate template
+aws cloudformation validate-template --template-body file://template.yaml
+
+# Create stack with change set preview
+aws cloudformation deploy \
+  --template-file template.yaml \
+  --stack-name myapp-dev \
+  --parameter-overrides Environment=dev
+```
+
+### Cross-Stack Reference Example
+
+```yaml
+# In consuming stack — import the exported bucket ARN
+Resources:
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Environment:
+        Variables:
+          BUCKET_ARN: !ImportValue dev-AppBucketArn
+```
 
 ## Best Practices
 
-- 使用 YAML 格式替代 JSON，便于版本控制和 Code Review。
-- 敏感信息用 Parameter + NoEcho 或 Secrets Manager，不在模板中硬编码。
-- 使用 Mappings 和 Conditions 实现环境差异化配置。
-- 堆栈名称加环境前缀（dev-、prod-），避免冲突。
+- Use YAML over JSON for readability and version control
+- Store sensitive values with `Parameter` + `NoEcho` or AWS Secrets Manager — never hardcode
+- Use Mappings and Conditions for environment-specific configuration
+- Prefix stack names with environment (e.g., `dev-`, `prod-`) to avoid conflicts
+- Encapsulate reusable resources as nested stacks for composability
+
+## Troubleshooting
+
+- **Rollback on create**: Check stack events in CloudFormation console for the specific resource failure
+- **Circular dependency**: Refactor with `DependsOn` or split resources across stacks
+- **Drift detection**: Run `aws cloudformation detect-stack-drift` to find out-of-band changes
 
 ## Keywords
 
-cloudformation, aws, infrastructure as code, cloudformation template, 亚马逊云科技, aws iac, 基础设施自动化
+cloudformation, aws, infrastructure as code, cloudformation template, aws iac, nested stacks, cross-stack references

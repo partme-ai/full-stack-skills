@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-get-style-guide
-description: Get specific style detailed definitions. Use to get metadata for a specific style, including palettes, typography rules, etc.
+description: "Retrieve detailed style guide metadata (color palettes, typography rules, visual specs) by tags or ID from Pencil via the get_style_guide MCP tool. Use when the user explicitly mentions Pencil and needs to apply a specific visual style, retrieve theme colors and fonts, or look up a style guide by keyword tags."
 license: Complete terms in LICENSE.txt
 ---
 

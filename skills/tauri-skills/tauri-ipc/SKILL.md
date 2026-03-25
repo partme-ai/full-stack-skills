@@ -1,6 +1,6 @@
 ---
 name: tauri-ipc
-description: Guidance for Tauri v2 IPC with frontend invoke calls, Rust commands, and type-safe bindings.
+description: "Implement frontend-to-Rust IPC using invoke calls, Tauri commands, and type-safe bindings in Tauri v2. Use when defining Rust commands callable from the frontend, setting up typed IPC contracts, or implementing bidirectional event-based communication."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,37 +8,58 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Frontend-to-Rust IPC or invoke calls / 前端到 Rust 的 IPC 或 invoke 调用
-- Tauri commands or type-safe bindings / Tauri 命令或类型安全绑定
-- Bidirectional messaging or event-based IPC / 双向消息或事件驱动 IPC
+- Frontend-to-Rust IPC or invoke calls
+- Defining Tauri commands
+- Type-safe IPC bindings (tauri-specta)
 
 **Trigger phrases include:**
-- "IPC", "invoke", "command", "tauri-specta", "type safety"
-- "IPC", "调用命令", "类型安全", "tauri-specta"
+- "IPC", "invoke", "tauri command", "type-safe", "tauri-specta", "calling rust"
 
 ## How to use this skill
 
-1. Define Rust commands and register them in the Tauri builder
-2. Use invoke on the frontend with typed payloads
-3. Apply type generation tools to avoid any-typed IPC
-4. Establish error handling and response contracts
+1. **Define a Rust command**:
+   ```rust
+   #[tauri::command]
+   fn greet(name: &str) -> String {
+       format!("Hello, {}!", name)
+   }
+   ```
+2. **Register the command** in the Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .invoke_handler(tauri::generate_handler![greet])
+   ```
+3. **Call from the frontend**:
+   ```typescript
+   import { invoke } from '@tauri-apps/api/core';
+   const greeting = await invoke<string>('greet', { name: 'World' });
+   ```
+4. **For type-safe bindings**, use `tauri-specta` to auto-generate TypeScript types from Rust commands:
+   ```bash
+   cargo add tauri-specta specta
+   ```
+5. **Bidirectional events** for Rust-to-frontend communication:
+   ```rust
+   app.emit("update", payload)?;  // Rust -> Frontend
+   ```
+   ```typescript
+   import { listen } from '@tauri-apps/api/event';
+   await listen('update', (event) => console.log(event.payload));
+   ```
+6. **Handle errors** by returning `Result<T, String>` from Rust commands
 
 ## Outputs
 
-- Typed IPC request/response contract / 类型化 IPC 请求响应契约
-- Error handling and validation guidance / 错误处理与校验指导
-
-## Scope
-
-- Boundary: invoke calls and command definitions only
-- v2 focus: type-safe IPC with tauri-specta or official generators
+- Rust command definition and registration
+- Frontend invoke call pattern
+- Type-safe IPC with tauri-specta
+- Bidirectional event communication
 
 ## References
 
-- https://v2.tauri.app/concept/inter-process-communication/
 - https://v2.tauri.app/develop/calling-rust/
 - https://v2.tauri.app/develop/calling-frontend/
 
 ## Keywords
 
-tauri ipc, invoke, tauri command, type safety, tauri-specta
+tauri IPC, invoke, tauri command, type-safe, tauri-specta, events

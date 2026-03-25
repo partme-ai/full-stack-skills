@@ -1,6 +1,6 @@
 ---
 name: vue-router-v4
-description: Provides comprehensive guidance for Vue Router v4 including route configuration, navigation, nested routes, route guards, and Vue 3 integration. Use when the user asks about Vue Router v4, needs to set up routing for Vue 3 applications, implement navigation guards, or work with Vue Router v4 features.
+description: "Provides comprehensive guidance for Vue Router v4 including route configuration, navigation, nested routes, route guards, and Vue 3 integration. Use when the user asks about Vue Router v4, needs to set up routing for Vue 3 applications, implement navigation guards, or work with Vue Router v4 features."
 license: Complete terms in LICENSE.txt
 ---
 

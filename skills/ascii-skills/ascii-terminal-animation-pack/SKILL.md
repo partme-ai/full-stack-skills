@@ -1,6 +1,6 @@
 ---
 name: ascii-terminal-animation-pack
-description: Plan and generate terminal ASCII animations/screensaver-style output (FPS, refresh rules, loop policy, low-flicker guidance), with a static poster frame and an optional local demo script.
+description: "Plan and generate terminal ASCII animations/screensaver-style output (FPS, refresh rules, loop policy, low-flicker guidance), with a static poster frame and an optional local demo script."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -36,6 +36,13 @@ dependencies:
 - animationSpec (refresh rules, FPS, loop policy, disable conditions)
 - staticPosterFrame (ASCII-only)
 - safetyNotes (exit/disable guidance, avoid log spam)
+
+### Workflow
+
+1. **Check TTY**: Detect if output is a terminal (`sys.stdout.isatty()`) — skip animation for non-interactive
+2. **Generate spec**: Define theme, FPS, duration, loop policy, and exit conditions
+3. **Render frames**: Output frames with ANSI cursor control; clear screen between frames
+4. **Validate output**: Confirm clean exit (cursor restored), no log contamination, short default duration
 
 ## Script
 - `scripts/matrix_demo.py`: best-effort matrix rain demo (short-run, TTY-only)

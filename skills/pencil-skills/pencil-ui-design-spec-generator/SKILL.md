@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-spec-generator
-description: Translates vague user requirements into an action-level PENCIL_PLAN sequence of Pencil MCP tool calls . Does not execute; outputs the plan only.
+description: "Translates high-level user requirements into a PENCIL_PLAN: a strict sequence of Pencil MCP tool calls (open_document, set_variables, batch_design, get_screenshot). Use when the user explicitly mentions Pencil and wants to plan a design task, generate a step-by-step design spec, or create a login form, dashboard, or design system initialization plan."
 license: Complete terms in LICENSE.txt
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: uniapp-uview
-description: A comprehensive skill for integrating and using uView UI with UniApp projects. This skill focuses on UniApp-specific integration, configuration, and platform-specific considerations when using uView UI in UniApp applications. Use this skill whenever the user needs to integrate uView UI into UniApp projects, configure UniApp-specific settings, or handle platform differences.
+description: "Integrates uView UI component library into UniApp projects including easycom configuration, pages.json and manifest.json setup, SCSS theming, and platform-specific handling (H5, mini-program, App, nvue). Use when the user needs to add uView UI components to a UniApp project, configure easycom auto-import, or handle cross-platform styling."
 license: Complete terms in LICENSE.txt
 ---
 

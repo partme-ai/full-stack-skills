@@ -1,6 +1,6 @@
 ---
 name: dart-sass
-description: Provides comprehensive guidance for Dart Sass including Sass syntax, compilation, mixins, functions, and best practices. Use when the user asks about Dart Sass, needs to compile Sass to CSS, use Sass features, or work with Sass in projects.
+description: "Provides comprehensive guidance for Dart Sass including Sass syntax, compilation, mixins, functions, and best practices. Use when the user asks about Dart Sass, needs to compile Sass to CSS, use Sass features, or work with Sass in projects."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -72,6 +72,44 @@ This skill includes detailed examples organized to match the official documentat
 - Reference templates in `templates/` directory for common scaffolding
 - Adapt templates to your specific needs and coding style
 
+### Inline Quick Start
+
+```bash
+# Install
+npm install --save-dev sass
+
+# Compile once
+npx sass src/styles.scss dist/styles.css
+
+# Watch for changes
+npx sass --watch src/styles.scss:dist/styles.css
+
+# Production (compressed)
+npx sass src/styles.scss dist/styles.css --style=compressed --no-source-map
+```
+
+```scss
+// src/styles.scss — using @use module system
+@use 'sass:math';
+@use './variables' as vars;
+
+.container {
+  max-width: vars.$max-width;
+  padding: math.div(vars.$spacing, 2);
+}
+
+@mixin responsive($breakpoint) {
+  @media (min-width: $breakpoint) { @content; }
+}
+
+.hero {
+  font-size: 1.5rem;
+  @include responsive(768px) {
+    font-size: 2rem;
+  }
+}
+```
+
 ## API Reference
 
 - **JavaScript API**: `api/js-api.md` - JavaScript API for compiling Sass (compile, compileString, etc.)
@@ -88,6 +126,13 @@ This skill includes detailed examples organized to match the official documentat
 6. **Load paths**: Use --load-path to simplify import paths
 7. **Performance**: Use Dart Sass for best performance (faster than Ruby Sass)
 8. **Version control**: Don't commit compiled CSS files, only commit Sass source files
+
+## Troubleshooting
+
+- **@import deprecation warning**: Replace `@import` with `@use` and `@forward`; update variable references to use namespaces
+- **Compilation errors**: Check for missing semicolons, unmatched braces, or invalid nesting
+- **Missing module**: Verify `@use` path is correct relative to the file; use `--load-path` for shared directories
+- **Slow compilation**: Use `--watch` during development; consider splitting large files into partials
 
 ## Resources
 

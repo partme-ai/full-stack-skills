@@ -1,6 +1,6 @@
 ---
 name: uniapp-native-app
-description: A comprehensive skill for uni-app native app offline packaging. Use this skill to package uni-app as native Android/iOS apps, configure native app settings, handle signing, and follow official offline packaging documentation.
+description: "Packages uni-app projects as native Android APK/AAB and iOS IPA via offline packaging, covering manifest configuration, signing certificates, native plugin integration, and build distribution. Use when the user needs to package a uni-app as a native app, configure Android keystore or iOS provisioning, or set up offline build for distribution."
 license: Complete terms in LICENSE.txt
 ---
 

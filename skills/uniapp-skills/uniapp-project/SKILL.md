@@ -1,6 +1,6 @@
 ---
 name: uniapp-project
-description: Provides comprehensive uni-app component and API integration guidance. Use when the user needs official uni-app components or APIs, wants per-component or per-API examples, or needs cross-platform compatibility details.
+description: "Provides per-component and per-API examples with cross-platform compatibility details for uni-app, covering built-in components, uni-ui components, and APIs (network, storage, device, UI, navigation, media). Use when the user needs official uni-app components or APIs, wants per-component examples with doc links, or needs platform compatibility checks."
 license: Complete terms in LICENSE.txt
 ---
 

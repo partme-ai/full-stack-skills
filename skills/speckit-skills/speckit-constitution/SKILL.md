@@ -1,6 +1,6 @@
 ---
 name: speckit-constitution
-description: Create or update the project constitution from interactive or provided principle inputs, ensuring all dependent templates stay in sync.
+description: "Create or update the project constitution at .specify/memory/constitution.md by collecting governance principles, filling template placeholders, versioning with semver, and propagating changes to dependent templates and agent config files. Use when setting up initial project governance, amending principles, or syncing constitution changes across spec/plan/tasks templates."
 ---
 
 # Spec Kit Constitution Skill

@@ -1,33 +1,36 @@
 ---
 name: nvm
-description: Guidance for installing, configuring, and using nvm (Node Version Manager) based on the official README. Use when the user needs to manage Node.js versions, install nvm, or troubleshoot nvm usage.
+description: "Install, configure, and use nvm (Node Version Manager) to manage Node.js versions. Routes to focused sub-skills for installation, shell setup, version switching, .nvmrc defaults, global packages, Docker/CI, troubleshooting, and more. Use when the user needs to manage Node.js versions, install nvm, or troubleshoot nvm usage."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm (Node Version Manager)
 
-Use this skill when the request is broad or ambiguous, and you need to route the user to a focused nvm sub-skill.
+Route broad or ambiguous nvm requests to the most relevant sub-skill.
 
-## How to use this skill
+## Workflow
 
-1. Identify the user's intent (install, setup, usage, defaults, troubleshooting, or metadata).
-2. Switch to the best-matching nvm sub-skill below.
+1. Identify the user's intent from their request.
+2. Route to the best-matching sub-skill below.
 
-### Sub-skill map
+### Sub-skill routing map
 
-- nvm-install
-- nvm-setup
-- nvm-usage-basics
-- nvm-defaults-and-nvmrc
-- nvm-global-packages
-- nvm-mirror-and-auth
-- nvm-docker-ci
-- nvm-verify
-- nvm-troubleshooting-macos
-- nvm-troubleshooting-linux
-- nvm-uninstall
-- nvm-misc
-- nvm-project-meta
+| User Intent | Sub-skill |
+|---|---|
+| "Install nvm", "How do I set up nvm?" | nvm-install |
+| "nvm not found", "shell profile setup" | nvm-setup |
+| "nvm install 20", "nvm use", "switch node" | nvm-usage-basics |
+| ".nvmrc", "default version", "nvm alias" | nvm-defaults-and-nvmrc |
+| "global packages", "reinstall-packages" | nvm-global-packages |
+| "mirror", "corporate proxy", "auth header" | nvm-mirror-and-auth |
+| "Docker", "CI/CD", "Dockerfile" | nvm-docker-ci |
+| "verify", "nvm --version", "is nvm working?" | nvm-verify |
+| "macOS nvm issues", "zshrc" | nvm-troubleshooting-macos |
+| "Linux nvm issues", "WSL" | nvm-troubleshooting-linux |
+| "auto use", "auto switch on cd" | nvm-shell-integration |
+| "uninstall nvm", "remove nvm" | nvm-uninstall |
+| "nvm colors", "ansible", "nvm tests" | nvm-misc |
+| "maintainers", "license", "support" | nvm-project-meta |
 
 ## Keywords
 

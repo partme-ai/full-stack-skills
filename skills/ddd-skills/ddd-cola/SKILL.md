@@ -1,28 +1,104 @@
 ---
 name: ddd-cola
-description: Provides comprehensive guidance for COLA architecture including adapter layer, application layer, domain layer, and infrastructure layer. Use when the user asks about COLA, needs to implement COLA architecture, structure applications with COLA, or work with COLA patterns.
+description: "Provides comprehensive guidance for COLA architecture including adapter layer, application layer, domain layer, and infrastructure layer. Use when the user asks about COLA, needs to implement COLA architecture, structure applications with COLA, or work with COLA patterns."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 使用 COLA 架构框架进行项目开发（Adapter → App → Domain ← Infrastructure）
-- 应用 COLA 的分层架构模式，明确适配层、应用层、领域层、基础设施层职责
-- 实现基于 COLA 的领域驱动设计，保持领域层纯净、依赖倒置
+- Structure a project using COLA architecture (Adapter, Application, Domain, Infrastructure)
+- Apply COLA's layered architecture with clear responsibilities per layer
+- Implement domain-driven design with COLA while keeping the domain layer pure and dependency-inverted
+- Organize Java/Spring Boot projects following COLA V5 conventions
 
 ## How to use this skill
 
-1. **分层**：Adapter 处理 HTTP/RPC/消息入站与出站；Application 编排用例、事务；Domain 承载实体、值对象、领域服务；Infrastructure 实现仓储、外部服务。
-2. **依赖方向**：Domain 不依赖外层；Application 依赖 Domain；Adapter/Infrastructure 依赖 Application 与 Domain。
-3. **包结构**：按 layer 分包（如 `adapter/controller`、`app/executor`、`domain/model`、`infrastructure/persistence`），或按模块再分子包。
+### Workflow
+
+1. **Understand the layer responsibilities**: Adapter handles I/O; Application orchestrates use cases; Domain holds business logic; Infrastructure implements persistence and external services
+2. **Set up the package structure** following COLA conventions
+3. **Enforce dependency direction**: Domain depends on nothing; Application depends on Domain; Adapter and Infrastructure depend on Application and Domain
+4. **Define ports in Domain or Application**, implement them in Infrastructure
+
+### Layer Structure
+
+```
+com.example.app/
+├── adapter/
+│   ├── controller/        # HTTP/RPC/message inbound handlers
+│   └── scheduler/         # Scheduled tasks
+├── app/
+│   ├── executor/          # Use case executors (command handlers)
+│   └── service/           # Application services (orchestration, transactions)
+├── domain/
+│   ├── model/             # Entities, Value Objects, Aggregates
+│   │   ├── entity/
+│   │   └── valueobject/
+│   ├── service/           # Domain services
+│   └── gateway/           # Repository and external service interfaces (ports)
+└── infrastructure/
+    ├── persistence/       # Repository implementations (JPA, MyBatis)
+    ├── external/          # External API clients
+    └── config/            # Spring configuration and bean wiring
+```
+
+### Dependency Direction
+
+```
+Adapter → Application → Domain ← Infrastructure
+```
+
+### Example: Use Case Executor
+
+```java
+// Domain gateway (port)
+public interface OrderGateway {
+    void save(Order order);
+    Optional<Order> findById(String id);
+}
+
+// Application executor
+@Component
+public class CreateOrderExecutor {
+    private final OrderGateway orderGateway;
+
+    public CreateOrderExecutor(OrderGateway orderGateway) {
+        this.orderGateway = orderGateway;
+    }
+
+    @Transactional
+    public OrderDto execute(CreateOrderCmd cmd) {
+        Order order = Order.create(cmd.getItems(), cmd.getCustomerId());
+        orderGateway.save(order);
+        return OrderDto.from(order);
+    }
+}
+
+// Infrastructure implementation
+@Repository
+public class OrderGatewayImpl implements OrderGateway {
+    private final OrderMapper orderMapper;
+
+    @Override
+    public void save(Order order) {
+        orderMapper.insert(OrderDO.fromDomain(order));
+    }
+}
+```
 
 ## Best Practices
 
-- 领域逻辑只放在 Domain 层；Application 只做编排与事务边界。
-- 用接口在 Domain 或 Application 定义端口，Infrastructure 实现。
-- 避免在 Adapter 中写业务逻辑；DTO 与领域对象在边界做转换。
+- Domain logic belongs exclusively in the Domain layer; Application layer only orchestrates and manages transaction boundaries
+- Define ports (interfaces) in Domain or Application; Infrastructure implements them
+- Avoid business logic in the Adapter layer; DTOs and domain objects are converted at the boundary
+- Follow COLA naming conventions: `Cmd` for commands, `Executor` for handlers, `Gateway` for ports
+
+## Resources
+
+- COLA GitHub: https://github.com/alibaba/COLA
+- COLA architecture guide: https://blog.csdn.net/significantfrank/article/details/110934799
 
 ## Keywords
 
-cola, cola architecture, clean object-oriented layered architecture, 分层架构, COLA 框架, DDD COLA, adapter layer, application layer, domain layer, infrastructure layer
+cola, cola architecture, clean object-oriented layered architecture, COLA V5, adapter layer, application layer, domain layer, infrastructure layer, DDD, dependency inversion

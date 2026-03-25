@@ -1,6 +1,6 @@
 ---
 name: uniapp-ucharts
-description: A comprehensive skill for integrating and using uCharts with UniApp projects. This skill focuses on UniApp-specific integration, configuration, and platform-specific considerations when using uCharts in UniApp applications. Use this skill whenever the user needs to integrate uCharts into UniApp projects, configure UniApp-specific settings, or handle platform differences.
+description: "Integrates uCharts data visualization into UniApp projects including easycom configuration, pages.json and manifest.json setup, platform-specific handling (H5, mini-program, App, nvue), and chart lifecycle management. Use when the user needs to add charts to a UniApp project, configure uCharts components, or handle cross-platform chart rendering."
 license: Complete terms in LICENSE.txt
 ---
 

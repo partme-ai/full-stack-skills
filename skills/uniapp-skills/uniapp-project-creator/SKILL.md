@@ -1,6 +1,6 @@
 ---
 name: uniapp-project-creator
-description: Provides one-command project creation for uni-app using the official quickstart CLI, including project initialization, configuration, and template selection. Use when the user asks to create a uni-app project with a single command, needs to initialize a new uni-app project, or generate uni-app project structure.
+description: "Creates new uni-app projects via the official CLI or HBuilderX with Vue 2/Vue 3 template selection, manifest.json and pages.json configuration, and directory structure setup. Use when the user wants to scaffold a new uni-app project, initialize project files with a single command, or set up the development environment."
 license: Complete terms in LICENSE.txt
 ---
 

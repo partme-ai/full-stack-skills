@@ -1,6 +1,6 @@
 ---
 name: vue2
-description: Provides comprehensive guidance for Vue 2.x development including Options API, components, directives, lifecycle hooks, computed properties, watchers, Vuex state management, and Vue Router. Use when the user asks about Vue 2, needs to create Vue 2 components, implement reactive data binding, handle component communication, or work with Vue 2 ecosystem tools.
+description: "Provides comprehensive guidance for Vue 2.x development including Options API, components, directives, lifecycle hooks, computed properties, watchers, Vuex state management, and Vue Router. Use when the user asks about Vue 2, needs to create Vue 2 components, implement reactive data binding, handle component communication, or work with Vue 2 ecosystem tools."
 ---
 
 # Vue 2 开发指南

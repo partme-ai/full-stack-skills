@@ -1,12 +1,7 @@
 ---
 name: stitch-vue-bootstrap-components
-description: Convert Stitch designs into modular Vite/Vue 3 and BootstrapVue or BootstrapVueNext components. Uses [BootstrapVue Vue 3] support; Stitch MCP get_screen for retrieval; high-reliability fetch via scripts; enforces Vue SFC structure and Bootstrap component contracts b-container b-row b-button etc..
-allowed-tools:
-  - "stitch*:*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+description: "Convert Stitch designs into modular Vite + Vue 3 + BootstrapVue/BootstrapVueNext components. Use when the user mentions Bootstrap or BootstrapVue conversion from Stitch. Retrieves screen HTML via Stitch MCP get_screen, maps Tailwind to Bootstrap utilities, enforces Vue SFC structure with Bootstrap components (b-container, b-row, b-col, b-button, b-card)."
+allowed-tools: "stitch*:*, Bash, Read, Write, web_fetch"
 ---
 
 
@@ -65,10 +60,23 @@ You are a **frontend engineer** turning Stitch designs into clean, modular Vue 3
 - **Fetch errors**: Quote the URL in the bash command; ensure `scripts/fetch-stitch.sh` is executable.
 - **Component mapping**: Follow [references/contract.md](references/contract.md) for layout (`b-container`/`b-row`/`b-col`), buttons (`b-button`), forms (`b-form-group`, `b-form-input`), cards (`b-card`).
 
-## Keywords
+## Example: Stitch HTML to Bootstrap Vue SFC
 
-**English:** Stitch, Vue 3, Bootstrap, BootstrapVue, Vite, b-container, b-button.  
-**中文关键词：** Stitch、Vue 3、Bootstrap、组件。
+Stitch HTML with Tailwind card:
+```html
+<div class="bg-white rounded-lg shadow p-4"><h2 class="text-lg font-bold">Title</h2><button class="bg-blue-500 text-white px-4 py-2 rounded">Action</button></div>
+```
+
+Converted Bootstrap Vue component:
+```vue
+<template>
+  <b-card title="Title">
+    <b-button variant="primary">Action</b-button>
+  </b-card>
+</template>
+```
+
+Key mapping: `div.rounded-lg.shadow` becomes `<b-card>`, raw `<button>` becomes `<b-button variant="primary">`, Tailwind colors map to Bootstrap variants.
 
 ## References
 

@@ -1,6 +1,6 @@
 ---
 name: tauri-app-plugin-permissions
-description: Guidance for Tauri v2 plugin permission authoring, capability generation, and platform differences.
+description: "Author and audit Tauri v2 plugin permissions, generate capability files, and handle cross-platform permission differences. Use when writing plugin permission schemas, generating capabilities/default.json, or auditing permissions across Windows/macOS/Linux/mobile."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,42 +8,51 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Writing or auditing plugin permissions / 编写或审计插件权限
-- Plugin capability templates / 插件权限模板
-- Cross-platform permission differences / 跨平台权限差异
+- Writing or auditing plugin permissions
+- Generating capability templates or permissions schemas
+- Cross-platform permission differences
 
 **Trigger phrases include:**
-- "plugin permissions", "capability template", "permissions schema"
-- "插件权限", "权限模板", "平台差异"
+- "plugin permissions", "capability template", "permissions schema", "capabilities json"
 
 ## How to use this skill
 
-1. Enumerate feature → plugin permission needs / 功能与插件权限需求映射
-2. Separate plugin-defined permissions from app-enabled capabilities / 区分插件权限与应用能力
-3. Generate capabilities/default.json with minimal scope / 生成最小权限配置
-4. Validate Windows/platform differences and adjust / 校验平台差异并调整
+1. **Map features to plugin permissions**:
+   ```
+   Feature: "Read user files"
+   Plugin:  fs
+   Permission: fs:allow-read-text-file
+   Scope: { "path": "$DOCUMENT/**" }
+   ```
+2. **Generate capabilities/default.json** with minimal scope:
+   ```json
+   {
+     "identifier": "default",
+     "description": "Main app capabilities",
+     "windows": ["main"],
+     "permissions": [
+       "fs:allow-read-text-file",
+       "dialog:allow-open",
+       { "identifier": "http:default", "allow": [{ "url": "https://api.example.com/**" }] }
+     ]
+   }
+   ```
+3. **Separate plugin-defined permissions** (what a plugin exposes) from app-enabled capabilities (what your app allows)
+4. **Handle platform differences**: Some permissions behave differently on Windows vs macOS (e.g., shell execution, file paths)
+5. **Audit permissions** by reviewing each capability entry against the minimum required for each feature
+6. **Run `cargo tauri build`** to validate that all required permissions are declared
 
 ## Outputs
 
-- Permission template per plugin / 插件权限模板
-- Capability file with minimal scope / 最小权限能力文件
-- Cross-platform audit checklist / 跨平台审计清单
-
-## Scope
-
-- Boundary: Plugin permissions and capability configuration only / 仅限权限配置
-- Key points: Windows and platform capability differences / 平台差异
-- Out of scope: plugin implementation details / 不涉及插件实现
+- Feature-to-permission mapping table
+- Minimal capabilities/default.json file
+- Cross-platform permission audit checklist
 
 ## References
 
 - https://v2.tauri.app/learn/using-plugin-permissions/
-- https://v2.tauri.app/zh-cn/learn/security/using-plugin-permissions/
-- https://v2.tauri.app/learn/security/capabilities-for-windows-and-platforms/
-- https://v2.tauri.app/zh-cn/learn/security/capabilities-for-windows-and-platforms/
 - https://v2.tauri.app/learn/security/writing-plugin-permissions/
-- https://v2.tauri.app/zh-cn/learn/security/writing-plugin-permissions/
 
 ## Keywords
 
-tauri permissions, plugin permissions, capabilities, scope, security, 插件权限, 权限模板, 平台差异
+tauri permissions, plugin permissions, capabilities, scope, capability template

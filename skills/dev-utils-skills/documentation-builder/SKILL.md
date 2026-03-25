@@ -1,88 +1,104 @@
 ---
 name: documentation-builder
-description: Provides comprehensive guidance for building documentation including documentation generation, formatting, and documentation best practices. Use when the user asks about building documentation, needs to generate documentation, format documentation, or create documentation structures.
+description: "Generates structured technical documentation including API docs (OpenAPI/Swagger), README files, user guides, developer guides, and changelogs. Use when the user needs to create or improve project documentation, generate API reference docs, write onboarding guides, or structure documentation for a codebase."
 ---
 
-# 文档构建技能
+## When to use this skill
 
-## 概述
+Use this skill whenever the user wants to:
+- Generate a project README with installation, usage, and contributing sections
+- Create API documentation from code or OpenAPI specs
+- Write developer onboarding or setup guides
+- Build user manuals or quick-start tutorials
+- Structure documentation for a new or existing project
+- Generate a CHANGELOG from commit history or release notes
 
-本技能帮助您生成各种技术文档，包括 API 文档、用户手册、开发指南等。
+## How to use this skill
 
-**关键词**: 文档编写、API 文档、用户手册、开发指南、技术文档、README
+### Workflow
 
-## 核心功能
+1. **Identify the doc type** - README, API reference, user guide, developer guide, or changelog
+2. **Gather context** - Read the codebase, existing docs, and project structure
+3. **Generate documentation** - Use the templates and patterns below
+4. **Validate** - Ensure all code examples run, links resolve, and sections are complete
 
-### 1. API 文档生成
+### README Template
 
-- 生成 RESTful API 文档
-- 描述 API 端点、参数和响应
-- 提供请求和响应示例
-- 创建交互式 API 文档（如 Swagger/OpenAPI）
+```markdown
+# Project Name
 
-### 2. 用户手册编写
+Brief description of what the project does and why it exists.
 
-- 编写用户使用指南
-- 创建快速入门教程
-- 提供常见问题解答（FAQ）
-- 设计操作步骤和截图
+## Quick Start
 
-### 3. 开发指南创建
+\`\`\`bash
+npm install my-package
+\`\`\`
 
-- 编写开发环境搭建指南
-- 创建代码贡献指南
-- 设计架构和设计文档
-- 提供开发最佳实践
+\`\`\`typescript
+import { MyClient } from 'my-package';
+const client = new MyClient({ apiKey: process.env.API_KEY });
+const result = await client.query('hello');
+\`\`\`
 
-### 4. README 和项目文档
+## Features
 
-- 生成项目 README
-- 创建安装和使用说明
-- 编写变更日志（CHANGELOG）
-- 设计项目结构说明
+- Feature one with brief explanation
+- Feature two with brief explanation
 
-## 使用指南
+## Installation
 
-### 文档编写原则
+Detailed installation steps for different environments.
 
-1. **清晰性**: 文档应清晰易懂，避免歧义
-2. **完整性**: 覆盖所有重要功能和场景
-3. **准确性**: 确保文档与代码一致
-4. **实用性**: 提供实际可用的示例
-5. **可维护性**: 文档应易于更新和维护
+## Usage
 
-### 文档结构
+Detailed usage examples with code snippets.
 
-- **概述**: 项目或功能的概述
-- **快速开始**: 快速上手指南
-- **详细说明**: 详细的功能说明
-- **API 参考**: API 接口文档（如适用）
-- **示例**: 使用示例和代码示例
-- **常见问题**: FAQ 和故障排除
+## API Reference
 
-### 文档格式
+Link to full API docs or inline reference.
 
-- Markdown（.md）
-- reStructuredText（.rst）
-- HTML
-- PDF（如需要）
+## Contributing
 
-## 输出格式
+How to contribute, run tests, and submit PRs.
 
-文档应包含：
+## License
 
-- **文档文件**: 完整的文档内容
-- **目录结构**: 清晰的章节和目录
-- **代码示例**: 实际可运行的代码示例
-- **图表和截图**: 可视化说明（如需要）
-- **链接和引用**: 相关资源的链接
+License type and link.
+```
 
-## 最佳实践
+### API Documentation Pattern (OpenAPI)
 
-- 使用清晰的标题和章节结构
-- 提供实际可用的代码示例
-- 保持文档与代码同步更新
-- 使用图表和截图辅助说明
-- 编写易于搜索的文档
-- 考虑不同水平的读者
-- 定期审查和更新文档
+```yaml
+paths:
+  /users/{id}:
+    get:
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+```
+
+## Best Practices
+
+1. **Start with a quick-start** - Let readers get running in under 2 minutes
+2. **Include runnable code examples** - Every API endpoint or function should have a copy-paste example
+3. **Keep docs next to code** - Co-locate documentation with the source it describes
+4. **Use consistent structure** - Follow the same heading hierarchy across all doc pages
+5. **Version your docs** - Tag documentation alongside code releases
+
+## Keywords
+
+文档编写, documentation, README, API docs, OpenAPI, Swagger, user guide, 用户手册, developer guide, 开发指南, changelog, 技术文档

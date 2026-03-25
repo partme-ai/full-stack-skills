@@ -1,86 +1,87 @@
 ---
 name: test-writer
-description: Provides comprehensive guidance for writing tests including test case creation, test structure, and testing best practices. Use when the user asks about writing tests, needs to create test cases, structure tests, or implement testing strategies.
+description: "Generates unit, integration, and end-to-end tests using frameworks like pytest, Jest, JUnit, and Playwright. Use when the user needs to write tests for existing code, create test suites for a module, add edge-case coverage, or set up a testing framework from scratch."
 ---
 
-# 测试编写技能
+## When to use this skill
 
-## 概述
+Use this skill whenever the user wants to:
+- Write unit tests for functions, classes, or modules
+- Create integration tests for API endpoints or database interactions
+- Build end-to-end tests for user workflows
+- Add test coverage for edge cases and error paths
+- Set up a testing framework (pytest, Jest, JUnit, Vitest, Playwright)
+- Generate test fixtures and mock data
 
-本技能帮助您编写各种类型的测试，包括单元测试、集成测试和端到端测试。
+## How to use this skill
 
-**关键词**: 测试编写、单元测试、集成测试、端到端测试、测试用例、测试框架
+### Workflow
 
-## 核心功能
+1. **Identify the code under test** - Read the function/class/module to understand its behavior
+2. **Choose the test type** - Unit (isolated), integration (multi-component), or E2E (full flow)
+3. **Write tests using AAA pattern** - Arrange inputs, Act on the function, Assert expected results
+4. **Cover edge cases** - Empty inputs, boundary values, error conditions, concurrent access
 
-### 1. 单元测试编写
+### Unit Test Example (pytest)
 
-- 为函数和类编写单元测试
-- 设计测试用例覆盖各种场景
-- 使用 Mock 和 Stub 隔离依赖
-- 确保测试的独立性和可重复性
+```python
+import pytest
+from decimal import Decimal
+from orders import calculate_order_total, OrderItem
 
-### 2. 集成测试设计
+class TestCalculateOrderTotal:
+    def test_single_item_no_discount(self):
+        items = [OrderItem(price=Decimal("10.00"), quantity=2)]
+        result = calculate_order_total(items, discount_pct=0.0, tax_rate=0.08)
+        assert result == Decimal("21.60")
 
-- 编写模块间的集成测试
-- 测试 API 接口和数据库交互
-- 验证系统组件的协作
-- 设计测试数据和测试环境
+    def test_applies_discount_before_tax(self):
+        items = [OrderItem(price=Decimal("100.00"), quantity=1)]
+        result = calculate_order_total(items, discount_pct=0.1, tax_rate=0.10)
+        assert result == Decimal("99.00")
 
-### 3. 端到端测试
+    def test_empty_items_returns_zero(self):
+        result = calculate_order_total([], discount_pct=0.0, tax_rate=0.08)
+        assert result == Decimal("0.00")
 
-- 编写完整的用户流程测试
-- 测试关键业务场景
-- 验证系统端到端的功能
-- 使用自动化测试工具
+    def test_invalid_discount_raises_error(self):
+        items = [OrderItem(price=Decimal("10.00"), quantity=1)]
+        with pytest.raises(ValueError, match="discount_pct must be 0-1"):
+            calculate_order_total(items, discount_pct=1.5)
+```
 
-### 4. 测试工具和框架
+### Integration Test Example (Jest + Supertest)
 
-- 支持主流测试框架（JUnit, pytest, Jest 等）
-- 生成测试报告和覆盖率报告
-- 创建测试配置和测试环境
-- 设计测试数据和 Fixture
+```typescript
+import request from 'supertest';
+import { app } from '../src/app';
+import { db } from '../src/database';
 
-## 使用指南
+describe('POST /api/users', () => {
+  afterEach(async () => { await db.query('DELETE FROM users WHERE email LIKE $1', ['%@test.com']); });
 
-### 测试编写原则
+  it('creates a user and returns 201', async () => {
+    const res = await request(app)
+      .post('/api/users')
+      .send({ name: 'Alice', email: 'alice@test.com' })
+      .expect(201);
+    expect(res.body).toMatchObject({ name: 'Alice', email: 'alice@test.com' });
+  });
 
-1. **全面性**: 覆盖正常流程、边界情况和异常情况
-2. **独立性**: 每个测试应独立运行，不依赖其他测试
-3. **可重复性**: 测试结果应一致，不受环境影响
-4. **清晰性**: 测试代码应清晰易懂
-5. **快速性**: 测试应快速执行
+  it('returns 400 for missing email', async () => {
+    await request(app).post('/api/users').send({ name: 'Bob' }).expect(400);
+  });
+});
+```
 
-### 测试用例设计
+## Best Practices
 
-- **正常场景**: 测试正常的功能流程
-- **边界情况**: 测试边界值和极限情况
-- **异常情况**: 测试错误处理和异常情况
-- **性能测试**: 测试性能和负载（如需要）
+1. **One assertion per behavior** - Each test should verify one specific behavior
+2. **Descriptive test names** - Name tests as `test_<behavior>_when_<condition>` or `it('should <outcome> when <input>')`
+3. **Isolate dependencies** - Use mocks/stubs for external services, databases, and APIs
+4. **Test the contract, not the implementation** - Assert on outputs and side effects, not internal state
+5. **Run tests in CI** - Ensure tests pass on every commit; aim for 80%+ line coverage on critical paths
 
-### 测试覆盖率
+## Keywords
 
-- 目标覆盖率: 80% 以上（根据项目需求）
-- 关键路径: 100% 覆盖
-- 边界情况: 重点覆盖
-- 异常处理: 确保覆盖
-
-## 输出格式
-
-测试代码应包含：
-
-- **测试文件**: 完整的测试代码文件
-- **测试用例**: 清晰的测试用例和描述
-- **测试数据**: 测试数据和 Fixture
-- **测试配置**: 测试配置文件
-- **测试报告**: 测试执行结果和覆盖率
-
-## 最佳实践
-
-- 使用 AAA 模式（Arrange-Act-Assert）
-- 测试名称应描述测试内容
-- 一个测试只测试一个功能点
-- 使用 Mock 隔离外部依赖
-- 保持测试代码简洁
-- 定期运行测试，确保通过
-- 关注测试覆盖率，但不盲目追求 100%
+测试编写, test writing, unit test, integration test, e2e test, pytest, Jest, JUnit, Vitest, Playwright, mock, fixture, 单元测试, 集成测试, 端到端测试, test coverage

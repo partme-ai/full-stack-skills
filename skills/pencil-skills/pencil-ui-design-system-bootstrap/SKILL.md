@@ -1,9 +1,8 @@
 ---
 name: pencil-ui-design-system-bootstrap
-description: Initialize Bootstrap. design system components in Pencil variables and component overview.
+description: "Initialize Bootstrap design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with Bootstrap, needs to set up Bootstrap color palette and typography variables, or wants to create component library frames for Grid, Card, Modal, Navbar, and other Bootstrap components."
 license: Complete terms in LICENSE.txt
 ---
-
 
 # Bootstrap Design System Initializer
 
@@ -11,7 +10,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on Bootstrap specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize Bootstrap tokens (primary, secondary, danger, warning colors) in a Pencil .pen file
+- The user needs a component overview frame for Bootstrap components in Pencil
+- The user mentions "Pencil" together with "Bootstrap" or Bootstrap-specific components (Card, Modal, Navbar, Grid)
+- An orchestrator skill (pencil-ui-designer) routes a Bootstrap initialization request
 
 ## How to use this skill
 
@@ -58,11 +61,34 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize Bootstrap Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "bs-primary": "#0d6efd",
+      "bs-secondary": "#6c757d",
+      "bs-success": "#198754",
+      "bs-danger": "#dc3545",
+      "bs-warning": "#ffc107",
+      "bs-body-color": "#212529",
+      "bs-border-color": "#dee2e6",
+      "bs-border-radius": "6px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against Bootstrap docs (Sass/CSS variables).
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

@@ -1,26 +1,43 @@
 ---
 name: ant-design-mini
-description: Provides comprehensive guidance for Ant Design Mini component library for mini-programs including components, themes, and platform support. Use when the user asks about Ant Design Mini, needs to build mini-program applications, or use mini-program components.
+description: "Builds mini-program UIs with Ant Design Mini components for Alipay and WeChat mini-programs. Covers Button, Form, List, Modal, Tabs, NavBar, and 60+ components with theme customization and CSS variable theming. Use when the user needs to create mini-program interfaces with Ant Design Mini, configure themes, or implement mini-program-specific UI patterns."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- Install and set up Ant Design Mini in a mini-program project
-- Use Ant Design Mini components in Alipay Mini Program
-- Use Ant Design Mini components in WeChat Mini Program
-- Configure Ant Design Mini (theme, i18n, etc.)
-- Use form components (Button, Input, Form, etc.)
-- Use data display components (List, Card, etc.)
-- Use feedback components (Toast, Modal, etc.)
-- Use navigation components (Tabs, NavBar, etc.)
-- Customize component styles
-- Handle component events
-- Understand Ant Design Mini API and methods
-- Troubleshoot Ant Design Mini issues
+- Build Alipay or WeChat mini-program UIs with Ant Design Mini components
+- Use form, data display, feedback, or navigation components in mini-programs
+- Customize the Ant Design Mini theme via CSS variables
+- Handle component events and lifecycle in mini-program contexts
 
 ## How to use this skill
+
+### Quick-Start Example: Button and Form in Mini-Program
+
+```xml
+<!-- pages/index/index.axml -->
+<ant-button type="primary" onTap="handleClick">Submit</ant-button>
+
+<ant-form onFinish="onFormFinish">
+  <ant-form-item label="Name" name="name" required="{{true}}">
+    <ant-input placeholder="Enter your name" />
+  </ant-form-item>
+  <ant-form-item label="Phone" name="phone">
+    <ant-input type="number" placeholder="Enter phone" />
+  </ant-form-item>
+  <ant-button type="primary" form-type="submit">Submit</ant-button>
+</ant-form>
+```
+
+```javascript
+// pages/index/index.js
+Page({
+  handleClick() { my.showToast({ content: 'Clicked!' }); },
+  onFormFinish(values) { console.log('Form values:', values); }
+});
+```
 
 This skill is organized to match the Ant Design Mini official documentation structure (https://ant-design-mini.antgroup.com/guide/quick-start, https://ant-design-mini.antgroup.com/components/overview). When working with Ant Design Mini:
 

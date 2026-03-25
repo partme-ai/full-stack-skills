@@ -1,28 +1,92 @@
 ---
 name: ddd-clean-architecture
-description: Provides comprehensive guidance for clean architecture including layer separation, dependency rules, and architectural patterns. Use when the user asks about clean architecture, needs to implement clean architecture principles, or structure applications with clean architecture.
+description: "Provides comprehensive guidance for clean architecture including layer separation, dependency rules, and architectural patterns. Use when the user asks about clean architecture, needs to implement clean architecture principles, or structure applications with clean architecture."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 按 Clean Architecture 分层（Entities, Use Cases, Interface Adapters, Frameworks）
-- 遵守依赖规则：内层不依赖外层；业务核心不依赖框架与 IO
-- 组织项目包与测试边界
+- Structure an application following Clean Architecture layers (Entities, Use Cases, Interface Adapters, Frameworks)
+- Enforce the dependency rule: inner layers never depend on outer layers
+- Organize project packages and define clear test boundaries
+- Combine Clean Architecture with Domain-Driven Design patterns
 
 ## How to use this skill
 
-1. **层**：最内 Entities；次内 Use Cases（应用逻辑）；再外 Interface Adapters（Presenter、Gateway 实现）；最外 Frameworks（Web、DB、UI）。
-2. **依赖**：只允许由外向内；Use Cases 定义 Gateway 接口，外层实现。
-3. **测试**：核心用单元测试；外层用集成测试或 E2E。
+### Workflow
+
+1. **Define Entities** (innermost layer) containing enterprise-wide business rules
+2. **Define Use Cases** (application layer) containing application-specific business logic
+3. **Create Interface Adapters** (presenters, gateways) that convert data between layers
+4. **Implement Frameworks** (outermost layer) for web, database, and UI concerns
+
+### Layer Structure
+
+```
+com.example.app/
+├── entity/              # Entities — business rules, no dependencies
+├── usecase/             # Use Cases — application logic, depends only on entity
+│   ├── port/            # Input/output port interfaces
+│   └── interactor/      # Use case implementations
+├── adapter/             # Interface Adapters — presenters, gateways
+│   ├── controller/      # Web controllers
+│   ├── presenter/       # Response formatting
+│   └── gateway/         # Gateway implementations
+└── framework/           # Frameworks — DB, web server, external APIs
+    ├── web/
+    └── persistence/
+```
+
+### Use Case Example
+
+```java
+// Use case port (input boundary)
+public interface CreateOrderUseCase {
+    OrderOutput execute(CreateOrderInput input);
+}
+
+// Use case interactor
+public class CreateOrderInteractor implements CreateOrderUseCase {
+    private final OrderGateway orderGateway;
+    private final PaymentGateway paymentGateway;
+
+    public CreateOrderInteractor(OrderGateway orderGateway, PaymentGateway paymentGateway) {
+        this.orderGateway = orderGateway;
+        this.paymentGateway = paymentGateway;
+    }
+
+    @Override
+    public OrderOutput execute(CreateOrderInput input) {
+        Order order = Order.create(input.getItems());
+        paymentGateway.charge(order.totalAmount());
+        orderGateway.save(order);
+        return OrderOutput.from(order);
+    }
+}
+```
+
+### Gateway Interface (defined in Use Case layer)
+
+```java
+public interface OrderGateway {
+    void save(Order order);
+    Optional<Order> findById(String id);
+}
+```
 
 ## Best Practices
 
-- 业务规则集中在 Entities 与 Use Cases；避免在 Controller 或 DB 层写业务。
-- 用接口隔离 IO；便于替换与测试。
-- 与 DDD 结合：Entities/Use Cases 可对应聚合与领域服务。
+- Concentrate business rules in Entities and Use Cases; avoid placing business logic in controllers or database layers
+- Use interfaces to isolate I/O; this makes the core easy to replace and test
+- Entities and Use Cases map naturally to DDD aggregates and domain services
+- Test core layers with unit tests; test outer layers with integration or E2E tests
+
+## Resources
+
+- Clean Architecture by Robert C. Martin
+- https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 ## Keywords
 
-clean architecture, dependency rule, use case, entity, 整洁架构, 依赖规则
+clean architecture, dependency rule, use case, entity, interface adapter, gateway, layer separation, DDD, testability

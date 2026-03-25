@@ -1,6 +1,6 @@
 ---
 name: tauri-app-updater
-description: Guidance for Tauri v2 updater plugin with OTA updates and signing keys.
+description: "Configure OTA (over-the-air) app updates using the Tauri v2 updater plugin with signing keys and update server setup. Use when implementing auto-update checks, generating signing key pairs, or configuring update server endpoints and metadata."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,59 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- OTA updates for the app / 应用 OTA 更新
-- Signing keys or update servers / 签名密钥或更新服务器
-- Automatic update checks / 自动更新检查
+- Auto-updates or OTA updates for the app
+- Signing keys for update verification
+- Update server configuration
 
 **Trigger phrases include:**
-- "updater", "OTA", "signing key", "update server"
-- "更新", "OTA", "签名", "更新服务器"
+- "updater", "auto-update", "OTA", "signing key", "update server", "app update"
 
 ## How to use this skill
 
-1. Generate and manage updater signing keys
-2. Configure update server URLs and metadata
-3. Implement update checks and user prompts
-4. Validate update flow across platforms
+1. **Install the updater plugin**:
+   ```bash
+   cargo add tauri-plugin-updater
+   ```
+2. **Generate signing keys**:
+   ```bash
+   npx @tauri-apps/cli signer generate -w ~/.tauri/myapp.key
+   ```
+3. **Configure the updater** in `tauri.conf.json`:
+   ```json
+   {
+     "plugins": {
+       "updater": {
+         "endpoints": ["https://releases.example.com/{{target}}/{{arch}}/{{current_version}}"],
+         "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ..."
+       }
+     }
+   }
+   ```
+4. **Register the plugin and check for updates**:
+   ```typescript
+   import { check } from '@tauri-apps/plugin-updater';
+   const update = await check();
+   if (update) {
+     await update.downloadAndInstall();
+     // Optionally restart the app
+   }
+   ```
+5. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["updater:default"] }
+   ```
+6. **Set up your update server** to serve JSON metadata with version, download URL, and signature
 
 ## Outputs
 
-- Update flow plan / 更新流程方案
-- Signing and metadata checklist / 签名与元数据清单
-
-## Scope
-
-- Boundary: Updater plugin setup and usage only
-- Key points: Signing keys and update metadata
+- Updater plugin setup with signing keys
+- Update check and install flow
+- Update server endpoint configuration
 
 ## References
 
 - https://v2.tauri.app/plugin/updater/
-- https://v2.tauri.app/zh-cn/plugin/updater/
 
 ## Keywords
 
-tauri updater, ota updates, signing, update server
+tauri updater, auto-update, OTA, signing key, update server, app update

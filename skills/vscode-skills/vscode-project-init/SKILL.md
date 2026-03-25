@@ -1,6 +1,6 @@
 ---
 name: vscode-project-init
-description: Initialize a new VS Code Extension project using TypeScript.
+description: "Scaffold a new VS Code extension project using TypeScript via Yeoman generator (yo code), creating src/extension.ts entry point and package.json manifest. Use when the user wants to start a new VS Code extension project from scratch."
 license: Complete terms in LICENSE.txt
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: uniappx-project
-description: Provides comprehensive uni-app-x component and API integration guidance. Use when the user needs official uni-app-x components or APIs, wants per-component or per-API examples, or needs cross-platform compatibility details for uni-app-x.
+description: "Provides per-component and per-API examples with platform compatibility details for uni-app-x (Vue 3 + TypeScript + Vite). Use when the user needs official uni-app-x built-in components, API references with examples, cross-platform compatibility checks, or conditional compilation guidance for uni-app-x projects."
 license: Complete terms in LICENSE.txt
 ---
 

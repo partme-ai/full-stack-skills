@@ -1,12 +1,7 @@
 ---
 name: stitch-vue-layui-components
-description: Convert Stitch designs into modular Vite/Vue 3 and Layui-Vue components. Uses Stitch MCP get_screen for retrieval; high-reliability fetch via scripts; enforces Vue SFC structure and Layui-Vue component contracts layui-btn layui-input lay-card etc..
-allowed-tools:
-  - "stitch*:*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+description: "Convert Stitch designs into modular Vite + Vue 3 + Layui-Vue components. Use when the user mentions Layui conversion from Stitch. Retrieves screen HTML via Stitch MCP get_screen, maps Tailwind to Layui tokens (2px/4px radius), enforces Vue SFC structure with Layui-Vue components (layui-btn, layui-input, lay-card, lay-page-header)."
+allowed-tools: "stitch*:*, Bash, Read, Write, web_fetch"
 ---
 
 
@@ -65,10 +60,23 @@ You are a **frontend engineer** turning Stitch designs into clean, modular Vue 3
 - **Fetch errors**: Quote the URL in the bash command; ensure `scripts/fetch-stitch.sh` is executable.
 - **Component mapping**: Follow [references/contract.md](references/contract.md) for buttons (layui-btn), inputs (layui-input), cards (layui-card), tables (layui-table), page-header, result, skeleton, timeline, space.
 
-## Keywords
+## Example: Stitch HTML to Layui-Vue SFC
 
-**English:** Stitch, Vue 3, Layui, Layui-Vue, Vite, layui-btn, lay-card.  
-**中文关键词：** Stitch、Vue 3、Layui、组件。
+Stitch HTML with Tailwind card:
+```html
+<div class="bg-white rounded shadow p-4"><h2 class="text-lg font-bold">Dashboard</h2><button class="bg-teal-600 text-white px-4 py-2">Submit</button></div>
+```
+
+Converted Layui-Vue component:
+```vue
+<template>
+  <lay-card title="Dashboard">
+    <lay-btn type="normal">Submit</lay-btn>
+  </lay-card>
+</template>
+```
+
+Key mapping: `div.rounded.shadow` becomes `<lay-card>`, raw `<button>` becomes `<lay-btn>`, Tailwind radius maps to Layui 2px classic radius per [references/contract.md](references/contract.md).
 
 ## References
 

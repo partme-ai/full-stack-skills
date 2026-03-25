@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-replace-all-matching-properties
-description: Global property batch replace. Use for global style adjustment, e.g., 'Replace all red backgrounds with brand blue'.
+description: "Batch replace matching style properties (colors, fonts, sizes) across nodes in a Pencil .pen file via the replace_all_matching_properties MCP tool. Use when the user explicitly mentions Pencil and needs to globally swap colors, update font families, migrate to a new brand style, or batch-adjust spacing across frames."
 license: Complete terms in LICENSE.txt
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: electron-egg
-description: Provides comprehensive guidance for Electron EGG framework including project structure, main/renderer processes, IPC, window management, and desktop app development. Use when the user asks about Electron EGG, needs to create Electron applications with EGG, or work with Electron EGG patterns.
+description: "Build desktop applications with the Electron EGG framework, covering project setup, main/renderer process communication, window management, plugin system, and build/packaging. Use when the user asks about Electron EGG, electron-egg, needs to create Electron applications with EGG, or work with Electron EGG patterns."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -124,61 +124,13 @@ app.start()
 - `examples/` → https://www.kaka996.com/pages/987b1c/
 - `api/` → https://www.kaka996.com/pages/a99b72/
 
-## Examples and Templates
+## API Reference (`api/`)
 
-This skill includes detailed examples organized to match the official documentation structure. All examples are in the `examples/` directory (see mapping above).
-
-**To use examples:**
-- Identify the topic from the user's request
-- Load the appropriate example file from the mapping above
-- Follow the instructions, syntax, and best practices in that file
-- Adapt the code examples to your specific use case
-
-**To use templates:**
-- Reference templates in `templates/` directory for common scaffolding
-- Adapt templates to your specific needs and coding style
-
-## API Reference
-
-Detailed API documentation is available in the `api/` directory, organized to match the official Electron EGG API documentation structure (https://www.kaka996.com/pages/a99b72/):
-
-### Main Process API (`api/main-api.md`)
-- Application class and methods
-- BrowserWindow creation and management
-- ipcMain IPC handling
-- Application lifecycle hooks
-
-### Renderer Process API (`api/renderer-api.md`)
-- ipcRenderer IPC communication
-- contextBridge for secure API exposure
-- DOM APIs available in renderer
-- Event handling
-
-### IPC API (`api/ipc-api.md`)
-- IPC communication methods (ipcMain, ipcRenderer)
-- Message sending and receiving
-- Async and sync IPC
-- Event handling and channels
-
-### Window API (`api/window-api.md`)
-- BrowserWindow creation and options
-- Window management methods
-- Window events
-- Window lifecycle
-
-### Configuration API (`api/config-api.md`)
-- Configuration file structure
-- App info configuration
-- Window configuration
-- Plugin configuration
-- Environment variables
-
-**To use API reference:**
-1. Identify the API you need help with
-2. Load the corresponding API file from the `api/` directory
-3. Find the API signature, parameters, return type, and examples
-4. Reference the linked example files for detailed usage patterns
-5. All API files include links to relevant example files in the `examples/` directory
+- `api/main-api.md` - Application class, BrowserWindow, ipcMain, lifecycle hooks
+- `api/renderer-api.md` - ipcRenderer, contextBridge, DOM APIs
+- `api/ipc-api.md` - IPC communication methods and channels
+- `api/window-api.md` - Window creation, management, events
+- `api/config-api.md` - Configuration options and environment variables
 
 ## Best Practices
 

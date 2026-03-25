@@ -1,12 +1,7 @@
 ---
 name: stitch-uview-components
-description: Convert Stitch designs into uni-app and Vue 2 and uView 2.0 pages and components. Uses Stitch MCP get_screen for retrieval; high-reliability fetch via scripts; enforces uni-app page structure and uView 2 u-* component contracts.
-allowed-tools:
-  - "stitch*:*"
-  - "Bash"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+description: "Convert Stitch designs into uni-app + Vue 2 + uView 2.0 pages and components. Use when the user mentions uView, uView 2, or uni-app Vue 2 conversion from Stitch. Retrieves screen HTML via Stitch MCP get_screen, maps Tailwind to rpx/theme, enforces uni-app page structure with uView 2 u-* components (u-navbar, u-form, u-button, u-cell-group)."
+allowed-tools: "stitch*:*, Bash, Read, Write, web_fetch"
 ---
 
 
@@ -65,10 +60,27 @@ You are a **frontend engineer** turning Stitch designs into clean, modular uni-a
 - **Fetch errors**: Quote the URL in the bash command; ensure `scripts/fetch-stitch.sh` is executable.
 - **Component mapping**: Follow [references/contract.md](references/contract.md) for layout (u-row, u-col), forms (u-form, u-input), nav (u-navbar, u-tabs), list (u-swipe-action), feedback (u-toast, u-modal).
 
-## Keywords
+## Example: Stitch HTML to uView 2 Page
 
-**English:** Stitch, uni-app, uView, uView 2, Vue 2, u-button, u-navbar.  
-**中文关键词：** Stitch、uni-app、uView、uView 2、组件。
+Stitch HTML with Tailwind card and button:
+```html
+<div class="bg-white rounded-lg shadow p-4"><h2 class="text-lg font-bold">Profile</h2><button class="bg-blue-500 text-white px-4 py-2 rounded">Save</button></div>
+```
+
+Converted uView 2 page:
+```vue
+<template>
+  <view class="page">
+    <u-navbar title="Profile" :autoBack="true" />
+    <u-cell-group>
+      <u-cell title="Profile" />
+    </u-cell-group>
+    <u-button type="primary" text="Save" @click="handleSave" />
+  </view>
+</template>
+```
+
+Key mapping: `div.rounded-lg.shadow` becomes `<u-cell-group>`, raw `<button>` becomes `<u-button type="primary">`, Tailwind px maps to rpx.
 
 ## References
 

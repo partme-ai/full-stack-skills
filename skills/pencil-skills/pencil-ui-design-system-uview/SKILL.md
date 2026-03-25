@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-uview
-description: Initialize uView 2.x . design system components in Pencil variables and component overview.
+description: "Initialize uView 2.x design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with uView 2.x (not uView Pro), needs to set up uView color palette and typography variables, or wants to create component library frames for Button, Form, Cell, Tabs, and other uView components."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on uView 2.x specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize uView 2.x tokens (primary, success, warning, error colors) in a Pencil .pen file
+- The user needs a component overview frame for uView 2.x components in Pencil
+- The user mentions "Pencil" together with "uView" (2.x, not Pro) or uView-specific components (Button, Cell, Tabs, Navbar)
+- An orchestrator skill (pencil-ui-designer) routes a uView 2.x initialization request
 
 ## How to use this skill
 
@@ -59,11 +63,33 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize uView 2.x Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "u-type-primary": "#3c9cff",
+      "u-type-success": "#5ac725",
+      "u-type-warning": "#f9ae3d",
+      "u-type-error": "#f56c6c",
+      "u-main-color": "#303133",
+      "u-border-color": "#e4e7ed",
+      "u-font-size-base": "14px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against uView 2.x documentation (distinct from uView Pro).
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

@@ -1,56 +1,50 @@
 ---
 name: pencil-ui-designer
-description: The Pencil Orchestrator. Handles the flow of initializing Design System Components based on requirements.
+description: "Orchestrates Pencil design system initialization by routing framework requests to the correct pencil-ui-design-system-* skill. Use when the user explicitly mentions Pencil and wants to initialize a design system (antd, Bootstrap, Element Plus, Layui, uView, Vant, uCharts, ECharts), set up component libraries, or create design tokens in a .pen file."
 license: Apache 2.0
 ---
 
-
 # Pencil Designer (Master Skill)
 
-This is the entry point for all Pencil design tasks. It acts as the **"Orchestrator Agent"** that plans and executes the component initialization workflow.
+This is the entry point for all Pencil design system initialization tasks. It acts as the orchestrator that classifies the target framework, routes to the correct `pencil-ui-design-system-*` skill, and returns the structured initialization plan.
 
 ## When to use this skill
 
-### Intent Recognition (CRITICAL)
-Even if a trigger phrase matches, you must **verify the user's intent**:
-1.  Is the user explicitly asking to use "Pencil"?
-2.  Is the current conversation context clearly about "Pencil" design tasks?
+Use this skill when:
+- The user explicitly mentions "Pencil" and wants to initialize a design system (antd, Bootstrap, Element Plus, Layui, uView, Vant, uCharts, ECharts)
+- The user says "Pencil, initialize components for [framework]" or "Use Pencil to set up [framework] design system"
+- The conversation context is about Pencil design tasks requiring framework-specific component setup
 
-**If the answer is NO, do NOT use this skill.**
-
-**CRITICAL PREREQUISITE:**
-**You must ONLY use this skill when the user EXPLICITLY mentions "Pencil".**
-
-**Trigger phrases include:**
-- "Pencil, initialize components for..." (Pencil, 初始化...组件)
-- "Use Pencil to design system..." (使用 Pencil 设计系统...)
-- "Pencil flow..." (Pencil 流...)
+**Do NOT use this skill** if the user does not explicitly mention "Pencil" or if the request is about general design tasks unrelated to Pencil .pen files.
 
 ## Workflow
 
 ### 1) Intent Classification
 
-Determine the target framework and components required.
+Parse the user request to determine:
+- **Target framework**: Which UI library or chart library (antd, Bootstrap, Element Plus, etc.)
+- **Components scope**: Full initialization or specific component categories
 
 ### 2) Framework Routing
 
-Route the request to the specific `pencil-ui-design-system-*` skill.
+Route the request to the specific `pencil-ui-design-system-*` skill:
 
-**Mapping:**
-- `layui` -> `pencil-ui-design-system-layui`
-- `antd`, `ant design` -> `pencil-ui-design-system-antd`
-- `bootstrap` -> `pencil-ui-design-system-bootstrap`
-- `element`, `element-plus` -> `pencil-ui-design-system-element`
-- `uview` -> `pencil-ui-design-system-uview`
-- `uview pro`, `uviewpro` -> `pencil-ui-design-system-uviewpro`
-- `vant` -> `pencil-ui-design-system-vant`
-- `ucharts` -> `pencil-ui-design-system-ucharts`
-- `echarts` -> `pencil-ui-design-system-echarts`
+| User mentions | Routes to |
+|---|---|
+| `layui`, `layui-vue` | `pencil-ui-design-system-layui` |
+| `antd`, `ant design` | `pencil-ui-design-system-antd` |
+| `bootstrap` | `pencil-ui-design-system-bootstrap` |
+| `element`, `element-plus` | `pencil-ui-design-system-element` |
+| `uview` (2.x) | `pencil-ui-design-system-uview` |
+| `uview pro`, `uviewpro` | `pencil-ui-design-system-uviewpro` |
+| `vant`, `vant 4` | `pencil-ui-design-system-vant` |
+| `ucharts`, `qiun-data-charts` | `pencil-ui-design-system-ucharts` |
+| `echarts` | `pencil-ui-design-system-echarts` |
 
 ### 3) Execution
 
-Invoke the target skill to generate the "Design System Components" initialization plan.
+Invoke the target skill which generates a PENCIL_PLAN: a sequence of Pencil MCP tool calls (`open_document` -> `set_variables` -> `batch_design` -> `get_screenshot`).
 
 ### 4) Output
 
-Return the structured plan (JSON/Action List) to the user.
+Return the structured plan (JSON/Action List) to the user for execution or approval.

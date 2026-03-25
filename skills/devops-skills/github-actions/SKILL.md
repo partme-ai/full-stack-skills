@@ -1,28 +1,106 @@
 ---
 name: github-actions
-description: Provides comprehensive guidance for GitHub Actions including workflow creation, actions, secrets, and automation. Use when the user asks about GitHub Actions, needs to create GitHub workflows, automate GitHub processes, or configure CI/CD with GitHub Actions.
+description: "Provides comprehensive guidance for GitHub Actions including workflow creation, CI/CD pipelines, secrets management, matrix strategies, and reusable workflows. Use when the user asks about GitHub Actions, needs to create workflows, automate processes, or configure CI/CD."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 编写或调试 GitHub Actions 工作流（`.github/workflows/*.yml`）
-- 配置 trigger、jobs、steps、secrets、矩阵与复用
-- 集成 checkout、build、test、deploy、通知
+- Create or debug GitHub Actions workflows (`.github/workflows/*.yml`)
+- Configure triggers, jobs, steps, secrets, matrix strategies, or reusable workflows
+- Integrate checkout, build, test, deploy, and notification steps
+- Optimize workflow performance with caching and concurrency controls
 
 ## How to use this skill
 
-1. **工作流**：YAML 中定义 `on`、`jobs`、`steps`；用 `actions/checkout`、官方/第三方 action；secrets 在 Settings 中配置。
-2. **复用**：composite actions、reusable workflows；矩阵策略跑多版本/多平台。
-3. **环境**：runner 环境（Ubuntu/Windows/macOS）；容器 job 时注意网络与挂载。
+### Workflow
+
+1. **Create workflow file** — add YAML to `.github/workflows/`
+2. **Define triggers** — specify `on` events (push, pull_request, schedule, etc.)
+3. **Configure jobs and steps** — use official and third-party actions
+4. **Test and iterate** — push to trigger, check logs, fix failures
+
+### Quick Start Example
+
+```yaml
+# .github/workflows/ci.yml
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
+      - name: Deploy
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: ./scripts/deploy.sh
+```
+
+### Reusable Workflow Example
+
+```yaml
+# .github/workflows/reusable-build.yml
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        type: string
+        default: '20'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm ci && npm run build
+```
 
 ## Best Practices
 
-- 用 `secrets` 存令牌与密钥；不在 log 中 echo 敏感信息。
-- 关键步骤加 `id` 与 `outputs` 便于后续步骤使用。
-- 缓存依赖（actions/cache）；必要时用 concurrency 取消旧运行。
+- Store tokens and keys in `secrets` — never echo sensitive values in logs
+- Add `id` and `outputs` to key steps for downstream consumption
+- Cache dependencies with `actions/cache` or built-in setup action caching
+- Use `concurrency` to cancel outdated workflow runs on the same branch
+- Pin action versions to a SHA or major version tag for security
+
+## Troubleshooting
+
+- **Workflow not triggered**: Verify the `on` event matches your branch and event type
+- **Permission denied**: Check `permissions` block and repository settings for GITHUB_TOKEN scope
+- **Cache miss**: Ensure the cache key includes lockfile hash (e.g., `hashFiles('**/package-lock.json')`)
+- **Matrix failures**: Use `continue-on-error` selectively; check logs per matrix combination
 
 ## Keywords
 
-github actions, workflow, yaml, CI/CD, 工作流, 自动化
+github actions, workflow, yaml, CI/CD, automation, matrix strategy, reusable workflows, secrets

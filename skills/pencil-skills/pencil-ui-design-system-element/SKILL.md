@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-element
-description: Initialize Element Plus. design system components in Pencil variables and component overview.
+description: "Initialize Element Plus design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with Element Plus or Element UI, needs to set up Element color palette and typography variables, or wants to create component library frames for Button, Table, Form, Dialog, and other Element components."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on Element Plus specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize Element Plus tokens (primary, success, warning, danger colors) in a Pencil .pen file
+- The user needs a component overview frame for Element Plus components in Pencil
+- The user mentions "Pencil" together with "Element", "Element Plus", or Element-specific components (Table, Form, Dialog, Menu)
+- An orchestrator skill (pencil-ui-designer) routes an Element Plus initialization request
 
 ## How to use this skill
 
@@ -59,11 +63,33 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize Element Plus Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "el-color-primary": "#409eff",
+      "el-color-success": "#67c23a",
+      "el-color-warning": "#e6a23c",
+      "el-color-danger": "#f56c6c",
+      "el-text-color-primary": "#303133",
+      "el-border-color": "#dcdfe6",
+      "el-font-size-base": "14px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against Element Plus theme documentation.
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

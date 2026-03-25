@@ -1,6 +1,6 @@
 ---
 name: ascii-motd-profile-banner
-description: Generate ASCII-only MOTD / SSH login banner / shell profile welcome messages (short/long variants, quiet mode guidance, security notices).
+description: "Generate ASCII-only MOTD / SSH login banner / shell profile welcome messages (short/long variants, quiet mode guidance, security notices)."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -35,6 +35,28 @@ license: Complete terms in LICENSE.txt
 - bannerLong (<= 30 lines)
 - safetyNotes (>= 3 actionable security notes)
 - toggleAdvice (interactive vs non-interactive display guidance)
+
+### Inline Example (short mode)
+
+```
+================================================================================
+  MyServer - Production
+================================================================================
+  * Disk usage: 42% (210GB / 500GB)
+  * Last deploy: 2024-03-15 14:30 UTC
+  * Docs: https://docs.example.com
+--------------------------------------------------------------------------------
+  WARNING: Do not store credentials in shell history
+================================================================================
+```
+
+### Workflow
+
+1. Define `title` and `messageBullets` (1-5 items)
+2. Choose `mode` (short for <= 12 lines, long for <= 30 lines)
+3. Generate `bannerShort` and `bannerLong` variants
+4. Include `safetyNotes` (>= 3 actionable security reminders)
+5. **Validate**: Confirm line count, width <= 80, no trailing spaces
 
 ## Examples
 - `examples/ssh-short.md`

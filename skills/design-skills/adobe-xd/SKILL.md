@@ -1,26 +1,54 @@
 ---
 name: adobe-xd
-description: Provides comprehensive guidance for Adobe XD including design creation, prototyping, components, and collaboration. Use when the user asks about Adobe XD, needs to create UI/UX designs, build prototypes, or work with Adobe XD components.
+description: "Guides creation of UI/UX designs, interactive prototypes, reusable components, and design specs in Adobe XD. Use when the user asks about Adobe XD artboards, prototype links, repeat grids, component states, design tokens export, or developer handoff."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 用 Adobe XD 做 UI/UX 设计、原型与协作
-- 组件、重复网格、语音与动效原型
+- Create or edit UI/UX designs using Adobe XD artboards and components
+- Build interactive prototypes with transitions, auto-animate, or voice triggers
+- Work with repeat grids, component states, or responsive resize
+- Export design specs or assets for developer handoff
+- Manage shared libraries, design tokens, or collaborate via shared links
 
 ## How to use this skill
 
-1. **操作**：画板、组件与状态；原型链接与动效；共享与评论。
-2. **集成**：Adobe 生态与插件；导出与开发交接。
-3. **参考**：Adobe XD 官方文档（注：Adobe 已推进 Figma 等替代方案，新项目可评估）。
+### 1. Design Creation
+
+1. **Create artboards**: Select device preset or custom size, name artboards by screen (e.g., "Login", "Dashboard").
+2. **Build components**: Select elements -> right-click -> "Make Component". Use slash naming for categories (e.g., `Button/Primary`, `Button/Secondary`).
+3. **Add states**: Select component -> "Default State" dropdown -> "New State" to create hover/active states.
+4. **Use repeat grid**: Select element -> "Repeat Grid" to create lists or card grids; drag handles to adjust count and spacing.
+
+### 2. Prototyping
+
+1. Switch to **Prototype** mode.
+2. Drag a connector from a trigger element to the target artboard.
+3. Configure transition: trigger (Tap/Drag/Voice), action (Transition/Auto-Animate/Overlay), and easing.
+4. Preview with Play button (Cmd+Enter / Ctrl+Enter).
+
+### 3. Developer Handoff
+
+1. Click **Share** -> "Share for Development".
+2. Developers access the published link to inspect spacing, colors, fonts, and export assets.
+
+```text
+Example prototype link setup:
+  Trigger: Tap on "Login" button
+  Action: Transition to "Dashboard" artboard
+  Animation: Auto-Animate, 0.3s ease-out
+```
 
 ## Best Practices
 
-- 组件与规范一致；原型可点击与说明完整。
-- 交付标注与切图；版本与权限管理。
+- Keep components consistent with a shared design library.
+- Ensure prototypes are fully linked with clear interaction annotations.
+- Export assets at 1x, 2x, and 3x for multi-density screens.
+- Use version history and shared links for team collaboration.
+- Note: Adobe has deprecated XD in favor of Figma; evaluate for new projects.
 
 ## Keywords
 
-adobe xd, UI 设计, 原型, Adobe
+adobe xd, UI design, prototype, artboard, components, repeat grid, developer handoff, Adobe

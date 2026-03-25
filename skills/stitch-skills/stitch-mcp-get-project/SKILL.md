@@ -1,10 +1,7 @@
 ---
 name: stitch-mcp-get-project
-description: Retrieves the detailed metadata of a specific Stitch project.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Retrieve detailed metadata of a specific Stitch project including design theme, fonts, device type, and screen instances. Use when you need project context before generating new screens or to verify project existence. Requires the project resource name in projects/{id} format."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

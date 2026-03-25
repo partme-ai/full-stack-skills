@@ -1,42 +1,55 @@
 ---
 name: skill-installer
-description: Manages the installation and discovery of AI skills from the PartMe marketplace.
+description: "Discovers, installs, and manages AI skills from the PartMe marketplace. Acts as the local package manager for Knowledge-as-a-Service (KaaS) and Tool-as-a-Service (TaaS) skills. Use when the user wants to search for available skills, install a new skill into their environment, or list currently installed skills."
 ---
 
-# Skill Installer
+## When to use this skill
 
-## Overview
+Use this skill whenever the user wants to:
+- Search the PartMe marketplace for available skills by keyword or category
+- Install a new skill into their local environment
+- List or audit currently installed skills
+- Discover skills related to a specific technology (e.g., "vue", "database", "testing")
 
-The `skill-installer` is a core utility skill that allows users and agents to discover, install, and manage other AI skills within the PartMe ecosystem. It serves as the local package manager for the "Knowledge as a Service" (KaaS) and "Tool as a Service" (TaaS) architecture.
+## How to use this skill
 
-## Features
+### Workflow
 
-- **Search Skills**: Query the local marketplace for available skills by keyword.
-- **Install Skills**: Register skills into the local environment.
-- **List Installed Skills**: View currently active skills.
+1. **Search** for skills matching the user's needs
+2. **Review** the results (name, description, path)
+3. **Install** the chosen skill
+4. **Verify** installation via the list command
 
-## Usage
+### Example: Find and Install a Vue Skill
 
-### Search for a skill
-```
+```bash
+# Step 1: Search for Vue-related skills
 skill-installer(action="search_skills", query="vue")
-```
+# Returns: [{"name": "vue3", "description": "Vue 3 component development", "path": "./skills/vue3"}, ...]
 
-### Install a skill
-```
+# Step 2: Install the skill
 skill-installer(action="install_skill", skill_path="./skills/vue3")
+# Returns: {"status": "installed", "name": "vue3"}
+
+# Step 3: Verify installation
+skill-installer(action="list_installed_skills")
+# Returns: [{"name": "vue3", "status": "active"}, ...]
 ```
 
-## Tools
+## Tools Reference
 
-### `search_skills`
-- **Input**: `query` (string)
-- **Output**: JSON list of matching skills with descriptions and paths.
+| Tool | Input | Output |
+|------|-------|--------|
+| `search_skills` | `query` (string) | JSON list of matching skills with descriptions and paths |
+| `install_skill` | `skill_path` (string) | Confirmation of installation |
+| `list_installed_skills` | None | JSON list of installed skills with status |
 
-### `install_skill`
-- **Input**: `skill_path` (string)
-- **Output**: Confirmation of installation.
+## Best Practices
 
-### `list_installed_skills`
-- **Input**: None
-- **Output**: JSON list of installed skills.
+1. **Search before installing** - Check what is available to avoid duplicates
+2. **Use specific queries** - Search "avue-crud" rather than just "crud" for better results
+3. **Verify after install** - Run `list_installed_skills` to confirm the skill is active
+
+## Keywords
+
+skill installer, marketplace, KaaS, TaaS, install skill, search skills, PartMe, skill management

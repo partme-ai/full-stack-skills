@@ -1,13 +1,6 @@
 ---
 name: java-code-comments
-description: |
-  Provides comprehensive guidance for adding Java code comments following industry standards and best practices. 
-  This skill helps add class-level comments, method-level comments, and field-level comments to Java code. 
-  Use when the user wants to add comments to Java code, needs to document Java classes/methods/fields, 
-  wants to improve code documentation, or needs to generate JavaDoc comments. This skill covers Controller, 
-  Service, ServiceImpl, Mapper, Model, Entity, BO (Business Object), DTO, VO, and other common Java 
-  component types. The skill follows a systematic workflow: scan codebase, identify components, create 
-  todo list, and add comments in order (class comments → method comments → field comments).
+description: "Adds JavaDoc comments to Java code following industry standards. Covers class-level, method-level, and field-level comments for Controller, Service, ServiceImpl, Mapper, Entity, BO, DTO, VO, and other component types. Use when the user wants to add comments to Java code, generate JavaDoc documentation, or systematically document a Java codebase."
 license: Complete terms in LICENSE.txt
 ---
 

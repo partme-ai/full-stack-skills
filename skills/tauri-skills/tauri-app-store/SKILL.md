@@ -1,6 +1,6 @@
 ---
 name: tauri-app-store
-description: Guidance for Tauri v2 store plugin with key-value persistence and lazy loading.
+description: "Persist key-value data to disk using the Tauri v2 store plugin for app settings and preferences. Use when saving app configuration, choosing between Store and LazyStore, or implementing persistent settings with automatic disk writes."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,50 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Lightweight persistent storage / 轻量持久化存储
-- Store vs LazyStore decision / Store 与 LazyStore 选择
-- Saving app settings to disk / 应用配置落盘保存
+- Persistent key-value storage for app settings
+- Store vs LazyStore selection
+- Saving user preferences or configuration to disk
 
 **Trigger phrases include:**
-- "store", "lazystore", "persistence", "key-value"
-- "持久化", "本地存储", "配置保存", "键值"
+- "store", "key-value", "app settings", "persistence", "preferences", "local storage"
 
 ## How to use this skill
 
-1. Decide between Store and LazyStore based on load timing
-2. Define the storage file location and schema
-3. Restrict access via capabilities and scope
-4. Validate persistence lifecycle and error handling
+1. **Install the store plugin**:
+   ```bash
+   cargo add tauri-plugin-store
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_store::Builder::new().build())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["store:allow-get", "store:allow-set", "store:allow-save", "store:allow-load"] }
+   ```
+4. **Use the store from the frontend**:
+   ```typescript
+   import { Store } from '@tauri-apps/plugin-store';
+   const store = await Store.load('settings.json');
+   await store.set('theme', 'dark');
+   await store.set('language', 'en');
+   const theme = await store.get<string>('theme');
+   await store.save(); // persist to disk
+   ```
+5. **Choose Store vs LazyStore**: Use `Store` for settings loaded at startup; use `LazyStore` for data loaded on-demand
+6. **Auto-save** can be configured to persist changes automatically without manual `save()` calls
 
 ## Outputs
 
-- Store selection guidance / Store 选择指导
-- Persistence plan for app settings / 应用配置持久化方案
-
-## Scope
-
-- Boundary: Store plugin usage only
-- Key points: Store vs LazyStore differences
+- Store plugin setup with settings file
+- Get/set/save patterns for key-value data
+- Store vs LazyStore selection guidance
 
 ## References
 
 - https://v2.tauri.app/plugin/store/
-- https://v2.tauri.app/zh-cn/plugin/store/
 
 ## Keywords
 
-tauri store, key-value, persistence, local storage
+tauri store, key-value, persistence, app settings, preferences, local storage

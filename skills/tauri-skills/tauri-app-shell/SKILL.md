@@ -1,6 +1,6 @@
 ---
 name: tauri-app-shell
-description: Guidance for Tauri v2 shell plugin with secure command execution and open behavior.
+description: "Execute system commands and open external URLs securely using the Tauri v2 shell plugin with strict allowlists. Use when spawning child processes, running system commands with argument validation, or opening URLs in the default browser via shell."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,55 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Executing commands or opening external links / 执行命令或打开外部链接
-- Shell plugin permissions or security risks / Shell 插件权限或安全风险
-- Command allowlists and argument control / 命令白名单与参数控制
+- Executing system commands from a Tauri app
+- Shell plugin permissions and command allowlists
+- Opening external URLs via shell (alternative to opener plugin)
 
 **Trigger phrases include:**
-- "shell", "allow-execute", "allow-open", "command execution"
-- "shell", "执行命令", "打开链接", "白名单"
+- "shell", "execute command", "spawn process", "allow-execute", "system command"
 
 ## How to use this skill
 
-1. Identify command and open requirements with allowed targets
-2. Configure capabilities for shell allow-execute and allow-open
-3. Apply strict allowlist or regex constraints for arguments
-4. Validate behavior across platforms and error handling
+1. **Install the shell plugin**:
+   ```bash
+   cargo add tauri-plugin-shell
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_shell::init())
+   ```
+3. **Configure strict allowlists** in `src-tauri/capabilities/default.json`:
+   ```json
+   {
+     "permissions": [
+       {
+         "identifier": "shell:allow-execute",
+         "allow": [{ "name": "git", "cmd": "git", "args": ["status"] }]
+       },
+       "shell:allow-open"
+     ]
+   }
+   ```
+4. **Execute commands from the frontend**:
+   ```typescript
+   import { Command } from '@tauri-apps/plugin-shell';
+   const output = await Command.create('git', ['status']).execute();
+   console.log('stdout:', output.stdout);
+   ```
+5. **CRITICAL: Apply strict allowlists** -- the shell plugin is high-risk; never allow arbitrary command execution
+6. **Use regex constraints** on arguments when dynamic input is needed, and validate all user-provided args
 
 ## Outputs
 
-- Shell capability allowlist plan / Shell 权限白名单方案
-- Safe execution and open policy / 安全执行与打开策略
-
-## Scope
-
-- Boundary: Shell plugin capability and usage patterns only
-- Key points: High-risk plugin requires strict permission control
+- Shell plugin setup with strict command allowlists
+- Command execution pattern with output handling
+- Security-first configuration (this is a high-risk plugin)
 
 ## References
 
 - https://v2.tauri.app/plugin/shell/
-- https://v2.tauri.app/zh-cn/plugin/shell/
 
 ## Keywords
 
-tauri shell, command execution, allow-execute, allow-open, security
+tauri shell, execute command, spawn process, allow-execute, system command, security

@@ -1,8 +1,6 @@
 ---
 name: threejs-controls
-description: >-
-  Addon camera and object manipulation controls: OrbitControls, MapControls, FlyControls, FirstPersonControls, TrackballControls, ArcballControls, DragControls, PointerLockControls, TransformControls; damping, target focal point, and integration with the animation loop.
-  Use for editor-style navigation and gizmos—not a full game character controller stack; pair with Raycaster selection patterns in threejs-objects when transforming selections.
+description: "Addon camera and object manipulation controls: OrbitControls, MapControls, FlyControls, FirstPersonControls, TrackballControls, ArcballControls, DragControls, PointerLockControls, TransformControls; damping, target focal point, and integration with the animation loop. Use for editor-style navigation and gizmos—not a full game character controller stack; pair with Raycaster selection patterns in threejs-objects when transforming selections."
 ---
 
 ## When to use this skill
@@ -34,6 +32,25 @@ description: >-
 4. **TransformControls**: wire `dragging-changed` to disable Orbit temporarily; sync with selection from **threejs-objects**.
 5. **Constraints**: set min/max distance/angles to avoid flipping or underground views.
 6. **Dispose**: `controls.dispose()` when tearing down.
+
+### Example: OrbitControls with damping
+
+```javascript
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.minDistance = 2;
+controls.maxDistance = 50;
+
+// Must call update() each frame when damping is enabled
+function animate() {
+  controls.update();
+  renderer.render(scene, camera);
+}
+renderer.setAnimationLoop(animate);
+```
 
 See [examples/workflow-orbit-damping.md](examples/workflow-orbit-damping.md).
 

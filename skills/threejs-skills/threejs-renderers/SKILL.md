@@ -1,8 +1,6 @@
 ---
 name: threejs-renderers
-description: >-
-  Core rendering pipeline for three.js using WebGLRenderer and WebGPURenderer, canvas sizing, device pixel ratio, color space and tone mapping, output encoding, WebGL/WebGPU render targets, Info statistics, and addon overlay renderers (CSS2D/CSS3D/SVG).
-  Use when tuning the draw loop, performance, or switching WebGPU vs WebGL; for EffectComposer passes use threejs-postprocessing; for XR session lifecycle use threejs-webxr; for shader graphs use threejs-node-tsl.
+description: "Core rendering pipeline for three.js using WebGLRenderer and WebGPURenderer, canvas sizing, device pixel ratio, color space and tone mapping, output encoding, WebGL/WebGPU render targets, Info statistics, and addon overlay renderers (CSS2D/CSS3D/SVG). Use when tuning the draw loop, performance, or switching WebGPU vs WebGL; for EffectComposer passes use threejs-postprocessing; for XR session lifecycle use threejs-webxr; for shader graphs use threejs-node-tsl."
 ---
 
 ## When to use this skill

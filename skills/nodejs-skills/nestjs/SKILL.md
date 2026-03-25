@@ -1,6 +1,6 @@
 ---
 name: nestjs
-description: Provides comprehensive guidance for NestJS using the official documentation. Use when the user asks about NestJS architecture, controllers, providers, modules, middleware, guards, pipes, interceptors, dependency injection, GraphQL, WebSockets, microservices, OpenAPI/Swagger, security, or testing.
+description: "Provides comprehensive guidance for NestJS using the official documentation. Use when the user asks about NestJS architecture, controllers, providers, modules, middleware, guards, pipes, interceptors, dependency injection, GraphQL, WebSockets, microservices, OpenAPI/Swagger, security, or testing."
 license: Complete terms in LICENSE.txt
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-snapshot-layout
-description: Get page layout structure snapshot. Use when you need to understand the current page's DOM-like tree structure to prepare for layout adjustments.
+description: "Capture a structural snapshot of the node tree in a Pencil .pen file via the snapshot_layout MCP tool, optionally filtering to only show layout problems. Use when the user explicitly mentions Pencil and needs to analyze page hierarchy, check for clipped or overlapping elements, or prepare for layout adjustments."
 license: Complete terms in LICENSE.txt
 ---
 

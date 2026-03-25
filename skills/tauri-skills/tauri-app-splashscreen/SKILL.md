@@ -1,6 +1,6 @@
 ---
 name: tauri-app-splashscreen
-description: Guidance for Tauri v2 splashscreen setup and lifecycle control to avoid white screens.
+description: "Configure a splashscreen window in Tauri v2 to display during app initialization and avoid white screen flashes. Use when adding a loading screen at startup, controlling splashscreen-to-main-window transitions, or handling slow frontend loads."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,53 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Splashscreen at app startup / 启动时的启动页
-- Hiding splashscreen timing / 启动页隐藏时机
-- White screens during initial load / 初始加载白屏
+- Splashscreen or loading screen at app startup
+- Avoiding white screen flash during initialization
+- Controlling when to hide the splashscreen
 
 **Trigger phrases include:**
-- "splashscreen", "startup screen", "white screen", "loading"
-- "启动页", "白屏", "加载"
+- "splashscreen", "splash screen", "loading screen", "white screen", "startup screen"
 
 ## How to use this skill
 
-1. Configure splashscreen assets and window settings
-2. Decide when to hide splashscreen and show main window
-3. Handle slow frontend load and error fallback
-4. Validate cross-platform startup behavior
+1. **Configure splashscreen window** in `tauri.conf.json`:
+   ```json
+   {
+     "app": {
+       "windows": [
+         { "label": "splashscreen", "url": "splashscreen.html", "width": 400, "height": 300, "decorations": false, "center": true },
+         { "label": "main", "url": "/", "visible": false }
+       ]
+     }
+   }
+   ```
+2. **Create a splashscreen HTML file** (e.g., `splashscreen.html`) with your loading animation or logo
+3. **Close the splashscreen and show main window** from Rust when the app is ready:
+   ```rust
+   #[tauri::command]
+   async fn close_splashscreen(app: tauri::AppHandle) {
+       if let Some(splash) = app.get_webview_window("splashscreen") { splash.close().unwrap(); }
+       if let Some(main) = app.get_webview_window("main") { main.show().unwrap(); }
+   }
+   ```
+4. **Trigger from the frontend** when initialization is complete:
+   ```typescript
+   import { invoke } from '@tauri-apps/api/core';
+   await invoke('close_splashscreen');
+   ```
+5. **Handle slow frontend loads** by keeping the splashscreen visible until the frontend signals readiness
+6. **Set a timeout** to close the splashscreen even if initialization hangs, to prevent stuck screens
 
 ## Outputs
 
-- Splashscreen lifecycle plan / 启动页生命周期方案
-- Startup timing checklist / 启动时机清单
-
-## Scope
-
-- Boundary: Splashscreen configuration and lifecycle only
-- Key points: Avoiding white screen and startup timing
+- Splashscreen window configuration in tauri.conf.json
+- Rust command to transition from splash to main window
+- Timeout fallback for hung initialization
 
 ## References
 
 - https://v2.tauri.app/learn/splashscreen/
-- https://v2.tauri.app/zh-cn/learn/splashscreen/
 
 ## Keywords
 
-tauri splashscreen, startup, window, white screen
+tauri splashscreen, loading screen, white screen, startup, splash window

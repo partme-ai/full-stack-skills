@@ -1,11 +1,8 @@
 ---
 name: stitch-skill-creator
-description: "A factory skill for creating new Stitch Scenario Skills. It enforces the \"Design First, Execute Last\" SOP and standard Stitch architectural patterns. Use this when you need to add support for a new domain e.g. \"Music Apps\" \"Social Networks\" to the Stitch ecosystem."
+description: "Factory skill for creating new Stitch Scenario Skills with the Design First, Execute Last SOP. Use when you need to add a new domain (e.g. Music Apps, Social Networks, Login Pages) to the Stitch ecosystem. Generates SKILL.md templates, directory structure, and examples via automated script or manual workflow."
 license: Complete terms in LICENSE.txt
-allowed-tools:
-  - "Read"
-  - "Write"
-  - "Bash"
+allowed-tools: "Read, Write, Bash"
 ---
 
 

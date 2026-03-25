@@ -1,6 +1,6 @@
 ---
 name: tauri-framework-upgrade
-description: Guidance for upgrading to stable Tauri v2 from v1 or v2 beta with migration checks.
+description: "Migrate Tauri apps from v1 to v2 or from v2 beta to v2 stable, handling breaking changes in config, plugins, and permissions. Use when upgrading Tauri versions, resolving migration errors, or updating config/capability formats for v2."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,40 +8,51 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Upgrading from Tauri v1 to v2 / 从 v1 升级到 v2
-- Migrating from v2 beta to v2 stable / v2 beta 迁移到稳定版
-- Breaking changes in config or permissions / 配置或权限变更
+- Upgrading from Tauri v1 to v2
+- Migrating from v2 beta to v2 stable
+- Breaking changes in config or permissions
 
 **Trigger phrases include:**
-- "migrate", "upgrade", "breaking changes", "v1 to v2"
-- "升级", "迁移", "配置变更", "权限变更"
+- "migrate", "upgrade", "v1 to v2", "breaking changes", "migration", "tauri update"
 
 ## How to use this skill
 
-1. Identify current version and target / 确认当前版本与目标版本
-2. Review breaking changes across config, plugins, permissions / 盘点变更点
-3. Update tauri.conf.json and plugin layouts / 更新配置与插件位置
-4. Migrate capabilities/default.json and scopes / 迁移能力与 Scope
-5. Validate IPC, CSP, and runtime behavior / 验证 IPC、CSP 与运行行为
+1. **Run the migration command**:
+   ```bash
+   npx @tauri-apps/cli migrate
+   ```
+2. **Key breaking changes from v1 to v2**:
+   - `allowlist` replaced with **capabilities system** (`src-tauri/capabilities/default.json`)
+   - `tauri` config key renamed to `app`
+   - Plugins moved from built-in to `cargo add tauri-plugin-*`
+   - Event system now uses typed payloads
+3. **Update tauri.conf.json** to v2 format:
+   ```json
+   {
+     "identifier": "com.example.app",
+     "app": { "windows": [{ "label": "main" }] },
+     "build": { "frontendDist": "../dist" }
+   }
+   ```
+4. **Create capabilities/default.json** to replace the old allowlist:
+   ```json
+   { "identifier": "default", "windows": ["main"], "permissions": ["core:default"] }
+   ```
+5. **Update Cargo.toml** dependencies to v2 versions
+6. **Validate** by running `npm run tauri dev` and resolving any compile or runtime errors
 
 ## Outputs
 
-- Migration checklist / 迁移清单
-- Updated config mapping / 更新后的配置映射
-- Post-upgrade validation plan / 升级后验证计划
-
-## Scope
-
-- Boundary: Version migration and validation only / 仅限迁移与验证
-- Key points: Config structure and capability system changes / 配置与权限体系
-- Out of scope: feature redesign / 不包含功能重构
+- Migration command and automated changes
+- Config format mapping (v1 to v2)
+- Capabilities file replacing allowlist
+- Post-migration validation checklist
 
 ## References
 
-- https://v2.tauri.app/start/migrate/
 - https://v2.tauri.app/start/migrate/from-tauri-1/
 - https://v2.tauri.app/start/migrate/from-tauri-2-beta/
 
 ## Keywords
 
-tauri upgrade, migrate, v2, breaking changes, config migration, 升级, 迁移, 配置变更
+tauri upgrade, migrate, v1 to v2, breaking changes, migration, version update

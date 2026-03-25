@@ -1,12 +1,8 @@
 ---
 name: stitch-ui-designer
-description: The Master Orchestrator. Handles the end-to-end flow of designing and generating UI screens. Use this for all "Design X" requests.
+description: "Master orchestrator for end-to-end Stitch UI design and generation. Use when the user asks to design, create, or make a UI screen using Stitch. Coordinates design spec generation, framework contract injection, prompt assembly, and MCP execution (create_project, generate_screen_from_text, get_screen) in a single workflow."
 license: Complete terms in LICENSE.txt
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
-  - "web_fetch"
+allowed-tools: "stitch*:*, Read, Write, web_fetch"
 ---
 
 

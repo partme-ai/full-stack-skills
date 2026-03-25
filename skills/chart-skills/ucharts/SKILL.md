@@ -1,6 +1,6 @@
 ---
 name: ucharts
-description: Provides comprehensive guidance for uCharts chart library including chart types, data formats, chart configuration, and platform support. Use when the user asks about uCharts, needs to create charts, configure chart options, or work with uCharts in applications.
+description: "Guides uCharts usage for cross-platform chart creation in uni-app, including line, bar, pie, radar, and mixed charts with data formatting, configuration, and responsive design. Use when the user needs to create charts with uCharts, configure chart options, or build data visualizations in uni-app applications."
 license: Complete terms in LICENSE.txt
 ---
 

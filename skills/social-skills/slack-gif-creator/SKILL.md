@@ -21,8 +21,14 @@ A toolkit providing utilities and knowledge for creating animated GIFs optimized
 
 ## Core Workflow
 
+1. **Create builder** with target dimensions and FPS
+2. **Generate frames** using PIL drawing primitives
+3. **Save with optimization** for Slack constraints
+4. **Validate** the output meets Slack requirements
+
 ```python
 from core.gif_builder import GIFBuilder
+from core.validators import validate_gif
 from PIL import Image, ImageDraw
 
 # 1. Create builder
@@ -32,14 +38,15 @@ builder = GIFBuilder(width=128, height=128, fps=10)
 for i in range(12):
     frame = Image.new('RGB', (128, 128), (240, 248, 255))
     draw = ImageDraw.Draw(frame)
-
     # Draw your animation using PIL primitives
-    # (circles, polygons, lines, etc.)
-
     builder.add_frame(frame)
 
 # 3. Save with optimization
 builder.save('output.gif', num_colors=48, optimize_for_emoji=True)
+
+# 4. Validate before uploading
+passes, info = validate_gif('output.gif', is_emoji=True, verbose=True)
+assert passes, f"GIF failed validation: {info}"
 ```
 
 ## Drawing Graphics
@@ -230,22 +237,6 @@ builder.save(
     remove_duplicates=True
 )
 ```
-
-## Philosophy
-
-This skill provides:
-- **Knowledge**: Slack's requirements and animation concepts
-- **Utilities**: GIFBuilder, validators, easing functions
-- **Flexibility**: Create the animation logic using PIL primitives
-
-It does NOT provide:
-- Rigid animation templates or pre-made functions
-- Emoji font rendering (unreliable across platforms)
-- A library of pre-packaged graphics built into the skill
-
-**Note on user uploads**: This skill doesn't include pre-built graphics, but if a user uploads an image, use PIL to load and work with it - interpret based on their request whether they want it used directly or just as inspiration.
-
-Be creative! Combine concepts (bouncing + rotating, pulsing + sliding, etc.) and use PIL's full capabilities.
 
 ## Dependencies
 

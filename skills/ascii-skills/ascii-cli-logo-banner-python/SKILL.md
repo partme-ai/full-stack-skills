@@ -1,6 +1,6 @@
 ---
 name: ascii-cli-logo-banner-python
-description: Generate copy-pastable ASCII banners with a built-in font (no external font deps), including compact fallback and optional ANSI 256 coloring for the logo.
+description: "Generate copy-pastable ASCII banners with a built-in font (no external font deps), including compact fallback and optional ANSI 256 coloring for the logo. Use when the user needs a simple ASCII banner, startup logo, or CLI welcome screen without external dependencies."
 license: Complete terms in LICENSE.txt
 dependencies:
   - python>=3.8
@@ -40,6 +40,31 @@ dependencies:
 - bannerPlain: banner text (ASCII-only when colorMode=none)
 - compactPlain: compact banner when width < 60
 - plainTextFallback: if colorMode is enabled, also provide a no-color fallback (same layout)
+
+### Workflow
+
+1. Define inputs: `brand`, `width`, optional `slogan`/`version`/`repo`
+2. Run the generation script
+3. Verify output against quality checklist (width, alignment, no trailing spaces)
+4. If `colorMode=ansi256`, generate colored variant and provide `plainTextFallback`
+
+### Script Usage
+
+```bash
+# Basic banner
+python3 scripts/generate_banner.py --brand "MyApp" --width 80
+
+# Banner with slogan and version
+python3 scripts/generate_banner.py --brand "MyApp" --width 80 \
+  --slogan "Build faster" --version "1.0.0" --repo "https://github.com/org/myapp"
+
+# Compact mode (width < 60)
+python3 scripts/generate_banner.py --brand "MyApp" --width 50
+
+# With ANSI 256 color gradient
+python3 scripts/generate_banner.py --brand "MyApp" --width 80 \
+  --colorMode ansi256 --colorStart 33 --colorEnd 129
+```
 
 ## Script
 - `scripts/generate_banner.py`

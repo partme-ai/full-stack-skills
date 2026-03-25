@@ -1,6 +1,6 @@
 ---
 name: uniapp-native-plugin
-description: A comprehensive skill for developing native plugins for uni-app. Use this skill when building Android/iOS native plugins, integrating native capabilities, or publishing plugins based on official native plugin docs.
+description: "Develops native Android and iOS plugins for uni-app including module creation, JavaScript-to-native communication, and plugin packaging for distribution. Use when the user needs to build custom native modules, extend uni-app with native capabilities (camera, Bluetooth, sensors), or create publishable native plugins."
 license: Complete terms in LICENSE.txt
 ---
 

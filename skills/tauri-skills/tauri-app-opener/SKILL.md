@@ -1,6 +1,6 @@
 ---
 name: tauri-app-opener
-description: Guidance for Tauri v2 opener plugin with safe external links and file handling.
+description: "Open external URLs and files in the default system application using the Tauri v2 opener plugin with protocol allowlisting. Use when opening links in the browser, launching files in their default app, or restricting which protocols and paths can be opened."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,52 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Opening external links or files / 打开外部链接或文件
-- Allowlisted protocols or paths / 协议或路径白名单
-- Safe opener wrapper / 安全打开封装
+- Opening external links or URLs from a Tauri app
+- Launching files in their default application
+- Protocol or path allowlisting for the opener
 
 **Trigger phrases include:**
-- "opener", "open link", "protocol allowlist", "open file"
-- "打开链接", "打开文件", "协议白名单", "安全打开"
+- "open link", "open URL", "open file", "default browser", "opener", "launch"
 
 ## How to use this skill
 
-1. Define allowed protocols and target paths
-2. Configure opener plugin capabilities and scope
-3. Implement a safe open API with strict validation
-4. Validate behavior across platforms and error cases
+1. **Install the opener plugin**:
+   ```bash
+   cargo add tauri-plugin-opener
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_opener::init())
+   ```
+3. **Configure capabilities** with allowed URLs/protocols in `src-tauri/capabilities/default.json`:
+   ```json
+   {
+     "permissions": [
+       { "identifier": "opener:allow-open-url", "allow": [{ "url": "https://**" }] },
+       "opener:allow-open-path"
+     ]
+   }
+   ```
+4. **Open URLs and files from the frontend**:
+   ```typescript
+   import { openUrl, openPath } from '@tauri-apps/plugin-opener';
+   await openUrl('https://tauri.app');
+   await openPath('/path/to/document.pdf');
+   ```
+5. **Restrict allowed protocols** to https:// and specific schemes only (never allow arbitrary URLs)
+6. **Validate paths** before opening to prevent path traversal attacks
 
 ## Outputs
 
-- Opener policy and allowlist plan / 打开策略与白名单方案
-- Cross-platform behavior checklist / 跨平台行为清单
-
-## Scope
-
-- Boundary: Opener plugin usage only
-- Key points: Protocol and path allowlisting
+- Opener plugin setup with protocol-scoped permissions
+- URL and file opening patterns
+- Security validation for paths and protocols
 
 ## References
 
 - https://v2.tauri.app/plugin/opener/
-- https://v2.tauri.app/zh-cn/plugin/opener/
 
 ## Keywords
 
-tauri opener, external links, allowlist, security
+tauri opener, open URL, open file, default browser, external links, allowlist

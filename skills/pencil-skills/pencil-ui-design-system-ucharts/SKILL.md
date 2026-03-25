@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-ucharts
-description: Initialize uCharts. design system components chart placeholders and data-viz tokens in Pencil.
+description: "Initialize uCharts chart theme tokens and data visualization placeholder frames in a Pencil .pen file. Use when the user mentions Pencil with uCharts or qiun-data-charts, needs to set up chart series colors and axis tokens, or wants to create placeholder frames for Line, Bar, Pie, Radar, and other uCharts chart types."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a chart/design system based on uCharts specifications in a .pen file: set up chart theme colors and create placeholder frames for chart types (line, bar, pie, etc.).
+Use this skill when:
+- The user wants to initialize uCharts chart theme tokens (series colors, axis, text) in a Pencil .pen file
+- The user needs placeholder frames for uCharts chart types (Line, Area, Column, Bar, Pie, Ring, Radar)
+- The user mentions "Pencil" together with "uCharts", "qiun-data-charts", or chart visualization components
+- An orchestrator skill (pencil-ui-designer) routes a uCharts initialization request
 
 ## How to use this skill
 
@@ -48,11 +52,33 @@ Use `mcp__pencil__batch_design` to create a "Charts Overview" frame with placeho
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize uCharts Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/dashboard.pen",
+    "replace": false,
+    "variables": {
+      "ucharts-color-1": "#1890ff",
+      "ucharts-color-2": "#52c41a",
+      "ucharts-color-3": "#faad14",
+      "ucharts-color-4": "#f5222d",
+      "ucharts-axis-color": "#e8e8e8",
+      "ucharts-text-color": "#666666",
+      "ucharts-font-size": "12px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against uCharts theme documentation.
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Chart "components" here are placeholder frames for layout; actual chart config is code-side.
+- Keep each `batch_design` call to maximum 25 operations.
 
 ## Keywords
 

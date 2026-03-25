@@ -1,8 +1,6 @@
 ---
 name: threejs-helpers
-description: >-
-  Debug and visualization helpers in three.js Core Helpers (AxesHelper, GridHelper, CameraHelper, light helpers, SkeletonHelper, bounding box helpers, PlaneHelper, PolarGridHelper, ArrowHelper) and Addons Helpers (VertexNormalsHelper, VertexTangentsHelper, RectAreaLightHelper, LightProbeHelper, ViewHelper, OctreeHelper, TextureHelper, PositionalAudioHelper, AnimationPathHelper, RapierHelper).
-  Use only for development and editor overlays—not for shipping art; for gizmo-style manipulation use threejs-controls.
+description: "Debug and visualization helpers in three.js Core Helpers (AxesHelper, GridHelper, CameraHelper, light helpers, SkeletonHelper, bounding box helpers, PlaneHelper, PolarGridHelper, ArrowHelper) and Addons Helpers (VertexNormalsHelper, VertexTangentsHelper, RectAreaLightHelper, LightProbeHelper, ViewHelper, OctreeHelper, TextureHelper, PositionalAudioHelper, AnimationPathHelper, RapierHelper). Use only for development and editor overlays—not for shipping art; for gizmo-style manipulation use threejs-controls."
 ---
 
 ## When to use this skill
@@ -25,10 +23,34 @@ description: >-
 ## How to use this skill
 
 1. **Attach** helper to the object it describes (e.g., `CameraHelper(light.shadow.camera)`).
-2. **Update** when targets move—some helpers need per-frame refresh.
-3. **Remove** in production builds or behind debug flags.
-4. **Performance**: helpers add draw calls—disable when profiling performance issues.
-5. **Addons**: import from `three/addons/helpers/...` paths per **threejs-dev-setup**.
+2. **Update** when targets move — some helpers need per-frame refresh.
+3. **Gate behind debug flags** — remove helpers in production builds to save draw calls.
+4. **Performance** — helpers add draw calls; disable when profiling performance issues.
+5. **Addons** — import from `three/addons/helpers/...` paths per **threejs-dev-setup**.
+
+### Example: Debug flag pattern for conditional helpers
+
+```javascript
+import * as THREE from 'three';
+
+const DEBUG = import.meta.env.DEV; // Vite-style; adapt for your bundler
+const debugGroup = new THREE.Group();
+debugGroup.visible = DEBUG;
+scene.add(debugGroup);
+
+// Add helpers only in development
+if (DEBUG) {
+  debugGroup.add(new THREE.AxesHelper(5));
+  debugGroup.add(new THREE.GridHelper(10, 10));
+
+  // Shadow camera helper for directional light
+  const shadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+  debugGroup.add(shadowHelper);
+}
+
+// Toggle helpers at runtime via console or GUI
+// debugGroup.visible = !debugGroup.visible;
+```
 
 See [examples/workflow-light-camera-helpers.md](examples/workflow-light-camera-helpers.md).
 

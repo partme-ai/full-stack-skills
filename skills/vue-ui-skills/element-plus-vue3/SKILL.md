@@ -1,6 +1,6 @@
 ---
 name: element-plus-vue3
-description: Provides comprehensive guidance for Element Plus Vue 3 component library including installation, components, themes, internationalization, and API reference. Use when the user asks about Element Plus for Vue 3, needs to build Vue 3 applications with Element Plus, or customize component styles.
+description: "Provides comprehensive guidance for Element Plus Vue 3 component library including installation, components, themes, internationalization, and API reference. Use when the user asks about Element Plus for Vue 3, needs to build Vue 3 applications with Element Plus, or customize component styles."
 license: Complete terms in LICENSE.txt
 ---
 

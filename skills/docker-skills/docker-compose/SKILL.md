@@ -17,6 +17,34 @@ Use this skill whenever the user wants to:
 2. **CLI**：`docker compose up -d`、`down`、`logs -f`、`ps`；override 用 `-f` 或 `docker-compose.override.yml`。
 3. **环境**：`.env` 或 env_file 注入变量；secrets 用 Docker secrets 或外部方案。
 
+### Example: docker-compose.yml with health check
+
+```yaml
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://user:pass@db:5432/mydb
+
+  db:
+    image: postgres:16
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  pgdata:
+```
+
 ## Best Practices
 
 - 服务间用内部网络；仅暴露必要端口。

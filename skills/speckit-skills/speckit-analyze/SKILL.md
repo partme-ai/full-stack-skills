@@ -1,6 +1,6 @@
 ---
 name: speckit-analyze
-description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and tasks.md after task generation.
+description: "Perform a read-only cross-artifact consistency analysis across spec.md, plan.md, and tasks.md, detecting duplications, ambiguities, coverage gaps, and constitution violations with severity ratings. Use when the user has all three artifacts and needs a quality check before implementation, or wants to identify inconsistencies across specifications."
 ---
 
 # Spec Kit Analyze Skill

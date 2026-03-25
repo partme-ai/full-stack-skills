@@ -1,6 +1,6 @@
 ---
 name: full-stack-doc
-description: Provides comprehensive guidance for Chinese product documentation generation including product documentation creation, formatting, and documentation best practices. Use when the user asks about product documentation in Chinese, needs to generate product docs, or create Chinese documentation.
+description: "Generates full-lifecycle Chinese software project documentation using 14 templates covering product research, PRD, architecture design, domain modeling (DDD/COLA), testing, deployment, and operations. Use when the user needs to create product documentation in Chinese, generate PRD documents, write architecture designs, or produce deployment and maintenance docs."
 ---
 
 # 项目文档生成技能

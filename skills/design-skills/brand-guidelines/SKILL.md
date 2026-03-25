@@ -1,16 +1,18 @@
 ---
 name: brand-guidelines
-description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.
+description: "Applies Anthropic brand colors (dark #141413, orange #d97757, blue #6a9bcc, green #788c5d), Poppins headings, and Lora body text to artifacts such as presentations, documents, or visuals. Use when the user needs Anthropic brand styling, brand color application, corporate typography, or visual formatting following Anthropic design standards."
 license: Complete terms in LICENSE.txt
 ---
 
 # Anthropic Brand Styling
 
-## Overview
+## When to use this skill
 
-To access Anthropic's official brand identity and style resources, use this skill.
-
-**Keywords**: branding, corporate identity, visual identity, post-processing, styling, brand colors, typography, Anthropic brand, visual formatting, visual design
+Use this skill when:
+- The user needs to apply Anthropic brand colors and typography to any artifact
+- The user asks about Anthropic's official color palette, fonts, or visual identity
+- An artifact (presentation, document, visual) needs Anthropic's look-and-feel
+- The user mentions brand guidelines, corporate styling, or Anthropic visual standards
 
 ## Brand Guidelines
 
@@ -71,3 +73,25 @@ To access Anthropic's official brand identity and style resources, use this skil
 - Uses RGB color values for precise brand matching
 - Applied via python-pptx's RGBColor class
 - Maintains color fidelity across different systems
+
+## Workflow
+
+1. **Identify the artifact** to style (presentation, document, HTML, image).
+2. **Apply colors**: Use main colors for backgrounds and text; accent colors for highlights and shapes.
+3. **Apply typography**: Poppins for headings (24pt+), Lora for body text.
+4. **Verify contrast**: Ensure dark text on light backgrounds and light text on dark backgrounds.
+
+```python
+# Example: Apply brand colors to a PowerPoint slide
+from pptx.util import Pt
+from pptx.dml.color import RGBColor
+
+# Anthropic brand colors
+DARK = RGBColor(0x14, 0x14, 0x13)
+LIGHT = RGBColor(0xFA, 0xF9, 0xF5)
+ORANGE = RGBColor(0xD9, 0x77, 0x57)
+```
+
+## Keywords
+
+branding, corporate identity, visual identity, brand colors, typography, Anthropic brand, Poppins, Lora

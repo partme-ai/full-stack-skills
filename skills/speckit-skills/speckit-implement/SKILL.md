@@ -1,6 +1,6 @@
 ---
 name: speckit-implement
-description: Execute the implementation plan by processing and executing all tasks defined in tasks.md
+description: "Execute the implementation plan by processing tasks from tasks.md phase-by-phase, following TDD order, respecting task dependencies and parallel markers, setting up ignore files, and marking completed tasks. Use when the plan and tasks are ready and the user wants to begin coding, or when resuming implementation after a pause."
 ---
 
 # Spec Kit Implement Skill

@@ -1,11 +1,19 @@
 ---
 name: skill-sop-creator
-description: Guide for creating Standard Operating Procedures and SOPs and composite workflows by combining atomic Agent Skills. Use when users want to design, structure, or implement multi-step workflows that orchestrate multiple skills for complex business goals. Transforms loose tool collections into reliable, repeatable business processes.
+description: "Creates Standard Operating Procedures (SOPs) by combining atomic Agent Skills into multi-step composite workflows with decision logic and human-in-the-loop checkpoints. Supports searching available skills, drafting SOP structures, and validating dependencies. Use when the user wants to design automated business workflows, chain multiple skills into a repeatable process, or create composite skill orchestrations."
 ---
 
 # skill-sop-creator
 
-Guide for creating Standard Operating Procedures (SOPs) and composite workflows by combining atomic Agent Skills. Use this skill when users want to design, structure, or implement multi-step workflows (SOPs) that orchestrate multiple skills to achieve complex business goals. This skill transforms loose collections of tools into reliable, repeatable business processes.
+## When to use this skill
+
+Use this skill whenever the user wants to:
+- Design a multi-step automated workflow that chains multiple Agent Skills
+- Create a repeatable Standard Operating Procedure for a business process
+- Search for available atomic skills to compose into a workflow
+- Validate that a proposed SOP has all required skill dependencies
+
+Guide for creating Standard Operating Procedures (SOPs) and composite workflows by combining atomic Agent Skills. This skill transforms loose collections of tools into reliable, repeatable business processes.
 
 ## Parameters
 

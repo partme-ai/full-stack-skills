@@ -1,12 +1,6 @@
 ---
 name: mybatis-plus-generator
-description: |
-  Provides comprehensive guidance for generating MyBatis-Plus code including Entity, Mapper, Service, ServiceImpl, 
-  Controller, DTO, VO, BO and other related objects from database tables. Use ONLY when the user explicitly 
-  mentions MyBatis-Plus, mybatis-plus-generator, or wants to generate code using MyBatis-Plus framework. 
-  This skill automatically generates standard CRUD methods and custom methods based on user requirements for 
-  MyBatis-Plus projects. Supports MVC and DDD architectures, Java and Kotlin languages. Do NOT trigger for 
-  generic code generation, JPA/Hibernate, or other ORM frameworks.
+description: "Generates MyBatis-Plus code (Entity, Mapper, Service, ServiceImpl, Controller, DTO, VO, BO) from database tables. Supports MVC and DDD architectures, Java and Kotlin, with standard CRUD and custom methods. Use ONLY when the user explicitly mentions MyBatis-Plus or mybatis-plus-generator; do NOT trigger for JPA, Hibernate, or other ORMs."
 license: Complete terms in LICENSE.txt
 ---
 

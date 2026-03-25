@@ -1,12 +1,6 @@
 ---
 name: ddd4j-project-creator
-description: |
-  A comprehensive skill for creating new ddd4j (Domain-Driven Design for Java) projects based on ddd4j-boot framework. 
-  Use ONLY when the user explicitly mentions creating a ddd4j project, initializing ddd4j project, or setting up 
-  ddd4j-boot project. Supports three project types: single-module monolith, multi-module monolith, and microservices. 
-  Generates project scaffolding based on ddd4j-boot architecture with DDD, Hexagonal Architecture, Clean Architecture, 
-  and COLA V5 patterns. Do NOT trigger for generic DDD projects, JPA/Hibernate projects, or other ORM frameworks 
-  without explicit ddd4j mention.
+description: "A comprehensive skill for creating new ddd4j (Domain-Driven Design for Java) projects based on ddd4j-boot framework. Use ONLY when the user explicitly mentions creating a ddd4j project, initializing ddd4j project, or setting up ddd4j-boot project. Supports three project types: single-module monolith, multi-module monolith, and microservices."
 license: Complete terms in LICENSE.txt
 ---
 

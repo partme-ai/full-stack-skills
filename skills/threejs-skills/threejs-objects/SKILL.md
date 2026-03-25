@@ -1,8 +1,6 @@
 ---
 name: threejs-objects
-description: >-
-  three.js scene graph objects: Object3D transforms and hierarchy, Group, Mesh, InstancedMesh, SkinnedMesh, BatchedMesh, LOD, Line/LineLoop/LineSegments, Points, Sprite, Bone, Skeleton, ClippingGroup; interaction via Raycaster, Layers masks, and EventDispatcher patterns.
-  Merges the former interaction scope—use for picking and layers; for pure vector math without scene graph use threejs-math; for playing skeletal clips use threejs-animation; for frustum culling internals see camera docs.
+description: "three.js scene graph objects: Object3D transforms and hierarchy, Group, Mesh, InstancedMesh, SkinnedMesh, BatchedMesh, LOD, Line/LineLoop/LineSegments, Points, Sprite, Bone, Skeleton, ClippingGroup; interaction via Raycaster, Layers masks, and EventDispatcher patterns. Use when building scene hierarchies, picking objects with Raycaster, or configuring instanced/skinned meshes; for pure vector math use threejs-math; for skeletal clips use threejs-animation."
 ---
 
 ## When to use this skill
@@ -29,12 +27,39 @@ description: >-
 ## How to use this skill
 
 1. **Compose** scenes with `Group` and transforms; minimize deep hierarchies where possible.
-2. **Instancing**: set per-instance matrices; understand `count` and frustum culling behavior.
-3. **SkinnedMesh**: bind skeleton; clips in **threejs-animation**; skinning material flags in **threejs-materials**.
-4. **Picking**: normalize device coords, set ray from camera, filter by layers, sort intersections.
-5. **Events**: `EventDispatcher` on custom objects—patterns only, not DOM frameworks.
-6. **Clipping**: `ClippingGroup` usage per docs when user needs sectional cuts.
-7. **Dispose**: geometries/materials/textures when removing objects permanently.
+2. **Instancing** — set per-instance matrices; understand `count` and frustum culling behavior.
+3. **SkinnedMesh** — bind skeleton; clips in **threejs-animation**; skinning material flags in **threejs-materials**.
+4. **Picking** — normalize device coords, set ray from camera, filter by layers, validate intersections are sorted by distance before processing.
+5. **Events** — `EventDispatcher` on custom objects; patterns only, not DOM frameworks.
+6. **Clipping** — `ClippingGroup` usage per docs when user needs sectional cuts.
+7. **Dispose** — call `dispose()` on geometries/materials/textures when removing objects permanently.
+
+### Example: Raycaster picking with validation
+
+```javascript
+import * as THREE from 'three';
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+function onPointerMove(event) {
+  // Normalize device coordinates (-1 to +1)
+  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function pick(camera, scene) {
+  raycaster.setFromCamera(pointer, camera);
+  const intersections = raycaster.intersectObjects(scene.children, true);
+
+  // Validate: intersections are sorted by distance (nearest first)
+  if (intersections.length > 0) {
+    console.log('Nearest hit:', intersections[0].object.name,
+                'at distance:', intersections[0].distance);
+  }
+  return intersections;
+}
+```
 
 See [examples/workflow-raycaster-pick.md](examples/workflow-raycaster-pick.md).
 

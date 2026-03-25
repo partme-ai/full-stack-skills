@@ -1,6 +1,6 @@
 ---
 name: tauri-scaffold
-description: Guidance for Tauri v2 project scaffolding with create-tauri-app, project structure, and frontend static export configuration.
+description: "Scaffold a Tauri v2 project with create-tauri-app, configure project structure, and set up static export for frontend frameworks. Use when creating a new project, understanding the Tauri project structure, or configuring SSG/static export for Next.js or SvelteKit."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,37 +8,51 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Scaffolding a Tauri v2 project / 搭建 Tauri v2 项目脚手架
-- Project structure or initial configuration / 项目结构或初始化配置
-- Static export or SSG for framework integration / 框架静态导出或 SSG
+- Scaffolding a new Tauri v2 project
+- Understanding the Tauri project structure
+- Static export or SSG configuration
 
 **Trigger phrases include:**
-- "create-tauri-app", "scaffold", "project structure", "static export", "SSG"
-- "脚手架", "项目结构", "静态导出", "SSG"
+- "scaffold", "create-tauri-app", "project structure", "static export", "SSG", "new project"
 
 ## How to use this skill
 
-1. Gather target platforms and frontend framework choice
-2. Use create-tauri-app with appropriate options
-3. Apply SSG or static export configuration for the chosen framework
-4. Verify the project builds and loads local assets correctly
+1. **Scaffold with create-tauri-app**:
+   ```bash
+   npm create tauri-app@latest my-app -- --template react-ts
+   ```
+2. **Project structure** after scaffolding:
+   ```
+   my-app/
+   ├── src/               # Frontend code
+   ├── src-tauri/
+   │   ├── src/main.rs    # Rust entry point
+   │   ├── Cargo.toml     # Rust dependencies
+   │   ├── tauri.conf.json # Tauri configuration
+   │   └── capabilities/  # Permission files
+   └── package.json       # Frontend dependencies
+   ```
+3. **Configure static export** for SSR frameworks (Tauri needs static files):
+   - Next.js: `output: 'export'` in `next.config.js`
+   - SvelteKit: `@sveltejs/adapter-static`
+4. **Align output paths** in `tauri.conf.json`:
+   ```json
+   { "build": { "frontendDist": "../dist" } }
+   ```
+5. **Verify the scaffold** by running `npm run tauri dev` and confirming the window opens
+6. **Add plugins** to `Cargo.toml` as needed for your app features
 
 ## Outputs
 
-- Scaffold commands and options / 脚手架命令与选项
-- Project structure and config checklist / 项目结构与配置清单
-
-## Scope
-
-- Boundary: create-tauri-app decisions and initial configuration
-- Key points: SSG/export configuration for frameworks like Next.js
+- Scaffolded Tauri v2 project with chosen frontend
+- Project structure overview
+- Static export configuration for SSR frameworks
 
 ## References
 
 - https://v2.tauri.app/start/create-project/
 - https://v2.tauri.app/start/project-structure/
-- https://v2.tauri.app/start/frontend/
 
 ## Keywords
 
-tauri scaffold, create-tauri-app, project structure, static export, ssg
+tauri scaffold, create-tauri-app, project structure, static export, SSG

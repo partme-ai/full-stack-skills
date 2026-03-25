@@ -21,7 +21,7 @@ Use **`/opsx:sync`** to merge delta specs from a change into the main `openspec/
 
 1. **Run sync**
    - `/opsx:sync` — sync the current/inferred change.
-   - `/opsx:sync <change-name>` — sync a specific change.
+   - `/opsx:sync add-dark-mode` — sync a specific change by name.
 
 2. **What happens**
    - Reads delta specs from the change folder.

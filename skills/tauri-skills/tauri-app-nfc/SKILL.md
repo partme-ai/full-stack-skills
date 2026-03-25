@@ -1,6 +1,6 @@
 ---
 name: tauri-app-nfc
-description: Guidance for Tauri v2 NFC plugin with session handling and data validation.
+description: "Read and write NFC tags using the Tauri v2 NFC plugin with session lifecycle management. Use when adding NFC read/write features, managing NFC scan sessions, or handling NFC availability on mobile devices."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,48 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- NFC read or write features / NFC 读写功能
-- NFC session lifecycle / NFC 会话生命周期
-- Devices with NFC capabilities / 具备 NFC 能力的设备
+- NFC tag reading or writing in a Tauri app
+- NFC session lifecycle (start, scan, stop)
+- NFC hardware availability checks on mobile
 
 **Trigger phrases include:**
-- "nfc", "read", "write", "session"
-- "NFC", "读", "写", "会话"
+- "NFC", "NFC tag", "near field", "NFC read", "NFC write", "tap to scan"
 
 ## How to use this skill
 
-1. Identify NFC use cases and supported platforms
-2. Configure NFC plugin capabilities and permissions
-3. Implement session handling and data validation
-4. Provide user feedback for read/write outcomes
+1. **Install the NFC plugin**:
+   ```bash
+   cargo add tauri-plugin-nfc
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_nfc::init())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["nfc:allow-scan", "nfc:allow-write"] }
+   ```
+4. **Start an NFC scan session from the frontend**:
+   ```typescript
+   import { scan } from '@tauri-apps/plugin-nfc';
+   const tag = await scan();
+   console.log('Tag ID:', tag.id);
+   console.log('Records:', tag.records);
+   ```
+5. **Manage session lifecycle**: start scanning, process results, and stop the session when done
+6. **Validate tag data** before processing and provide user feedback for successful/failed scans
 
 ## Outputs
 
-- NFC workflow plan / NFC 流程方案
-- Session handling checklist / 会话处理清单
-
-## Scope
-
-- Boundary: NFC plugin usage only
-- Key points: Session lifecycle and data validation
+- NFC plugin setup with scan and write capabilities
+- Session lifecycle management pattern
+- Tag data validation and user feedback flow
 
 ## References
 
 - https://v2.tauri.app/plugin/nfc/
-- https://v2.tauri.app/zh-cn/plugin/nfc/
 
 ## Keywords
 
-tauri nfc, read write, session, permissions
+tauri nfc, NFC tag, near field communication, scan, read write

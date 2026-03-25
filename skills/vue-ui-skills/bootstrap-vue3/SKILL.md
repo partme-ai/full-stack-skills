@@ -1,6 +1,6 @@
 ---
 name: bootstrap-vue3
-description: Provides comprehensive guidance for Bootstrap Vue 3 component library including Bootstrap components, grid system, utilities, and Vue 3 integration. Use when the user asks about Bootstrap Vue 3, needs to use Bootstrap components in Vue 3, or implement responsive layouts.
+description: "Provides comprehensive guidance for Bootstrap Vue 3 component library including Bootstrap components, grid system, utilities, and Vue 3 integration. Use when the user asks about Bootstrap Vue 3, needs to use Bootstrap components in Vue 3, or implement responsive layouts."
 license: Complete terms in LICENSE.txt
 ---
 

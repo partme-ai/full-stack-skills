@@ -1,34 +1,53 @@
 ---
 name: nvm-docker-ci
-description: Cover nvm installation and usage in Docker images and CI/CD pipelines, including non-interactive shell loading.
+description: "Install and configure nvm in Docker containers and CI/CD pipelines, including non-interactive shell loading via BASH_ENV or ENTRYPOINT. Use when the user asks about nvm in Docker, CI/CD nvm setup, GitHub Actions node version management, or troubleshooting nvm in non-interactive shells."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm in Docker and CI/CD
 
-**ALWAYS use this skill when the user mentions:**
-- Installing nvm in Docker
-- Using nvm in CI/CD pipelines
-- Non-interactive shell configuration
+Configure nvm for containerized and CI/CD environments where shells run non-interactively.
 
-**Trigger phrases include:**
-- "Dockerfile", "容器", "CI/CD"
-- "BASH_ENV", "ENTRYPOINT", "non-interactive"
+## Workflow
 
-## How to use this skill
+1. **Install nvm in a Dockerfile:**
+   ```dockerfile
+   ENV NVM_DIR=/usr/local/nvm
+   ENV NODE_VERSION=20.11.0
+   RUN mkdir -p $NVM_DIR \
+     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
+     && . $NVM_DIR/nvm.sh \
+     && nvm install $NODE_VERSION \
+     && nvm alias default $NODE_VERSION
 
-**CRITICAL: This skill targets container and CI usage only.** Base install steps remain in nvm-install.
+   # Make nvm available in non-interactive shells
+   ENV BASH_ENV="$NVM_DIR/nvm.sh"
+   ```
 
-1. Choose Dockerfile or CI job installation approach.
-2. Ensure non-interactive shells load nvm via BASH_ENV or ENTRYPOINT.
-3. Validate nvm availability in container or pipeline.
+2. **Load nvm in CI/CD jobs** (e.g., GitHub Actions):
+   ```yaml
+   steps:
+     - run: |
+         export NVM_DIR="$HOME/.nvm"
+         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+         nvm install 20
+         nvm use 20
+         node -v
+   ```
+
+3. **Validate nvm availability** in the container or pipeline:
+   ```bash
+   docker run --rm my-image bash -c "nvm --version && node -v"
+   ```
+
+**Note:** Base installation steps are in nvm-install. This skill targets container and CI usage only.
 
 ### Example file map
 
-- examples/install-docker.md
-- examples/install-docker-cicd.md
-- examples/docker-dev.md
+- `examples/install-docker.md` - Dockerfile nvm installation
+- `examples/install-docker-cicd.md` - CI/CD pipeline configuration
+- `examples/docker-dev.md` - Development container setup
 
 ## Keywords
 
-docker, ci, bash_env, entrypoint, non-interactive shell, nvm in container, 容器
+docker, ci, bash_env, entrypoint, non-interactive shell, nvm in container, GitHub Actions

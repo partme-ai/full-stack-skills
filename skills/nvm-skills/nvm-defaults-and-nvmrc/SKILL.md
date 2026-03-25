@@ -1,39 +1,49 @@
 ---
 name: nvm-defaults-and-nvmrc
-description: Define default Node versions and manage project-specific versions with .nvmrc and auto-use flows.
+description: "Set default Node versions via nvm aliases, create .nvmrc files for project-specific versions, and configure shell auto-switching per directory. Use when the user asks about nvm alias default, .nvmrc configuration, auto-switching Node versions on directory change, or pinning a Node version for a project."
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
+# nvm Defaults and .nvmrc
 
-**ALWAYS use this skill when the user mentions:**
-- Setting a default Node version or alias
-- Creating or using a .nvmrc file
-- Auto-switching versions per directory
+Configure default Node versions and project-level version pinning with nvm.
 
-**Trigger phrases include:**
-- "nvm alias default", "默认版本", ".nvmrc"
-- "auto use", "进入目录自动切换"
+## Workflow
 
-## How to use this skill
+1. **Set the default Node version** using an alias:
+   ```bash
+   nvm alias default 20
+   # Or use an LTS alias
+   nvm alias default lts/iron
+   ```
 
-**CRITICAL: This skill is about defaults and .nvmrc.** Basic install/use belongs to nvm-usage-basics.
+2. **Create or update .nvmrc** in the project root:
+   ```bash
+   # Pin to a specific version
+   echo "20.11.0" > .nvmrc
+   # Or use an LTS alias
+   echo "lts/iron" > .nvmrc
+   ```
 
-1. Set the default alias or LTS target.
-2. Create or update .nvmrc with the required version or alias.
-3. Enable shell auto-use logic if requested.
-4. Verify switching behavior in a new shell session.
+3. **Enable shell auto-switching** if requested (see auto-use examples per shell).
 
-**Important notes:**
-- Keep .nvmrc consistent across team repos to avoid version drift.
+4. **Verify** the configuration works:
+   ```bash
+   # Open a new shell, then:
+   nvm current        # Should show the default version
+   cd /path/to/project
+   node -v            # Should match .nvmrc version
+   ```
+
+**Important:** Keep .nvmrc consistent across team repos to avoid version drift. Basic install/use belongs to nvm-usage-basics.
 
 ### Example file map
 
-- examples/default-version.md
-- examples/nvmrc.md
-- examples/auto-use-bash.md
-- examples/auto-use-zsh.md
-- examples/auto-use-fish.md
+- `examples/default-version.md` - Setting default aliases
+- `examples/nvmrc.md` - .nvmrc file creation and usage
+- `examples/auto-use-bash.md` - Auto-switching for bash
+- `examples/auto-use-zsh.md` - Auto-switching for zsh
+- `examples/auto-use-fish.md` - Auto-switching for fish
 
 ## Keywords
 

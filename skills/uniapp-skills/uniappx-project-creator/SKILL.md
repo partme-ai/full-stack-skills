@@ -1,6 +1,6 @@
 ---
 name: uniappx-project-creator
-description: Provides one-command project creation for uni-app-x including Vue 3 + TypeScript + Vite setup, configuration, and template generation. Use when the user asks to create a uni-app-x project with a single command, needs to initialize a new uni-app-x project, or generate uni-app-x project structure.
+description: "Creates new uni-app-x projects with Vue 3 + TypeScript + Vite via CLI or HBuilderX, including tsconfig.json setup, manifest.json and pages.json configuration, and Composition API project templates. Use when the user wants to scaffold a new uni-app-x project, initialize TypeScript project files, or set up the uni-app-x development environment."
 license: Complete terms in LICENSE.txt
 ---
 

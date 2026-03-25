@@ -1,26 +1,60 @@
 ---
 name: ant-design-react
-description: Provides comprehensive guidance for Ant Design React component library including components, design system, themes, and TypeScript support. Use when the user asks about Ant Design for React, needs to build React applications with Ant Design, or implement design system patterns.
+description: "Builds enterprise React UIs with Ant Design (antd) including 60+ components (Button, Form, Table, Select, Modal, Message), design tokens, TypeScript support, and ConfigProvider theming. Use when the user needs to create React applications with Ant Design, build forms with validation, display data tables, or customize the Ant Design theme."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- Build React applications with Ant Design components
-- Use Ant Design UI components (Button, Form, Table, Input, Select, etc.)
-- Customize Ant Design theme and styles
-- Implement internationalization (i18n) with Ant Design
-- Use Ant Design with TypeScript
-- Create forms with validation
-- Display data in tables and lists
-- Implement navigation and layout
-- Use Ant Design icons
-- Handle user feedback (Modal, Message, Notification)
-- Implement data visualization components
+- Build React applications with Ant Design (antd) components
+- Create forms with validation (Form, Input, Select, DatePicker)
+- Display data in tables with sorting, filtering, and pagination
+- Customize the Ant Design theme with design tokens or CSS variables
+- Use feedback components (Modal, Message, Notification)
+- Implement layouts and navigation (Layout, Menu, Breadcrumb)
 - Use Ant Design design tokens and design system
 
 ## How to use this skill
+
+### Quick-Start Example: Form with Table
+
+```tsx
+import { Button, Form, Input, Table, message } from 'antd';
+
+const columns = [
+  { title: 'Name', dataIndex: 'name', sorter: (a, b) => a.name.localeCompare(b.name) },
+  { title: 'Email', dataIndex: 'email' },
+  { title: 'Status', dataIndex: 'status', filters: [
+    { text: 'Active', value: 'active' }, { text: 'Inactive', value: 'inactive' }
+  ], onFilter: (value, record) => record.status === value },
+];
+
+function UserPage() {
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    message.success(`Created user: ${values.name}`);
+  };
+
+  return (
+    <>
+      <Form form={form} layout="inline" onFinish={onFinish}>
+        <Form.Item name="name" rules={[{ required: true }]}>
+          <Input placeholder="Name" />
+        </Form.Item>
+        <Form.Item name="email" rules={[{ required: true, type: 'email' }]}>
+          <Input placeholder="Email" />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">Add User</Button>
+        </Form.Item>
+      </Form>
+      <Table columns={columns} dataSource={[]} rowKey="id" pagination={{ pageSize: 10 }} />
+    </>
+  );
+}
+```
 
 This skill is organized to match the Ant Design React official documentation structure (https://4x-ant-design.antgroup.com/docs/react/introduce-cn, https://4x-ant-design.antgroup.com/components/overview-cn/). When working with Ant Design React:
 

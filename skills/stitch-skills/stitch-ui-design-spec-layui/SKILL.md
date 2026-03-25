@@ -1,10 +1,7 @@
 ---
 name: stitch-ui-design-spec-layui
-description: Layui-Vue design spec for Stitch. Outputs hard-constraints prefix or selector JSON and assembled prompt.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Layui-Vue design spec for Stitch screen generation. Use when the user mentions Layui, layui-vue, or layui admin in a Stitch design request. Outputs a hard-constraints prefix with Layui tokens (Primary #16baaa, Nav-bg #393D49, layui-btn/input/card components) or a CONTRACT_SELECTION_JSON_V1 selector with assembled prompt."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

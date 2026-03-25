@@ -1,6 +1,6 @@
 ---
 name: spring-cloud
-description: Provides comprehensive guidance for Spring Cloud microservices including service discovery, configuration management, load balancing, circuit breakers, API gateways, and distributed tracing. Use when the user asks about Spring Cloud, needs to build microservices, implement service discovery, or work with Spring Cloud components.
+description: "Provides comprehensive guidance for Spring Cloud microservices including service discovery, configuration management, load balancing, circuit breakers, API gateways, and distributed tracing. Use when the user asks about Spring Cloud, needs to build microservices, implement service discovery, or work with Spring Cloud components."
 ---
 
 # Spring Cloud 微服务开发指南

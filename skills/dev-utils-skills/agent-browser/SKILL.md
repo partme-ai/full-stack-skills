@@ -1,30 +1,45 @@
 ---
 name: agent-browser
-description: A comprehensive skill for using agent-browser, a CLI tool for browser automation designed for AI agents, developed by Vercel Labs. This skill covers installation, core commands, selectors (refs, CSS, XPath, semantic locators), agent mode, sessions, options, and best practices. Use this skill whenever the user needs to automate browser interactions via CLI commands, especially for AI agents that need to interact with web pages.
+description: "Automates browser interactions via CLI using agent-browser by Vercel Labs. Covers navigation, clicking, form filling, snapshots, refs-based selectors, agent mode with JSON output, session management, and CDP integration. Use when the user needs to automate web browsing, scrape pages, fill forms, or integrate browser automation into AI agent workflows."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- Automate browser interactions via CLI commands
-- Use browser automation for AI agents
-- Navigate websites and interact with pages using command-line tools
+- Automate browser interactions (click, fill, navigate, screenshot) via CLI
+- Scrape web content or extract data from pages
+- Build AI agent workflows that interact with websites
 - Use refs-based element selection for deterministic automation
-- Integrate browser automation into AI agent workflows
-- Capture snapshots of web pages with accessibility trees
-- Fill forms, click elements, and extract content via CLI
-- Use semantic locators for more reliable element selection
-- Work with browser automation in agent mode with JSON output
-- Manage multiple browser sessions
-- Debug browser automation with headed mode
-- Use authenticated sessions with custom headers
-- Connect to existing browsers via CDP
-- Stream browser viewport for live preview
+- Run browser automation in agent mode with JSON output
+- Manage authenticated sessions with custom headers or CDP
 
 ## How to use this skill
 
 This skill is organized to match the agent-browser official documentation structure (https://github.com/vercel-labs/agent-browser/blob/main/README.md). When working with agent-browser:
+
+### Quick-Start Example: Snapshot → Identify → Interact
+
+```bash
+# 1. Install
+npm install -g @anthropic-ai/agent-browser
+
+# 2. Open a page and take a snapshot to get element refs
+agent-browser open "https://example.com"
+agent-browser snapshot
+# Output includes refs like @e1, @e2, @e3 for each element
+
+# 3. Click an element by ref
+agent-browser click @e3
+
+# 4. Fill a form field
+agent-browser fill @e5 "hello@example.com"
+
+# 5. Agent mode (JSON output for programmatic use)
+agent-browser snapshot --json
+```
+
+### Detailed Documentation
 
 1. **Install agent-browser**:
    - Load `examples/getting-started/installation.md` for installation instructions

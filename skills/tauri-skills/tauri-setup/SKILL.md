@@ -1,6 +1,6 @@
 ---
 name: tauri-setup
-description: Guidance for Tauri v2 prerequisites and environment setup across macOS, Windows, Linux, and mobile Android iOS targets.
+description: "Install Tauri v2 prerequisites and configure the development environment across macOS, Windows, Linux, Android, and iOS. Use when setting up Rust toolchain, Node.js, platform build tools, or mobile development prerequisites (Xcode, Android Studio)."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,47 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Tauri v2 prerequisites or environment setup / Tauri v2 前置环境或安装配置
-- Rust toolchain, Node.js, build tools, Xcode, Android SDK/NDK / Rust 工具链、Node.js、构建工具、Xcode、Android SDK/NDK
-- Desktop and mobile environment checks / 桌面与移动端环境检查
+- Tauri v2 prerequisites or environment setup
+- Installing Rust toolchain, Node.js, or platform build tools
+- Mobile development setup (Xcode, Android Studio/NDK)
 
 **Trigger phrases include:**
-- "prerequisites", "toolchain", "Xcode", "Android SDK", "NDK"
-- "前置环境", "工具链", "Xcode", "Android Studio", "NDK"
+- "setup", "prerequisites", "install tauri", "toolchain", "Xcode", "Android Studio"
 
 ## How to use this skill
 
-1. Identify the target platforms and OS (macOS, Windows, Linux, Android, iOS)
-2. Provide OS-specific prerequisite installation steps
-3. Include mobile development checks for Android Studio/NDK and Xcode
-4. Verify toolchains with minimal commands and version checks
+1. **Install Rust** (required on all platforms):
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+2. **Install Node.js** (LTS recommended):
+   ```bash
+   # Using nvm
+   nvm install --lts
+   ```
+3. **Platform-specific prerequisites**:
+   - **macOS**: Xcode Command Line Tools: `xcode-select --install`
+   - **Windows**: Visual Studio Build Tools with C++ workload, WebView2
+   - **Linux**: `sudo apt install libwebkit2gtk-4.1-dev build-essential libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev`
+4. **Mobile prerequisites**:
+   - **Android**: Android Studio with NDK, add Rust targets: `rustup target add aarch64-linux-android armv7-linux-androideabi`
+   - **iOS**: Xcode with iOS SDK, add Rust targets: `rustup target add aarch64-apple-ios`
+5. **Verify setup**:
+   ```bash
+   rustc --version && cargo --version && node --version
+   ```
+6. **Create a test project** to confirm everything works: `npm create tauri-app@latest`
 
 ## Outputs
 
-- Prerequisite checklist by platform / 按平台的前置环境清单
-- Verification commands and pass criteria / 验证命令与通过标准
-
-## Scope
-
-- Boundary: Operating-system level dependencies only
-- v2 focus: Mobile development prerequisites must be covered
+- Platform-specific prerequisite installation commands
+- Mobile development prerequisites (Android Studio, Xcode)
+- Verification commands to confirm setup
 
 ## References
 
 - https://v2.tauri.app/start/prerequisites/
-- https://v2.tauri.app/mobile/development/#prerequisites
 
 ## Keywords
 
-tauri v2, prerequisites, rust, node.js, build tools, xcode, android studio, ndk, sdk
+tauri setup, prerequisites, Rust, Node.js, Xcode, Android Studio, toolchain

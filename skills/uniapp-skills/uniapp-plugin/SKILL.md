@@ -1,6 +1,6 @@
 ---
 name: uniapp-plugin
-description: A comprehensive skill for the uni-app plugin market and automatic plugin installation. Use this skill to browse plugins, auto-install plugins, configure plugin settings, and integrate third-party plugins based on the official plugin market docs.
+description: "Browses, installs, configures, and manages plugins from the uni-app plugin market (ext.dcloud.net.cn) including component plugins, API plugins, and template plugins with dependency handling. Use when the user needs to find and install uni-app plugins, configure plugin settings, manage plugin dependencies, or integrate third-party components."
 license: Complete terms in LICENSE.txt
 ---
 

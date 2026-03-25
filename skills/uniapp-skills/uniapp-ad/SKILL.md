@@ -1,6 +1,6 @@
 ---
 name: uniapp-ad
-description: A comprehensive skill for uni-ad monetization in uni-app. Use this skill to integrate ads, configure ad types, handle ad events, and follow official uni-ad documentation.
+description: "Integrates uni-ad monetization into uni-app applications including banner, interstitial, rewarded video, and native ad types with event handling and placement configuration. Use when the user needs to add ad monetization, configure ad types, handle ad load/show/close/error events, or optimize ad revenue in a uni-app project."
 license: Complete terms in LICENSE.txt
 ---
 

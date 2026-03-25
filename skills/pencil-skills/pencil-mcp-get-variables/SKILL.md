@@ -1,6 +1,6 @@
 ---
 name: pencil-mcp-get-variables
-description: Read design variables Tokens . Use to get Design Tokens color font variables defined in the current document to ensure consistency.
+description: "Read design token variables (colors, fonts, spacing) from a Pencil .pen file via the get_variables MCP tool. Use when the user explicitly mentions Pencil and needs to list design tokens, check the current theme, or retrieve variable IDs for use in batch_design operations."
 license: Complete terms in LICENSE.txt
 ---
 

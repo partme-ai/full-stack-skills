@@ -1,6 +1,6 @@
 ---
 name: stitch-ui-design-spec-element-plus
-description: Element Plus design spec for Stitch. Outputs hard-constraints prefix or selector JSON and assembled prompt.
+description: "Element Plus design spec for Stitch screen generation. Use when the user mentions Element Plus, element-ui, or el-plus in a Stitch design request. Outputs a hard-constraints prefix with Element Plus tokens (colors, typography, radius, el-* components) or a CONTRACT_SELECTION_JSON_V1 selector with assembled prompt."
 ---
 
 

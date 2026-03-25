@@ -1,6 +1,6 @@
 ---
 name: rspack
-description: Provides comprehensive guidance for Rspack bundler including configuration, plugins, loaders, optimization, and Webpack compatibility. Use when the user asks about Rspack, needs to configure Rspack, optimize build performance, or migrate from Webpack.
+description: "Provides comprehensive guidance for Rspack bundler including configuration, plugins, loaders, optimization, and Webpack compatibility. Use when the user asks about Rspack, needs to configure Rspack, optimize build performance, or migrate from Webpack."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -194,14 +194,65 @@ This skill is organized to match the Rspack official documentation structure (ht
    - Plugins: https://rspack.rs/zh/plugins/
    - API: https://rspack.rs/zh/api/
 
+### Inline Quick Start
+
+```bash
+# Create a new Rspack project
+npm create rspack@latest
+
+# Or add to existing project
+npm install --save-dev @rspack/core @rspack/cli
+```
+
+```javascript
+// rspack.config.js
+const { HtmlRspackPlugin } = require('@rspack/core');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: '[name].[contenthash].js',
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: {
+          loader: 'builtin:swc-loader',
+          options: { jsc: { parser: { syntax: 'ecmascript', jsx: true } } },
+        },
+      },
+    ],
+  },
+  plugins: [new HtmlRspackPlugin({ template: './index.html' })],
+  optimization: { splitChunks: { chunks: 'all' } },
+};
+```
+
+```bash
+# Development
+npx rspack serve
+
+# Production build
+npx rspack build
+```
+
 ## Best Practices
 
 1. **Use TypeScript for configuration**: Better type safety and autocomplete
-2. **Leverage built-in plugins**: Use Rspack plugins when available
+2. **Leverage built-in plugins**: Use Rspack plugins when available (faster than Webpack equivalents)
 3. **Optimize for production**: Use production mode for builds
 4. **Code splitting**: Use optimization.splitChunks for better performance
 5. **Cache configuration**: Enable persistent caching for faster rebuilds
 6. **Use HMR**: Enable Hot Module Replacement for better DX
+
+## Troubleshooting
+
+- **Webpack plugin not compatible**: Check Rspack compatibility list; some Webpack plugins need Rspack equivalents
+- **Loader errors**: Use `builtin:swc-loader` instead of `babel-loader` for better performance
+- **Build slower than expected**: Enable persistent caching; check for unoptimized loaders
+- **Migration issues**: Use the webpack migration guide at `examples/guide/migration/webpack.md`
 
 ## Resources
 

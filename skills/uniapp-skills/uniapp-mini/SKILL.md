@@ -1,6 +1,6 @@
 ---
-name: uniapp-mini-guide
-description: A comprehensive skill for uni-app mini program development. Use when building uni-app mini programs, configuring mini program settings, or working with mini program components and APIs based on the official native support docs.
+name: uniapp-mini
+description: "Guides uni-app mini program development including configuration, component usage, API compatibility, and conditional compilation for WeChat, Alipay, Baidu, and other mini program platforms. Use when the user wants to build uni-app mini programs, configure mini program settings, or handle platform-specific differences."
 license: Complete terms in LICENSE.txt
 ---
 

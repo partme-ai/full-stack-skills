@@ -1,6 +1,6 @@
 ---
 name: spring-ai-alibaba
-description: Provides comprehensive guidance for Spring AI Alibaba including Alibaba Cloud AI services integration, model APIs, and AI application development. Use when the user asks about Spring AI Alibaba, needs to use Alibaba Cloud AI services, or integrate AI capabilities in Spring applications.
+description: "Provides comprehensive guidance for Spring AI Alibaba including Alibaba Cloud AI services integration, model APIs, and AI application development. Use when the user asks about Spring AI Alibaba, needs to use Alibaba Cloud AI services, or integrate AI capabilities in Spring applications."
 ---
 
 # Spring AI Alibaba 开发指南

@@ -1,31 +1,63 @@
 ---
 name: dbeaver
-description: Provides comprehensive guidance for DBeaver including database connection, SQL development, data management, and ER diagrams. Use when the user asks about DBeaver, needs to connect to databases, manage database connections, or use DBeaver for SQL development.
+description: "Guides DBeaver usage for database connection management, SQL development, data import/export, and ER diagram generation across MySQL, PostgreSQL, Oracle, MongoDB, and other databases. Use when the user needs to configure DBeaver connections, write queries in the SQL editor, export data, or generate ER diagrams."
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 配置 DBeaver 数据库连接（MySQL、PostgreSQL、Oracle、MongoDB 等）
-- 使用 DBeaver 进行 SQL 开发、查询、数据编辑
-- 管理数据库连接、驱动、书签
-- 导出/导入数据、生成 ER 图、生成 DDL
+- Configure DBeaver database connections (MySQL, PostgreSQL, Oracle, MongoDB, etc.)
+- Write and execute SQL queries in the DBeaver SQL editor
+- Export data to CSV, JSON, SQL, or Excel formats
+- Import data from files into database tables
+- Generate ER diagrams to visualize table relationships
+- Manage multiple database connections, bookmarks, and drivers
 
 ## How to use this skill
 
-1. **连接管理**：新建连接 → 选择数据库类型 → 配置连接参数 → 测试连接。
-2. **SQL 开发**：使用 SQL 编辑器、查询控制台、结果排序过滤。
-3. **数据管理**：导出数据（CSV、JSON、SQL、Excel）、导入数据、批量编辑。
-4. **ER 图**：从数据库生成实体关系图，可视化表结构。
+### Workflow
+
+1. **Create a connection** - New Connection > Select database type > Configure host/port/credentials > Test Connection
+2. **Write SQL** - Open SQL Editor (F3) > Write query > Execute (Ctrl+Enter)
+3. **Manage data** - Right-click table > Export Data or Import Data > Choose format
+4. **Generate ER diagram** - Right-click schema > View Diagram > Arrange tables
+
+### Quick-Start Example: Connect and Query
+
+```
+1. File > New > Database Connection
+2. Select "PostgreSQL" > Enter:
+   Host: localhost
+   Port: 5432
+   Database: mydb
+   Username: admin
+   Password: ****
+3. Click "Test Connection" to verify
+4. Open SQL Editor (F3), run:
+   SELECT table_name, pg_size_pretty(pg_total_relation_size(table_name::text))
+   FROM information_schema.tables
+   WHERE table_schema = 'public'
+   ORDER BY pg_total_relation_size(table_name::text) DESC;
+```
+
+### Data Export
+
+```
+Right-click table > Export Data >
+  Format: CSV / JSON / SQL INSERT / Excel
+  Options: Set delimiter, encoding, header row
+  Target: File or clipboard
+```
 
 ## Best Practices
 
-- 驱动管理：首次连接需下载数据库驱动，DBeaver 会自动提示。
-- 敏感信息：连接属性中可加密存储密码，启用"记住密码"选项。
-- 事务管理：默认自动提交，生产环境建议手动管理事务。
-- 结果集：使用过滤器、排序、分页查看大量数据。
+1. **Driver management** - DBeaver auto-downloads drivers on first connect; update drivers periodically
+2. **Secure credentials** - Enable encrypted password storage in connection properties
+3. **Transaction mode** - Switch to manual commit in production to prevent accidental changes
+4. **Result set navigation** - Use filters, sorting, and pagination for large result sets
+5. **Keyboard shortcuts** - Ctrl+Enter to execute, Ctrl+Shift+E to explain plan, F3 for SQL editor
 
 ## Keywords
 
-dbeaver, database, sql, postgresql, mysql, oracle, mongodb, 数据库管理, sql 开发, er 图
+dbeaver, database, SQL, PostgreSQL, MySQL, Oracle, MongoDB, 数据库管理, SQL editor, ER diagram, data export, data import, database tool

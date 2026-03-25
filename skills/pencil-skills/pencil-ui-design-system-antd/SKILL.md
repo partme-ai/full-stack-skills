@@ -1,9 +1,8 @@
 ---
 name: pencil-ui-design-system-antd
-description: Initialize Ant Design. design system components in Pencil variables and component overview.
+description: "Initialize Ant Design (antd) design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with Ant Design or antd, needs to set up antd color palette and typography variables, or wants to create component library frames for Button, Form, Table, Modal, and other antd components."
 license: Complete terms in LICENSE.txt
 ---
-
 
 # Ant Design System Initializer
 
@@ -11,7 +10,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on Ant Design specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize Ant Design tokens (colors, typography, radius) in a Pencil .pen file
+- The user needs a component overview frame for antd components in Pencil
+- The user mentions "Pencil" together with "Ant Design", "antd", or antd-specific components (Button, Table, Modal, Form)
+- An orchestrator skill (pencil-ui-designer) routes an antd initialization request
 
 ## How to use this skill
 
@@ -60,11 +63,34 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize Ant Design Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "ant-primary": "#1677ff",
+      "ant-success": "#52c41a",
+      "ant-warning": "#faad14",
+      "ant-error": "#ff4d4f",
+      "ant-text": "#000000e0",
+      "ant-border": "#d9d9d9",
+      "ant-font-size-base": "14px",
+      "ant-border-radius": "6px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against Ant Design token documentation.
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

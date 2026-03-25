@@ -1,6 +1,6 @@
 ---
 name: tauri-app-upload
-description: Guidance for Tauri v2 upload plugin with file transfer, progress reporting, and headers.
+description: "Upload files from the local filesystem using the Tauri v2 upload plugin with progress reporting and custom headers. Use when uploading large files with progress callbacks, configuring custom request headers, or implementing retry logic for reliable transfers."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -8,36 +8,48 @@ license: Complete terms in LICENSE.txt
 ## When to use this skill
 
 **ALWAYS use this skill when the user mentions:**
-- Uploading large files from desktop or mobile / 桌面或移动端的大文件上传
-- Progress callbacks or custom headers / 进度回调或自定义头
-- Reliable file transfer from local disk / 本地磁盘可靠文件传输
+- Uploading files from desktop or mobile
+- Progress tracking during file upload
+- Custom headers or retry logic for uploads
 
 **Trigger phrases include:**
-- "upload", "progress", "headers", "retry"
-- "上传", "进度", "请求头", "重试"
+- "upload", "file upload", "upload progress", "upload headers", "file transfer"
 
 ## How to use this skill
 
-1. Define upload endpoints and file selection flow
-2. Configure upload plugin capabilities and scope
-3. Implement progress callbacks and error handling
-4. Validate performance and retries for large files
+1. **Install the upload plugin**:
+   ```bash
+   cargo add tauri-plugin-upload
+   ```
+2. **Register the plugin** in your Tauri builder:
+   ```rust
+   tauri::Builder::default()
+       .plugin(tauri_plugin_upload::init())
+   ```
+3. **Configure capabilities** in `src-tauri/capabilities/default.json`:
+   ```json
+   { "permissions": ["upload:allow-upload"] }
+   ```
+4. **Upload a file with progress from the frontend**:
+   ```typescript
+   import { upload } from '@tauri-apps/plugin-upload';
+   await upload('https://api.example.com/upload', '/path/to/file.zip', (progress, total) => {
+     console.log(`Uploaded ${progress} of ${total} bytes`);
+   }, { 'Authorization': 'Bearer token' });
+   ```
+5. **Implement retry logic** for large file uploads that may fail due to network interruptions
+6. **Combine with dialog plugin** to let users select files before uploading
 
 ## Outputs
 
-- Upload flow and retry plan / 上传流程与重试方案
-- Permission and performance checklist / 权限与性能清单
-
-## Scope
-
-- Boundary: Upload plugin usage only
-- Key points: Progress handling and custom headers
+- Upload plugin setup with progress callbacks
+- File transfer pattern with custom headers
+- Retry and error handling strategy
 
 ## References
 
 - https://v2.tauri.app/plugin/upload/
-- https://v2.tauri.app/zh-cn/plugin/upload/
 
 ## Keywords
 
-tauri upload, file transfer, progress, headers
+tauri upload, file upload, progress, transfer, custom headers, retry

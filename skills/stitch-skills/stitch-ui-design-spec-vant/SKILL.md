@@ -1,10 +1,7 @@
 ---
 name: stitch-ui-design-spec-vant
-description: Vant 4 design spec for Stitch. Outputs hard-constraints prefix or selector JSON and assembled prompt.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Vant 4 (Vue 3/Mobile) design spec for Stitch screen generation. Use when the user mentions Vant, vant4, or vant-ui in a Stitch design request. Outputs a hard-constraints prefix with Vant tokens (Primary #1989fa, van-button/van-field/van-nav-bar components, mobile-first 375px) or a CONTRACT_SELECTION_JSON_V1 selector."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

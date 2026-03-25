@@ -1,10 +1,7 @@
 ---
 name: stitch-mcp-get-screen
-description: Retrieves the full details of a specific screen, including HTML code.
-allowed-tools:
-  - "stitch*:*"
-  - "Read"
-  - "Write"
+description: "Retrieve full details of a specific Stitch screen including HTML code, screenshot URL, and metadata. Use when you need to export screen code, analyze generated HTML structure, or feed screen data into a framework conversion skill. Requires projectId and screenId as numeric IDs."
+allowed-tools: "stitch*:*, Read, Write"
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 name: pencil-ui-design-system-layui
-description: Initialize Layui. design system components in Pencil variables and component overview.
+description: "Initialize Layui design tokens and component overview frames in a Pencil .pen file. Use when the user mentions Pencil with Layui or layui-vue, needs to set up Layui color palette and typography variables, or wants to create component library frames for Button, Table, Form, Menu, and other Layui components."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -11,7 +11,11 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-Use this skill when you need to initialize a new design system based on Layui specifications, specifically to set up the global color palette and create the initial component library frames in a .pen file.
+Use this skill when:
+- The user wants to initialize Layui tokens (primary, warm, danger colors) in a Pencil .pen file
+- The user needs a component overview frame for Layui components in Pencil
+- The user mentions "Pencil" together with "Layui", "layui-vue", or Layui-specific components (Table, Form, Menu, Tabs)
+- An orchestrator skill (pencil-ui-designer) routes a Layui initialization request
 
 ## How to use this skill
 
@@ -56,11 +60,33 @@ Use `mcp__pencil__batch_design` to create a "Components Overview" frame with sec
 
 Organize frames using Auto Layout. Keep each `batch_design` call to maximum 25 operations.
 
+### Example: Initialize Layui Variables
+
+```json
+{
+  "name": "set_variables",
+  "arguments": {
+    "filePath": "designs/app.pen",
+    "replace": false,
+    "variables": {
+      "layui-primary": "#1e9fff",
+      "layui-warm": "#ffb800",
+      "layui-danger": "#ff5722",
+      "layui-text": "#333333",
+      "layui-border": "#e6e6e6",
+      "layui-font-md": "14px",
+      "layui-radius": "2px"
+    }
+  }
+}
+```
+
 ## Best Practices
 
 - Verify token values against Layui official documentation.
 - Use `set_variables` with `replace: false` unless a full reset is requested.
 - Use Auto Layout for component overview frames.
+- Keep each `batch_design` call to maximum 25 operations; split by category if needed.
 
 ## Keywords
 

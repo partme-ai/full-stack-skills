@@ -1,6 +1,6 @@
 ---
-name: upgradeLink
-description: Provides comprehensive guidance for upgrade link management including upgrade link creation, configuration, and upgrade link best practices. Use when the user asks about upgrade links, needs to create upgrade links, configure upgrade processes, or manage upgrade links.
+name: upgrade-link
+description: "Configure and manage UpgradeLink for system upgrades, version migrations, and upgrade workflows. Covers link creation, settings configuration, API integrations, and rollback strategies. Use when the user asks about UpgradeLink, needs to create upgrade links, perform version migrations, or configure upgrade processes."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -55,41 +55,36 @@ This skill is organized to match the UpgradeLink official documentation structur
 
 - `examples/` → https://www.toolsetlink.com/upgrade/what-is-upgrade.html
 
-## Examples and Templates
+## Upgrade Workflow
 
-This skill includes detailed examples organized to match the official documentation structure. All examples are in the `examples/` directory (see mapping above).
+1. **Pre-upgrade checks:**
+   - Verify version compatibility requirements
+   - Back up data before performing upgrades
+   - Test in development environment first
 
-**To use examples:**
-- Identify the topic from the user's request
-- Load the appropriate example file from the mapping above
-- Follow the instructions, syntax, and best practices in that file
-- Adapt the code examples to your specific use case
+2. **Execute upgrade** following the guide for your use case:
+   - Load the appropriate example from `examples/getting-started/` or `examples/features/`
+   - Follow the step-by-step instructions in that file
 
-**To use templates:**
-- Reference templates in `templates/` directory for common scaffolding
-- Adapt templates to your specific needs and coding style
+3. **Post-upgrade validation:**
+   - Verify the upgrade completed successfully
+   - Check logs for errors
+   - Have a rollback plan ready if issues arise
 
-## API Reference
+## Reference Files
 
-Detailed API documentation is available in the `api/` directory, organized to match the official UpgradeLink API documentation structure.
-
-**To use API reference:**
-1. Identify the API you need help with
-2. Load the corresponding API file from the `api/` directory
-3. Find the API signature, parameters, return type, and examples
-4. Reference the linked example files for detailed usage patterns
-5. All API files include links to relevant example files in the `examples/` directory
+- `examples/getting-started/` - Introduction and basic usage
+- `examples/features/` - Feature-specific examples
+- `examples/advanced/` - Advanced usage patterns
+- `api/` - API reference documentation
+- `templates/` - Usage templates
 
 ## Best Practices
 
-1. **Follow official documentation**: Always refer to official UpgradeLink documentation
-2. **Test upgrades**: Test upgrades in development environment first
-3. **Backup data**: Always backup data before performing upgrades
-4. **Version compatibility**: Check version compatibility requirements
-5. **Error handling**: Implement proper error handling
-6. **Logging**: Enable logging for troubleshooting
-7. **Documentation**: Document upgrade procedures
-8. **Rollback plan**: Have a rollback plan ready
+1. **Test first**: Always test upgrades in development before production
+2. **Backup data**: Create backups before performing upgrades
+3. **Error handling**: Implement proper error handling and logging
+4. **Rollback plan**: Have a rollback plan ready for every upgrade
 
 ## Resources
 

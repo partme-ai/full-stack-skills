@@ -1,59 +1,72 @@
 ---
 name: theme-factory
-description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.
+description: "Applies professional color and font themes to slides, documents, reports, and HTML pages. Includes 10 pre-set themes (Ocean Depths, Sunset Boulevard, Modern Minimalist, etc.) with hex palettes and font pairings, plus on-the-fly custom theme generation. Use when the user wants to style or re-theme any visual artifact."
 license: Complete terms in LICENSE.txt
 ---
 
+## When to use this skill
 
-# Theme Factory Skill
+Use this skill whenever the user wants to:
+- Apply a consistent color/font theme to a slide deck, document, report, or landing page
+- Preview available themes before choosing one
+- Generate a custom theme from a description (e.g., "warm corporate" or "playful startup")
+- Re-theme an existing artifact with a different visual identity
 
-This skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact.
+## How to use this skill
 
-## Purpose
+### Workflow
 
-To apply consistent, professional styling to presentation slide decks, use this skill. Each theme includes:
-- A cohesive color palette with hex codes
-- Complementary font pairings for headers and body text
-- A distinct visual identity suitable for different contexts and audiences
+1. **Show the theme showcase** - Display `theme-showcase.pdf` so the user can visually compare all 10 themes
+2. **Ask for their choice** - Let the user pick a theme or describe a custom one
+3. **Wait for confirmation** - Get explicit approval before applying
+4. **Apply the theme** - Read the theme file from `themes/` and apply colors/fonts consistently
 
-## Usage Instructions
+### Available Themes
 
-To apply styling to a slide deck or other artifact:
+| # | Theme | Style | Primary Color |
+|---|-------|-------|--------------|
+| 1 | Ocean Depths | Professional, calming | Maritime blues |
+| 2 | Sunset Boulevard | Warm, vibrant | Orange/coral |
+| 3 | Forest Canopy | Natural, grounded | Earth greens |
+| 4 | Modern Minimalist | Clean, contemporary | Grayscale |
+| 5 | Golden Hour | Rich, warm | Autumnal golds |
+| 6 | Arctic Frost | Cool, crisp | Winter blues |
+| 7 | Desert Rose | Soft, sophisticated | Dusty pinks |
+| 8 | Tech Innovation | Bold, modern | Electric blues |
+| 9 | Botanical Garden | Fresh, organic | Garden greens |
+| 10 | Midnight Galaxy | Dramatic, cosmic | Deep purples |
 
-1. **Show the theme showcase**: Display the `theme-showcase.pdf` file to allow users to see all available themes visually. Do not make any modifications to it; simply show the file for viewing.
-2. **Ask for their choice**: Ask which theme to apply to the deck
-3. **Wait for selection**: Get explicit confirmation about the chosen theme
-4. **Apply the theme**: Once a theme has been chosen, apply the selected theme's colors and fonts to the deck/artifact
+### Applying a Theme (example)
 
-## Themes Available
+```css
+/* Example: Ocean Depths theme applied via CSS variables */
+:root {
+  --color-primary: #1B4F72;
+  --color-secondary: #2E86C1;
+  --color-accent: #AED6F1;
+  --color-background: #EBF5FB;
+  --color-text: #1C2833;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Source Sans Pro', sans-serif;
+}
+```
 
-The following 10 themes are available, each showcased in `theme-showcase.pdf`:
+### Custom Theme Generation
 
-1. **Ocean Depths** - Professional and calming maritime theme
-2. **Sunset Boulevard** - Warm and vibrant sunset colors
-3. **Forest Canopy** - Natural and grounded earth tones
-4. **Modern Minimalist** - Clean and contemporary grayscale
-5. **Golden Hour** - Rich and warm autumnal palette
-6. **Arctic Frost** - Cool and crisp winter-inspired theme
-7. **Desert Rose** - Soft and sophisticated dusty tones
-8. **Tech Innovation** - Bold and modern tech aesthetic
-9. **Botanical Garden** - Fresh and organic garden colors
-10. **Midnight Galaxy** - Dramatic and cosmic deep tones
+When no preset fits, create a custom theme:
+1. Ask the user for a mood/description (e.g., "energetic tech startup")
+2. Generate a palette of 4-5 harmonious hex colors
+3. Select complementary heading and body fonts
+4. Name the theme descriptively
+5. Show for review, then apply
 
-## Theme Details
+## Best Practices
 
-Each theme is defined in the `themes/` directory with complete specifications including:
-- Cohesive color palette with hex codes
-- Complementary font pairings for headers and body text
-- Distinct visual identity suitable for different contexts and audiences
+1. **Contrast check** - Ensure text/background combinations meet WCAG AA contrast ratios
+2. **Consistency** - Apply the same theme tokens to every slide/page, never mix themes
+3. **Font pairing** - Use one display font for headings and one readable font for body text
+4. **Accent sparingly** - Use accent colors for highlights and CTAs, not large surfaces
 
-## Application Process
+## Keywords
 
-After a preferred theme is selected:
-1. Read the corresponding theme file from the `themes/` directory
-2. Apply the specified colors and fonts consistently throughout the deck
-3. Ensure proper contrast and readability
-4. Maintain the theme's visual identity across all slides
-
-## Create your Own Theme
-To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.
+theme, styling, color palette, font pairing, slides, presentation, design, visual identity, 主题, 配色, 样式

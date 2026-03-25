@@ -1,28 +1,63 @@
 ---
 name: drawio-architecture
-description: Provides comprehensive guidance for draw.io architecture diagrams including diagram creation, shapes, templates, and collaboration. Use when the user asks about draw.io architecture, needs to create architecture diagrams, design system diagrams, or collaborate on diagrams.
+description: “Creates system architecture, deployment, and component diagrams using Draw.io (diagrams.net). Supports C4 model, UML, AWS/Azure/GCP cloud shapes, swim lanes, and exports to PNG/SVG/PDF. Use when the user needs to design architecture diagrams, visualize system components, or create deployment diagrams for documentation.”
 license: Complete terms in LICENSE.txt
 ---
 
 ## When to use this skill
 
 Use this skill whenever the user wants to:
-- 用 Draw.io 画系统架构图、部署图、组件图
-- 产出可导出的矢量/PNG 图用于文档或评审
-- 协作编辑与版本管理（如 Confluence、Git 存 .drawio）
+- Create system architecture diagrams (microservices, monolith, cloud)
+- Design deployment or infrastructure diagrams (AWS, Azure, GCP)
+- Build C4 model diagrams (context, container, component, code)
+- Generate UML component or package diagrams
+- Export diagrams for documentation or design reviews
 
 ## How to use this skill
 
-1. **工具**：Draw.io 桌面版或 diagrams.net；支持 .drawio XML、导出 PNG/SVG/PDF。
-2. **内容**：从模板或形状库选（C4、UML、云组件）；用泳道/容器表达层次。
-3. **协作**：存到 Confluence、Google Drive 或仓库；约定命名与图例。
+### Workflow
+
+1. **Choose a template** - Start from C4, UML, or cloud provider template in Draw.io
+2. **Add shapes** - Use the appropriate shape library (AWS, Azure, GCP, UML, or general)
+3. **Define connections** - Use labeled arrows to show data flow and dependencies
+4. **Add legend and title** - Include a legend explaining colors/shapes and a diagram title
+5. **Export** - Save as `.drawio` for version control; export PNG/SVG/PDF for docs
+
+### Quick-Start Example: C4 Container Diagram (XML)
+
+```xml
+<mxGraphModel>
+  <root>
+    <mxCell id=”0”/>
+    <mxCell id=”1” parent=”0”/>
+    <!-- Web App container -->
+    <mxCell id=”2” value=”Web Application&#xa;[React, TypeScript]” style=”rounded=1;whiteSpace=wrap;fillColor=#438DD5;fontColor=#ffffff;” vertex=”1” parent=”1”>
+      <mxGeometry x=”100” y=”100” width=”160” height=”80” as=”geometry”/>
+    </mxCell>
+    <!-- API container -->
+    <mxCell id=”3” value=”API Server&#xa;[Go, Gin]” style=”rounded=1;whiteSpace=wrap;fillColor=#438DD5;fontColor=#ffffff;” vertex=”1” parent=”1”>
+      <mxGeometry x=”400” y=”100” width=”160” height=”80” as=”geometry”/>
+    </mxCell>
+    <!-- Arrow: Web App → API -->
+    <mxCell id=”4” value=”REST/JSON” style=”edgeStyle=orthogonalEdgeStyle;” edge=”1” source=”2” target=”3” parent=”1”/>
+  </root>
+</mxGraphModel>
+```
+
+### Collaboration
+
+- **Version control** - Store `.drawio` files in Git alongside source code
+- **Confluence** - Use the Draw.io Confluence plugin for inline editing
+- **Google Drive** - Open diagrams.net with Google Drive integration
 
 ## Best Practices
 
-- 一图一主题；用标题与图例说明符号含义。
-- 保持风格统一（颜色、字体、箭头）；复杂系统用多图分层。
-- 导出时选合适分辨率；文档中引用时注明“架构图”与更新日期。
+1. **One diagram, one topic** - Avoid cramming multiple concerns into a single diagram
+2. **Consistent styling** - Use the same colors, fonts, and arrow styles across all diagrams
+3. **Add a legend** - Explain what colors and shapes represent
+4. **Layer complex systems** - Use multiple diagrams at different abstraction levels (C4 levels 1-3)
+5. **Note the update date** - Add a “Last updated: YYYY-MM-DD” label for living documents
 
 ## Keywords
 
-draw.io, architecture diagram, C4, deployment diagram, 架构图, 部署图, diagrams.net
+draw.io, diagrams.net, architecture diagram, C4, deployment diagram, UML, component diagram, 架构图, 部署图, system design, cloud architecture

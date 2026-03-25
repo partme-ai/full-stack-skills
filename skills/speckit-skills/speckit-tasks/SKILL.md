@@ -1,6 +1,6 @@
 ---
 name: speckit-tasks
-description: Generate an actionable, dependency-ordered tasks.md for the feature based on available design artifacts.
+description: "Generate a dependency-ordered tasks.md organized by user story, with phased execution (Setup, Foundational, User Stories, Polish), parallel markers, and strict checklist format (checkbox, TaskID, Story label, file path). Use when the implementation plan is ready and the user needs an executable task breakdown before coding."
 ---
 
 # Spec Kit Tasks Skill
