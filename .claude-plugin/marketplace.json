@@ -43,14 +43,18 @@
       "description": "Angular 框架（1个技能）。",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/angular-skills/angular"]
+      "skills": [
+        "./skills/angular-skills/angular"
+      ]
     },
     {
       "name": "svelte-skills",
       "description": "Svelte 框架（1个技能）。",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/svelte-skills/svelte"]
+      "skills": [
+        "./skills/svelte-skills/svelte"
+      ]
     },
     {
       "name": "build-skills",
@@ -226,7 +230,9 @@
       "description": "游戏引擎 Cocos2d-x（1个技能）。",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/cocos-skills/cocos2d-x"]
+      "skills": [
+        "./skills/cocos-skills/cocos2d-x"
+      ]
     },
     {
       "name": "ascii-skills",
@@ -251,7 +257,7 @@
     },
     {
       "name": "dev-utils-skills",
-      "description": "开发工具链：代码生成、测试编写、文档构建、MCP 构建器、前端设计等（13个技能）。",
+      "description": "开发工具链：代码生成、测试编写、文档构建、MCP 构建器、前端设计等（12个技能）。",
       "source": "./",
       "strict": false,
       "skills": [
@@ -260,7 +266,6 @@
         "./skills/dev-utils-skills/java-code-comments",
         "./skills/dev-utils-skills/mybatis-plus-generator",
         "./skills/dev-utils-skills/documentation-builder",
-        "./skills/dev-utils-skills/full-stack-doc",
         "./skills/dev-utils-skills/mcp-builder",
         "./skills/dev-utils-skills/webapp-testing",
         "./skills/dev-utils-skills/frontend-design",
@@ -306,7 +311,7 @@
     },
     {
       "name": "document-skills",
-      "description": "文档与图表：docx、pptx、pdf、xlsx、文档协作、API 文档生成、ProcessOn 思维导图、Mermaid、PlantUML（9个技能，与 skill-group-mapping 一致）。",
+      "description": "文档与图表：docx、pptx、pdf、xlsx、文档协作、API 文档、全栈产品文档标准（full-stack-doc）、ProcessOn 思维导图、Mermaid、PlantUML（10个技能，与 skill-group-mapping 一致）。",
       "source": "./",
       "strict": false,
       "skills": [
@@ -316,6 +321,7 @@
         "./skills/document-skills/xlsx",
         "./skills/document-skills/doc-coauthoring",
         "./skills/document-skills/api-doc-generator",
+        "./skills/document-skills/full-stack-doc",
         "./skills/document-skills/processon-mindmap",
         "./skills/document-skills/mermaid",
         "./skills/document-skills/plantuml"

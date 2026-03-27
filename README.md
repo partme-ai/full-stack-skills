@@ -176,7 +176,7 @@ Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态
 
 - `threejs-skills` 当前在仓库中包含 18 个技能，但未进入 Marketplace 发布面。
 - `vscode-skills` 当前在仓库中包含 4 个技能，但未进入 Marketplace 发布面。
-- `document-skills` 当前目录中有 5 个技能，而 Marketplace 仍引用 9 个条目，其中 `docx`、`pptx`、`pdf`、`xlsx` 为缺失目录引用。
+- `document-skills` 当前目录中有 6 个技能（含 `full-stack-doc`），而 Marketplace 仍引用 10 个条目，其中 `docx`、`pptx`、`pdf`、`xlsx` 为缺失目录引用。
 - `tauri-skills` 当前目录中有 52 个技能，而 Marketplace 当前发布 51 个条目；`tauri-app-updater` 目前仅存在于仓库目录中。
 
 ### 阅读路径建议
@@ -475,10 +475,10 @@ fskill install
 | `database-skills` | 5 | 是 | 5 | 已与当前发布面对应 |
 | `ddd-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
 | `design-skills` | 12 | 是 | 12 | 已与当前发布面对应 |
-| `dev-utils-skills` | 13 | 是 | 13 | 已与当前发布面对应 |
+| `dev-utils-skills` | 12 | 是 | 12 | 已与当前发布面对应；`full-stack-doc` 已迁至 `document-skills` |
 | `devops-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
 | `docker-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
-| `document-skills` | 5 | 是 | 9 | 目录技能数与 Marketplace 引用数不一致，详见 repository-map |
+| `document-skills` | 6 | 是 | 10 | 目录技能数与 Marketplace 引用数不一致（含缺失的 docx/pptx/pdf/xlsx），详见 repository-map |
 | `drawio-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
 | `electron-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
 | `flutter-skills` | 2 | 是 | 2 | 已与当前发布面对应 |

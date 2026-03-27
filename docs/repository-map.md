@@ -44,10 +44,10 @@ full-stack-skills/
 | `database-skills` | 5 | 5 | 已发布 | — |
 | `ddd-skills` | 6 | 6 | 已发布 | — |
 | `design-skills` | 12 | 12 | 已发布 | — |
-| `dev-utils-skills` | 13 | 13 | 已发布 | — |
+| `dev-utils-skills` | 12 | 12 | 已发布 | `full-stack-doc` 已迁至 `document-skills` |
 | `devops-skills` | 6 | 6 | 已发布 | — |
 | `docker-skills` | 2 | 2 | 已发布 | — |
-| `document-skills` | 5 | 9 | 已发布 | 缺少目录：docx、pptx、pdf、xlsx |
+| `document-skills` | 6 | 10 | 已发布 | 含 `full-stack-doc`；仍缺目录：docx、pptx、pdf、xlsx |
 | `drawio-skills` | 2 | 2 | 已发布 | — |
 | `electron-skills` | 3 | 3 | 已发布 | — |
 | `flutter-skills` | 2 | 2 | 已发布 | — |

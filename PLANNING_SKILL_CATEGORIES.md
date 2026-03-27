@@ -346,7 +346,7 @@ Marketplace (full-stack-skills)
       "name": "documentation-skills",
       "description": "文档技能集合：文档生成、文档处理、图表绘制",
       "skills": [
-        "./skills/full-stack-doc",
+        "./skills/document-skills/full-stack-doc",
         "./skills/docx",
         "./skills/mermaid"
       ]
