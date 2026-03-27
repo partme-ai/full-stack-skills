@@ -128,7 +128,7 @@ The main repo now covers frontend, backend, mobile, cross-platform development, 
 
 - `threejs-skills` exists in the repository with 18 skills and is not currently published in Marketplace.
 - `vscode-skills` exists in the repository with 4 skills and is not currently published in Marketplace.
-- `document-skills` has 5 skill directories on disk, while Marketplace still references 9 entries, including missing paths for `docx`, `pptx`, `pdf`, and `xlsx`.
+- `document-skills` has 6 skill directories on disk (including `full-stack-doc`), while Marketplace still references 10 entries, including missing paths for `docx`, `pptx`, `pdf`, and `xlsx`.
 - `tauri-skills` has 52 skill directories on disk, while Marketplace currently publishes 51 entries; `tauri-app-updater` remains repo-only.
 
 ### Recommended Reading Path
@@ -308,10 +308,10 @@ The table below reflects the current `skills/` directory and `.claude-plugin/mar
 | `database-skills` | 5 | Yes | 5 | Aligned with current published surface |
 | `ddd-skills` | 6 | Yes | 6 | Aligned with current published surface |
 | `design-skills` | 12 | Yes | 12 | Aligned with current published surface |
-| `dev-utils-skills` | 13 | Yes | 13 | Aligned with current published surface |
+| `dev-utils-skills` | 12 | Yes | 12 | Aligned with current published surface; `full-stack-doc` moved under `document-skills` |
 | `devops-skills` | 6 | Yes | 6 | Aligned with current published surface |
 | `docker-skills` | 2 | Yes | 2 | Aligned with current published surface |
-| `document-skills` | 5 | Yes | 9 | On-disk count differs from Marketplace refs; see repository-map |
+| `document-skills` | 6 | Yes | 10 | On-disk count differs from Marketplace refs; see repository-map |
 | `drawio-skills` | 2 | Yes | 2 | Aligned with current published surface |
 | `electron-skills` | 3 | Yes | 3 | Aligned with current published surface |
 | `flutter-skills` | 2 | Yes | 2 | Aligned with current published surface |

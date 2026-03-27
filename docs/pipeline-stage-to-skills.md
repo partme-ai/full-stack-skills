@@ -24,7 +24,7 @@
 
 | 阶段 | 技能名 | 仓库 | 说明 |
 |------|--------|------|------|
-| 需求 / 一句话需求 / 需求分析 → 原始需求 | full-stack-doc | full-stack-skills | 需求分析模板、需求调研模板 |
+| 需求 / 一句话需求 / 需求分析 → 原始需求 | full-stack-doc（`document-skills` 插件） | full-stack-skills | `full-stack-doc/templates/version/` 需求分析/调研等；目录落位见 `full-stack-doc` SKILL |
 | 需求 / PRD（what/why） | speckit-specify | speckit-agent-skills（可选） | Spec Kit：从自然语言生成/更新规格 |
 | 需求澄清 / 歧义消除 | speckit-clarify | speckit-agent-skills（可选） | Spec Kit：澄清规格 |
 | 清楚的原始需求 → PRD 文档 | full-stack-doc | full-stack-skills | PRD 文档模板 |

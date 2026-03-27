@@ -30,9 +30,9 @@
 | **svelte-skills** | svelte | 1 | Svelte 框架 |
 | **mobile-native-skills** | android-kotlin, ios-swift | 2 | 原生移动端 |
 | **chart-skills** | lime-echart, ucharts | 2 | 图表组件 |
-| **dev-utils-skills** | code-generator, test-writer, java-code-comments, mybatis-plus-generator, documentation-builder, full-stack-doc, mcp-builder, webapp-testing, frontend-design, web-artifacts-builder, theme-factory, agent-browser, maven-search | 13 | 开发工具链（与 development-skills-utils 对应） |
+| **dev-utils-skills** | code-generator, test-writer, java-code-comments, mybatis-plus-generator, documentation-builder, mcp-builder, webapp-testing, frontend-design, web-artifacts-builder, theme-factory, agent-browser, maven-search | 12 | 开发工具链（与 development-skills-utils 对应） |
 | **design-skills** | algorithmic-art, brand-guidelines, canvas-design, figma, figma-ai, sketch, adobe-xd, dalle, uizard, galileo-ai, runway-ml, framer | 12 | 设计与 AI 绘图（midjourney/stable-diffusion/axure/modao 待补目录则入本组） |
-| **document-skills** | docx, pptx, pdf, xlsx, doc-coauthoring, api-doc-generator, processon-mindmap, mermaid, plantuml | 9 | 文档与图表（与 document 插件对应） |
+| **document-skills** | docx, pptx, pdf, xlsx, doc-coauthoring, api-doc-generator, full-stack-doc, processon-mindmap, mermaid, plantuml | 10 | 文档与图表（与 document 插件对应） |
 | **testing-skills** | jest, vitest, pytest, junit, cypress, playwright, selenium, appium, detox | 9 | 测试框架与 E2E/移动端测试 |
 | **devops-skills** | gitlab-ci, github-actions, kubernetes, terraform, ansible, cloudformation | 6 | CI/CD 与 IaC（jenkins 待补目录则入本组） |
 | **database-skills** | postgresql, oracle, redis, elasticsearch, dbeaver | 5 | 数据库与工具（mysql/mongodb/navicat 待补目录则入本组） |
