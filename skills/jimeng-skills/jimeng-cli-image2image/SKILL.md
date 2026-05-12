@@ -119,7 +119,7 @@ Same as other CLI skills: `--poll` timeout → `query_result`. Common errors bel
 | `--images` | **Yes** | 1-10 local file paths, comma-separated | — |
 | `--prompt` | **Yes** | String (Chinese preferred, Keep/Change style) | — |
 | `--ratio` | No | 21:9, 16:9, 3:2, 4:3, 1:1, 3:4, 2:3, 9:16 | 1:1 |
-| `--model_version` | No | 4.0, 4.1, 4.5, 4.6, 5.0 | 5.0 |
+| `--model_version` | No | 4.0, 4.1, 4.5, 5.0 | 5.0 |
 | `--resolution_type` | No | 2k, 4k (1k NOT supported) | 2k |
 | `--poll` | No | Seconds (0 = async, polls every 1s) | 0 |
 
@@ -127,12 +127,12 @@ Same as other CLI skills: `--poll` timeout → `query_result`. Common errors bel
 
 ## Model Selection
 
-| Model | Best For |
-|-------|----------|
-| **5.0** (default) | Latest flagship, all I2I tasks |
-| 4.6 | Portraits, faces, product edits |
-| 4.5 | Artistic style transfer, landscapes |
-| 4.0-4.1 | Reliable baseline |
+| Model | Official Model ID | Best For |
+|-------|-------------------|----------|
+| **5.0** (default) | `doubao-seedream-5-0-260128` | Latest flagship, all I2I tasks |
+| 4.5 | `doubao-seedream-4-5-251128` | Artistic style transfer, landscapes |
+| 4.1 | — | Portrait editing, poster layout, multi-round edits |
+| 4.0 | `doubao-seedream-4-0-250828` | Reliable baseline |
 
 > I2I requires 4.0+. Models 3.0/3.1 are NOT available for image-to-image.
 
@@ -166,7 +166,7 @@ dreamina session list
 ## FAQ (from official documentation)
 
 **Q: Login succeeds but generation commands still fail?**
-A: (1) Verify `~/.dreamina_cli/config.toml` exists; (2) Run `dreamina user_credit` — if this fails, login/config is the issue. Do NOT test generation until `user_credit` works.
+A: (1) Run `dreamina user_credit` — if this fails, login/config is the issue. (2) Check `~/.dreamina_cli/` exists. Note: `config.toml`, `credential.json`, `tasks.db` may NOT be present after Docker-based login (auth stored ephemerally). Do NOT test generation until `user_credit` works.
 
 **Q: Browser login flow is stuck?**
 A: Use `dreamina login --debug` for detailed debug output.
@@ -190,7 +190,7 @@ A: `dreamina logout` clears `credential.json` only. `config.toml` and `tasks.db`
 6. **Max 10 images** — comma-separated: `--images ./a.png,./b.png,./c.png`
 7. **`--poll` polls every 1 second** — timeout returns "querying" (not failure), use `query_result` to check later
 8. **Edit prompt style matters** — use Keep/Change framework from jimeng-prompt-image2image. Undescribed elements may change unexpectedly
-9. **`~/.dreamina_cli/` directory** — config.toml, credential.json, tasks.db. Don't delete
+9. **`~/.dreamina_cli/` directory** — may contain config.toml, credential.json, tasks.db after native (non-Docker) login. In Docker setups, these files may be absent (auth stored ephemerally). Don't delete the directory
 
 ## Available Resources
 

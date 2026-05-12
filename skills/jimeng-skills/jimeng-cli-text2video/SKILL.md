@@ -66,8 +66,9 @@ dreamina logout             # Clear credentials (keeps config.toml and tasks.db)
 
 **1c. Check config (if login issues):**
 ```bash
-ls -la ~/.dreamina_cli/     # config.toml, credential.json, tasks.db
+ls -la ~/.dreamina_cli/
 ```
+> ⚠️ Note: `config.toml`, `credential.json`, `tasks.db` may not exist — especially in Docker. Auth state can be ephemeral. Use `dreamina user_credit` as the definitive check.
 
 ### Step 2: Ensure prompt is ready
 
@@ -224,7 +225,7 @@ A: `dreamina relogin` clears login state and starts new flow.
 6. **Match duration to action** — don't cram a 3-stage narrative into a 5-second clip
 7. **Default model is seedance2.0fast** — good quality, faster. Use seedance2.0 for final renders
 8. **Some models need web auth first** — if `AigcComplianceConfirmationRequired`, authorize on dreamina website
-9. **`~/.dreamina_cli/` directory** — contains config.toml, credential.json, tasks.db. Don't delete
+9. **`~/.dreamina_cli/` directory** — may contain config.toml, credential.json, tasks.db after native (non-Docker) login. In Docker setups, these files may be absent (auth stored ephemerally). Don't delete
 
 ## Available Resources
 

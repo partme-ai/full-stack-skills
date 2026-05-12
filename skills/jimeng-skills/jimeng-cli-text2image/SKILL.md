@@ -69,11 +69,9 @@ dreamina logout             # Clear credentials (keeps config.toml and tasks.db)
 
 **1c. Check config file (if login issues persist):**
 ```bash
-# Config lives at ~/.dreamina_cli/config.toml
-# Credentials at ~/.dreamina_cli/credential.json
-# Task history at ~/.dreamina_cli/tasks.db
 ls -la ~/.dreamina_cli/
 ```
+> ⚠️ **Note**: The official docs reference `config.toml`, `credential.json`, and `tasks.db` at `~/.dreamina_cli/`, but these files may not exist after login — especially in Docker environments. Auth state can be stored ephemerally. If `ls` shows only `SKILL.md` and `version.json`, login is still valid if `dreamina user_credit` returns your balance. See the `dreamina-cli` skill's `references/docker-compatibility.md` for Docker-specific setup info.
 
 ### Step 2: Ensure prompt is ready
 
@@ -144,7 +142,7 @@ Common errors and responses — see `references/workflow-patterns.md` for detail
 |-----------|----------|--------|---------|
 | `--prompt` | **Yes** | String (Chinese preferred) | — |
 | `--ratio` | No | 21:9, 16:9, 3:2, 4:3, 1:1, 3:4, 2:3, 9:16 | 1:1 |
-| `--model_version` | No | 3.0, 3.1, 4.0, 4.1, 4.5, 4.6, 5.0 | 5.0 |
+| `--model_version` | No | 3.0, 3.1, 4.0, 4.1, 4.5, 5.0 | 5.0 |
 | `--resolution_type` | No | 1k/2k (3.x), 2k/4k (4.0+) | Model default |
 | `--session` | No | Integer session ID | 0 |
 | `--poll` | No | Seconds (0 = async) | 0 (async) |
@@ -182,13 +180,14 @@ dreamina image_upscale --image ./x.png --resolution_type=4k  # Upscale image
 
 ## Model Selection Guide
 
-| Model | Resolutions | Best For | Notes |
-|-------|------------|----------|-------|
-| **5.0** (default) | 2k, 4k | Latest flagship, everything | Use unless specific reason otherwise |
-| 4.6 | 2k, 4k | Portraits, faces, products | Strong on human subjects |
-| 4.5 | 2k, 4k | Landscapes, illustrations, artistic | Good for creative/artistic prompts |
-| 4.0-4.1 | 2k, 4k | General purpose | Reliable baseline |
-| 3.0-3.1 | 1k, 2k | Simple/short prompts, fast generation | Lower detail, good for iteration |
+| CLI --model_version | Official Model ID | Resolutions | Best For |
+|-------|-------------------|------------|----------|
+| **5.0** (default) | `doubao-seedream-5-0-260128` | 2k, 3k, 4k | Latest flagship, everything. Use unless specific reason otherwise |
+| 4.5 | `doubao-seedream-4-5-251128` | 2k, 4k | Landscapes, illustrations, artistic. Good for creative/artistic prompts |
+| 4.1 | — | 2k, 4k | Portrait editing, poster editing, multi-round editing |
+| 4.0 | `doubao-seedream-4-0-250828` | 1k, 2k, 4k | General purpose multi-modal editing. Reliable baseline |
+| 3.1 | — | 1k, 2k | Cinematic/storytelling, film genre prompts |
+| 3.0 | — | 1k, 2k | Simple/short prompts, text rendering, fast generation |
 
 Load `references/model-guide.md` for detailed model selection guidance.
 
@@ -207,13 +206,13 @@ A: Use `--poll=N` (recommend `--poll=30`) for auto-waiting. If timeout, save the
 A: Run `dreamina relogin` — it clears existing login state and starts a new login flow.
 
 **Q: How to completely clear local login info?**
-A: Run `dreamina logout` — this clears `credential.json` only. `config.toml` and `tasks.db` are preserved.
+A: Run `dreamina logout` — this clears `credential.json` only. `config.toml` and `tasks.db` are preserved on native installs, but these files may be absent in Docker setups.
 
 ## Gotchas
 
 1. **Always check credits first** — never run a generation without `dreamina user_credit`. Warn user if balance is low. If `user_credit` fails, do NOT proceed to generation — fix login/config first
 2. **Prompt goes through prompt skill first** — don't craft prompts here. Route to jimeng-prompt-text2image for all prompt writing
-3. **`~/.dreamina_cli/` is the config directory** — contains `config.toml` (settings), `credential.json` (login), `tasks.db` (history). Don't delete this directory
+3. **`~/.dreamina_cli/` is the config directory** — may contain `config.toml` (settings), `credential.json` (login), `tasks.db` (history) after native (non-Docker) login. In Docker setups these files may be absent. Don't delete this directory
 4. **`--poll` polls every 1 second** — using `--poll=30` means up to 30 polling attempts, not a 30-second fixed wait. Timeout returns "querying" status, not failure
 5. **Model 5.0 is the safe default** — latest flagship, best quality. Don't hardcode but default here unless the prompt recommends a specific version
 6. **Resolution must match model capability** — 1k only for 3.x, 2k for all, 4k for 4.0+
