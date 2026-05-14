@@ -99,8 +99,6 @@ Each component is optional. Select and weight components based on the scenario:
 3. **Aspect ratio drives composition** — a prompt written for 16:9 will compose differently than the same prompt at 9:16. Always confirm the intended aspect ratio
 4. **Style keywords can dominate** — strong style keywords (cyberpunk, 水墨, Pixar) can override other elements. Place them carefully in the prompt order
 5. **Prompt language** — 即梦 works best with Chinese prompts. If the user provides English, translate and adapt rather than directly using it
-6. **⚠️ Never write hex color values into prompts** — The model treats `#ff2121`, `#9d2933` etc. as literal text to render in the image, NOT as color instructions. Always use Chinese color names only: \"大红\", \"胭脂\", \"桃红\" — never \"大红 #ff2121\" or any form with hex codes
-7. **Color library is for YOUR reference only** — Load `color-library/chinese-traditional.md` to FIND the right color name to write into the prompt. Do NOT copy hex codes into the output prompt text
 6. **⚠️ Never write hex color values into prompts** — The model treats `#ff2121`, `#9d2933` etc. as literal text to render in the image, NOT as color instructions. Always use Chinese color names only: "大红", "胭脂", "桃红" — never "大红 #ff2121" or any form with hex codes
 7. **Color library is for YOUR reference only** — Load `color-library/chinese-traditional.md` to FIND the right color name to write into the prompt. Do NOT copy hex codes into the output prompt text
 

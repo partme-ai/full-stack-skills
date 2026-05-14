@@ -92,10 +92,14 @@ The key difference from text-to-image prompting:
 → Load `rules/video-core-methodology.md` for component-by-component build guide + presentation format
 
 ### Step 4: Apply video writing rules
-→ Load `rules/video-writing-rules.md` for all 7 rules (motion, camera, duration, light, etc.)
+→ Load `rules/video-writing-rules.md` for all 10 rules (motion, camera, duration, light, model-matching, differentiation, action layers)
 
 ### Step 5: Validate
 → Load `rules/video-validation-checklist.md` and run through all checks
+
+### Step 6 (User assessment): Evaluate prompt output
+When the user provides an existing prompt output and asks for evaluation ("评估""检测命中率""看看优化方向"):
+→ Load `references/evaluation-framework.md` for the systematic 6-dimension assessment methodology
 
 ## Gotchas
 
@@ -107,9 +111,11 @@ The key difference from text-to-image prompting:
 6. **First-time web authorization** — some models require browser auth before first use
 7. **Character consistency not guaranteed** — same face across segments not reliable
 8. **Camera + complex motion = risk** — prioritize one over the other
-9. **Model version matters** — 视频3.0 Pro uses natural language, Seedance 2.0 needs structured camera direction. 智能多帧 requires uploading frames + per-frame duration settings
-10. **⚠️ Never write hex color codes in video prompts** — Same as image prompts: `#RRGGBB` values get rendered as text in the video frames, NOT as color instructions. Use Chinese color names only
-10. **⚠️ No hex color values** — Same rule as image prompts: never write `#ff2121` into video prompts. Use Chinese color names only
+9. **Model-prompt mismatch is the #1 output killer (Rule 8)** — long descriptive prose → 视频3.0 Pro; structured short sentences → Seedance 2.0. Mismatching causes detail loss and poor generation. **This is the single most common error in real usage.**
+10. **Action layer count by model (Rule 10)** — Seedance 2.0 can't handle 4+ action layers reliably. Cap at 3. 视频3.0 Pro can handle 4-5.
+11. **Multi-scheme differentiation is non-optional (Rule 9)** — When providing 2+ alternatives, verify visual distinction. At least 2 dimensions must differ (运镜/动作密度/景别/节奏/场景). Similar schemes waste user's time.
+12. **Light must change, not just exist (Rule 5)** — "洒入" is a static snapshot. Use "缓缓流动""逐渐变亮""光影移动" to encode time passage.
+13. **⚠️ Never write hex color codes in video prompts** — Same as image prompts: `#RRGGBB` values get rendered as text in the video frames, NOT as color instructions. Use Chinese color names only
 
 ## Available Resources
 
@@ -117,11 +123,12 @@ The key difference from text-to-image prompting:
 |----------|-------------|--------------|
 | `rules/video-category-table.md` | 12 video scenario categories | Step 1 |
 | `rules/video-core-methodology.md` | Component-by-component build guide | Step 3 |
-| `rules/video-writing-rules.md` | 7 video-specific writing rules | Step 4 |
-| `rules/video-validation-checklist.md` | 6-point pre-submission checklist | Step 5 |
+| `rules/video-writing-rules.md` | 10 video-specific writing rules | Step 4 |
+| `rules/video-validation-checklist.md` | 基础+进阶+多方案校验清单 | Step 5 |
 | `video-words/motion.md` | Motion vocabulary library | When writing motion descriptions |
 | `video-words/scene-style.md` | Scene/style/vocabulary library | When describing scenes |
 | `camera-basic.md` | 7 basic camera movements | Basic camera work needed |
 | `camera-advanced.md` | 7 compound moves + emotion mapping | Advanced camera work |
 | `references/jimeng-video-3.0-guide.md` | 视频3.0/3.0 Pro: 8 dimensions | User mentions 视频3.0 |
 | `references/smart-multi-frame-guide.md` | 智能多帧: 多图一镜到底 | User mentions 智能多帧/多帧 |
+| `references/evaluation-framework.md` | 6维评估框架: 词库命中率/规则遵从度/公式完整性/模型匹配/区分度/校验 | User asks to assess/evaluate skill output |
