@@ -6,7 +6,7 @@
 
 ![Version](https://img.shields.io/badge/Version-0.0.1-red)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
-![Skill Docs](https://img.shields.io/badge/SKILL.md-421-orange)
+![Skill Docs](https://img.shields.io/badge/SKILL.md-422-orange)
 ![Skill Groups](https://img.shields.io/badge/Groups-42-blue)
 ![Marketplace Plugins](https://img.shields.io/badge/Plugins-40-brightgreen)
 
@@ -18,7 +18,7 @@
 
 > **⚠️ 注意：** 当前文档口径以仓库内 `skills/` 实际目录和 `.claude-plugin/marketplace.json` 为准。
 
-> **说明：** 当前仓库内共有 **42 个技能组目录**、**421 个 `SKILL.md` 文件**；其中 Marketplace 当前发布 **40 个插件**、共 **410 条技能路径**。未进入 Marketplace 的仓库内技能组为 `threejs-skills` 与 `vscode-skills`。
+> **说明：** 当前仓库内共有 **42 个技能组目录**、**422 个 `SKILL.md` 文件**；其中 Marketplace 当前发布 **40 个插件**、共 **411 条技能路径**。未进入 Marketplace 的仓库内技能组为 `threejs-skills` 与 `vscode-skills`。
 
 ## ⚡ 5 分钟安装与转换示例
 
@@ -127,9 +127,9 @@ Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态
 | 指标 | 当前值 |
 |---|---:|
 | `skills/` 下技能组目录 | 42 |
-| 仓库内 `SKILL.md` 文件 | 421 |
+| 仓库内 `SKILL.md` 文件 | 422 |
 | Marketplace 插件数 | 40 |
-| Marketplace 技能路径数 | 410 |
+| Marketplace 技能路径数 | 411 |
 | 仓库内未发布技能组 | 2 |
 
 ### ✨ 核心特性
@@ -137,7 +137,7 @@ Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态
 #### 1. 分组式组织
 - **42 个技能组目录**：按领域、框架和工作流拆分，便于维护与扩展
 - **40 个 Marketplace 插件**：按技能组发布，便于按需安装与组合使用
-- **421 个 `SKILL.md` 文件**：沉淀可复用的 Agent Skills 资产
+- **422 个 `SKILL.md` 文件**：沉淀可复用的 Agent Skills 资产
 
 #### 2. 全链路覆盖
 - **前端与 UI**：Vue、React、Angular、Svelte、各类 UI 组件库与构建工具
@@ -176,7 +176,7 @@ Skills 是由说明、脚本和资源组成的文件夹，Claude 会按需动态
 
 - `threejs-skills` 当前在仓库中包含 18 个技能，但未进入 Marketplace 发布面。
 - `vscode-skills` 当前在仓库中包含 4 个技能，但未进入 Marketplace 发布面。
-- `document-skills` 当前目录中有 6 个技能（含 `full-stack-doc`），而 Marketplace 仍引用 10 个条目，其中 `docx`、`pptx`、`pdf`、`xlsx` 为缺失目录引用。
+- `document-skills` 当前目录中有 7 个技能（含 `full-stack-doc`、`processon-diagram-generator`），而 Marketplace 仍引用 11 个条目，其中 `docx`、`pptx`、`pdf`、`xlsx` 为缺失目录引用。
 - `tauri-skills` 当前目录中有 52 个技能，而 Marketplace 当前发布 51 个条目；`tauri-app-updater` 目前仅存在于仓库目录中。
 
 ### 阅读路径建议
@@ -262,9 +262,9 @@ full-stack-skills/
 | 项目 | 当前值 |
 |---|---:|
 | 技能组目录 | 42 |
-| `SKILL.md` 文件 | 421 |
+| `SKILL.md` 文件 | 422 |
 | Marketplace 插件 | 40 |
-| Marketplace 技能路径 | 410 |
+| Marketplace 技能路径 | 411 |
 | 仓库内未发布技能组 | 2 |
 
 ### 免责声明
@@ -478,7 +478,7 @@ fskill install
 | `dev-utils-skills` | 12 | 是 | 12 | 已与当前发布面对应；`full-stack-doc` 已迁至 `document-skills` |
 | `devops-skills` | 6 | 是 | 6 | 已与当前发布面对应 |
 | `docker-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
-| `document-skills` | 6 | 是 | 10 | 目录技能数与 Marketplace 引用数不一致（含缺失的 docx/pptx/pdf/xlsx），详见 repository-map |
+| `document-skills` | 7 | 是 | 11 | 目录技能数与 Marketplace 引用数不一致（含缺失的 docx/pptx/pdf/xlsx），详见 repository-map |
 | `drawio-skills` | 2 | 是 | 2 | 已与当前发布面对应 |
 | `electron-skills` | 3 | 是 | 3 | 已与当前发布面对应 |
 | `flutter-skills` | 2 | 是 | 2 | 已与当前发布面对应 |

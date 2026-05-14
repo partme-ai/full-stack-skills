@@ -12,5 +12,6 @@
 | [mermaid](mermaid/) | Mermaid 图表 |
 | [plantuml](plantuml/) | PlantUML |
 | [processon-mindmap](processon-mindmap/) | ProcessOn 思维导图 |
+| [processon-diagram-generator](processon-diagram-generator/) | ProcessOn 智能图表生成（流程图、架构图、时序图等） |
 
 安装：`/plugin install document-skills@full-stack-skills`

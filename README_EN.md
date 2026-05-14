@@ -4,7 +4,7 @@ A grouped Agent Skills repository for Claude Code, Claude.ai, and compatible Age
 
 ![Version](https://img.shields.io/badge/Version-0.0.1-red)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
-![Skill%20Docs](https://img.shields.io/badge/SKILL.md-421-orange)
+![Skill%20Docs](https://img.shields.io/badge/SKILL.md-422-orange)
 ![Skill%20Groups](https://img.shields.io/badge/Groups-42-blue)
 ![Marketplace%20Plugins](https://img.shields.io/badge/Plugins-40-brightgreen)
 
@@ -99,7 +99,7 @@ Skills are folders of instructions, scripts, and resources that Claude loads dyn
 
 ## About This Repository
 
-This repository is PartMeAI’s grouped Agent Skills catalog. The current repository snapshot contains **42** skill-group directories and **421** `SKILL.md` files. `.claude-plugin/marketplace.json` currently publishes **40** plugins with **410** skill paths.
+This repository is PartMeAI’s grouped Agent Skills catalog. The current repository snapshot contains **42** skill-group directories and **422** `SKILL.md` files. `.claude-plugin/marketplace.json` currently publishes **40** plugins with **411** skill paths.
 
 The main repo now covers frontend, backend, mobile, cross-platform development, testing, DevOps, documentation, OCR, Tauri, Stitch, Pencil, T2UI, OpenSpec, and Spec Kit workflows.
 
@@ -108,9 +108,9 @@ The main repo now covers frontend, backend, mobile, cross-platform development, 
 | Metric | Current Value |
 |---|---:|
 | Skill-group directories under `skills/` | 42 |
-| `SKILL.md` files on disk | 421 |
+| `SKILL.md` files on disk | 422 |
 | Plugins in `.claude-plugin/marketplace.json` | 40 |
-| Published skill refs in Marketplace | 410 |
+| Published skill refs in Marketplace | 411 |
 | Repo-only groups not published | 2 |
 
 ### Coverage Map
