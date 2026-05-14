@@ -11,7 +11,7 @@
 | `--image` | **Yes** | 本地图片路径 | — |
 | `--prompt` | No | 运动描述（增量式） | — |
 | `--duration` | No | 3-15s | 5 |
-| `--model_version` | No | seedance2.0, seedance2.0fast, 3.0, 3.0fast, 3.0pro, 3.5pro | seedance2.0fast |
+| `--model_version` | **Yes** | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.0, 3.0fast, 3.0pro, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
 | `--video_resolution` | No | 720P (Seedance), 1080P (legacy) | 720P |
 | `--poll` | No | 秒 (0=async) | 0 |
 
@@ -23,7 +23,7 @@
 | `--last` | **Yes** | 本地图片路径（结束帧） | — |
 | `--prompt` | No | 过渡描述 | — |
 | `--duration` | No | 4-15s | 5 |
-| `--model_version` | No | seedance2.0, seedance2.0fast, 3.5pro | seedance2.0fast |
+| `--model_version` | **Yes** | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
 | `--video_resolution` | No | 720P (Seedance), 1080P (legacy) | 720P |
 
 ## multiframe2video（多帧故事）
@@ -47,7 +47,7 @@
 | `--prompt` | No | 合成描述 | — |
 | `--duration` | No | 4-15s | 5 |
 | `--ratio` | No | 1:1, 3:4, 16:9, 4:3, 9:16, 21:9 | 16:9 |
-| `--model_version` | No | seedance2.0, seedance2.0fast | seedance2.0fast |
+| `--model_version` | No | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip** | seedance2.0fast_vip ⬅️ VIP 优先 |
 
 > *至少需要 `--image`、`--video`、`--audio` 其中之一。
 

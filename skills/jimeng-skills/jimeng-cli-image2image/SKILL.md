@@ -26,12 +26,37 @@ Do NOT use this skill for:
 ## Core Execution Flow
 
 ```
-1. CHECK   → dreamina user_credit          # Always first
-2. VERIFY  → Images exist and are readable  # --images requires local files
-3. SUBMIT  → dreamina image2image --images ./input.png --prompt="..." [--poll=N]
-4. MONITOR → dreamina query_result --submit_id=<id>  # If async or poll timeout
-5. RETRIEVE → Results saved/downloaded
+1. CHECK   → dreamina user_credit                  # Always first
+2. VERIFY  → Images exist and are readable
+3. SUBMIT  → dreamina image2image --images ./input.png --prompt="..." --poll=0  # Async → get submit_id
+4. POLL    → Agent 每 ~5 秒调用 query_result --submit_id=<id> 检查 gen_status
+5. RETRIEVE → gen_status="success" → 提取结果并报告
 ```
+
+## 定时查询 SOP（智能体行为规范，非 shell 死循环）
+
+提交生成任务后，应由**智能体（AI）**负责任务状态查询，而非用 `while true` shell 脚本阻塞终端：
+
+**Step 1 — 提交任务（一次 terminal 调用）**：
+```bash
+dreamina image2image --images ./input.png --prompt="改成水彩风格" --model_version=5.0 --poll=0
+```
+→ 解析输出中的 `submit_id`，记录下来。
+
+**Step 2 — 智能体周期查询（多次 terminal 调用，每次单独）**：
+```
+每 ~5 秒执行一次: dreamina query_result --submit_id=<submit_id>
+```
+根据返回的 `gen_status` 做分支判断：
+
+| gen_status | 智能体行为 |
+|-----------|-----------|
+| `"success"` | ✅ 提取结果 URL，报告给用户 |
+| `"failed"` | ❌ 报告错误信息给用户 |
+| `"querying"` | ⏳ 等待 ~5 秒后再次检查（最长等待 2 分钟） |
+| 长时间无变化（>3min） | ⚠️ 报告用户询问是否继续 |
+
+> **禁止**在 terminal 中使用 `while true; sleep 5; ...` 死循环。应由智能体在多次对话轮次中独立调用 `query_result`。
 
 ## How to use this skill
 
@@ -68,14 +93,20 @@ Load `references/parameter-reference.md` for the complete parameter map.
 
 ### Step 4: Execute the generation
 
-**Standard style transfer:**
+**Recommended (async + 智能体周期查询):**
 ```bash
 dreamina image2image \
   --images ./photo.png \
   --prompt="保持人物面部特征和姿势不变，将照片转换为吉卜力动画风格，温暖手绘质感" \
   --model_version=5.0 \
   --resolution_type=4k \
-  --poll=30
+  --poll=0
+```
+→ 解析获取 `submit_id`，智能体随后每 ~5 秒调用 `query_result` 检查状态。
+
+**Quick poll (for fast edits, auto 1s polling):**
+```bash
+dreamina image2image --images ./photo.png --prompt="改成水彩风格" --model_version=5.0 --poll=30
 ```
 
 **Background replacement:**
@@ -103,7 +134,12 @@ dreamina image2image --images ./input.png --prompt="..." --poll=0
 
 ### Step 5: Handle results → Step 6: Handle errors
 
-Same as other CLI skills: `--poll` timeout → `query_result`. Common errors below.
+After generation completes:
+- Confirm `gen_status` is `"success"`
+- If using 智能体周期查询 → 每次 `query_result` 返回后智能体根据 `gen_status` 分支判断
+- If `--poll` timeout → 智能体接手用 `query_result` 继续轮询
+
+Common errors below.
 
 | Error | Action |
 |-------|--------|
@@ -191,6 +227,8 @@ A: `dreamina logout` clears `credential.json` only. `config.toml` and `tasks.db`
 7. **`--poll` polls every 1 second** — timeout returns "querying" (not failure), use `query_result` to check later
 8. **Edit prompt style matters** — use Keep/Change framework from jimeng-prompt-image2image. Undescribed elements may change unexpectedly
 9. **`~/.dreamina_cli/` directory** — may contain config.toml, credential.json, tasks.db after native (non-Docker) login. In Docker setups, these files may be absent (auth stored ephemerally). Don't delete the directory
+10. **图片类不支持 VIP 通道** — dreamina image2image 的 `--model_version` 参数只有 `4.0, 4.1, 4.5, 4.6, 5.0`，没有 `_vip` 变体。VIP 通道仅限视频类子命令。如需确认 CLI 实际支持的参数，运行 `dreamina image2image -h`——CLI help 输出是唯一真相来源，技能文档可能滞后
+11. **不要写 shell 死循环做任务轮询** — 提交任务时用 `--poll=0` 获取 submit_id，然后由智能体在对话轮次中每 ~5 秒调用一次 `query_result`。禁止 `while true; sleep 5;` 阻塞终端。智能体需根据 gen_status 做分支判断（继续等/报结果/通知超时）
 
 ## Available Resources
 

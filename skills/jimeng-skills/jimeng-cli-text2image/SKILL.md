@@ -27,11 +27,59 @@ Do NOT use this skill for:
 ## Core Execution Flow
 
 ```
-1. CHECK   → dreamina user_credit          # Always first — check credits before any generation
-2. SUBMIT  → dreamina text2image --prompt="..." --ratio=X:Y [--poll=N]
-3. MONITOR → dreamina query_result --submit_id=<id>  # If async (no --poll)
-4. RETRIEVE → Results saved to session or download directory
+1. CHECK   → dreamina user_credit                  # Always first — check credits
+2. SUBMIT  → dreamina text2image --prompt="..." --ratio=X:Y --poll=0  # Async → get submit_id
+3. POLL    → Agent 每 ~5 秒手动调用 query_result --submit_id=<id> 检查 gen_status
+4. RETRIEVE → gen_status="success" → 提取结果并报告
 ```
+
+## 定时查询 SOP（智能体行为规范，非 shell 死循环）
+
+提交生成任务后，应由**智能体（AI）**负责任务状态查询，而非用 `while true` shell 脚本阻塞终端：
+
+### 步骤
+
+**Step 1 — 提交任务（一次 terminal 调用）**：
+```bash
+dreamina text2image --prompt="..." --ratio=16:9 --poll=0
+```
+→ 解析输出中的 `submit_id`，记录下来。
+
+**Step 2 — 智能体周期查询（多次 terminal 调用，每次单独）**：
+```
+每 ~5 秒执行一次: dreamina query_result --submit_id=<submit_id>
+```
+根据返回的 `gen_status` 做分支判断：
+
+| gen_status | 智能体行为 |
+|-----------|-----------|
+| `"success"` | ✅ 提取结果 URL/文件，报告给用户 |
+| `"failed"` | ❌ 报告错误信息给用户 |
+| `"querying"` | ⏳ 等待 ~5 秒后再次调用 query_result（最长等待：图片 2 分钟，视频 15 分钟） |
+| 长时间无变化（图片 >3min，视频 >20min） | ⚠️ 主动报告给用户，询问是否要继续等 |
+
+> **禁止**在 terminal 中使用 `while true; sleep 5; ...` 死循环。应由智能体在多次对话轮次中调用 `query_result`，每次独立发起 terminal 调用。
+
+### 示例（智能体自身逻辑）
+
+```
+# Turn 1
+terminal: dreamina text2image --prompt="..." --poll=0
+→ parse: submit_id = "abc-123"
+→ tell user: "已提交任务，submit_id=abc-123，5秒后检查结果"
+
+# Turn 2 (after ~5s)
+terminal: dreamina query_result --submit_id=abc-123
+→ gen_status = "querying"
+→ tell user: "任务处理中，5秒后再检查"
+
+# Turn 3 (after ~5s)
+terminal: dreamina query_result --submit_id=abc-123
+→ gen_status = "success"
+→ extract result_url, report to user
+```
+
+> **原理**: 每次单独调用 terminal 而非 shell 死循环，智能体可以在每次查询结果后做灵活判断（重试、报告进度、超时处理），且不阻塞终端资源。
 
 ## How to use this skill
 
@@ -97,33 +145,31 @@ Load `references/parameter-reference.md` for the complete parameter map.
 
 ### Step 4: Execute the generation
 
-**Synchronous (recommended for most cases):**
+**Recommended (async + 智能体周期查询):**
+```bash
+dreamina text2image --prompt="<prompt>" --ratio=16:9 --model_version=5.0 --resolution_type=4k --poll=0
+```
+→ 解析获取 `submit_id`，智能体随后每 ~5 秒调用 `query_result` 检查状态。
+
+**Quick poll (for fast tasks, auto 1s polling):**
 ```bash
 dreamina text2image --prompt="<prompt>" --ratio=16:9 --model_version=5.0 --resolution_type=4k --poll=30
-```
-
-**Async (for batch or long-running tasks):**
-```bash
-# Submit without polling
-dreamina text2image --prompt="<prompt>" --ratio=16:9 --poll=0
-
-# Note the submit_id from output, then query later:
-dreamina query_result --submit_id=<id>
 ```
 
 **With session (organized projects):**
 ```bash
 dreamina session create "project-name"  # First time
-dreamina text2image --prompt="<prompt>" --session=<session_id> --ratio=16:9 --poll=30
+dreamina text2image --prompt="<prompt>" --session=<session_id> --ratio=16:9 --poll=0
+# Then follow 5s polling SOP using submit_id
 ```
 
 ### Step 5: Handle results
 
 After generation completes:
-- Confirm the `gen_status` is "success"
-- Report the output file path to the user
-- If using `--poll=30`, output is available immediately
-- If async, provide the `submit_id` and instructions for checking later
+- Confirm the `gen_status` is `"success"`
+- If using the 5s 智能体周期查询 → 每次 `query_result` 返回后智能体根据 `gen_status` 做分支判断
+- If using `--poll=N` and it completes → output is available immediately
+- If still `"querying"` after reasonable wait time → ask user if they want to continue waiting
 
 ### Step 6: Handle errors
 
@@ -217,7 +263,7 @@ A: Run `dreamina logout` — this clears `credential.json` only. `config.toml` a
 5. **Model 5.0 is the safe default** — latest flagship, best quality. Don't hardcode but default here unless the prompt recommends a specific version
 6. **Resolution must match model capability** — 1k only for 3.x, 2k for all, 4k for 4.0+
 7. **Chinese prompts produce best results** — 即梦 is optimized for Chinese. If the user's prompt is in English, suggest translating
-8. **Session 0 is the default session** — no need to create sessions for one-off generations
+10. **不要写 shell 死循环做任务轮询** — 提交任务时用 `--poll=0` 获取 submit_id，然后由智能体在对话轮次中每 ~5 秒手动调用一次 `query_result`。禁止 `while true; sleep 5;` 阻塞终端。智能体需根据每次返回的 gen_status 做分支判断（继续等/报告结果/通知超时）
 
 ## Available Resources
 
