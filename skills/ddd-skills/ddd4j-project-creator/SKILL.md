@@ -1,10 +1,7 @@
 ---
 name: ddd4j-project-creator
 description: |
-  A comprehensive skill for creating new ddd4j (Domain-Driven Design for Java) projects based on ddd4j-boot framework. 
   Use ONLY when the user explicitly mentions creating a ddd4j project, initializing ddd4j project, or setting up 
-  ddd4j-boot project. Supports three project types: single-module monolith, multi-module monolith, and microservices. 
-  Generates project scaffolding based on ddd4j-boot architecture with DDD, Hexagonal Architecture, Clean Architecture, 
   and COLA V5 patterns. Do NOT trigger for generic DDD projects, JPA/Hibernate projects, or other ORM frameworks 
   without explicit ddd4j mention.
 license: Complete terms in LICENSE.txt
@@ -14,21 +11,17 @@ license: Complete terms in LICENSE.txt
 
 ## When to use this skill
 
-**CRITICAL: This skill should ONLY be triggered when the user explicitly mentions creating a ddd4j project, initializing ddd4j project, or setting up ddd4j-boot project.**
 
 **ALWAYS use this skill when the user mentions:**
 - Creating a ddd4j project (explicitly mentions "ddd4j")
-- Initializing ddd4j-boot project
 - Setting up ddd4j project structure
 - Creating ddd4j project scaffolding
 - 创建 ddd4j 项目 (explicitly mentions "ddd4j")
 - 初始化 ddd4j 项目 (initialize ddd4j project)
-- ddd4j-boot 项目创建 (create ddd4j-boot project)
 
 **Trigger phrases include:**
 - "创建 ddd4j 项目" (create ddd4j project) - **must include "ddd4j"**
 - "初始化 ddd4j 项目" (initialize ddd4j project) - **must include "ddd4j"**
-- "创建 ddd4j-boot 项目" (create ddd4j-boot project) - **must include "ddd4j"**
 - "使用 ddd4j 创建项目" (create project using ddd4j)
 - "ddd4j 项目脚手架" (ddd4j project scaffolding)
 
@@ -111,11 +104,9 @@ license: Complete terms in LICENSE.txt
    - `groupId`: Maven group ID (e.g., `com.github.hiwepy` or `io.ddd4j.base`)
    - `artifactId`: Maven artifact ID (e.g., `ddd4j-douyin` or `my-ddd4j-service`)
    - `version`: Project version (e.g., `1.0.0-SNAPSHOT`)
-   - `parentVersion`: Parent POM version (e.g., `2023.0.x.20251205-SNAPSHOT` or reference to `ddd4j-boot-parent`)
    - `packageBase`: Base package name (e.g., `io.ddd4j.douyin` or `com.example.service`)
    - `modules`: List of business modules (for multi-module/microservices)
    - `architecture`: Architecture pattern (DDD Classic, Hexagonal, Clean, COLA V5)
-   - `ddd4jBootVersion`: DDD4j Boot version (if using ddd4j-boot-bom)
 
 4. **Generate project structure**:
    - Create directory structure based on selected type
@@ -274,9 +265,7 @@ See the `examples/` directory for:
 ## Keywords
 
 **English keywords:**
-ddd4j, ddd4j-boot, ddd4j project, create ddd4j project, initialize ddd4j project, ddd4j project creator, ddd4j project scaffolding, ddd4j-boot project, ddd4j project structure, ddd4j-boot initialization, ddd4j microservice, ddd4j monolith
 
 **Chinese keywords (中文关键词):**
-ddd4j, ddd4j-boot, ddd4j 项目, 创建 ddd4j 项目, 初始化 ddd4j 项目, ddd4j 项目创建, ddd4j 项目脚手架, ddd4j-boot 项目, ddd4j 项目结构, ddd4j-boot 初始化, ddd4j 微服务, ddd4j 单体应用
 
 **IMPORTANT**: All keywords must include "ddd4j" to avoid false triggers. Generic terms like "DDD 项目" (DDD project) or "创建项目" (create project) without "ddd4j" should NOT trigger this skill.

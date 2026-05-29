@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>TRACE 评测报告 — ddd-architecture-awesome</title>
+<style>
+  @media print { body { background: white !important; } .no-print { display: none !important; } }
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="pb-8 max-w-5xl mx-auto px-4 pt-6">
+
+  <!-- Header -->
+  <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">ddd-architecture-awesome</h1>
+      <p class="text-sm text-gray-500 mt-0.5">full-stack-skills/skills/ddd-skills/ddd-architecture-awesome</p>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <span>评测时间：2026-05-29</span>
+      <span class="px-2 py-0.5 rounded bg-green-50 text-green-700 font-medium">Official: ✅ Pass</span>
+    </div>
+  </div>
+
+  <!-- TRACE 维度说明卡 -->
+  <div class="mb-6 rounded-2xl overflow-hidden border" style="border-color:rgba(63,94,255,0.16)">
+    <div class="h-1" style="background:linear-gradient(90deg,#3f5eff 0%,#af52de 100%)"></div>
+    <div class="p-5" style="background:linear-gradient(135deg,rgba(63,94,255,0.04) 0%,rgba(175,82,222,0.04) 100%)">
+      <div class="flex items-start gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-[18px] h-[18px] text-white"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div>
+          <h3 class="text-[15px] font-semibold text-gray-900 mb-1.5">TRACE 评测维度说明</h3>
+          <p class="text-[13px] leading-relaxed text-gray-600">
+            SkillHub TRACE 评测体系从 <span class="font-medium text-gray-800">可信任度（Trust）</span>、<span class="font-medium text-gray-800">可靠性（Reliability）</span>、<span class="font-medium text-gray-800">适用性（Adaptability）</span>、<span class="font-medium text-gray-800">规范性（Convention）</span>、<span class="font-medium text-gray-800">有效性（Effectiveness）</span> 五个维度全面评估 Skill 的质量。该体系基于 SkillHub 平台的长期运营实践及腾讯新闻团队的内容生产经验沉淀而成，旨在帮助用户快速识别高质量 Skill。
+          </p>
+          <p class="text-[12px] text-gray-500 mt-2 flex items-center gap-1">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            特别说明：本报告不是官方报告，而是 TRACE 评测体系的模拟检测，最终测评结果以 SkillHub 为准。
+          </p>
+          <p class="text-[12px] text-gray-400 mt-1">
+            等级阈值：≥4.7 优秀（Excellent） | ≥4.2 良好（Good） | ≥3.5 一般（Fair） | &lt;3.5 待改进（Needs improvement）
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overall Score + Radar -->
+  <div class="mb-6 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
+    <div class="flex flex-col lg:flex-row items-center gap-8">
+      <div class="w-full lg:w-[320px] h-[260px] flex-shrink-0">
+        <svg width="320" height="260" viewBox="0 0 320 260">
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="160" y2="40"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="245.595" y2="102.188"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="212.901" y2="202.812"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="107.099" y2="202.812"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="74.405" y2="102.188"/>
+          <path stroke="#e5e7eb" stroke-width="0.5" fill="none" d="M 160,112 L 177.119,124.438 L 170.580,144.562 L 149.420,144.562 L 142.881,124.438 Z"/>
+          <path stroke="#e5e7eb" stroke-width="0.5" fill="none" d="M 160,94 L 194.238,118.875 L 181.160,159.125 L 138.840,159.125 L 125.762,118.875 Z"/>
+          <path stroke="#e5e7eb" stroke-width="0.5" fill="none" d="M 160,76 L 211.357,113.313 L 191.740,173.687 L 128.260,173.687 L 108.643,113.313 Z"/>
+          <path stroke="#e5e7eb" stroke-width="0.5" fill="none" d="M 160,58 L 228.476,107.751 L 202.321,188.249 L 117.679,188.249 L 91.524,107.751 Z"/>
+          <path stroke="#e5e7eb" stroke-width="0.5" fill="none" d="M 160,40 L 245.595,102.188 L 212.901,202.812 L 107.099,202.812 L 74.405,102.188 Z"/>
+          <polygon points="160,42.8 241.599,104.340 208.834,197.612 111.166,197.612 78.401,104.340" fill="rgba(99,102,241,0.18)" stroke="#6366F1" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="160" cy="42.8" r="4" fill="#ef4444"/>
+          <circle cx="241.599" cy="104.340" r="4" fill="#f59e0b"/>
+          <circle cx="208.834" cy="197.612" r="4" fill="#3b82f6"/>
+          <circle cx="111.166" cy="197.612" r="4" fill="#8b5cf6"/>
+          <circle cx="78.401" cy="104.340" r="4" fill="#10b981"/>
+          <text font-size="12" text-anchor="middle" fill="#4B5563" x="160" y="28">T 可信任度</text>
+          <text font-size="12" text-anchor="start" fill="#4B5563" x="257" y="98">R 可靠性</text>
+          <text font-size="12" text-anchor="start" fill="#4B5563" x="220" y="213">A 适用性</text>
+          <text font-size="12" text-anchor="end" fill="#4B5563" x="100" y="213">C 规范性</text>
+          <text font-size="12" text-anchor="end" fill="#4B5563" x="63" y="98">E 有效性</text>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-baseline gap-3 mb-4">
+          <span class="text-[48px] font-bold text-gray-900 leading-none">4.71</span>
+          <span class="text-[16px] text-gray-400 font-medium">/ 5</span>
+        </div>
+        <div class="mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[13px] font-semibold bg-green-100 text-green-800">🟢 优秀（Excellent）</span>
+        </div>
+        <p class="text-[14px] leading-relaxed text-gray-600">结构清晰、内容完整的 DDD 知识体系入口技能。27 个分类参考文献形成六层知识金字塔，11 条领域专属 Gotchas 精准预防常见误区，3 个端到端案例覆盖不同复杂度场景。</p>
+        <p class="text-[13px] text-gray-500 mt-2">整体来看，<strong>可信任度（T）和规范性（C）表现最佳</strong>，适用性（A）和可靠性（R）相对薄弱，主要因为边界信息分散在三处未形成独立章节、缺少交互式引导模板。</p>
+        <div class="mt-4 grid grid-cols-5 gap-2">
+          <div class="text-center rounded-lg p-2" style="background:rgba(239,68,68,0.06)"><div class="text-[18px] font-bold" style="color:#ef4444">4.88</div><div class="text-[10px] text-gray-400">T·Trust</div></div>
+          <div class="text-center rounded-lg p-2" style="background:rgba(245,158,11,0.06)"><div class="text-[18px] font-bold" style="color:#f59e0b">4.63</div><div class="text-[10px] text-gray-400">R·Reliability</div></div>
+          <div class="text-center rounded-lg p-2" style="background:rgba(59,130,246,0.06)"><div class="text-[18px] font-bold" style="color:#3b82f6">4.63</div><div class="text-[10px] text-gray-400">A·Adaptability</div></div>
+          <div class="text-center rounded-lg p-2" style="background:rgba(139,92,246,0.06)"><div class="text-[18px] font-bold" style="color:#8b5cf6">4.75</div><div class="text-[10px] text-gray-400">C·Convention</div></div>
+          <div class="text-center rounded-lg p-2" style="background:rgba(16,185,129,0.06)"><div class="text-[18px] font-bold" style="color:#10b981">4.65</div><div class="text-[10px] text-gray-400">E·Effectiveness</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dimension Detail Cards -->
+  <div class="space-y-4">
+    <h3 class="text-[16px] font-semibold text-gray-900">📊 五维度详析（20 子项评分）</h3>
+
+    <!-- T -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(16,185,129,0.082)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" style="color:rgb(16,185,129)"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="flex-1"><span class="text-[14px] font-semibold text-gray-900">T · Trust（可信任度）</span><span class="text-[12px] text-gray-500 ml-2">安全红线维度</span><span class="float-right text-[18px] font-bold" style="color:rgb(16,185,129)">4.88</span></div>
+      </div>
+      <div class="flex items-center gap-3 mb-3"><div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:97.6%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div></div>
+      <p class="text-[13px] text-gray-600 mb-2">零脚本纯文档型、无任何安全风险，全篇中英双语完整覆盖，安全声明明确（4条）。边界信息分散在3处，未形成独立三分类章节。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">T1 安全性</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">无 secrets；无 scripts/；Security &amp; Stability 4条声明</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">T2 国内适配</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">全篇中英双语；架构中文标注；Spring Boot 生态</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">T3 边界控制</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">三重边界但分散 3 处，未独立三分类章节</td><td class="p-2 text-amber-600">整合为独立边界章节（✅/⚠️/❌）</td></tr>
+          <tr><td class="p-2 font-medium">T4 安全声明</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">教育用途+不执行代码+BC隔离+无脚本</td><td class="p-2 text-gray-400">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- R -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(59,130,246,0.082)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" style="color:rgb(59,130,246)"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
+        <div class="flex-1"><span class="text-[14px] font-semibold text-gray-900">R · Reliability（可靠性）</span><span class="text-[12px] text-gray-500 ml-2">稳定性与交付</span><span class="float-right text-[18px] font-bold" style="color:rgb(59,130,246)">4.63</span></div>
+      </div>
+      <div class="flex items-center gap-3 mb-3"><div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:92.6%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div></div>
+      <p class="text-[13px] text-gray-600 mb-2">Gotchas 质量高（11条具体领域陷阱+纠正），降级兜底优秀（每场景有替代Skill引导）。缺少交互式引导模板，steps=4未达满分阈值。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">R1 异常处理</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">11条Gotchas+代码异常；缺交互式引导模板</td><td class="p-2 text-amber-600">加"先给假设版本+列缺失项"模板</td></tr>
+          <tr><td class="p-2 font-medium">R2 可运行性</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">4步Workflow+3examples；steps&lt;5</td><td class="p-2 text-amber-600">加第5步"输入不足时的假设处理"</td></tr>
+          <tr><td class="p-2 font-medium">R3 交付完整</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">Gotchas+反例对比+输出模板；缺校验清单</td><td class="p-2 text-amber-600">加 plan-validate-execute 循环</td></tr>
+          <tr><td class="p-2 font-medium">R4 降级兜底</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">5场景均有替代Skill引导；手动校准+1.5</td><td class="p-2 text-gray-400">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- A -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(245,158,11,0.082)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" style="color:rgb(245,158,11)"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <div class="flex-1"><span class="text-[14px] font-semibold text-gray-900">A · Adaptability（适用性）</span><span class="text-[12px] text-gray-500 ml-2">场景识别与触发</span><span class="float-right text-[18px] font-bold" style="color:rgb(245,158,11)">4.63</span></div>
+      </div>
+      <div class="flex items-center gap-3 mb-3"><div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:92.6%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div></div>
+      <p class="text-[13px] text-gray-600 mb-2">双重边界+场景化路由+近失覆盖完整；Description 触发质量完美（653chars）。缺少显式受众分级，场景覆盖面可进一步扩展。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">A1 边界清晰</td><td class="p-2 font-bold text-blue-600">4.8</td><td class="p-2 text-gray-600">双重边界+场景化路由+近失覆盖；手动校准+0.8</td><td class="p-2 text-amber-600">整合独立三分类边界章节</td></tr>
+          <tr><td class="p-2 font-medium">A2 触发质量</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">653chars祈使句+中英关键词</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">A3 受众广度</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">中英双语；未显式声明目标受众分级</td><td class="p-2 text-amber-600">加受众分级（新手/架构师/开发者）</td></tr>
+          <tr><td class="p-2 font-medium">A4 场景覆盖</td><td class="p-2 font-bold text-amber-600">4.2</td><td class="p-2 text-gray-600">3examples+27refs；可扩展IoT/金融场景</td><td class="p-2 text-amber-600">增加更多复杂度场景 example</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(139,92,246,0.082)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" style="color:rgb(139,92,246)"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></div>
+        <div class="flex-1"><span class="text-[14px] font-semibold text-gray-900">C · Convention（规范性）</span><span class="text-[12px] text-gray-500 ml-2">结构与可维护性</span><span class="float-right text-[18px] font-bold" style="color:rgb(139,92,246)">4.75</span></div>
+      </div>
+      <div class="flex items-center gap-3 mb-3"><div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:95%;background:linear-gradient(90deg,#8b5cf6,#c4b5fd)"></div></div></div>
+      <p class="text-[13px] text-gray-600 mb-2">渐进披露优秀（27文件6级分类+逐一触发条件）；Gotchas精准实用。SKILL.md 505行略超推荐500上限，可迁移Sources章节到references。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">C1 用途说明</td><td class="p-2 font-bold text-blue-600">4.7</td><td class="p-2 text-gray-600">三重用途说明+触发条件；上调+0.2</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">C2 渐进披露</td><td class="p-2 font-bold text-blue-600">4.5</td><td class="p-2 text-gray-600">6子目录27文件按序号；SKILL.md 505略超上限</td><td class="p-2 text-amber-600">Sources章节移到references</td></tr>
+          <tr><td class="p-2 font-medium">C3 元信息</td><td class="p-2 font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">name有效+匹配+Apache-2.0+编号有序</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">C4 Gotchas</td><td class="p-2 font-bold text-green-600">4.8</td><td class="p-2 text-gray-600">11条精准领域陷阱+纠正建议</td><td class="p-2 text-gray-400">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- E -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(239,68,68,0.082)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" style="color:rgb(239,68,68)"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
+        <div class="flex-1"><span class="text-[14px] font-semibold text-gray-900">E · Effectiveness（有效性）</span><span class="text-[12px] text-gray-500 ml-2">任务增益与代价</span><span class="float-right text-[18px] font-bold" style="color:rgb(239,68,68)">4.65</span></div>
+      </div>
+      <div class="flex items-center gap-3 mb-3"><div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:93%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div></div>
+      <p class="text-[13px] text-gray-600 mb-2">12章完整知识链条；27refs可追溯；增益vs no-skill显著（反模式↑↑↑、知识追溯↑↑↑、架构选型↑↑↑）。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">E1 任务完成</td><td class="p-2 font-bold text-blue-600">4.8</td><td class="p-2 text-gray-600">12章完整覆盖：定义→决策树→架构→概念→反模式→路径</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">E2 正确权威</td><td class="p-2 font-bold text-amber-600">4.3</td><td class="p-2 text-gray-600">引用Evans/Vernon/Fowler等；ASCII图轻微对齐问题</td><td class="p-2 text-amber-600">修复窄终端ASCII图对齐</td></tr>
+          <tr><td class="p-2 font-medium">E3 交付质量</td><td class="p-2 font-bold text-blue-600">4.7</td><td class="p-2 text-gray-600">27refs+6层体系+3examples结构化输出</td><td class="p-2 text-gray-400">—</td></tr>
+          <tr><td class="p-2 font-medium">E4 增益归因</td><td class="p-2 font-bold text-blue-600">4.8</td><td class="p-2 text-gray-600">vs no-skill：反模式↑↑↑、知识追溯↑↑↑、架构选型↑↑↑</td><td class="p-2 text-gray-400">—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baseline -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📊 no-skill 基线对比</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-[13px]">
+        <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">对比维度</th><th class="p-2">no-skill（裸模型）</th><th class="p-2">启用此 skill</th><th class="p-2 w-16">增益</th></tr>
+        <tr><td class="p-2">DDD 概念准确性</td><td class="p-2 text-gray-500">中等（依赖训练数据）</td><td class="p-2">高（Evans/Vernon/Fowler 等权威源）</td><td class="p-2 font-bold text-green-600">↑↑</td></tr>
+        <tr><td class="p-2">适用场景判断</td><td class="p-2 text-gray-500">通用化建议</td><td class="p-2">结构化决策树+四维度评估表</td><td class="p-2 font-bold text-green-600">↑↑</td></tr>
+        <tr><td class="p-2">架构选型指导</td><td class="p-2 text-gray-500">可能偏颇</td><td class="p-2">5 种架构平等对比+中文生态</td><td class="p-2 font-bold text-green-600">↑↑↑</td></tr>
+        <tr><td class="p-2">反模式检测</td><td class="p-2 text-gray-500">泛泛而谈</td><td class="p-2">10 条精确反模式+修复+代码对比</td><td class="p-2 font-bold text-green-600">↑↑↑</td></tr>
+        <tr><td class="p-2">知识可追溯性</td><td class="p-2 text-gray-500">无</td><td class="p-2">27 文件+完整引用链+多语言参考实现</td><td class="p-2 font-bold text-green-600">↑↑↑</td></tr>
+        <tr><td class="p-2">Token 成本</td><td class="p-2 text-gray-500">0</td><td class="p-2">~3,000 tokens</td><td class="p-2 font-bold text-amber-600">中等</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Official -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📋 官方规范合规（agentskills.io）</h3>
+    <div class="rounded-lg p-3 mb-3" style="background:rgba(16,185,129,0.06);border-left:3px solid rgb(16,185,129)">
+      <span class="text-[14px] font-semibold" style="color:rgb(16,185,129)">✅ 全部通过（Pass）— 0 Issues</span>
+      <span class="text-[12px] text-gray-500 ml-2">基于 agentskills.io 官方规范</span>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-[13px]">
+        <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2 w-8">#</th><th class="text-left p-2">检查项</th><th class="p-2 w-16">结果</th><th class="text-left p-2">证据</th></tr>
+        <tr><td class="p-2">1</td><td class="p-2">SKILL.md 存在</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">SKILL.md 位于技能根目录</td></tr>
+        <tr><td class="p-2">2</td><td class="p-2">Name 与目录名一致</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">name=ddd-architecture-awesome</td></tr>
+        <tr><td class="p-2">3</td><td class="p-2">Name 格式有效（kebab-case）</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">小写字母+连字符，&lt;64字符</td></tr>
+        <tr><td class="p-2">4</td><td class="p-2">Description 有效</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">653 chars，做什么+何时使用</td></tr>
+        <tr><td class="p-2">5</td><td class="p-2">License 字段</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">Apache-2.0</td></tr>
+        <tr><td class="p-2">6</td><td class="p-2">目录结构规范</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">references(6subdirs/27files)+examples(3files)</td></tr>
+        <tr><td class="p-2">7</td><td class="p-2">渐进式披露质量</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">SKILL.md~505lines；Reference Library每条有触发条件</td></tr>
+        <tr><td class="p-2">8</td><td class="p-2">Description 触发质量</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">祈使句+中英文触发词</td></tr>
+        <tr><td class="p-2">9</td><td class="p-2">脚本安全性</td><td class="p-2 text-gray-400 font-bold">N/A</td><td class="p-2 text-gray-500">无 scripts/ 目录</td></tr>
+        <tr><td class="p-2">10</td><td class="p-2">密钥/敏感信息扫描</td><td class="p-2 text-green-600 font-bold">✅</td><td class="p-2 text-gray-500">未检出任何 secret</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Suggestions -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">💡 优化建议</h3>
+    <div class="space-y-2">
+      <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(239,68,68,0.04)">
+        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-red-100 text-red-700">P1</span>
+        <div><span class="text-[13px] font-medium text-gray-800">T3/A1 · 边界整合</span><p class="text-[12px] text-gray-500 mt-0.5">将分散的3处边界信息整合为独立三分类章节（✅擅长/⚠️需条件/❌超范围），每类≥3例，可达到 T3=5.0 + A1=5.0</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(245,158,11,0.04)">
+        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-700">P2</span>
+        <div><span class="text-[13px] font-medium text-gray-800">R1 · 交互式引导模板</span><p class="text-[12px] text-gray-500 mt-0.5">信息不足时先给假设版本的DDD适用性评估+列缺少的信息，替代笼统的"请提供更多信息"，可达到 R1=5.0</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(59,130,246,0.04)">
+        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-700">P3</span>
+        <div><span class="text-[13px] font-medium text-gray-800">A3 · 受众分级</span><p class="text-[12px] text-gray-500 mt-0.5">增加受众分级段落：DDD新手路径 vs 架构师路径 vs 开发者路径</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skill Profile -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📦 Skill 基础画像</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[13px]">
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">路径</span><br><span class="font-medium">skills/ddd-skills/ddd-architecture-awesome</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">SKILL.md</span><br><span class="font-medium">505 lines · 29,480 chars</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">References</span><br><span class="font-medium">27 files · 6 subdirs</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">Examples</span><br><span class="font-medium">3 end-to-end cases</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">Scripts</span><br><span class="font-medium">0</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">License</span><br><span class="font-medium">Apache-2.0</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">Gotchas</span><br><span class="font-medium">11 domain-specific</span></div>
+      <div class="p-2 rounded-lg bg-gray-50"><span class="text-gray-400">Skill Type</span><br><span class="font-medium">prompt</span></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-6 text-center text-[12px] text-gray-400 pb-4">
+    <p>评估依据：<strong>SkillHub TRACE 评测体系</strong></p>
+    <p>合规检查：<strong>agentskills.io</strong> 官方规范 · Generated 2026-05-29</p>
+  </div>
+
+</div>
+</body>
+</html>
