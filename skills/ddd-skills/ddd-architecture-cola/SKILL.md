@@ -1,400 +1,215 @@
 ---
 name: ddd-architecture-cola
-description: Provides comprehensive guidance for COLA v5 (Clean Object-oriented Layered Architecture) — Alibaba's DDD architecture framework. Merges project scaffolding (cola-creator) and architecture validation (cola-validator) into one skill. Covers diamond architecture pattern with Adapter/Application/Domain/Infrastructure layers, multi-module Maven/Gradle project generation, ArchUnit dependency validation, coding conventions, and CI/CD integration. Use when the user asks about COLA architecture, COLA 5.0, wants to create a COLA project, needs COLA project validation, uses Spring Boot + MyBatis in Chinese enterprise context, or wants automated architecture compliance checking.
+description: Comprehensive guidance for COLA v5 Architecture (菱形架构) — Alibaba's COLA framework with adapter/application/domain/infrastructure layers. Covers full project scaffolding, architecture validation (cola-creator + cola-validator combined), dependency rule checking with ArchUnit, CQRS integration, and multi-module Maven/Gradle project generation. Use when user asks about COLA architecture, 菱形架构, cola-creator, cola-validator, 创建 COLA 项目, or needs Alibaba DDD framework.
 license: Apache-2.0
 ---
+# DDD Architecture — COLA v5（菱形架构）
 
-# DDD Architecture - COLA v5
+COLA v5 是阿里巴巴开源的 DDD 架构框架，采用**菱形架构**——Domain 居中，Adapter 和 Infrastructure 分居两侧。本 Skill 合并 cola-creator（脚手架生成）和 cola-validator（架构校验），提供从创建到持续校验的全流程能力。
 
-COLA v5 (Clean Object-oriented Layered Architecture) implementation guide — Alibaba's DDD architecture framework. Merges project scaffolding + architecture validation.
-
-## When to use this skill
-
-**ALWAYS use this skill when the user mentions:**
-- "COLA 架构"、"COLA v5"、"cola architecture"、"Alibaba COLA"
-- "创建 COLA 项目"、"cola creator"、"COLA 脚手架"
-- "COLA 校验"、"cola validator"、"检查 COLA 架构"
-- "依赖方向检查"、"dependency direction check"
-- Spring Boot + MyBatis Chinese enterprise projects
-- Wants automated architecture compliance in CI/CD
-- Needs archunit validation for DDD layering
-
-## Architecture Overview
-
-### COLA v5 Diamond Architecture
+## Workflow
 
 ```
-                ┌──────────────┐
-                │   Adapter    │  ← Adapter Layer: HTTP, MQ, RPC
-                └──────┬───────┘
-                       │
-                ┌──────▼───────┐
-                │   Application│  ← Application Layer: orchestration, transaction, CQRS routing
-        ┌───────┴───────┬───────┴───────┐
-        ▼               ▼               ▼
-  ┌──────────┐   ┌──────────┐   ┌──────────┐
-  │  Domain  │   │  Domain  │   │  Domain  │  ← Domain Layer: core business logic
-  │   ★      │   │   ★      │   │   ★      │
-  └──────────┘   └──────────┘   └──────────┘
-        ▲               ▲               ▲
-        └───────────────┴───────────────┘
-                       │
-                ┌──────▼───────┐
-                │Infrastructure│  ← Infrastructure Layer: DB, MQ, Cache, External API
-                └──────────────┘
+输入 → 意图识别
+  ├─ "创建 COLA 项目" → Creator 流程（5 步）
+  │   Step 1: 确认项目名/包名/语言/Spring Boot 版本/CQRS 开关
+  │   Step 2: 生成多模块 Maven/Gradle 骨架
+  │   Step 3: 生成基类（AggregateRoot/Entity/VO/DomainEvent）
+  │   Step 4: 生成 Demo 聚合代码（四层完整链路）
+  │   Step 5: 生成 ArchUnit 测试 + check_cola.py 脚本
+  └─ "检查架构合规" → Validator 流程（4 步）
+      Step 1: 接收项目路径或代码片段
+      Step 2: 执行 6 项合规检查
+      Step 3: P0/P1/P2 权重扣分，输出评分报告
+      Step 4: 输出违规清单 + 修复建议
+完成后引导 → ddd-domain-designer / ddd-api-designer / ddd-code-reviewer
 ```
 
-### Four Core Constraints
+## When to Use / Boundary
 
-1. **Domain Zero Dependency**: No Spring/JPA/MyBatis imports in Domain layer
-2. **App No Business Logic**: No if/else business judgments in App layer
-3. **Adapter No SQL/Business**: No SQL or business logic in Adapter layer
-4. **No Circular Dependencies**: No cyclic dependencies between modules
+### 什么时候该用（适用场景）
+- Java + Spring Boot 企业级项目，MyBatis/JPA 技术栈
+- 需要脚手架自动生成多模块 COLA 项目
+- 需要 ArchUnit 自动校验架构合规
+- 国内阿里系技术生态（Dubbo/RocketMQ/Nacos）
+- 团队 5-50 人，业务中高复杂度
 
-## Part A: Project Scaffolding (cola-creator)
+### 不适用场景
+- 非 Java 项目 → 不适用，推荐 `ddd-architecture-clean` / `ddd-architecture-hexagonal`
+- 非 Spring Boot → 不适用，COLA 强绑定 Spring 生态
+- 2-3 人团队简单 CRUD → 不适用，`ddd-architecture-layered` 更轻量
+- 已有整洁/六边形架构正常运行 → 不适用，无需迁移
+- 快速原型/PoC 阶段 → 不适用，架构成本过高
 
-### Interactive Setup Flow
+## 菱形架构核心原理
 
 ```
-User: "Create a COLA project"
-  →
-Confirmation questions:
-  1. Project name and package base
-  2. Java/Kotlin language
-  3. Spring Boot version
-  4. Enable CQRS? (default: no)
-  5. Include Demo code? (default: Order example)
-  →
-Generate:
-  ├── Complete pom.xml / build.gradle (multi-module)
-  ├── COLA standard directory structure
-  ├── Base classes: Entity/AggregateRoot/ValueObject/DomainEvent
-  ├── Demo aggregate (Order complete example)
-  ├── DDD middleware config (DomainEventBus, etc.)
-  └── ArchUnit tests (automated dependency direction checks)
+          ┌──────────────┐
+          │   Adapter    │  ← 适配层：HTTP/MQ/RPC 协议适配与 DTO 转换
+          └──────┬───────┘
+          ┌──────▼───────┐
+          │   Application│  ← 应用层：用例编排、事务管理、CQRS 执行器
+  ┌───────┴───────┬───────┴───────┐
+  ▼               ▼               ▼
+┌──────────┐ ┌──────────┐ ┌──────────┐
+│  Domain  │ │  Domain  │ │  Domain  │  ← 领域层：业务规则 ★ 零框架依赖
+│   ★      │ │   ★      │ │   ★      │
+└──────────┘ └──────────┘ └──────────┘
+  ▲               ▲               ▲
+  └───────────────┴───────────────┘
+                 │
+          ┌──────▼───────┐
+          │Infrastructure│  ← 基础设施层：DB/MQ/缓存/外部 API 实现
+          └──────────────┘
 ```
 
-### Directory Structure (COLA v5 Multi-Module)
+| 层 | 模块 | 职责 | 依赖 |
+|---|------|------|------|
+| **Adapter** | `{p}-adapter` | REST/RPC/MQ 协议适配、DTO 转换、参数校验 | → app, domain |
+| **Application** | `{p}-app` | Command/Query 执行器、事务编排、扩展点路由 | → domain, infra |
+| **Domain** | `{p}-domain` | 聚合/E/VO、领域事件、Repository/Gateway 接口、Ability | 无依赖 |
+| **Infrastructure** | `{p}-infrastructure` | Repository/Gateway 实现、PO↔DO 转换、配置、组件 | → domain |
+
+**v5 新增特性**：Extension Point（@ExtensionPoint + @Extension(bizId) 多租户差异化）、Ability（领域能力抽象）、组件化基础设施（分布式锁/限流/熔断）、CQRS 强化（command/query 执行器严格分离）
+
+## 生成能力：cola-creator
+
+```
+AI 交互确认 → 项目名/包名(com.example.order) / 语言(Java 17+/Kotlin) / Spring Boot(3.2+/3.1) / CQRS(否/L1/L2) / Demo(默认Order)
+生成内容：
+  ├── pom.xml/build.gradle（6 模块：start/adapter/app/domain/infrastructure/common）
+  ├── COLA v5 标准目录结构 + 基类（AggregateRoot/Entity/VO/DomainEvent）
+  ├── Demo 聚合（Order 四层完整示例）
+  ├── DDD 中间件配置（DomainEventBus、ExtensionExecutor）
+  ├── ArchUnit 测试 + check_cola.py 脚本
+  └── .gitignore + README
+```
+
+两种方式：`mvn archetype:generate -DarchetypeGroupId=com.alibaba.cola -DarchetypeArtifactId=cola-archetype-web -DarchetypeVersion=5.0.0`（快速）或手动多模块（生产推荐，详见 references/02）。
+
+## 校验能力：cola-validator
+
+| 检查项 | 级别 | 说明 | 检测方式 |
+|--------|:----:|------|---------|
+| 依赖方向 | P0 | Domain 不可依赖 Infrastructure/App/Adapter | import 解析 |
+| Domain 纯净度 | P0 | Domain 无 Spring/JPA/MyBatis/Hibernate import | import 扫描 |
+| 层职责 | P0 | Adapter 无 SQL、App 无业务 if/else | AST 分析 |
+| 包命名规范 | P1 | 按 COLA 约定命名 | 正则匹配 |
+| 模块循环依赖 | P1 | DFS 检测依赖图 | 图遍历 |
+| 聚合设计 | P1 | 聚合＞5 实体、跨聚合引用、值对象可变性 | AST 分析 |
+
+评分模型：`评分 = 100 - 扣分（P0=10分/项，P1=5分/项，P2=2分/项）`。≥90→A，70-89→B，50-69→C，<50→D。
+
+运行：`mvn test -Dtest=ArchitectureComplianceTest`（ArchUnit Java 测试）或 `python scripts/check_cola.py /path/to/project`（Python 轻量校验）。
+
+## 目录结构（COLA v5 多模块）
 
 ```
 {project}/
-├── {project}-adapter/               # Adapter Layer
-│   ├── web/                         # REST Controllers
-│   │   ├── controller/
-│   │   └── dto/                     # Interface layer DTOs
-│   └── consumer/                    # Message consumers
-├── {project}-app/                   # Application Layer
-│   ├── service/                     # Application services (orchestration, no business logic)
-│   ├── command/                     # Command objects
-│   ├── query/                       # Query objects
-│   └── event/                       # Event handlers
-├── {project}-domain/                # Domain Layer (Core, zero dependencies)
-│   ├── {aggregate}/                 # By aggregate package
-│   │   ├── entity/                  # Entity + Aggregate Root
-│   │   ├── valueobject/             # Value Objects
-│   │   ├── event/                   # Domain Events
-│   │   ├── service/                 # Domain Services
-│   │   └── repository/              # Repository interfaces (definition only)
-│   ├── gateway/                     # Anti-corruption layer interfaces
-│   └── shared/                      # Shared value objects/enums/exceptions
-├── {project}-infrastructure/        # Infrastructure Layer
-│   ├── repository/                  # Repository implementations
-│   ├── gateway/                     # Anti-corruption layer implementations
-│   ├── converter/                   # PO ↔ DO converter
-│   └── config/                      # Configuration
-└── start/                           # Bootstrap module
-    └── Application.java
+├── start/               — 启动模块：Application.java(@EnableCola), config/
+├── adapter/             — 适配器层
+│   ├── web/             — controller/dto/advice(GlobalExceptionHandler)
+│   ├── rpc/             — Dubbo/gRPC provider/consumer/facade
+│   ├── job/             — 定时任务调度
+│   └── message/         — MQ consumer/producer
+├── app/                 — 应用层
+│   ├── executor/        — command/query/event/extension 执行器
+│   ├── model/           — command/query/event/dto 对象
+│   ├── eventhandler/    — 事件处理器
+│   └── extension/       — 扩展点(point/biz/impl)
+├── domain/ ★            — 领域层（零框架依赖）
+│   ├── model/           — entity/vo/aggregate/event/enums
+│   ├── service/         — 领域服务
+│   ├── ability/         — 领域能力（v5 新概念）
+│   ├── gateway/         — 防腐层接口
+│   └── repository/      — 仓储接口
+├── infrastructure/      — 基础设施层
+│   ├── config/          — DB/缓存/MQ/RPC 配置
+│   ├── persistence/     — repositoryimpl/mapper/dao/entity(PO)
+│   ├── gatewayimpl/     — 网关实现
+│   ├── external/        — 外部服务客户端
+│   └── component/       — 分布式锁/限流/熔断/重试
+└── common/              — 常量/异常/工具/注解/上下文
 ```
 
-### Generated Content
+## 落地步骤
 
-| Item | Description |
-|------|-------------|
-| Directory Structure | Complete Maven/Gradle multi-module structure |
-| Base Classes | Entity, AggregateRoot, ValueObject, DomainEvent base classes |
-| Dependencies | pom.xml / build.gradle with COLA + Spring dependencies |
-| Demo Code | Simple Order aggregate (entity, repository, app service, controller) |
-| Unit Test Skeletons | Domain layer + Application layer test templates |
-| ArchUnit Tests | Automated dependency direction validation |
-| .gitignore / README | Project configuration |
+Phase 1 [1天] 脚手架 → Phase 2 [2-3天] 领域建模（配合 ddd-domain-designer）→ Phase 3 [2-3天] 基础设施（Repository/Gateway/PO）→ Phase 4 [1-2天] 应用+适配（Executor → Controller）→ Phase 5 [0.5天] 架构校验 → Phase 6 [持续] CI/CD 自动校验
 
-## Part B: Architecture Validation (cola-validator)
+## 核心规则（Core Rules）
 
-### Validation Checklist
+**四大约束（P0）**：①Domain 零框架依赖（禁止 Spring/JPA/MyBatis）②App 层无业务 if/else ③Adapter 无 SQL/业务判断 ④模块间无循环依赖
 
-| Check Item | Severity | Description |
-|------------|:--:|-------------|
-| **Dependency Direction** | P0 | Domain must not depend on infrastructure/app/adapter |
-| **Package Naming** | P1 | Must conform to COLA package naming conventions |
-| **Layer Responsibility** | P0 | Adapter no business logic, App no SQL |
-| **Domain Purity** | P0 | Domain layer zero framework dependencies (no Spring/JPA/MyBatis imports) |
-| **Module Dependencies** | P1 | No cyclic dependencies between modules |
-| **Aggregate Design** | P1 | Aggregate size, cross-aggregate references |
+**依赖方向**：`adapter → app → domain ← infrastructure`（domain 不依赖任何人）
 
-### Dependency Direction Check Algorithm
+## Gotchas — 常见坑（15条）
 
-```
-Rules:
-  domain/          → must not depend on any other module
-  infrastructure/  → can depend on domain/
-  app/             → can depend on domain/ + infrastructure/
-  adapter/         → can depend on app/ + domain/
+1. **Domain 层放 Controller** — Controller 在 Adapter 层。Domain 下出现 `@RestController` 说明分层全错。
+2. **App 层直接操作 Mapper** — 必须通过 Repository 接口：`orderRepository.save(order)` 而非 `orderMapper.insert()`。
+3. **模块命名不匹配 COLA** — 必须为 `{project}-adapter/app/domain/infrastructure`，否则 ArchUnit 校验失败。
+4. **Command/Query 放 Domain 层** — 应放 `app/model/command/` 和 `app/model/query/`。
+5. **Archetype 版本不匹配** — cola-archetype-web 5.0.0 要求 Spring Boot 3.x，2.x 需手动适配。
+6. **Domain 层用 JPA @Entity** — 持久化映射在 Infrastructure 层用 PO 类。
+7. **App 层抛框架异常** — 应抛 `BizException`，Adapter 层统一转换。
+8. **跨聚合直接引用对象** — 聚合间通过 ID 引用，不直接 `Order.getCustomer()`。
+9. **值对象带 setter** — ValueObject 应不可变（final + 无 setter），修改返回新对象。
+10. **缺少领域事件** — 创建订单/支付/取消等关键操作必须发布领域事件。
+11. **Adapter 层有业务判断** — Controller/Consumer 不应有任何 if-else。
+12. **God Service 反模式** — Service 超 500 行应按聚合拆分。
+13. **扩展点无默认实现** — 每个 `ExtensionPoint` 需有默认 `@Extension`。
+14. **@EnableCola 缺失** — 启动类必须加 `@EnableCola` 启用的扩展点和事件总线。
+15. **PO 与 DO 混用** — 持久化对象和领域对象必须分离，用 Converter 转换。
 
-Detection method:
-  1. Parse import statements of each module
-  2. Check domain/ for import com.example.infrastructure.* → P0 violation
-  3. Check domain/ for import org.springframework.*     → P0 violation
-  4. Check domain/ for import javax.persistence.*        → P0 violation
-  5. Check app/ for import java.sql.*                    → P1 violation
-  6. Check adapter/ for if-else business branches        → P0 violation
-```
+## FAQ（15条）
 
-### Compliance Scoring
+**Q1: COLA v5 和整洁架构的关系？** COLA v5 是整洁架构的阿里化实现，增加包命名规范、扩展点机制、CQRS 强化和脚手架。
 
-```
-Compliance = (passed checks / total checks) * 100%
+**Q2: 为何不用 cola-archetype 直接生成？** Archetype 快速但固定，手动搭建更适合生产定制。
 
-≥ 90%  → 🟢 Excellent
-70-89% → 🟡 Good
-50-69% → 🟠 Fair
-< 50%  → 🔴 Failed, recommend rebuild
-```
+**Q3: COLA 支持微服务吗？** 支持。每个微服务内部按 COLA 四层组织，服务间通过 RPC/MQ 通信。
 
-## Implementation Phases
+**Q4: CQRS 强制吗？** 否。简单场景用 `app/service/` 编排，复杂场景切到 CQRS executor。
 
-```
-Phase 1: Project Scaffolding (1 day)
-  → Use ddd-architecture-cola creator → Generate complete project skeleton
+**Q5: check_cola.py 和 ArchUnit 区别？** check_cola.py 轻量 import 扫描适合 CI，ArchUnit 强大 AST 分析需 Java 环境。
 
-Phase 2: Domain Modeling (2-3 days)
-  → Pair with ddd-domain-designer → Generate aggregate code
+**Q6: Domain 层 @Autowired 怎么处理？** Domain 禁止 @Autowired，通过方法参数或构造器注入接口。
 
-Phase 3: Infrastructure Implementation (2-3 days)
-  → Repository implementation → Gateway implementation → Config
+**Q7: 领域事件送达保证？** App 层事务提交后 `EventBus.publish()`，生产配合 Transactional Outbox 模式。
 
-Phase 4: Application + Adapter (1-2 days)
-  → AppService → Controller → DTO
+**Q8: COLA 和 Spring Cloud 关系？** COLA 是架构规范，Spring Cloud 是基础设施，可完全集成使用。
 
-Phase 5: Architecture Validation (0.5 day)
-  → Use ddd-architecture-cola validator → Fix violations
+**Q9: 值对象存 JSON 还是拆列？** 简单值对象拆列，复杂嵌套存 JSON + Converter 类型转换。
 
-Phase 6: Continuous Validation
-  → CI/CD integration with ArchUnit → Auto-check on every commit
-```
+**Q10: 聚合太大怎么办？** ≤ 5 实体，按业务操作频率拆分。
 
-## Code Templates
+**Q11: 扩展点 bizId 来源？** 前端请求头、登录会员等级、租户 ID 路由。
 
-### Domain Layer
+**Q12: 无扩展点需求可删吗？** 可。`app/extension/` 和 `domain/ability/` 可不创建。
 
-```java
-// Aggregate Root — zero framework dependencies
-public class Order extends AggregateRoot<OrderId> {
-    private OrderStatus status;
-    private Money totalAmount;
-    private List<OrderItem> items;
+**Q13: common 模块内容？** 常量、异常基类、DTO 基类、上下文（UserContext/TenantContext）、自定义注解。
 
-    public void pay() {
-        if (!status.canPay()) {
-            throw new OrderDomainException("Cannot pay in current status");
-        }
-        this.status = OrderStatus.PAID;
-        addDomainEvent(new OrderPaidEvent(this.id));
-    }
-}
+**Q14: start 和 adapter 关系？** start 启动入口 + 全局配置，adapter 协议适配，start 依赖 adapter。
 
-// Repository Interface — defined in Domain
-public interface OrderRepository {
-    Optional<Order> findById(OrderId id);
-    void save(Order order);
-}
-```
+**Q15: 如何确保不泄露敏感配置？** 外部化配置 + 环境变量，禁止硬编码密钥，Domain 层不读写配置文件。
 
-### Application Layer
+## Keywords
 
-```java
-// Application Service — pure orchestration
-@Service
-public class OrderApplicationService {
-    private final OrderRepository orderRepository;
+`COLA` `COLA v5` `菱形架构` `diamond architecture` `cola-creator` `cola-validator` `ArchUnit` `CQRS` `Extension Point` `扩展点` `Ability` `领域能力` `Aggregate Root` `Entity` `Value Object` `Domain Event` `Repository` `Gateway` `防腐层` `DDD` `Spring Boot` `MyBatis` `@EnableCola` `CommandExecutor` `QueryExecutor`
+## Project Scaffolding
 
-    @Transactional
-    public void payOrder(PayOrderCommand command) {
-        Order order = orderRepository.findById(new OrderId(command.getOrderId()))
-            .orElseThrow(() -> new OrderNotFoundException(command.getOrderId()));
-        order.pay();
-        orderRepository.save(order);
-    }
-}
-```
+**ddd4j Boot** 是 COLA v5 架构的 Java 参考实现，基于 Spring Boot 3.5.x，集成 ddd-4-java 和 cqrs-4-java 轻量库，完整实现 DDD、CQRS 和 Event Sourcing 模式。
 
-### ArchUnit Validation
-
-```java
-@Test
-public void domainShouldNotDependOnInfrastructure() {
-    noClasses()
-        .that().resideInAPackage("..domain..")
-        .should().dependOnClassesThat()
-        .resideInAPackage("..infrastructure..")
-        .because("Domain layer must not depend on infrastructure")
-        .check(classes);
-}
-
-@Test
-public void domainShouldNotDependOnSpring() {
-    noClasses()
-        .that().resideInAPackage("..domain..")
-        .should().dependOnClassesThat()
-        .resideInAPackage("org.springframework..")
-        .because("Domain layer must have zero framework dependencies")
-        .check(classes);
-}
-```
-
-## CI/CD Integration
-
-```yaml
-# GitHub Actions Example
-- name: COLA Architecture Check
-  run: mvn test -pl {project}-domain -Dtest=ArchitectureComplianceTest
-```
-
-## Quick Decision: Where Does This Code Go?
-
-```
-├─ Is it handling HTTP/RPC/MQ protocol? → Adapter layer (adapter/web, adapter/consumer)
-├─ Is it orchestrating a use case (transaction boundary)? → Application layer (app/service)
-├─ Is it a CQRS command? → Application layer (app/command)
-├─ Is it a CQRS query? → Application layer (app/query)
-├─ Is it a business rule, entity, value object, domain event? → Domain layer (domain/{aggregate}/)
-├─ Is it a Repository interface? → Domain layer (domain/{aggregate}/repository/)
-├─ Is it implementing a Repository? → Infrastructure layer (infrastructure/repository/)
-├─ Is it a Gateway interface? → Domain layer (domain/gateway/)
-├─ Is it implementing a Gateway? → Infrastructure layer (infrastructure/gateway/)
-├─ Is it PO ↔ DO conversion? → Infrastructure layer (infrastructure/converter/)
-└─ ArchUnit test: "Domain must not import org.springframework.*"
-```
-
-## Sources
-
-### Primary Sources
-- [COLA 5.0 Architecture](https://github.com/alibaba/COLA) — Alibaba
-- [Domain-Driven Design: The Blue Book](https://www.domainlanguage.com/ddd/blue-book/) — Eric Evans (2003)
-- [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Robert C. Martin (2012)
-- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) — Alistair Cockburn (2005)
-
-### Chinese Resources
-- [COLA 5.0 架构设计文档](https://wiki.hiwepy.com/docs/ddd/ddd-1gvro1llhtqni)
-- [PartMe DDD 实战: COLA 完整代码示例](https://wiki.hiwepy.com/docs/llm-app)
-- [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html)
-
-## Output
-
-When assisting with this skill, provide:
-- Complete COLA v5 project scaffolding
-- Architecture validation report (violation list + fix suggestions)
-- Compliance score
-- ArchUnit automated validation configuration
-- CI/CD integration guide
+- **项目生成**: 使用 `scripts/init_project.py` 可自动生成 COLA 多模块项目结构，支持单模块单体、多模块单体和微服务三种项目类型，涵盖 pom.xml、package-info.java、.gitignore、mvnw 等必需文件
+- **合规验证**: 使用 `scripts/check_project.py` 可验证项目的 DDD 分层合规性、依赖方向正确性和包命名规范，输出详细的违规报告和修复建议
+- **场景示例**: 参考 `examples/13-architecture-patterns.md`（四种架构模式）、`examples/14-single-module.md`（单模块单体）、`examples/15-multi-module.md`（多模块单体）、`examples/16-microservices.md`（微服务）
+- **详细说明**: 参考 `references/14-ddd4j-scaffold.md` 了解完整的项目生成流程、验证规则、层依赖关系和包命名规范
 
 ## References
 
-See `references/` directory for:
-- `cola-structure.md` — Complete COLA v5 directory structure reference
-- `cola-conventions.md` — Coding conventions and best practices
-- `cola-migration.md` — Migration guide from other architectures
+详细参考见 `references/` 目录：01-architecture-principles（架构原理）、02-project-scaffold（脚手架）、03-domain-layer（领域层）、04-app-layer（应用层）、05-adapter-layer（适配层）、06-infrastructure（基础设施）、07-archunit-validation（ArchUnit 校验）、08-cqrs-integration（CQRS 集成）
 
-## Next Steps
+## Examples
 
-After project setup:
-1. [ddd-domain-designer](../ddd-domain-designer/) — Design your domain aggregates
-2. [ddd-api-designer](../ddd-api-designer/) — Design your API layer
-3. [ddd-code-reviewer](../ddd-code-reviewer/) — Review your COLA compliance
+完整代码见 `examples/` 目录：01-quickstart-order（Order 聚合完整实现）、02-customer-crud（CRUD 入门）、03-extension-point（扩展点机制）、04-cqrs-separation（CQRS 分离）、05-archunit-config（ArchUnit 校验 CI/CD 集成）
 
----
-
-## Skill Boundary
-
-### ✅ 擅长处理
-1. 中文企业 Spring Boot + MyBatis 技术栈
-2. 需要脚手架自动生成项目的团队
-3. 需要 ArchUnit 自动校验架构合规
-4. COLA v5 菱形架构（Adapter→App→Domain←Infrastructure）
-
-### ⚠️ 需要条件
-1. Java + Spring Boot 项目：COLA 强绑定 Spring 生态
-2. 团队愿意接受 COLA 的包命名约定
-3. 需要配合 DDD 领域建模使用
-
-### ❌ 超出范围
-1. Go/Python/TypeScript 项目 → 用 `ddd-architecture-clean` 或 `ddd-architecture-hexagonal`
-2. 非 Spring Boot → COLA 强绑定 Spring
-3. 2 人创业团队简单 CRUD → 用 `ddd-architecture-layered`
-
-
-## Security & Stability
-
-- All code templates are educational. Replace database credentials and external URLs with environment variables.
-- COLA's ArchUnit validation enforces layer boundaries at build time. Add check_cola.py (bundled in scripts/) to CI.
-- The diamond architecture isolates domain logic from infrastructure — reducing attack surface.
-- Script: scripts/check_cola.py validates COLA package naming and dependency rules. Run in CI to prevent violations.
-
-
-## Gotchas — Common Pitfalls
-
-- **Domain 层存放 Controller 接口**: COLA 的 Controller 接口定义在 Adapter 层，而不是 Domain 层。Domain 层只放领域对象。如果 Domain 中有 `@RestController`，分层就错了。
-- **App 层直接操作数据库**: App 层（Application）通过 Gateway 接口访问数据，不能直接使用 Mapper/JdbcTemplate。Gateway 接口在 Domain 层定义，实现在 Infrastructure 层。
-- **Module 命名不匹配 COLA 约定**: COLA v5 有严格的模块命名规范：`{project}-adapter`、`{project}-app`、`{project}-domain`、`{project}-infrastructure`。随机命名会导致 ArchUnit 校验失败。
-- **Command/Query 放在 Domain 层**: COLA 的 Command 和 Query 对象属于 App 层（Application），用于 DTO 传输。不要把它们和 Domain 的 Entity/ValueObject 混淆。
-- **忘记 COLA Archetype 版本**: 使用 `cola-archetype` 生成项目时注意 Spring Boot 和 COLA 版本匹配。不匹配的版本会导致编译失败。
-
-## When NOT to Use This Skill
-
-| ❌ Skip | ✅ Use Instead |
-|---------|---------------|
-| Non-Java project (Go, Python, TypeScript) | `architecture-clean` or `architecture-hexagonal` (language-agnostic) |
-| Non-Spring Boot project | COLA is tightly coupled to Spring Boot |
-| Simple CRUD, 2-person team | `architecture-layered` (much lower ceremony) |
-| Already on Clean Architecture | COLA is an opinionated Clean variant — stay if Clean works |
-| Startup prototyping, not enterprise | Skip DDD, use simple Spring Boot MVC |
-
-## Security & Stability
-
-- All code templates are educational. Replace database credentials and external service URLs with environment variables.
-- COLA's ArchUnit-based validation enforces layer boundaries at build time. Add `check_cola.py` (bundled in `scripts/`) to CI for automated compliance checking.
-- The diamond architecture isolates domain logic from infrastructure — reducing attack surface and making security audits focused.
-- Script: `scripts/check_cola.py` validates COLA package naming conventions and dependency rules. Run in CI to prevent architectural violations.
-
-## 🧭 DDD Skills Journey
-
-> 📍 **You are here: `ddd-architecture-cola` — Step 3: COLA v5 架构落地**
-
-```mermaid
-flowchart LR
-    S1["Step 1<br/>awesome<br/>入门与全景"] --> S2["Step 2<br/>selector<br/>架构选型"]
-    S2 --> S3A["Step 3<br/>layered<br/>分层架构"]
-    S2 --> S3B["Step 3<br/>onion<br/>洋葱架构"]
-    S2 --> S3C["Step 3<br/>hexagonal<br/>六边形架构"]
-    S2 --> S3D["Step 3<br/>clean<br/>整洁架构"]
-    S2 --> S3E["⭐ Step 3<br/>cola<br/>COLA v5"]
-    S3A & S3B & S3C & S3D & S3E --> S4A["Step 4<br/>domain-designer<br/>领域建模"]
-    S3A & S3B & S3C & S3D & S3E --> S4B["Step 4<br/>cqrs-architecture<br/>CQRS"]
-    S3A & S3B & S3C & S3D & S3E --> S4C["Step 4<br/>api-designer<br/>API设计"]
-    S4A & S4B & S4C --> S5["Step 5<br/>code-reviewer<br/>代码审查"]
-    S5 --> S6A["Step 6<br/>event-storming<br/>事件风暴"]
-    S5 --> S6B["Step 6<br/>testing-strategist<br/>测试策略"]
-    S5 --> S6C["Step 6<br/>devops-integration<br/>DevOps"]
-    S5 --> S6D["Step 6<br/>evaluator<br/>架构评估"]
-    S6A & S6B & S6C & S6D --> S7["🏁 Step 7<br/>architecture-doc<br/>架构文档"]
-
-    style S3E fill:#3b82f6,stroke:#2563eb,color:white,stroke-width:3px
-```
-
-**← Previous**: [selector](../ddd-architecture-selector/) — 为什么选 COLA？
-**→ Next**: [domain-designer](../ddd-domain-designer/) — 为 COLA 项目设计聚合和领域模型
-**🔗 Related**: [api-designer](../ddd-api-designer/) — 设计 API 接口 | [code-reviewer](../ddd-code-reviewer/) — ArchUnit 合规检查
-**🏠 Home**: [awesome](../ddd-architecture-awesome/) — DDD 概念全景
-
-💡 COLA 是国内企业的最佳选择：脚手架 + 校验 + Spring Boot 生态。先运行 `scripts/check_cola.py` 做一次合规检查，再开始写领域代码。
-
-> 📋 See [DESIGN.md](../DESIGN.md) for the complete 16-skill ecosystem map.
+项目规模示例见 `examples/` 目录：06-monolith-simple（单体简单项目）、07-monolith-complex（单体复杂项目）、08-monolith-multi-module（单体多模块项目）、09-microservice-simple-monolith（微服务简单的单体项目）、10-microservice-complex-monolith（微服务复杂的单体项目，基于 ddd4j-gateway）、11-microservice-simple-multi-module（微服务简单的多模块项目，基于 ddd4j-rednote）、12-microservice-complex-multi-module（微服务复杂的多模块项目，基于 ddd4j-pay）

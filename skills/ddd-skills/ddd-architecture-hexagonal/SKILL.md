@@ -1,368 +1,212 @@
 ---
 name: ddd-architecture-hexagonal
-description: Provides comprehensive guidance for Hexagonal Architecture (Ports & Adapters) implementation in DDD. Based on Alistair Cockburn's pattern, with business logic isolated through Ports (interfaces) and external systems connected via Adapters. Covers Primary/Driving Adapters, Secondary/Driven Adapters, UseCase interfaces, complete directory structure, code templates, testing with port mocking, and step-by-step implementation. Use when the user asks about hexagonal architecture, 六边形架构, ports and adapters, Alistair Cockburn pattern, needs multi-entry system support, or wants maximum infrastructure replaceability.
+description: Comprehensive guidance for Hexagonal Architecture (Ports & Adapters) — Alistair Cockburn's hexagonal architecture with domain core, port definitions, adapter implementations, and full Java/Spring Boot implementation steps. Covers primary/driving adapters, secondary/driven adapters, use case ports, repository ports, and dependency injection configuration. Use when user asks about hexagonal architecture, 六边形架构, ports and adapters, 端口适配器, Alistair Cockburn, or needs DDD with clean separation.
 license: Apache-2.0
 ---
 
-# DDD Architecture - Hexagonal
+# DDD Architecture — Hexagonal (Ports & Adapters)
 
-Hexagonal Architecture (Ports & Adapters) implementation guide — isolate business logic through Ports, connect external systems via Adapters. Based on Alistair Cockburn's pattern.
+**Alistair Cockburn (2005)** — 业务逻辑通过端口（Ports）隔离，外部系统通过适配器（Adapters）接入。**适用受众**: 后端架构师/技术负责人（团队 > 5 人）、DDD 实践者。**定制机制**: 提供技术栈/入口类型/团队规模三个配置维度。加载本技能时，建议先阅读 Workflow 和 When to Use 确认匹配度。
 
-## When to use this skill
+> "允许应用被用户、程序、自动化测试或批处理脚本平等驱动，并在脱离最终运行设备和数据库的情况下开发和测试。" — Alistair Cockburn
 
-**ALWAYS use this skill when the user mentions:**
-- "六边形架构"、"hexagonal architecture"、"Ports & Adapters"
-- "端口适配器"、"Alistair Cockburn"
-- "多入口系统"、"multi-entry system" (REST + CLI + MQ + gRPC)
-- "基础设施可替换"、"infrastructure replaceability"
-- "我需要 highest testability"、"端口隔离"
-- Microservice internal architecture standardization
-- Need to swap databases or message queues frequently
+## Workflow
 
-## Architecture Overview
+### Step 1: 主适配器协议转换 — REST Controller/CLI 接收请求，完成参数校验与协议转换
+### Step 2: 入站端口调用 — 适配器调用 UseCase 接口，触发应用层用例编排
+### Step 3: 应用服务编排 — Application Service 编排用例，调用领域模型执行业务逻辑
+### Step 4: 领域模型执行 — 聚合根/实体执行业务逻辑，输出结果或领域事件
+### Step 5: 出站端口持久化 — 应用服务通过 Repository 接口保存领域状态
+### Step 6: 次适配器技术实现 — Adapter 执行 DB/MQ/外部 API 的技术实现
 
-### Core Concept
+> **定义验证法**: 脱离数据库和 HTTP 即可跑通全部领域层单元测试 → 边界正确。
+
+## Rules
+
+1. **依赖规则**: 依赖方向必须从外到内——Adapter → Application → Domain。Domain 层零外部依赖。
+2. **端口粒度规则**: 每个端口职责单一，包含 10+ 方法的端口需立即拆分。
+3. **异常转换规则**: 技术异常（SQLException、TimeoutException）必须在 Adapter 内部捕获并转换为领域异常，不得向上泄漏。
+
+## When to Use
+
+### ✅ 适合场景
+1. **多入口系统**（REST + CLI + MQ + gRPC）：多个外部系统同时驱动同一业务逻辑
+2. **基础设施频繁变更**（换 DB/MQ/缓存）：只需换 Adapter 实现，Domain 零修改
+3. **极致可测试性**：Mock 端口即可测试全部领域逻辑，不依赖数据库
+4. **微服务架构标准化**：团队 > 5 人，需要各服务一致的架构约定
+5. **团队熟悉抽象设计**：能合理设计端口粒度，避免过度抽象
+
+## Boundary
+
+### ⚠️ 需要条件
+1. **团队理解抽象设计**：端口粒度需要领域知识和抽象能力，否则可能定义不当
+2. **项目规模适中**：小项目用 Layered 更简单，六边形增加间接层成本
+3. **需要 DDD 领域模型配合**：Port 接口定义需要领域建模前置知识
+4. **良好的 DI 容器支持**：Spring/Guice 等框架可简化适配器装配
+
+### ❌ 不适用（附替代方案）
+1. **单一 REST API + 简单 CRUD** → 用 `ddd-architecture-layered`
+2. **中文企业 MyBatis 生态** → 用 `ddd-architecture-cola`
+3. **需 UseCase + Entity 严格分离** → 用 `ddd-architecture-clean`
+4. **快速原型 / MVP 阶段** → 直接用传统三层（不引入六边形架构的开销）
+
+## 核心原理
+
+### 三大抽象
 
 ```
-Business logic isolated through "Ports" (interfaces),
-external systems connected via "Adapters"
-
-            ┌───────────────────────┐
-    Web ──▶│                       │──▶ DB
-            │    ┌───────────┐     │
-    CLI ──▶│    │  Domain   │     │──▶ MQ
-            │    │   ★       │     │
-    Event▶│    └───────────┘     │──▶ Cache
-            │                       │
-    Test ──▶│                       │──▶ External API
-            └───────────────────────┘
-
-    Driving Side (Left/Primary)  Domain Core  Driven Side (Right/Secondary)
+Driving Side (REST/CLI/gRPC/Test) → Domain Core ← Driven Side (PostgreSQL/RabbitMQ/Redis/Stripe)
 ```
 
-### Three Core Abstractions
+| 概念 | 说明 | 代码体现 |
+|------|------|---------|
+| **Port（端口）** | 领域层定义的接口 | `interface OrderRepository` |
+| **Primary Adapter（主适配器）** | 外部如何驱动系统 | REST Controller、CLI Command、gRPC Service |
+| **Secondary Adapter（次适配器）** | 系统如何驱动外部 | JPA RepositoryImpl、Kafka Producer、StripeClient |
 
-| Concept | Description | Code Representation |
-|---------|-------------|---------------------|
-| **Port (端口)** | Interface defined in Domain, isolates external dependencies | `interface OrderRepository` (in Domain) |
-| **Primary/Driving Adapter (主适配器)** | How external systems drive your system | REST Controller, CLI Command |
-| **Secondary/Driven Adapter (次适配器)** | How your system drives external systems | JPA RepositoryImpl, Kafka Producer |
+### Strong Port vs Weak Port
 
-## Applicability Check
+```java
+// ❌ Weak — 泄漏 SQL 概念
+interface OrderRepository { List<Order> findByQuery(String sql, Map<String, Object> params); }
 
-| ✓ Applicable | ✗ Not Applicable |
-|--------------|-------------------|
-| Multi-entry systems (REST + CLI + MQ + gRPC) | Single REST API + simple CRUD |
-| Infrastructure frequently replaced | Infrastructure is stable |
-| Need excellent testability | Team < 3 people |
-| Microservice internal architecture standard | Rapid prototyping |
+// ✅ Strong — 纯领域概念
+interface OrderRepository {
+    Optional<Order> findById(OrderId id);
+    List<Order> findByCustomerId(CustomerId customerId);
+    void save(Order order);
+}
+```
 
-## Complete Directory Structure
+## 目录结构
 
 ```
 {project}/
-├── {project}-domain/                  # Domain Core + Port Definitions
-│   ├── model/                         # Aggregates, Entities, Value Objects
-│   │   ├── order/
-│   │   │   ├── Order.java             # Aggregate Root
-│   │   │   ├── OrderItem.java         # Entity
-│   │   │   ├── OrderId.java           # Value Object
-│   │   │   └── OrderStatus.java       # Value Object / Enum
-│   │   └── shared/
-│   ├── service/                       # Domain Services
-│   ├── event/                         # Domain Events
-│   └── port/                          # ★ Ports (Interface Definitions)
-│       ├── inbound/                   # Inbound Ports (UseCase interfaces)
-│       │   ├── CreateOrderUseCase.java
-│       │   ├── PayOrderUseCase.java
-│       │   └── QueryOrderUseCase.java
-│       └── outbound/                  # Outbound Ports (Repository/External interfaces)
-│           ├── OrderRepository.java
-│           ├── PaymentGateway.java
-│           └── NotificationPort.java
-├── {project}-application/             # Application Layer (UseCase Implementation)
-│   └── service/
-│       ├── CreateOrderService.java
-│       ├── PayOrderService.java
-│       └── QueryOrderService.java
-├── {project}-adapter/                 # Adapter Layer
-│   ├── inbound/                       # ★ Primary Adapters (Driving Side)
-│   │   ├── web/                       # REST API
-│   │   │   ├── controller/
-│   │   │   └── dto/
-│   │   ├── cli/                       # Command Line
-│   │   └── event/                     # Event Listeners
-│   └── outbound/                      # ★ Secondary Adapters (Driven Side)
-│       ├── persistence/               # Database
-│       │   ├── OrderRepositoryImpl.java
-│       │   ├── entity/                # JPA Entity
-│       │   └── mapper/                # PO ↔ Domain
-│       ├── messaging/                 # Message Queue
-│       └── external/                  # External API Clients
-└── {project}-configuration/           # Configuration + DI Assembly
-    └── config/
+├── {project}-domain/              # 领域核心 + 端口定义（零框架依赖）
+│   └── port/{inbound, outbound}/  # ★ 端口接口
+├── {project}-application/         # 应用层（UseCase 实现）
+├── {project}-adapter/             # 适配器层
+│   ├── inbound/                   # ★ 主适配器（REST/CLI/gRPC/MQ）
+│   └── outbound/                  # ★ 次适配器（Persistence/Messaging/External）
+└── {project}-configuration/       # 配置层（DI 装配）
 ```
 
-## Code Templates
+## 开发规范
 
-### Ports (Domain Layer)
+### 层职责
 
-```java
-// ★ Inbound Port (UseCase) — defined in Domain
-public interface CreateOrderUseCase {
-    OrderCreated handle(CreateOrderCommand command);
-}
+| 层 | 依赖 | 允许做的事 | 禁止做的事 |
+|------|------|----------|----------|
+| Domain | 无 | 实体行为、值对象、领域事件、端口定义 | import 框架注解、SQL、HTTP |
+| Application | Domain | 用例编排、事务管理、端口调用 | if/else 业务判断、直接操作 DB |
+| Adapter | Application | 协议转换、参数校验、异常映射 | 包含业务逻辑、直接操作 Domain 内部状态 |
+| Configuration | 全部 | DI 装配、Profile 配置 | 包含业务代码 |
 
-// ★ Outbound Port (Repository) — defined in Domain
-public interface OrderRepository {
-    Order save(Order order);
-    Optional<Order> findById(OrderId id);
-}
-
-// ★ Outbound Port (External Gateway) — defined in Domain
-public interface PaymentGateway {
-    PaymentResult charge(Money amount);
-}
-```
-
-### Application Layer (UseCase Implementation)
+### 代码规范
 
 ```java
-// Application Service — implements inbound port, injects outbound ports
-@ApplicationService  // Custom annotation, not Spring @Service
+// 入站端口（Domain）
+public interface CreateOrderUseCase { OrderCreatedResult execute(CreateOrderCommand command); }
+// 出站端口（Domain）
+public interface OrderRepository { void save(Order order); Optional<Order> findById(OrderId id); }
+// 应用服务（实现入站端口，注入出站端口）
+@ApplicationService
 public class CreateOrderService implements CreateOrderUseCase {
-    private final OrderRepository orderRepository;   // Inject outbound port
-    private final PaymentGateway paymentGateway;
-
-    @Override
-    public OrderCreated handle(CreateOrderCommand command) {
-        Order order = Order.create(command);    // Domain logic
-        orderRepository.save(order);            // Outbound port
-        return OrderCreated.from(order);
+    private final OrderRepository orderRepository;
+    @Override @Transactional
+    public OrderCreatedResult execute(CreateOrderCommand command) {
+        Order order = Order.create(command.getCustomerId());
+        orderRepository.save(order);
+        return OrderCreatedResult.from(order);
     }
 }
-```
-
-### Primary Adapter (REST Controller)
-
-```java
-// Primary Adapter — REST Controller
+// 主适配器（仅协议转换）
 @RestController
 public class OrderController {
-    private final CreateOrderUseCase createOrderUseCase;
-
     @PostMapping("/orders")
-    public OrderResponse createOrder(@RequestBody CreateOrderRequest request) {
-        var command = request.toCommand();
-        var result = createOrderUseCase.handle(command);
-        return OrderResponse.from(result);
+    public ResponseEntity<CreateOrderResponse> create(@RequestBody @Valid CreateOrderRequest req) {
+        var result = createOrderUseCase.execute(req.toCommand());
+        return ResponseEntity.status(201).body(CreateOrderResponse.from(result));
     }
 }
-```
-
-### Secondary Adapter (JPA Repository)
-
-```java
-// Secondary Adapter — JPA Repository Implementation
+// 次适配器（技术实现）
 @Repository
-public class JpaOrderRepository implements OrderRepository {
-    private final JpaOrderRepo jpaRepo;   // Spring Data JPA
-    private final OrderMapper mapper;     // PO ↔ Domain
-
-    @Override
-    public Order save(Order order) {
-        OrderPO po = mapper.toPO(order);
-        OrderPO saved = jpaRepo.save(po);
-        return mapper.toDomain(saved);
-    }
+public class PostgresOrderRepository implements OrderRepository {
+    @Override public void save(Order order) { jpaRepo.save(mapper.toPO(order)); }
 }
 ```
 
-## Testing Strategy
-
-```java
-// Unit Test — Mock outbound ports, test UseCase
-@Test
-public void createOrder_should_save_and_return_order() {
-    // Given
-    var mockRepo = mock(OrderRepository.class);
-    var useCase = new CreateOrderService(mockRepo);
-
-    // When
-    var result = useCase.handle(command);
-
-    // Then
-    verify(mockRepo).save(any(Order.class));
-    assertNotNull(result.getOrderId());
-}
-
-// Integration Test — Real secondary adapter
-@SpringBootTest
-@Testcontainers
-public class JpaOrderRepositoryTest {
-    @Autowired private OrderRepository orderRepository;
-
-    @Test
-    public void should_save_and_load_aggregate_completely() {
-        Order order = Order.create(/* ... */);
-        orderRepository.save(order);
-        var loaded = orderRepository.findById(order.getId());
-        assertTrue(loaded.isPresent());
-    }
-}
-```
-
-## Implementation Phases
+## 落地步骤
 
 ```
-Phase 1: Define Ports (1-2 days)
-  → Inbound ports (UseCase interfaces) → Outbound ports (Repository/External interfaces)
-
-Phase 2: Implement Domain Model (2-3 days)
-  → Aggregate roots/entities/value objects → Domain services → Domain events
-
-Phase 3: Implement Application Layer (1-2 days)
-  → UseCase implementations (inject ports, orchestrate calls)
-
-Phase 4: Implement Adapters (2-4 days)
-  → Primary: REST/gRPC/CLI → Secondary: DB/MQ/External API
-
-Phase 5: DI Assembly + Testing (1-2 days)
-  → Dependency injection config → Port mock testing → Adapter integration testing
+Phase 1: 定义端口（1-2 天）→ 入站端口(UseCase) → 出站端口(Repository/Gateway)
+Phase 2: 领域模型（2-3 天）→ 聚合根/实体/值对象 → 领域服务 → 领域事件
+Phase 3: 应用服务（1-2 天）→ UseCase 实现（注入端口，编排调用）
+Phase 4: 适配器（2-4 天） → 主适配器(REST/gRPC/CLI) → 次适配器(DB/MQ/External)
+Phase 5: DI 装配 + 测试（1-2 天）→ DI 配置 → 端口 Mock 测试 → 适配器集成测试
 ```
 
-## Quick Decision: Where Does This Code Go?
+## Security & Stability
 
-```
-├─ Defines a contract (interface) for inbound operations? → Domain layer (domain/port/inbound)
-├─ Defines a contract (interface) for outbound operations? → Domain layer (domain/port/outbound)
-├─ Implements a UseCase (inbound port)? → Application layer (application/service)
-├─ Is it a business rule, entity, or value object? → Domain layer (domain/model)
-├─ Converts HTTP/REST to port calls? → Adapter layer (adapter/inbound/web)
-├─ Implements a Repository or external API client? → Adapter layer (adapter/outbound/persistence)
-├─ Assembles all adapters with ports (DI)? → Configuration layer (configuration/config)
-└─ Primary test: "Can I run domain logic from a unit test with NO infrastructure?" → Yes = correct
-```
+- 本技能为纯文档型架构指南，**不收集、不处理、不上传用户数据**。
+- 所有代码模板均为教学参考。替换外部服务 URL、密钥和凭证为环境变量配置。
+- Port/Adapter 隔离确保领域逻辑不直接依赖 HTTP/DB/MQ 库——Adapter 层处理所有 I/O。
+- 实现 Secondary Adapter 时，始终设置连接/读取超时，对关键路径实现断路器模式。
 
-## Sources
+## Gotchas（8 条常见陷阱）
+
+1. **端口定义过宽**: 每个端口只做一件事。包含 10+ 方法的端口视为"上帝端口"，立即拆分。
+2. **主适配器包含业务逻辑**: Controller 只能做参数转换和调用 UseCase，不能包含 if/else 业务判断。
+3. **次适配器忘记异常转换**: 技术异常（SQLException、TimeoutException）必须在适配器内部转换为领域异常。
+4. **领域层框架依赖**: Domain 模块不能 import Spring/JPA/MyBatis 注解。
+5. **端口命名不一致**: 入站端口用动作命名（`CreateOrderUseCase`），出站端口用资源命名（`OrderRepository`）。
+6. **事务放在适配器层**: 事务由应用层控制，适配器不负责事务管理。
+7. **过度抽象**: 不为"未来可能会换"提前创建端口。等真正需要替换时再抽取端口。
+8. **用户需求不清晰时先给假设**: 用户没说技术栈/入口类型/团队规模时，先给假设版本再补充提问。
+
+## FAQ（8 条常见问题）
+
+**Q1: 六边形和整洁架构有什么区别？** A: 六边形由 Cockburn 提出（2005），核心是端口/适配器；整洁由 Uncle Bob 提出（2012），强调 UseCase 和 Entity 分离。六边形更关注"对称性"（主/次适配器），整洁更关注"依赖规则"。
+**Q2: 端口应该放在 Domain 层还是 Application 层？** A: 推荐放在 Domain 层。Domain 是业务核心，端口是业务对外部依赖的抽象。
+**Q3: 如何避免端口过度抽象？** A: YAGNI 原则：只为当前确定的变更需求定义端口。
+**Q4: 一个 UseCase 接口一个方法还是多个方法？** A: 推荐一个接口一个方法（接口隔离原则）。但高度相关的方法（如 OrderRepository 的 save/findById）可放同一接口。
+**Q5: Controller 层的 DTO 和 Domain 层的 Entity 能否共用？** A: 不能。DTO 是适配器层的数据载体，Entity 是领域层的业务模型，需要 Mapper 转换。
+**Q6: 六边形架构如何处理查询？** A: 查询也通过端口进行。使用 `QueryOrderUseCase` 返回只读 DTO，复杂查询可用 CQRS。
+**Q7: 如何验证六边形边界是否正确？** A: 能否不启动数据库和 HTTP 就跑通 Domain 层全部单元测试？能 → 正确。不能 → 有泄漏。
+**Q8: 团队不熟悉六边形架构怎么办？** A: 逐步引入。先做好 Domain 层纯净度和端口定义，再逐步抽取适配器。
+## References
+
+| 文件 | 目的 |
+|------|------|
+| [references/01-port-definitions.md](references/01-port-definitions.md) | 端口定义规范 — 入站/出站端口、命名、粒度、Strong/Weak |
+| [references/02-primary-adapters.md](references/02-primary-adapters.md) | 主适配器详解 — REST/CLI/gRPC/MQ 四种适配器实现 |
+| [references/03-secondary-adapters.md](references/03-secondary-adapters.md) | 次适配器详解 — JPA/MyBatis/Stripe/RabbitMQ/InMemory |
+| [references/04-domain-model.md](references/04-domain-model.md) | 领域模型设计 — 聚合根、实体、值对象、领域服务、领域事件 |
+| [references/05-application-services.md](references/05-application-services.md) | 应用服务层 — UseCase 实现、编排规范、命令对象 |
+| [references/06-di-configuration.md](references/06-di-configuration.md) | DI 配置 — Spring Config、Profile 切换、多环境适配器 |
+| [references/07-testing.md](references/07-testing.md) | 测试策略 — 领域层/应用层/适配器/架构 四级测试 |
+| [references/08-migration.md](references/08-migration.md) | 渐进迁移 — 从传统三层到六边形的迁移指南 |
+| [examples/01-order-hexagonal-complete.md](examples/01-order-hexagonal-complete.md) | 完整订单六边形示例 — Domain/Port/Service/Adapter 全流程 |
+| [examples/02-user-registration-example.md](examples/02-user-registration-example.md) | 用户注册示例 — 值对象、验证码、领域事件 |
+| [examples/03-multi-entry-points-example.md](examples/03-multi-entry-points-example.md) | 多入口系统示例 — 同一 UseCase 供 REST/CLI/Kafka/gRPC 调用 |
+| [examples/04-adapter-swapping-example.md](examples/04-adapter-swapping-example.md) | 适配器可替换性示例 — Postgres→MongoDB、Stripe→PayPal 零代码修改 |
+| [examples/05-port-swapping-test.md](examples/05-port-swapping-test.md) | 主适配器可替换性示例 — REST/gRPC/CLI 三种入口 + 端口级测试 |
+| [examples/06-monolith-simple.md](examples/06-monolith-simple.md) | 单体简单六边形 — 单模块四包 + ports/adapters 子包结构 |
+| [examples/07-monolith-complex.md](examples/07-monolith-complex.md) | 单体复杂六边形 — 多端口 + 多适配器 + 多聚合根 |
+| [examples/08-monolith-multi-module.md](examples/08-monolith-multi-module.md) | 单体多模块六边形 — Maven 多模块编译期边界约束 |
+| [examples/09-microservice-simple.md](examples/09-microservice-simple.md) | 微服务简单六边形 — 单微服务内最小六边形结构 |
+| [examples/10-microservice-complex.md](examples/10-microservice-complex.md) | 微服务复杂六边形 — 多聚合 + Saga + 跨服务调用 |
+| [examples/11-microservice-multi-module.md](examples/11-microservice-multi-module.md) | 微服务多模块六边形 — 每服务内部 Maven 多模块 |
+| [examples/12-microservice-complex-multi.md](examples/12-microservice-complex-multi.md) | 微服务复杂多模块 — CQRS + 读写分离 + CDC + 分布式 Saga |
 
 ### Primary Sources
 - [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) — Alistair Cockburn (2005)
 - [Hexagonal Architecture Explained](https://openlibrary.org/works/OL38388131W) — Cockburn & Garrido de Paz (2024)
 - [Domain-Driven Design: The Blue Book](https://www.domainlanguage.com/ddd/blue-book/) — Eric Evans (2003)
-- [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Robert C. Martin (2012)
-
-### Implementation Guides
 - [AWS: Hexagonal Architecture Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
-- [Microsoft: DDD + CQRS Microservices](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
-### Reference Implementations
-| Language | Repository |
-|----------|-----------|
-| Java | [thombergs/buckpal](https://github.com/thombergs/buckpal) |
-| Go | [bxcodec/go-clean-arch](https://github.com/bxcodec/go-clean-arch) |
-| TypeScript | [jbuget/nodejs-clean-architecture-app](https://github.com/jbuget/nodejs-clean-architecture-app) |
+### 导航
 
-## Output
-
-When assisting with this skill, provide:
-- Complete hexagonal project directory structure
-- Domain Ports (UseCase + Repository interfaces)
-- Primary + Secondary adapter code templates
-- Demo aggregate implementation
-- Mock test + Adapter integration tests
-- Complete UseCase call chain (Controller → UseCase → Port → Adapter)
-
----
-
-## clean-ddd-hexagonal References
-
-| File | Purpose |
-|------|--------|
-| [references/clean-ddd-hexagonal-hexagonal.md](references/clean-ddd-hexagonal-hexagonal.md) | Hexagonal Architecture ports & adapters — driver/driven ports, naming conventions, configurability |
-
-## Skill Boundary
-
-### ✅ 擅长处理
-1. 多入口系统（REST + CLI + MQ + gRPC）
-2. 基础设施频繁变更（换 DB/换 MQ/换缓存）
-3. 需要极致可测试性（端口 Mock 即可测试全部领域逻辑）
-4. 团队理解 Port/Adapter 模式
-
-### ⚠️ 需要条件
-1. 团队理解抽象设计：否则 Port 定义不当
-2. 项目规模适中：小项目用 Layered 更简单
-3. 需要配合 DDD 领域模型：Port 接口定义需要领域知识
-
-### ❌ 超出范围
-1. 单一 REST API 入口 → 用 `ddd-architecture-layered`
-2. 中文企业 MyBatis 生态 → 用 `ddd-architecture-cola`
-3. 需要 UseCase 驱动 → 用 `ddd-architecture-clean`
-
-
-## Security & Stability
-
-- All code templates are educational. Replace external service URLs and credentials.
-- Port/Adapter isolation means domain logic never directly depends on HTTP/DB/MQ libraries — adapter layer handles all I/O.
-- When implementing Secondary Adapters for external APIs, always set timeouts and implement circuit breaker patterns.
-- No executable scripts bundled. This skill provides architecture guidance and code generation patterns only.
-
-
-## Gotchas — Common Pitfalls
-
-- **Port 接口定义过宽**: 每个 Port 应该只做一件事。不要创建 "god port" 包含 10+ 方法。如果 Port 变大，拆分它。
-- **Primary Adapter 包含业务逻辑**: REST Controller 只能做参数转换和调用 UseCase，不能包含 if/else 业务判断。业务逻辑在 Domain，编排在 Application/UseCase。
-- **Secondary Adapter 忘记错误转换**: 外部系统异常（SQLException、HttpTimeoutException）必须在 Adapter 内部转换为领域异常，不能让领域层看到技术异常。
-- **"端口爆炸"反模式**: 不是每个外部依赖都需要独立端口。例如日志框架、序列化库不需要抽象。只为可能替换的外部系统定义 Port。
-- **忘记测试端口隔离**: 如果不启动数据库就能跑通 Domain 层全部单元测试，说明六边形边界正确。如果单元测试需要数据库，Port 边界有泄露。
-
-## When NOT to Use This Skill
-
-| ❌ Skip | ✅ Use Instead |
-|---------|---------------|
-| Single REST API, no other entry points | `architecture-layered` (less abstraction overhead) |
-| Chinese enterprise MyBatis + Spring Boot | `architecture-cola` (better Chinese ecosystem fit) |
-| Need use-case-centric organization | `architecture-clean` (Interactor pattern) |
-| Small team, tight deadline | `architecture-layered` (simpler onboarding) |
-| Existing working architecture | Don't rewrite — evaluate with `architecture-evaluator` first |
-
-## Security & Stability
-
-- All code templates are educational. Replace external service URLs and credentials with environment-specific configuration.
-- Port/Adapter isolation means domain logic never directly depends on HTTP, database, or messaging libraries — the adapter layer handles all I/O.
-- When implementing Secondary Adapters for external APIs, always set connection/read timeouts and implement circuit breaker patterns for resilience.
-- No executable scripts bundled. This skill provides architecture guidance and code generation patterns only.
-
-## 🧭 DDD Skills Journey
-
-> 📍 **You are here: `ddd-architecture-hexagonal` — Step 3: 六边形架构落地**
-
-```mermaid
-flowchart LR
-    S1["Step 1<br/>awesome<br/>入门与全景"] --> S2["Step 2<br/>selector<br/>架构选型"]
-    S2 --> S3A["Step 3<br/>layered<br/>分层架构"]
-    S2 --> S3B["Step 3<br/>onion<br/>洋葱架构"]
-    S2 --> S3C["⭐ Step 3<br/>hexagonal<br/>六边形架构"]
-    S2 --> S3D["Step 3<br/>clean<br/>整洁架构"]
-    S2 --> S3E["Step 3<br/>cola<br/>COLA v5"]
-    S3A & S3B & S3C & S3D & S3E --> S4A["Step 4<br/>domain-designer<br/>领域建模"]
-    S3A & S3B & S3C & S3D & S3E --> S4B["Step 4<br/>cqrs-architecture<br/>CQRS"]
-    S3A & S3B & S3C & S3D & S3E --> S4C["Step 4<br/>api-designer<br/>API设计"]
-    S4A & S4B & S4C --> S5["Step 5<br/>code-reviewer<br/>代码审查"]
-    S5 --> S6A["Step 6<br/>event-storming<br/>事件风暴"]
-    S5 --> S6B["Step 6<br/>testing-strategist<br/>测试策略"]
-    S5 --> S6C["Step 6<br/>devops-integration<br/>DevOps"]
-    S5 --> S6D["Step 6<br/>evaluator<br/>架构评估"]
-    S6A & S6B & S6C & S6D --> S7["🏁 Step 7<br/>architecture-doc<br/>架构文档"]
-
-    style S3C fill:#3b82f6,stroke:#2563eb,color:white,stroke-width:3px
-```
-
-**← Previous**: [selector](../ddd-architecture-selector/) — 为什么选六边形架构？
-**→ Next**: [domain-designer](../ddd-domain-designer/) — 为六边形架构设计端口对应的领域模型
-**🔗 Related**: [api-designer](../ddd-api-designer/) — 设计六边形 API 接口 | [testing-strategist](../ddd-testing-strategist/) — 端口 Mock 测试
-**🏠 Home**: [awesome](../ddd-architecture-awesome/) — DDD 概念全景
-
-💡 六边形 = 端口 + 适配器。设计验证法：如果不用数据库和 HTTP 就能跑通领域逻辑的单元测试，你的六边形边界就对了。
-
-> 📋 See [DESIGN.md](../DESIGN.md) for the complete 16-skill ecosystem map.
+- **→ Next**: [domain-designer](../ddd-domain-designer/) — 为六边形架构设计领域模型
+- **🔗 Related**: [testing-strategist](../ddd-testing-strategist/) — 端口 Mock 测试 | [api-designer](../ddd-api-designer/) — 六边形 API 设计
+> 💡 六边形 = 端口 + 适配器。验证法：不启动数据库和 HTTP，只跑 CLI/单元测试就能执行业务逻辑 → 边界正确。

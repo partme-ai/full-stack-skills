@@ -10,67 +10,62 @@ license: Apache-2.0
 
 ## Workflow
 
-```
-用户提问                         本 Skill 回答流程
-──────────                      ──────────────────
-"帮我用洋葱架构建项目"       → 1. 判断适用性 → 2. 搭建目录骨架 → 3. 编写 Domain 核心 → 4. 编写 Application 接口
-"我想把三层架构改成洋葱"     → 5. 编写 Infrastructure 实现 → 6. 编写 API 适配器 → 7. 配置 DI 组装 → 8. 编写测试
-"洋葱架构有什么坑"           → 9. 对照 Gotchas 清单检查
-```
+### Step 1: 适用性检查 — 判断项目是否适合洋葱架构 | 参考：SKILL.md When to Use
+### Step 2: 搭建目录骨架 — 创建四层模块 core/infrastructure/api/composition | 参考：references/04
+### Step 3: 编写 Domain 核心 — 聚合根、值对象、Repository 接口、领域事件（零框架依赖）| 参考：references/01
+### Step 4: 编写 Application 接口 — 应用服务接口契约，纯编排不含业务逻辑 | 参考：references/02
+### Step 5: 编写 Infrastructure 实现 — 实现 Domain 层 Repository/MQ/外部客户端 | 参考：references/03
+### Step 6: 编写 API 适配器 — Controller、DTO、Assembler、全局异常处理 | 参考：references/04
+### Step 7: 配置 DI 组装 — composition 模块集中装配 | 参考：references/05
+### Step 8: 编写测试 — Domain 层单测 → Application Mock → Infra 集成测试 | 参考：references/06
+### Step 9: Gotchas 检查 — 对照常见陷阱逐条验证 | 参考：各 references 陷阱章节
+### Step 10: 迁移（如适用） — 三层→洋葱渐进迁移 | 参考：references/07
 
-**输出模板**：回答始终包含以下结构，用户可跳过已了解的部分：
+## When to Read (触发条件)
 
-```
-1. [适用性判断] 项目是否符合洋葱架构条件
-2. [目录结构]   四层模块骨架（core/infrastructure/api/composition）
-3. [Domain 层]  聚合根、值对象、仓储接口
-4. [Application] 应用服务接口与实现
-5. [Infrastructure] 仓储实现、MQ、外部集成
-6. [API 层]     REST 控制器
-7. [Composition] DI 装配配置
-8. [测试]       单元测试 + 集成测试
-9. [Gotchas]    检查常见陷阱
-```
+| 用户问题 | 加载动作 |
+|---------|---------|
+| "帮我用洋葱架构搭建项目" | 打开 SKILL.md + references/01-05 |
+| "Repository 接口应该放哪？" | 打开 references/01-domain-model |
+| "洋葱架构怎么测试？" | 打开 references/06-testing |
+| "从三层怎么迁到洋葱？" | 打开 references/07-migration-from-layered |
+| "洋葱和六边形有什么区别？" | 打开 references/08-comparison |
+| "洋葱支持 CQRS 吗？" | 打开 examples/example-04-cqrs-onion |
+| "多入口怎么设计？" | 打开 examples/example-03-multi-entry |
+| "DI 怎么配置 Spring Boot？" | 打开 references/05-di-composition |
 
-## When to Use Onion Architecture
+## When to Use
 
 | ✅ 适用场景 | ❌ 不适用 |
 |-----------|----------|
-| 基础设施频繁变更（DB/MQ/缓存厂商更换） | 简单 CRUD 项目（过度设计，成本>收益） |
+| 基础设施频繁变更（DB/MQ/缓存厂商更换） | 简单 CRUD 项目（过度设计） |
 | 单元测试覆盖率要求 > 80% | 两周交付的原型/PoC |
 | 多入口系统（REST + CLI + MQ + gRPC） | 单入口 + 单数据库的简单服务 |
-| 团队有接口抽象和 DI 设计能力 | 团队刚接触 DDD，不熟悉依赖倒置 |
-| 业务规则复杂，需要严格隔离 | 业务逻辑简单，三层架构够用 |
+| 团队有接口抽象和 DI 设计能力 | 团队不熟悉依赖倒置 |
+| 业务规则复杂，需要严格隔离 | 三层架构够用 |
 
-### Boundary：Skill 边界
+### Boundary
 
 | 区域 | 归属 |
 |------|------|
-| 三层→洋葱的迁移策略 | ✅ 本 Skill 处理（含 references/07-migration） |
-| 洋葱 vs 六边形 vs 整洁对比 | ✅ 本 Skill 处理（含 references/08-comparison） |
+| 三层→洋葱迁移 | ✅ 本 Skill（references/07-migration） |
+| 洋葱 vs 六边形 vs 整洁对比 | ✅ 本 Skill（references/08-comparison） |
 | 选型决策 | ❌ 用 `ddd-architecture-selector` |
 | 领域建模 | ❌ 用 `ddd-domain-designer` |
 | 代码审查 | ❌ 用 `ddd-code-reviewer` |
-| 中文企业 COLA 项目 | ❌ 用 `ddd-architecture-cola` |
+| COLA 项目 | ❌ 用 `ddd-architecture-cola` |
+
+## Audience
+
+This skill is designed for: **Backend developers** (implementing DDD architectures), **Software architects** (evaluating and selecting patterns), **Tech leads** (reviewing team implementations), and **DDD beginners** (learning domain-driven design fundamentals).
 
 ## 核心原理：同心圆依赖规则
 
-```
 所有依赖关系指向圆心（Domain），内层定义接口，外层实现接口。
 
-     ┌──────────────────────────────────────┐
-     │        Infrastructure Layer           │  ← 最外层：技术细节
-     │    ┌──────────────────────────────┐   │      DB 实现、MQ、HTTP 客户端
-     │    │       API / Adapters          │   │  ← 用户界面层
-     │    │    ┌──────────────────────┐   │   │      Controller、DTO、Middleware
-     │    │    │   Application Layer   │   │   │  ← 应用层：用例编排
-     │    │    │  ┌────────────────┐   │   │   │      事务边界、服务组合
-     │    │    │  │   Domain Core   │   │   │   │  ← 核心层：零依赖
-     │    │    │  │  ★              │   │   │   │      实体、值对象、聚合根
-     │    │    │  └────────────────┘   │   │   │      仓储接口、领域服务
-     │    │    └──────────────────────┘   │   │
-     │    └──────────────────────────────┘   │
-     └──────────────────────────────────────┘
+```
+Infrastructure → API/Adapters → Application → Domain Core ★
+所有依赖指向圆心，内层零框架依赖。
 ```
 
 ### Jeffrey Palermo 四原则
@@ -80,201 +75,63 @@ license: Apache-2.0
 3. **依赖指向圆心** — Infrastructure → Application → Domain，不允许逆向
 4. **外层知道内层，内层不知道外层** — Domain 对 Infrastructure 一无所知
 
-### 与六边形/整洁架构的对比
+## Rules
 
-| 维度 | 洋葱架构 | 六边形架构 | 整洁架构 |
-|------|---------|-----------|---------|
-| 心智模型 | 同心圆嵌套 | 六边形 + 端口/适配器 | 四圈层 + 用例驱动 |
-| 可视化程度 | ★★★ 最直观 | ★★☆ | ★★☆ |
-| 接口组织 | 按层（Domain 定义仓储接口） | 按端口（inbound/outbound） | 按用例（Input/Output Port） |
-| 典型目录 | core/infrastructure/api/composition | domain/adapter/configuration | usecase/entity/adapter/framework |
-| 最佳场景 | 领域复杂的单体或多入口系统 | API 集成多的微服务 | 企业级大型系统 |
+| # | 规则 | 检测方式 | 级别 |
+|---|------|---------|:----:|
+| 1 | Domain 层零框架依赖 | 搜索 Domain 包中的框架 import | P0 |
+| 2 | Repository 接口在 Domain，实现在 Infra | 检查接口/实现位置 | P0 |
+| 3 | Application 层纯编排，不含业务 if/else | 代码审查 | P0 |
+| 4 | 值对象不可变（final 字段，无 setter） | ValueObject 类检查 | P1 |
+| 5 | 跨聚合通过 ID 引用 | 聚合根字段类型检查 | P1 |
+| 6 | DTO 在 API 层定义，不泄露到 Domain | 检查 Domain 中 DTO import | P0 |
+| 7 | Composition Root 集中管理 DI | 检查各层是否有 `new` 依赖 | P1 |
 
-## 完整目录结构
+详见 [references/08-comparison.md](references/08-comparison.md) 了解洋葱 vs 六边形 vs 整洁架构的详细对比。
+
+## 目录结构
 
 ```
 {project}/
-├── {project}-core/                        # 核心层（Domain + Application 接口）
-│   ├── domain/                            # 领域模型（零框架依赖）
-│   │   ├── model/                         # 实体、值对象、聚合根
-│   │   │   ├── {aggregate-name}/
-│   │   │   │   ├── {Aggregate}Root.java   # 聚合根
-│   │   │   │   ├── {Entity}.java          # 实体
-│   │   │   │   └── {ValueObject}.java     # 值对象
-│   │   │   └── shared/                    # 共享值对象（Money, Email, Address）
-│   │   ├── service/                       # 领域服务
-│   │   ├── repository/                    # ★ 仓储接口（纯抽象，定义在 Domain）
-│   │   ├── event/                         # 领域事件
-│   │   └── exception/                     # 领域异常
-│   └── application/                       # 应用服务接口（契约定义）
-│       └── service/                       # 应用服务接口
-├── {project}-infrastructure/              # 基础设施层
-│   ├── data/                              # 数据访问
-│   │   ├── repository/                    # ★ 仓储实现（实现 Domain 层接口）
-│   │   ├── entity/                        # JPA Entity / PO 持久化对象
-│   │   └── mapper/                        # PO ↔ Domain 映射
-│   ├── messaging/                         # 消息队列
-│   ├── external/                          # 外部 API 客户端
-│   └── config/                            # 基础设施配置
-├── {project}-api/                         # API / 适配器层
-│   ├── controller/                        # REST 控制器
-│   ├── dto/                               # 请求/响应 DTO
-│   │   ├── request/
-│   │   └── response/
-│   ├── assembler/                         # DTO ↔ Domain 组装器
-│   ├── middleware/                        # 拦截器、异常处理
-│   └── swagger/                           # API 文档
-└── {project}-composition/                 # DI 组装层（唯一知道所有实现的模块）
-    └── config/                            # Spring Boot @Configuration / 手动 DI
+├── {project}-core/domain/          # 领域模型（零框架依赖）
+├── {project}-core/application/     # 应用服务接口
+├── {project}-infrastructure/       # Repository 实现、MQ、外部集成
+├── {project}-api/                  # Controller、DTO、Assembler
+└── {project}-composition/          # DI 组装
 ```
 
-### 模块职责边界
+### 模块依赖规则
 
 | 模块 | 可依赖 | 不可依赖 |
 |------|--------|---------|
-| core/domain | 无（纯 Java） | Spring/JPA/MyBatis/任何框架 |
+| core/domain | 无（纯 Java） | Spring/JPA/MyBatis |
 | core/application | domain | infrastructure, api |
 | infrastructure | core | api |
 | api | core, infrastructure | — |
 | composition | 所有模块 | — |
 
-## 开发规范
+## 开发规范（详见各 references）
 
-### 规范清单
+| # | 规范 | 违规示例 |
+|---|------|---------|
+| 1 | Domain 零框架依赖 | `import org.springframework.stereotype.Service` |
+| 2 | Repository 接口在 Domain | 接口和实现都在 Infra |
+| 3 | Application 只编排不实现 | AppService 包含业务判断 |
+| 4 | 事务边界在 Application | Controller 或 Repository 开事务 |
+| 5 | 跨聚合通过领域事件 | 聚合 A 直接引用聚合 B |
+| 6 | 值对象不可变 | ValueObject 有 setter |
+| 7 | 实体充血模型 | 实体只有 getter/setter |
+| 8 | DTO 在 API 层定义 | Domain 中有 DTO import |
+| 9 | Composition Root 最外层 | 各层自己 `new` 依赖 |
+| 10 | 严格分层 | API 直接调用 Infrastructure |
 
-| # | 规范 | 说明 | 违规示例 |
-|---|------|------|---------|
-| 1 | Domain 零框架依赖 | 不 import `@Service`, `@Entity`, `JpaRepository` | `import org.springframework.stereotype.Service` |
-| 2 | Repository 接口定义在 Domain | 接口在内层，实现在外层 Infrastructure | 接口和实现都在 Infrastructure |
-| 3 | Application 只编排不实现 | 不放 if/else 业务规则，只协调领域对象 | AppService 包含状态机逻辑 |
-| 4 | 事务边界在 Application | 用 `@Transactional` 在 AppService 层 | 在 Controller 或 Repository 开事务 |
-| 5 | 跨聚合通过领域事件 | 聚合间用 ID 引用，跨聚合操作用事件最终一致 | 聚合 A 直接引用聚合 B 的实体 |
-| 6 | 值对象不可变 | 字段 `final`，无 setter，提供工厂方法 | ValueObject 有 setter 方法 |
-| 7 | 实体充血模型 | 业务方法在实体内部，不在 Service | 实体只有 getter/setter |
-| 8 | DTO 在 API 层定义 | 不把 DTO 传到 Domain 层 | `import api.dto.OrderDTO` 在 Domain 中 |
-| 9 | Composition Root 最外层 | DI 配置集中在一个地方，不散落到各层 | 各层自己 `new` 依赖对象 |
-| 10 | 严格分层 | 每层只能调用直接下方层 | API 直接调用 Infrastructure |
+## Gotchas — (详见各 references 陷阱章节)
 
-### 代码规范示例
+15 条核心陷阱：Domain 层框架泄露 / Repository 接口位置 / Application 过厚 / 过度抽象 / Composition Root 分散 / 值对象可变 / 聚合根过大 / 跨聚合直接引用 / Controller 含业务逻辑 / DTO 泄露 / PO 注解 / 缺少事件 / 事务跨聚合 / Infra 侵入测试
 
-```java
-// ✅ 正确：Domain 定义接口
-// core/domain/repository/OrderRepository.java
-public interface OrderRepository {
-    Optional<Order> findById(OrderId id);
-    void save(Order order);
-}
+## FAQ — (详见 references/08-comparison.md 和各层 references)
 
-// ✅ 正确：Infrastructure 实现接口
-// infrastructure/data/repository/OrderRepositoryImpl.java
-@Repository
-public class OrderRepositoryImpl implements OrderRepository {
-    private final JpaOrderRepository jpaRepo;       // Spring Data
-    private final OrderMapper mapper;               // PO ↔ Domain
-
-    @Override
-    public Optional<Order> findById(OrderId id) {
-        return jpaRepo.findById(id.getValue())
-            .map(mapper::toDomain);
-    }
-}
-
-// ❌ 错误：Domain 直接依赖 JPA
-// core/domain/repository/OrderRepository.java
-public interface OrderRepository extends JpaRepository<Order, Long> {  // 违规！
-}
-```
-
-## 落地实施步骤
-
-```
-Phase 1: 识别核心域模型（1-2 天）
-  └─ 确定聚合根、实体、值对象 → 定义 Repository 接口 → 定义领域事件
-
-Phase 2: 搭建 Core 层（1 天）
-  └─ 创建 core/domain/ 模块 → 编写充血模型实体 → 定义 Application 接口
-
-Phase 3: 实现 Infrastructure 层（2-3 天）
-  └─ 实现 Repository（JPA/MyBatis）→ 实现 MQ → 实现外部 API 客户端
-  └─ 编写 PO 实体和 Mapper 映射
-
-Phase 4: 实现 API 适配层（1-2 天）
-  └─ Controller → DTO → Assembler → 异常处理 → Swagger
-
-Phase 5: 组装与测试（1-2 天）
-  └─ Composition Root 配置 DI → 单元测试（Domain）→ 集成测试（Repository）
-```
-
-### 迁移路径：从三层层到洋葱
-
-详见 [references/07-migration-from-layered.md](references/07-migration-from-layered.md)
-
-## Gotchas — 常见陷阱（15 条）
-
-| # | 陷阱 | 症状 | 修复 |
-|---|------|------|------|
-| 1 | **Domain 层泄露框架类型** | Domain 中 import `JpaRepository`, `@RestController` | 删除违规 import，接口放到 Domain，实现在 Infra |
-| 2 | **Repository 接口位置错误** | 接口和实现都在 Infrastructure 层 | 把接口移到 Domain 层，Infra 实现它 |
-| 3 | **Application 层过厚** | AppService 包含 if/else 业务判断 | 提取到 Domain Service |
-| 4 | **过度抽象** | 日志/配置也定义成 Port 接口 | 只对需要替换的部分（DB/MQ/缓存）抽象 |
-| 5 | **Composition Root 分散** | 各层用 `@Autowired` 或自己 `new` 依赖 | 集中到 composition/config |
-| 6 | **值对象可变** | ValueObject 有 setter，`equals/hashCode` 未覆盖 | 改用 `final` 字段 + 构造器 |
-| 7 | **聚合根过大** | 一个聚合包含超过 5 个实体 | 拆分聚合，用 ID 引用 |
-| 8 | **跨聚合直接引用** | 聚合 A 的 `List<聚合B>` 字段 | 改为 `List<BId>`，用 ID 引用 |
-| 9 | **Controller 包含业务逻辑** | Controller 中有 if/else 业务判断 | 移到 Application 或 Domain |
-| 10 | **DTO 泄露到 Domain** | Domain 中引用 api.dto 包 | 用 Assembler 在 API 层转换 |
-| 11 | **Domain 层放 PO 注解** | Domain model 上有 `@Entity`, `@Table` | PO 放在 Infrastructure，用 Mapper 转换 |
-| 12 | **Application 层忽略编排职责** | AppService 直接暴露 Domain 实体 | AppService 返回 DTO，不暴露 Domain |
-| 13 | **缺少领域事件** | 关键业务操作无事件记录 | 在实体方法中 `addDomainEvent()` |
-| 14 | **事务跨多个聚合** | 一个 `@Transactional` 涉及 2+ 聚合 | 改用领域事件 + 最终一致性 |
-| 15 | **Infrastructure 侵入测试** | 单元测试需要启动 Spring/数据库 | 用 Mock Repository 测试 Domain 和 Application |
-
-## FAQ — 常见问题（15 条）
-
-### Q1: 洋葱架构和六边形架构有什么区别？
-A: 洋葱强调"同心圆分层"的心智模型，可视化更直观；六边形强调"端口+适配器"的抽象。两者本质都是依赖倒置，洋葱更适用于需要清晰层间隔离的场景。
-
-### Q2: Domain 层真的不能有任何框架注解吗？
-A: 是的。Domain 层必须是纯业务逻辑，不能 import `@Entity`, `@Service`, `@Repository`。这些注解出现在 Domain 层意味着依赖方向反了。
-
-### Q3: 值对象和实体的判断标准是什么？
-A: 有唯一标识且可变 → 实体；无标识且不可变 → 值对象。如 `OrderId` 是值对象，`Order` 是实体（聚合根）。
-
-### Q4: Repository 接口为什么放在 Domain 层？
-A: Domain 层定义"我需要什么持久化能力"，Infrastructure 层实现"怎么持久化"。接口在 Domain 确保了 Domain 不依赖 Infrastructure。
-
-### Q5: 单个聚合内应该包含几个实体？
-A: Vaughn Vernon 建议 ≤ 5 个。超过时考虑是否聚合边界过大，需要拆分。
-
-### Q6: Application 层太薄怎么办？
-A: 这是正确的。Application 层应该薄——它只做编排。业务逻辑应该在 Domain 层。如果觉得"空"，说明 Domain 层设计得好。
-
-### Q7: 如何从三层架构迁移到洋葱架构？
-A: 详见 [references/07-migration-from-layered.md](references/07-migration-from-layered.md)。推荐渐进式迁移：先抽 Repository 接口，再分离 Domain 模块。
-
-### Q8: 洋葱架构支持 CQRS 吗？
-A: 支持。在 Application 层做 Command/Query 分离，Command 走完整的 Domain 逻辑，Query 直接读 Repository。详见 `ddd-cqrs-architecture`。
-
-### Q9: 单元测试要覆盖哪些层？
-A: Domain 层 100% 覆盖（无框架依赖，最易测试），Application 层 Mock 所有依赖测试编排逻辑，Infrastructure 层用 Testcontainers 做集成测试。
-
-### Q10: Composition Root 一定要单独模块吗？
-A: 推荐。单独的 composition 模块是唯一知道所有实现类型的模块，它负责装配。小项目可以放在启动模块中，但不要分散。
-
-### Q11: 多个聚合之间如何通信？
-A: 通过 Application 层编排，或通过领域事件实现最终一致性。禁止聚合间直接调用领域服务。
-
-### Q12: 洋葱架构适合微服务吗？
-A: 非常适合。每个微服务内部按洋葱组织，对外暴露 API 适配层。多入口场景（REST + MQ + gRPC）是洋葱的强项。
-
-### Q13: 值对象如何在数据库中持久化？
-A: 两种方式：嵌入式（`@Embeddable` 在 JPA 中）→ 适合小值对象；序列化 → 适合复杂值对象。转换逻辑在 Mapper 中。
-
-### Q14: 领域事件如何处理跨微服务通信？
-A: Application 层发布领域事件 → Infrastructure 层的 EventPublisher 发送到 MQ → 其他微服务订阅处理。注意幂等设计。
-
-### Q15: 为什么说洋葱架构"抗变化"？
-A: 因为所有技术细节（DB/MQ/HTTP）都在外层 Infrastructure，内层 Domain 不受影响。换数据库只需改 Infrastructure 层，Domain 层完全不动。
+涵盖：洋葱 vs 六边形、Domain 框架限制、值对象 vs 实体、Repository 接口位置、聚合大小、迁移策略、CQRS 兼容、测试层次、微服务适配、事件跨服务等。
 
 ## Keywords
 
@@ -284,7 +141,6 @@ layered isolation, dependency inversion, 依赖倒置, concentric layers,
 core/domain, application interfaces, infrastructure implementation,
 API adapters, composition root, DI assembly, domain model,
 repository pattern, aggregate root, value object, domain service,
-严格分层, 内层定义接口, 外层实现接口, 依赖指向圆心,
 DDD layered, clean architecture comparison, hexagonal comparison
 ```
 
@@ -303,48 +159,61 @@ DDD layered, clean architecture comparison, hexagonal comparison
 
 ## Examples
 
+### 业务场景示例
+
 | 示例 | 说明 |
 |------|------|
 | [examples/example-01-order-payment.md](examples/example-01-order-payment.md) | 订单支付完整示例（含 Domain/Application/Infra/API） |
 | [examples/example-02-product-catalog.md](examples/example-02-product-catalog.md) | 产品目录管理示例（含多聚合协作） |
 | [examples/example-03-multi-entry.md](examples/example-03-multi-entry.md) | 多入口系统示例（REST + MQ + CLI 三种适配器） |
 | [examples/example-04-cqrs-onion.md](examples/example-04-cqrs-onion.md) | CQRS + 洋葱融合示例（Command/Query 分离） |
+| [examples/example-05-user-registration.md](examples/example-05-user-registration.md) | 用户注册 + 邮件验证示例 |
 
-## Primary Sources
+### 项目规模示例
 
-- [Onion Architecture: Part 1](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) — Jeffrey Palermo (2008)
-- [Onion Architecture: Part 2](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-2/) — Jeffrey Palermo (2008)
-- [Onion Architecture: Part 3](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-3/) — Jeffrey Palermo (2008)
-- [Onion Architecture: Part 4](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-4/) — Jeffrey Palermo (2008)
-- [Domain-Driven Design: The Blue Book](https://www.domainlanguage.com/ddd/blue-book/) — Eric Evans (2003)
-- [Implementing Domain-Driven Design](https://www.domainlanguage.com/ddd/blue-book/) — Vaughn Vernon (2013)
-- [Clean Architecture: Standing on the Shoulders of Giants](https://herbertograca.com/2017/09/28/clean-architecture-standing-on-the-shoulders-of-giants/) — Herberto Graça
+| 示例 | 说明 |
+|------|------|
+| [examples/06-monolith-simple.md](examples/06-monolith-simple.md) | 单体简单：单模块项目，一个限界上下文 |
+| [examples/07-monolith-complex.md](examples/07-monolith-complex.md) | 单体复杂：单模块多限界上下文，内部隔离 |
+| [examples/08-monolith-multi-module.md](examples/08-monolith-multi-module.md) | 单体多模块：Maven 多模块强制分层 |
+| [examples/09-microservice-simple.md](examples/09-microservice-simple.md) | 微服务简单：单服务单上下文洋葱 |
+| [examples/10-microservice-complex.md](examples/10-microservice-complex.md) | 微服务复杂：单服务多上下文内部隔离 |
+| [examples/11-microservice-multi-module.md](examples/11-microservice-multi-module.md) | 微服务多模块：单服务 Maven 多模块洋葱 |
+| [examples/12-microservice-complex-multi.md](examples/12-microservice-complex-multi.md) | 微服务复杂多模块：多上下文 Maven 多模块 |
 
-## Implementation Guides
+Primary Sources: [Onion Architecture Part 1-4](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) — Jeffrey Palermo (2008) · [DDD Blue Book](https://www.domainlanguage.com/ddd/blue-book/) — Eric Evans (2003) · [Implementing DDD](https://www.domainlanguage.com/ddd/blue-book/) — Vaughn Vernon (2013)
 
-- [Microsoft: DDD-oriented Microservice](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
-- [Testcontainers for Integration Testing](https://testcontainers.com/)
+Implementation: [Microsoft DDD Microservice](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice) · [Testcontainers](https://testcontainers.com/)
 
 ## Output
 
-回答输出始终包含：
-- 适用性判断（项目是否适合洋葱架构）
-- 完整目录结构（四层模块）
-- 每层代码模板（Domain / Application / Infrastructure / API）
-- DI 装配配置
-- 测试骨架
-- Gotchas 合规检查
-- 扩展参考（references/ 和 examples/ 目录的引导引用）
+回答始终包含：适用性判断 → 目录结构 → 每层代码模板 → DI 装配 → 测试骨架 → Gotchas 合规检查。详细参考 references/ 和 examples/ 文件。
 
 ---
 
 ## 技能旅程
 
-> 📍 **当前 Skill：洋葱架构落地**
+> 📍 当前：洋葱架构落地
 
-← **上一步**：[selector](../ddd-architecture-selector/) — 架构选型
-→ **下一步**：[domain-designer](../ddd-domain-designer/) — 设计领域模型
-🔗 **相关**：[cqrs-architecture](../ddd-cqrs-architecture/) — CQRS 集成 | [code-reviewer](../ddd-code-reviewer/) — 架构审查
-🏠 **首页**：[awesome](../ddd-architecture-awesome/) — DDD 入门全景
+← **上一步**：[selector](../ddd-architecture-selector/)
+→ **下一步**：[domain-designer](../ddd-domain-designer/)
+🔗 **相关**：[cqrs-architecture](../ddd-cqrs-architecture/) | [code-reviewer](../ddd-code-reviewer/)
+🏠 **首页**：[awesome](../ddd-architecture-awesome/)
 
 > 核心口诀：内层定义接口，外层实现接口，依赖指向圆心。
+
+## Security & Safety
+
+This skill is pure documentation. It contains no executable scripts, collects no user data, accesses no external services or networks.
+
+## 验证清单
+
+- [ ] Domain 层无框架 import
+- [ ] Repository 接口在 Domain 层
+- [ ] Repository 实现在 Infrastructure 层
+- [ ] Application 层无业务 if/else
+- [ ] 值对象不可变
+- [ ] 跨聚合通过 ID 引用
+- [ ] DTO 只定义在 API 层
+- [ ] DI 集中在 composition 模块
+- [ ] 领域事件已发布

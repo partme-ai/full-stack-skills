@@ -1,376 +1,200 @@
 ---
 name: ddd-architecture-clean
-description: Provides comprehensive guidance for Clean Architecture implementation in DDD. Based on Robert C. Martin's Clean Architecture, organized around UseCases with strict dependency rules. Covers Enterprise Business Rules (Entities), Application Business Rules (UseCases), Interface Adapters, and Frameworks & Drivers layers. Includes complete directory structure, code templates with Interactor pattern, Input/Output ports, testing strategy, and implementation guide. Use when the user asks about clean architecture, 整洁架构, Robert Martin, Uncle Bob, use case driven design, needs enterprise-level strict module isolation, or large team DDD standardization.
+description: Comprehensive guidance for Clean Architecture (整洁架构) — Robert C. Martin's Clean Architecture with Enterprise Business Rules, Use Cases, Interface Adapters, and Frameworks layers. Covers core entities, use case interactors, dependency rules, and full implementation steps with Java/Spring Boot examples. Use when user asks about Clean Architecture, 整洁架构, Robert Martin, Uncle Bob, use case driven architecture, or needs to implement DDD with clean architecture.
 license: Apache-2.0
 ---
 
-# DDD Architecture - Clean
+# DDD Architecture — Clean
 
-Clean Architecture implementation guide — organized around UseCases with strict dependency rules. Based on Robert C. Martin's "Clean Architecture".
+> Clean Architecture by Robert C. Martin (Uncle Bob): UseCase-centric, strict dependency rule — source code dependencies must point only inward.
 
-## When to use this skill
+## Quick Start
 
-**ALWAYS use this skill when the user mentions:**
-- "整洁架构"、"Clean Architecture"、"Robert Martin"、"Uncle Bob"
-- "用例驱动"、"use case driven"
-- "企业级架构"、"enterprise architecture"
-- "严格模块隔离"、"strict module isolation"
-- Large team (15-50 people) DDD standardization
-- Core enterprise systems (order, payment, etc.)
-- Business rules independent of delivery mechanism
-- Need physical module isolation with strict boundaries
+直接说明你的需求，例如： "帮我建整洁架构项目骨架" / "订单模块实现 CreateOrder UseCase，从实体到控制器" / "检查项目依赖方向是否正确" / "从三层迁移到整洁架构，先迁订单"。
 
-## Architecture Overview
+信息不足时我先给参考版本，再列出需要补充的具体信息。
 
-### Core Concept
+## Workflow
 
-```
-Clean Architecture: UseCase-centric, strict dependency rules
+### Step 1: 确认基础概念
+确保团队对 DDD 实体、值对象、聚合根有一致理解。不清晰则先参考 `ddd-architecture-awesome`。
 
-                    ┌──────────────────────┐
-                    │    Frameworks &       │
-                    │    Drivers             │
-                    │  ┌────────────────┐   │
-                    │  │  Interface      │   │
-                    │  │  Adapters       │   │
-                    │  │  ┌──────────┐   │   │
-                    │  │  │   App    │   │   │
-                    │  │  │ Business │   │   │
-                    │  │  │  Rules   │   │   │
-                    │  │  │ ┌──────┐ │   │   │
-                    │  │  │ │Entity│ │   │   │
-                    │  │  │ │  ★   │ │   │   │
-                    │  │  │ └──────┘ │   │   │
-                    │  │  └──────────┘   │   │
-                    │  └────────────────┘   │
-                    └──────────────────────┘
-```
+### Step 2: 定义 Enterprise Business Rules
+识别聚合根 → 设计实体 + 值对象 → 实现业务规则 → 定义领域事件。参考 [01-core-entities](references/01-core-entities.md)、[order-entity example](examples/01-order-entity.md)
 
-**Dependency Rule**: Source code dependencies must point only inward. Outer layers can depend on inner layers; inner layers never know about outer layers.
+### Step 3: 定义 UseCase 端口
+为每个 UseCase 定义独立 Input Port → Output Port → UseCase DTO。参考 [02-usecase-ports](references/02-usecase-ports.md)
 
-### Four Layer Structure
+### Step 4: 实现 UseCase Interactor
+编写 Interactor → 编排实体 + 端口调用 → 发布领域事件。参考 [03-interactors](references/03-interactors.md)、[create-order example](examples/02-create-order-usecase.md)
 
-| Layer (outer → inner) | Responsibility | Depends On |
-|------------------------|---------------|------------|
-| Frameworks & Drivers | Web framework, DB, UI | → Adapters |
-| Interface Adapters | Controller, Gateway, Presenter | → Application |
-| Application Business Rules | Use Cases (orchestration) | → Enterprise |
-| Enterprise Business Rules | Entity, core business rules ★ | Nothing |
+### Step 5: 实现适配器层
+Controller → Presenter → Repository Impl → Gateway Impl → DI 配置。参考 [04-adapters](references/04-adapters.md)、[05-framework-config](references/05-framework-config.md)
 
-## Applicability Check
+### Step 6: 验证与测试
+Enterprise 单元测试 → UseCase 集成测试 → Adapter 集成测试 → ArchUnit 验证。参考 [06-dependency-rules](references/06-dependency-rules.md)、[07-testing-strategy](references/07-testing-strategy.md)
 
-| ✓ Applicable | ✗ Not Applicable |
-|--------------|-------------------|
-| Enterprise core systems (order, payment) | Temporary scripts, small tools |
-| Business rules independent of delivery | Frontend-heavy, backend-light CRUD |
-| Need strict module physical isolation | Team < 5, rapid iteration |
-| Microservice internal standardization | Simple 3-layer suffices |
+## When to Use / When NOT to
 
-## Complete Directory Structure
+| ✅ 适用 | ❌ 不适用 |
+|----------|-----------|
+| 企业级核心系统（订单、支付、库存） | 临时脚本、小工具 |
+| 业务规则独立于交付机制 | 前端重后端轻的简单 CRUD |
+| 需要严格模块物理隔离（15-50 人团队） | 团队 < 5 人、需快速迭代 |
+| 微服务内部标准化架构 | 简单三层架构已足够 |
+| UseCase 驱动的复杂业务编排 | 无复杂业务逻辑的管理后台 |
 
-```
-{project}/
-├── {project}-core/                    # Enterprise Business Rules
-│   ├── entity/                        # ★ Core Entities
-│   │   ├── Order.java
-│   │   ├── OrderId.java
-│   │   ├── OrderStatus.java
-│   │   └── Money.java
-│   ├── rule/                          # ★ Enterprise Business Rules
-│   │   ├── OrderValidationRule.java
-│   │   └── PricingRule.java
-│   └── exception/                     # ★ Domain Exceptions
-├── {project}-usecase/                 # Application Business Rules (UseCase)
-│   ├── port/                          # UseCase Input/Output Ports
-│   │   ├── input/                     # Input Ports (UseCase interfaces)
-│   │   │   ├── CreateOrderUseCase.java
-│   │   │   └── PayOrderUseCase.java
-│   │   └── output/                    # Output Ports (Repository/Gateway interfaces)
-│   │       ├── OrderRepository.java
-│   │       └── PaymentGateway.java
-│   ├── interactor/                    # UseCase Implementation (Interactor)
-│   │   ├── CreateOrderInteractor.java
-│   │   └── PayOrderInteractor.java
-│   └── dto/                           # UseCase-specific DTOs
-│       ├── CreateOrderRequest.java
-│       └── PayOrderResponse.java
-├── {project}-adapter/                 # Interface Adapters Layer
-│   ├── controller/                    # REST / gRPC Controllers
-│   ├── presenter/                     # Response format conversion
-│   ├── repository/                    # DB implementation (implements UseCase output ports)
-│   ├── gateway/                       # External API implementation
-│   └── converter/                     # DTO/PO ↔ Entity conversion
-└── {project}-framework/               # Frameworks & Drivers Layer
-    ├── config/                        # Spring/DI configuration
-    ├── persistence/                   # JPA Entity, Mapper
-    └── web/                           # Web config (CORS, Security)
-```
+## Boundary
 
-## Code Templates
+| 类别 | 能力 | 说明 |
+|------|------|------|
+| ✅ 擅长 | 严格分层的企业级系统 | 15-50 人团队，模块间强隔离 |
+| ✅ 擅长 | UseCase 驱动设计 | 每个用例独立 Interactor + Port |
+| ✅ 擅长 | 依赖规则自动化检查 | ArchUnit 全自动验证分层合规 |
+| ✅ 擅长 | 多语言落地 | Java/Go/TypeScript/C# 均可实现 |
+| ⚠️ 需条件 | 团队理解 Interactor 模式 | 否则学习成本高，需培训 |
+| ⚠️ 需条件 | 项目有一定规模 | 小项目用 Layered/Onion 更合适 |
+| ⚠️ 需条件 | 需配合 DDD 领域模型 | 单独使用 Clean Architecture 过于抽象 |
+| ❌ 超出范围 | 简单 CRUD 项目 | 用 `ddd-architecture-layered` |
+| ❌ 超出范围 | 中文 Spring Boot 生态 | 用 `ddd-architecture-cola` |
+| ❌ 超出范围 | 需要可视化环状模型 | 用 `ddd-architecture-onion` |
+| ❌ 超出范围 | 需要端口适配器概念 | 用 `ddd-architecture-hexagonal` |
 
-### Enterprise Layer (Core)
+## 受众说明
 
-```java
-// ★ Core Entity — zero framework dependencies
-public class Order {
-    private final OrderId id;
-    private Money totalAmount;
-    private OrderStatus status;
+| 用户类型 | 使用方式 |
+|---------|---------|
+| **后端架构师 / 技术负责人** | 直接使用，选型并按照 Workflow 6 步落地 |
+| **Java 开发者** | 参考 examples/ 代码模板，按步骤实现 UseCase |
+| **DDD 初学者** | 先读 `ddd-architecture-awesome` 了解概念，再回来看本 Skill |
+| **多语言团队（Go/TypeScript/C#）** | 架构规则通用，参考 references/ 中语言无关的部分 |
 
-    public void pay() {
-        if (!this.status.canPay()) {
-            throw new OrderDomainException("Cannot pay in current status");
-        }
-        this.status = OrderStatus.PAID;
-    }
-}
-```
+定制化：触发时说明你的技术栈（Java/Go/TS）、模块名称（如订单/支付），我会针对性地生成代码模板。
 
-### UseCase Layer (Application)
-
-```java
-// ★ Input Port (UseCase interface)
-public interface CreateOrderUseCase {
-    CreateOrderOutput execute(CreateOrderInput input);
-}
-
-// ★ Output Port (Repository interface)
-public interface OrderRepository {
-    Order save(Order order);
-    Optional<Order> findById(OrderId id);
-}
-
-// ★ Interactor (UseCase implementation)
-public class CreateOrderInteractor implements CreateOrderUseCase {
-    private final OrderRepository orderRepository;
-
-    @Override
-    public CreateOrderOutput execute(CreateOrderInput input) {
-        Order order = Order.create(/* ... */);   // Enterprise layer
-        orderRepository.save(order);              // Through port
-        return CreateOrderOutput.from(order);
-    }
-}
-```
-
-### Adapter Layer
-
-```java
-// Controller
-@RestController
-public class OrderController {
-    private final CreateOrderUseCase createOrderUseCase;
-
-    @PostMapping("/orders")
-    public ResponseEntity<CreateOrderResponse> createOrder(
-            @RequestBody CreateOrderRequest request) {
-        var input = request.toInput();
-        var output = createOrderUseCase.execute(input);
-        return ResponseEntity.ok(CreateOrderResponse.from(output));
-    }
-}
-
-// Repository Implementation
-@Repository
-public class JpaOrderRepository implements OrderRepository {
-    private final JpaOrderRepo jpaRepo;
-    private final OrderMapper mapper;
-
-    @Override
-    public Order save(Order order) {
-        return mapper.toDomain(jpaRepo.save(mapper.toPO(order)));
-    }
-
-    @Override
-    public Optional<Order> findById(OrderId id) {
-        return jpaRepo.findById(id.getValue()).map(mapper::toDomain);
-    }
-}
-```
-
-### Framework Layer
-
-```java
-@Configuration
-public class UseCaseConfig {
-    @Bean
-    public CreateOrderUseCase createOrderUseCase(OrderRepository repo) {
-        return new CreateOrderInteractor(repo);
-    }
-}
-```
-
-## Testing Strategy
+## 核心架构
 
 ```
-Enterprise Layer (Unit Test):
-  ✓ Entity business rules
-  ✓ Validation rules
-  ✓ No mocking needed (pure logic)
-
-UseCase Layer (Integration Test):
-  ✓ Interactor with Mock output ports
-  ✓ Verify correct Entity interaction
-
-Adapter Layer (Integration Test):
-  ✓ Controller with Mock UseCase
-  ✓ Repository with Testcontainers
-
-Framework Layer (E2E Test):
-  ✓ Complete request → response
+Enterprise ← UseCase ← Adapter ← Framework
 ```
 
-## Implementation Phases
+详细原理（四层结构、架构对比、数据流转）参考 [architecture-principles](references/architecture-principles.md)。目录结构参考 [directory-structure](references/directory-structure.md)。
 
-```
-Phase 1: Enterprise Business Rules (1-3 days)
-  → Core entities → Business rules → Domain exceptions
+## 开发规范
 
-Phase 2: UseCase + Ports (1-2 days)
-  → Input ports (UseCase) → Output ports (Repository/Gateway)
+| 规范 | 说明 | 违规示例 |
+|------|------|---------|
+| Entity 零框架依赖 | 不可 import Spring/JPA/Jackson | `@Entity` 出现在 `core/entity/` |
+| 每个 UseCase 独立端口 | 一个 UseCase = 一个 Input Port 接口 | 多个 UseCase 共享同一个接口 |
+| Interactor 只编排不做业务 | 业务 if/else 必须在 Entity 中 | Interactor 中有状态机判断 |
+| Output Port 在 UseCase 定义 | Repository 接口定义在 usecase 层 | Adapter 定义 Repository 接口 |
+| 数据转换在 Adapter 层 | Controller DTO 不可穿越到 UseCase | `@RequestBody` DTO 直接传入 Interactor |
+| 事务在 Framework 层管理 | @Transactional 只在 adapter/repository | Entity 方法上有 @Transactional |
 
-Phase 3: UseCase Interactors (1-2 days)
-  → UseCase implementations → DTO definitions
+详细规范请参考 [references/06-dependency-rules.md](references/06-dependency-rules.md)。
 
-Phase 4: Adapters + Framework (2-3 days)
-  → Controllers/Gateways → Repository implementations → DI config
+## Gotchas
 
-Phase 5: Testing (1-2 days)
-  → Enterprise unit tests → UseCase integration tests (mock ports) → Adapter E2E tests
-```
+| # | 陷阱 | 现象 | 正确做法 |
+|---|------|------|---------|
+| 1 | UseCase 包含业务逻辑 | Interactor 中有 if/else 状态判断 | 抽到 Entity/Domain Service |
+| 2 | Input Port 共享 | 多个 UseCase 共用一个接口 | 每个 UseCase 独立 Input Port |
+| 3 | Controller DTO 穿越层 | 框架 DTO 传入 UseCase 层 | Adapter 层完成 DTO ↔ Domain 转换 |
+| 4 | Entity 上有 @Entity 注解 | JPA 注解泄露到 Enterprise 层 | 在 Adapter 层创建独立的 JPA Entity |
+| 5 | Interactor 直接调 Adapter | 跳过 Output Port 调用实现类 | 通过 Output Port 接口调用 |
+| 6 | Output Port 放在 Adapter 层 | UseCase 依赖 Adapter 包 | Output Port 接口定义在 UseCase 层 |
+| 7 | UseCase 返回 Entity 对象 | Interactor 返回 `Order` 而非 DTO | 返回 UseCase 专属 Output DTO |
+| 8 | 过度设计简单查询 | 读操作也走完整 Input→Interactor→Output | 简单查询直接走 Repository |
+| 9 | Adapter 包含业务逻辑 | Controller 中有 if/else | 业务逻辑全在 Enterprise 层 |
+| 10 | 缺少 ArchUnit 检查 | 依赖违规无法自动发现 | CI 中集成 ArchUnit 测试 |
+| 11 | 领域对象可变 | ValueObject 有 setter 方法 | 所有值对象不可变 (record/final) |
+| 12 | UseCase 粒度不当 | Interactor 过大 (200+ 行) | 一个 Interactor 只做一个业务操作 |
+| 13 | 忽略领域事件 | 关键操作后无事件发布 | 状态变更必须产生领域事件 |
+| 14 | 事务在 UseCase 层 | Interactor 上有 @Transactional | 事务在 Adapter/Repository 层 |
+| 15 | Entity 构造函数暴露 | Entity 用 public 构造函数 | 使用 static factory 方法（如 Order.create()） |
 
-## Quick Decision: Where Does This Code Go?
+## FAQ
 
-```
-├─ Is it a core business rule with NO external knowledge? → Enterprise layer (core/entity, core/rule)
-├─ Is it a business validation or invariant? → Enterprise layer (core/exception)
-├─ Is it a UseCase input interface? → UseCase layer (usecase/port/input)
-├─ Is it a Repository or Gateway interface? → UseCase layer (usecase/port/output)
-├─ Is it implementing a UseCase (orchestrating entities + ports)? → UseCase layer (usecase/interactor)
-├─ Is it an HTTP/gRPC/CLI entry point? → Adapter layer (adapter/controller, adapter/presenter)
-├─ Is it implementing a DB/Gateway? → Adapter layer (adapter/repository, adapter/gateway)
-├─ Is it Spring/DI wiring, JPA entities, Web config? → Framework layer (framework/config, framework/persistence)
-└─ Golden rule: "Source code dependencies must point only inward"
-```
+| # | 问题 | 回答 |
+|---|------|------|
+| 1 | Clean Architecture 和六边形架构有什么区别？ | 整洁架构以 UseCase 为组织核心，强调四层严格隔离；六边形以 Port/Adapter 为抽象，强调驱动/被驱动端口对称性。核心目标一致：内层不依赖外层。 |
+| 2 | 什么时候用 Interactor vs Domain Service？ | Interactor 在 UseCase 层做编排（调 Entity + 调 Port）；Domain Service 在 Enterprise 层封装跨实体的业务规则（如 PricingService）。 |
+| 3 | Service 在哪里写业务逻辑？ | 都没有。Entity 中有业务方法（pay/cancel），DomainService 封装跨实体规则，Interactor 只编排不决策。 |
+| 4 | 每个 UseCase 都要有独立的 Input Port 吗？ | 是。这遵循接口隔离原则（ISP）。IOrderService 这种大接口是反模式。 |
+| 5 | 一个 UseCase 有多个输出怎么办？ | 每个输出独立为一个 Output Port。如 OrderRepository 为持久化，EventPublisher 为事件，PaymentGateway 为支付。 |
+| 6 | Entity 层可以引用 Repository 接口吗？ | 不可以。Enterprise 层不能知道任何 Output Port 的存在。Repository 接口在 UseCase 层定义。 |
+| 7 | 简单查询也走 UseCase 层吗？ | 不。纯读操作可以直接调用 Repository（查询不改变状态）。写操作必须走 UseCase。 |
+| 8 | 如何组织多个 UseCase？ | 按业务聚合组织：`order/usecase/` 下放所有 Order 相关的 CreateOrder/PayOrder/CancelOrder。 |
+| 9 | Interactor 中如何做事务？ | Framework 层通过声明式事务（@Transactional）包裹 Interactor 调用。 |
+| 10 | JPA Entity 和 Domain Entity 要分开吗？ | 要。JPA Entity（@Entity）在 Adapter 层，Domain Entity（纯 POJO）在 Enterprise 层。通过 Converter 转换。 |
+| 11 | 项目从三层架构迁移要多久？ | 小型 (6 周) / 中型 (12 周) / 大型 (20 周)。使用 Strangler Fig 模式按 UseCase 逐步迁移。 |
+| 12 | 如何保证依赖规则不被破坏？ | 在 Framework 模块中写 ArchUnit 测试（参考 examples/04-archunit-test.md），CI 中每次提交自动检查。 |
+| 13 | 值对象和实体的区别？ | 值对象不可变、无 ID、按属性相等（如 Money）；实体可变、有唯一 ID、按 ID 相等（如 Order）。 |
+| 14 | 领域事件是同步还是异步发布？ | Interactor 中同步收集事件并发布到 EventPublisher Port。异步处理由 Adapter 实现（写消息队列）。 |
+| 15 | 适配器层可以有多个实现吗？ | 可以。一个 Output Port 可以有多个 Adapter 实现：JPA/MyBatis/InMemory，通过 Spring Profile 切换。 |
 
-## Sources
+## Keywords
 
-### Primary Sources
+Clean Architecture, 整洁架构, Robert C. Martin, Uncle Bob, Enterprise Business Rules, Use Case, Interactor, Input Port, Output Port, Interface Adapter, Dependency Rule, 依赖倒置, 接口隔离, DDD, 领域驱动设计, 分层架构, 严格分层, 用例驱动, 领域模型, 实体, 值对象, 聚合根, 领域事件, ArchUnit, 依赖规则检查
+
+## References
+### Internal
+
+| 文件 | 内容 |
+|------|------|
+| [references/architecture-principles.md](references/architecture-principles.md) | 四层结构、依赖规则、架构对比、数据流转、目录结构 |
+| [references/01-core-entities.md](references/01-core-entities.md) | Enterprise 层实体、值对象、领域事件、异常模板与测试 |
+| [references/02-usecase-ports.md](references/02-usecase-ports.md) | Input/Output Port 定义、DTO 设计、端口设计规则 |
+| [references/03-interactors.md](references/03-interactors.md) | Interactor 实现模板、复杂编排、查询 Interactor、测试 |
+| [references/04-adapters.md](references/04-adapters.md) | Controller、Repository Impl、Gateway 适配器实现 |
+| [references/05-framework-config.md](references/05-framework-config.md) | Spring DI 配置、Security、Persistence、多 Profile |
+| [references/06-dependency-rules.md](references/06-dependency-rules.md) | 依赖规则矩阵、ArchUnit 全量测试集、CI 集成 |
+| [references/07-testing-strategy.md](references/07-testing-strategy.md) | 分层测试策略、Test Doubles、覆盖率目标 |
+| [references/08-migration-guide.md](references/08-migration-guide.md) | 三层→整洁架构迁移指南、Strangler Fig 模式 |
+| [examples/01-order-entity.md](examples/01-order-entity.md) | 完整 Order 实体代码 + 状态机 + 单元测试 |
+| [examples/02-create-order-usecase.md](examples/02-create-order-usecase.md) | 完整 CreateOrder UseCase 实现 + 测试 + Test Doubles |
+| [examples/03-repository-implementation.md](examples/03-repository-implementation.md) | Repository Adapter JPA 实现 + 集成测试 |
+| [examples/04-archunit-test.md](examples/04-archunit-test.md) | 完整 ArchUnit 依赖规则测试套件 |
+| [examples/05-domain-event-handling.md](examples/05-domain-event-handling.md) | 领域事件定义、发布、消费完整实现 |
+| [examples/06-monolith-simple.md](examples/06-monolith-simple.md) | 单体 Clean 简单版：单模块包级四层，目录树+依赖方向+ArchUnit |
+| [examples/07-monolith-complex.md](examples/07-monolith-complex.md) | 单体 Clean 复杂版：多聚合+多 Interactor，共享内核+领域隔离 |
+| [examples/08-monolith-multi-module.md](examples/08-monolith-multi-module.md) | 单体 Clean 多模块版：Maven 模块级分层，编译期强制依赖方向 |
+| [examples/09-microservice-simple.md](examples/09-microservice-simple.md) | 微服务 Clean 简单版：包级四层+事件总线+Kafka 适配器 |
+| [examples/10-microservice-complex.md](examples/10-microservice-complex.md) | 微服务 Clean 复杂版：CQRS + Saga + Outbox + 多子域 |
+| [examples/11-microservice-multi-module.md](examples/11-microservice-multi-module.md) | 微服务 Clean 多模块版：6 模块+API 契约独立发布 |
+| [examples/12-microservice-complex-multi.md](examples/12-microservice-complex-multi.md) | 微服务 Clean 复杂多模块：8 模块+全模式矩阵+子域编排 |
+
+### External
+
 - [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Robert C. Martin (2012)
 - [Clean Architecture: A Craftsman's Guide](https://www.oreilly.com/library/view/clean-architecture-a/9780134494272/) — Robert C. Martin (2017)
 - [Domain-Driven Design: The Blue Book](https://www.domainlanguage.com/ddd/blue-book/) — Eric Evans (2003)
-- [Explicit Architecture](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) — Herberto Graça
-
-### Implementation Guides
 - [Get Your Hands Dirty on Clean Architecture](https://reflectoring.io/book/) — Tom Hombergs
+- [thombergs/buckpal](https://github.com/thombergs/buckpal) — Java Reference Implementation
+- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) — Alistair Cockburn
+### DDD Skills 生态
 
-### Reference Implementations
-| Language | Repository |
-|----------|-----------|
-| Java | [thombergs/buckpal](https://github.com/thombergs/buckpal) |
-| Go | [bxcodec/go-clean-arch](https://github.com/bxcodec/go-clean-arch) |
-| .NET | [jasontaylordev/CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture) |
-
-## Output
-
-When assisting with this skill, provide:
-- Complete Clean Architecture project directory structure
-- Enterprise entity base classes + rule templates
-- UseCase ports (Input/Output) + Interactor templates
-- Adapter layer code templates
-- Framework layer DI configuration
-- Complete testing strategy (unit → integration → E2E)
-
----
-
-## clean-ddd-hexagonal References
-
-| File | Purpose |
-|------|--------|
-| [references/clean-ddd-hexagonal-hexagonal.md](references/clean-ddd-hexagonal-hexagonal.md) | Hexagonal Architecture ports & adapters — driver/driven ports, naming conventions, configurability |
-
-## Skill Boundary
-
-### ✅ 擅长处理
-1. 严格分层的大型企业系统（15-50 人团队）
-2. UseCase 驱动的设计：每个用例有独立 Interactor + Port
-3. 模块间强隔离：外圆永远不能影响内圆
-4. 多语言落地：Go/Java/TypeScript/C# 均可实现
-
-### ⚠️ 需要条件
-1. 团队理解 Interactor 模式：否则学习成本高
-2. 项目有一定规模：小项目用 Layered/Onion 更合适
-3. 需要配合 DDD 领域模型：单独使用 Clean Architecture 过于抽象
-
-### ❌ 超出范围
-1. 简单 CRUD 项目 → 用 `ddd-architecture-layered`
-2. 中文 Spring Boot 生态 → 用 `ddd-architecture-cola`
-3. 需要可视化的环状模型 → 用 `ddd-architecture-onion`
-
-
-## Security & Stability
-
-- All code templates are educational. Replace placeholder credentials with environment variables.
-- Clean Architecture's dependency rule (only inward) prevents domain code from accessing I/O — built-in security advantage.
-- Interactor pattern ensures each UseCase is independently testable without framework dependencies.
-- No executable scripts bundled. This skill provides architecture guidance and code generation patterns only.
-
-
-## Gotchas — Common Pitfalls
-
-- **UseCase 包含业务逻辑**: UseCase（Interactor）只做编排，不包含业务规则。业务规则在 Entity（Enterprise Business Rule）层。如果 UseCase 中有状态转移判断，抽到 Domain Service。
-- **Input/Output Port 滥用**: 每个 UseCase 应有独立的 Input Port 和 Output Port。不要多个 UseCase 共享同一个 Port 接口 — 违反了接口隔离原则。
-- **跨层类型转换遗漏**: Adapter 层返回给 UseCase 的数据必须转换为领域类型。不要让 Controller 的 DTO 直接穿越到 UseCase 层。
-- **Framework 层代码泄露**: Entity 层（最内层）绝不能 import Spring、JPA、Jackson 等框架类。如果 Entity 中有 `@Entity` 注解，整洁架构就破了。
-- **过度设计**: 简单 CRUD 操作不需要完整的 Input Port → Interactor → Output Port → Presenter 链路。简单查询可以跳过 Interactor 直接使用 Repository。
-
-## When NOT to Use This Skill
-
-| ❌ Skip | ✅ Use Instead |
-|---------|---------------|
-| Simple CRUD, few business rules | `architecture-layered` (much simpler) |
-| Need visual clarity (rings model) | `architecture-onion` (easier to explain to team) |
-| Chinese enterprise Spring Boot stack | `architecture-cola` (better ecosystem fit) |
-| Team unfamiliar with UseCase pattern | `architecture-hexagonal` or `architecture-layered` |
-| Single service, no multi-module need | `architecture-layered` (single module suffices) |
-
-## Security & Stability
-
-- All code templates are educational. Replace placeholder credentials with environment variables or secrets management.
-- Clean Architecture's strict dependency rule (only inward) naturally prevents domain code from accessing I/O — this isolation is a security advantage.
-- Interactor pattern ensures each UseCase is independently testable. Unit test UseCases without any framework or database dependencies.
-- No executable scripts bundled. This skill provides architecture guidance and code generation patterns only.
+| 前置/后续 | Skill |
+|-----------|-------|
+| ← 前置 | [ddd-architecture-selector](../ddd-architecture-selector/) — 架构选型 |
+| → 后续 | [ddd-domain-designer](../ddd-domain-designer/) — 领域建模 |
+| → 后续 | [ddd-code-reviewer](../ddd-code-reviewer/) — 代码审查 |
+| → 后续 | [ddd-architecture-evaluator](../ddd-architecture-evaluator/) — 架构评估 |
+| 🔗 相关 | [ddd-architecture-hexagonal](../ddd-architecture-hexagonal/) — 六边形架构 |
+| 🔗 相关 | [ddd-architecture-layered](../ddd-architecture-layered/) — 分层架构 |
 
 ## 🧭 DDD Skills Journey
 
 > 📍 **You are here: `ddd-architecture-clean` — Step 3: 整洁架构落地**
 
-```mermaid
-flowchart LR
-    S1["Step 1<br/>awesome<br/>入门与全景"] --> S2["Step 2<br/>selector<br/>架构选型"]
-    S2 --> S3A["Step 3<br/>layered<br/>分层架构"]
-    S2 --> S3B["Step 3<br/>onion<br/>洋葱架构"]
-    S2 --> S3C["Step 3<br/>hexagonal<br/>六边形架构"]
-    S2 --> S3D["⭐ Step 3<br/>clean<br/>整洁架构"]
-    S2 --> S3E["Step 3<br/>cola<br/>COLA v5"]
-    S3A & S3B & S3C & S3D & S3E --> S4A["Step 4<br/>domain-designer<br/>领域建模"]
-    S3A & S3B & S3C & S3D & S3E --> S4B["Step 4<br/>cqrs-architecture<br/>CQRS"]
-    S3A & S3B & S3C & S3D & S3E --> S4C["Step 4<br/>api-designer<br/>API设计"]
-    S4A & S4B & S4C --> S5["Step 5<br/>code-reviewer<br/>代码审查"]
-    S5 --> S6A["Step 6<br/>event-storming<br/>事件风暴"]
-    S5 --> S6B["Step 6<br/>testing-strategist<br/>测试策略"]
-    S5 --> S6C["Step 6<br/>devops-integration<br/>DevOps"]
-    S5 --> S6D["Step 6<br/>evaluator<br/>架构评估"]
-    S6A & S6B & S6C & S6D --> S7["🏁 Step 7<br/>architecture-doc<br/>架构文档"]
+`awesome(入门)` → `selector(选型)` → **`clean(整洁架构)`** + `layered/onion/hexagonal/cola` → `domain-designer/cqrs/api-designer` → `code-reviewer` → `testing/devops/evaluator` → `architecture-doc`
 
-    style S3D fill:#3b82f6,stroke:#2563eb,color:white,stroke-width:3px
-```
+**← [selector](../ddd-architecture-selector/) | → [domain-designer](../ddd-domain-designer/) | 🔗 [api-designer](../ddd-api-designer/) · [testing-strategist](../ddd-testing-strategist/) | 🏠 [awesome](../ddd-architecture-awesome/)
 
-**← Previous**: [selector](../ddd-architecture-selector/) — 为什么选整洁架构？
-**→ Next**: [domain-designer](../ddd-domain-designer/) — 为整洁架构设计 Enterprise 实体和 UseCase
-**🔗 Related**: [api-designer](../ddd-api-designer/) — 设计 API 接口 | [testing-strategist](../ddd-testing-strategist/) — 分层测试策略
-**🏠 Home**: [awesome](../ddd-architecture-awesome/) — DDD 概念全景
+---
 
-💡 整洁架构黄金法则：源码依赖只能指向内层。Enterprise → UseCase → Adapter → Framework，永远向内。
+## Security & Stability
 
-> 📋 See [DESIGN.md](../DESIGN.md) for the complete 16-skill ecosystem map.
+- 所有代码模板为教育用途。生产环境请用环境变量替换占位凭证。
+- 整洁架构的依赖规则（只能向内）天然阻止领域代码访问 I/O — 内置安全优势。
+- Interactor 模式确保每个 UseCase 可独立测试，无需框架或数据库依赖。
+- 不包含可执行脚本。本 Skill 仅提供架构指导和代码生成模式。

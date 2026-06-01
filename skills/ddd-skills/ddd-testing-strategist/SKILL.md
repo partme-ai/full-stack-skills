@@ -1,461 +1,199 @@
 ---
 name: ddd-testing-strategist
-description: Provides comprehensive guidance for DDD testing strategies — from aggregate testing to end-to-end validation. Covers the DDD testing pyramid (value object tests, aggregate root tests, domain service tests, repository integration tests), mock strategies by test target, CQRS-specific testing approaches, Event Sourcing test patterns, CI/CD test stage configuration, and architecture-specific testing guidance. Use when the user asks about DDD testing, 聚合测试, 领域测试, testing strategy, mock repository, 六边形测试, or needs to define a testing approach for DDD systems.
+description: DDD testing strategy — domain model unit testing, aggregate root testing, repository testing with mocks, application service integration testing, adapter E2E testing, test pyramid for DDD layered/hexagonal/clean architectures, and Test-Driven Domain Design (TDDD). Use when user asks about testing strategy, 测试策略, DDD testing, aggregate test, repository test, test-driven domain design, or needs to test DDD applications.
 license: Apache-2.0
 ---
 
 # DDD Testing Strategist
+DDD testing strategy — from value object unit tests to end-to-end validation across all DDD architectures. Covers the DDD test pyramid, layer-specific test patterns, mock strategies by architecture, Test-Driven Domain Design (TDDD), CI/CD pipeline integration, and N+1 query detection.
 
-DDD testing strategy — from aggregate root unit tests to end-to-end validation, with architecture-specific testing patterns.
-
-## When to use this skill
-
-**ALWAYS use this skill when the user mentions:**
-- "DDD 测试"、"DDD testing"、"domain testing"
-- "聚合测试"、"aggregate test"、"aggregate root test"
-- "测试策略"、"testing strategy"、"test pyramid"
-- "如何测试 DDD"、"how to test DDD"
-- "mock repository"、"mock port"、"mock adapter"
-- "领域事件测试"、"domain event testing"
-- "六边形测试"、"hexagonal testing"
-- "CQRS 测试"、"Event Sourcing 测试"
-
-## DDD Testing Pyramid
-
+## Workflow
 ```
-DDD Testing Pyramid (bottom-up):
+用户输入 → 场景分类 → 输出测试策略 + 代码模板
 
-         ╱  E2E Tests      ╲       ← 10%: User journeys, cross-service integration
-        ╱─── Integration ───╲       ← 20%: Repository impl, Gateway, API
-       ╱──── Domain Tests ────╲      ← 60%: Aggregate roots, domain services, domain events
-      ╱────── Unit Tests ──────╲     ← 10%: Value objects, utility methods
-
-Key differences from classical pyramid:
-  - Aggregate root tests = classical Service tests, but focused on business rules
-  - Domain event tests = DDD-unique test dimension
-  - Repository tests = ensure aggregate root complete load & save
+Step 1: 按用户问题场景分类（金字塔/AR/Repository/Mock/CQRS/TDDD/CI-CD/覆盖率）
+Step 2: 从 references 获取对应测试模板
+Step 3: 按架构类型调整 Mock 策略
+Step 4: 输出代码模板 + CI/CD 配置 + 覆盖率目标
 ```
-
-## Layer-Specific Testing
-
-### ① Value Object Tests — Pure Functions
-
-```java
-@Test
-public void money_should_prevent_negative_amount() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Money(-1.0, "CNY"));
-}
-
-@Test
-public void money_add_should_sum_correctly() {
-    Money m1 = new Money(10.0, "CNY");
-    Money m2 = new Money(20.0, "CNY");
-    assertEquals(new Money(30.0, "CNY"), m1.add(m2));
-}
-
-@Test
-public void money_should_reject_different_currencies() {
-    Money m1 = new Money(10.0, "CNY");
-    Money m2 = new Money(20.0, "USD");
-    assertThrows(IllegalArgumentException.class, () -> m1.add(m2));
-}
-```
-
-### ② Aggregate Root Tests — Core Business Rules
-
-```java
-@Test
-public void order_pay_should_change_status_when_draft() {
-    // Given: a draft order
-    Order order = Order.create(customerId, items);
-
-    // When: pay
-    order.pay(mockPaymentGateway);
-
-    // Then: status → PAID + domain event published
-    assertEquals(OrderStatus.PAID, order.getStatus());
-    assertTrue(order.getDomainEvents().stream()
-        .anyMatch(e -> e instanceof OrderPaidEvent));
-}
-
-@Test
-public void order_pay_should_fail_when_cancelled() {
-    // Given: cancelled order
-    Order order = Order.create(customerId, items);
-    order.cancel("Customer request");
-
-    // When + Then: pay should throw
-    assertThrows(OrderException.class,
-        () -> order.pay(mockPaymentGateway));
-}
-
-@Test
-public void order_calculateTotal_should_sum_all_items() {
-    Order order = Order.create(customerId, List.of(
-        new OrderItem("SKU-1", new Money(10, "CNY"), 2),
-        new OrderItem("SKU-2", new Money(20, "CNY"), 1)
-    ));
-    assertEquals(new Money(40, "CNY"), order.calculateTotal());
-}
-```
-
-### ③ Domain Service Tests — Mock Repository
-
-```java
-@Test
-public void pricing_service_should_apply_vip_discount() {
-    // Given
-    Order order = Order.create(vipCustomerId, items);
-    when(orderRepository.findById(order.getId()))
-        .thenReturn(Optional.of(order));
-
-    // When
-    pricingService.calculatePrice(order.getId());
-
-    // Then: 10% VIP discount
-    assertEquals(new Money(90.0, "CNY"), order.getTotalAmount());
-}
-```
-
-### ④ Repository Integration Tests
-
-```java
-@SpringBootTest
-@Testcontainers
-public class OrderRepositoryImplTest {
-    @Autowired private OrderRepository orderRepository;
-
-    @Test
-    public void should_save_and_load_aggregate_completely() {
-        Order order = Order.create(customerId, items);
-        order.pay(mockGateway);
-
-        orderRepository.save(order);
-        Optional<Order> loaded = orderRepository.findById(order.getId());
-
-        assertTrue(loaded.isPresent());
-        assertEquals(order.getTotalAmount(), loaded.get().getTotalAmount());
-        assertEquals(order.getItems().size(), loaded.get().getItems().size());
-        assertEquals(OrderStatus.PAID, loaded.get().getStatus());
-    }
-}
-```
-
-## Mock Strategy Matrix
-
-```
-┌──────────────────┬──────────┬──────────┬──────────┐
-│ Test Target / Mock│ Repository│ Gateway  │ EventBus │
-├──────────────────┼──────────┼──────────┼──────────┤
-│ Aggregate Root   │ N/A      │ N/A      │ Capture  │
-│ Domain Service   │ Mock     │ Mock     │ Capture  │
-│ Application Svc  │ Mock     │ Mock     │ Mock     │
-│ Repository Int.  │ Real DB  │ N/A      │ N/A      │
-│ API Integration  │ Real DB  │ Mock     │ Mock     │
-└──────────────────┴──────────┴──────────┴──────────┘
-```
-
-### Domain Event Assertion Pattern
-
-```java
-// Capture and verify domain events
-@Test
-public void order_pay_should_publish_correct_event() {
-    Order order = Order.create(customerId, items);
-    
-    order.pay(mockGateway);
-    
-    assertThat(order.getDomainEvents())
-        .hasSize(1)
-        .first()
-        .isInstanceOf(OrderPaidEvent.class)
-        .hasFieldOrPropertyWithValue("orderId", order.getId())
-        .extracting("totalAmount")
-        .isEqualTo(new Money(100.0, "CNY"));
-}
-```
-
-## Testing Strategy by Architecture
-
-| Scenario | Recommended Strategy | Reason |
-|----------|---------------------|--------|
-| Simple CRUD | Traditional Service + Repository tests | No complex domain logic |
-| DDD Layered | Aggregate root tests primary | Business logic in aggregates |
-| Hexagonal / Clean | Port mock + adapter integration | Inner/outer isolation |
-| CQRS | Command aggregate tests + Query integration | Read/write separation |
-| Event Sourcing | Event replay tests + Projection tests | Events as data source |
-| Microservices | Contract tests + Aggregate tests + E2E | Multi-service collaboration |
-
-## CQRS Testing Patterns
-
-```java
-// Command Side — same as aggregate root tests
-@Test
-public void createOrderCommand_should_create_order() {
-    CreateOrderCommand cmd = new CreateOrderCommand(customerId, items);
-    OrderCreated result = createOrderService.handle(cmd);
-    verify(orderRepository).save(any(Order.class));
-    assertNotNull(result.getOrderId());
-}
-
-// Query Side — integration test with real read model
-@Test
-public void query_should_return_from_read_model() {
-    // Setup: publish event to populate read model
-    orderPaidEventHandler.on(new OrderPaidEvent(orderId, amount));
-    
-    // Query
-    OrderDetailDTO result = orderQueryService.getOrderDetail(orderId);
-    
-    assertEquals(OrderStatus.PAID, result.getStatus());
-}
-```
-
-## Event Sourcing Testing
-
-```java
-@Test
-public void event_sourced_aggregate_should_replay_correctly() {
-    // Given: a sequence of events
-    List<DomainEvent> events = List.of(
-        new OrderCreatedEvent(orderId, customerId),
-        new OrderItemAddedEvent(orderId, item1),
-        new OrderPaidEvent(orderId)
-    );
-    
-    // When: replay events
-    Order order = Order.replay(events);
-    
-    // Then: aggregate state matches
-    assertEquals(OrderStatus.PAID, order.getStatus());
-    assertEquals(1, order.getItems().size());
-}
-
-@Test
-public void projection_should_build_from_events() {
-    projection.on(new OrderCreatedEvent("1", "C1"));
-    projection.on(new OrderPaidEvent("1"));
-    
-    OrderDocument doc = esTemplate.get("1", OrderDocument.class);
-    assertEquals("PAID", doc.getStatus());
-}
-```
-
-## CI/CD Test Stages
-
-```
-Commit Stage (< 5 min):
-  ✓ Value object unit tests
-  ✓ Aggregate root tests
-  ✓ Domain service tests (mock repository)
-
-PR Stage (< 15 min):
-  ✓ Repository integration tests (Testcontainers)
-  ✓ Application service integration tests
-  ✓ API contract tests
-
-Release Stage (< 30 min):
-  ✓ E2E tests (key user journeys)
-  ✓ Performance tests (N+1 query detection)
-```
-
-### N+1 Query Detection Test
-
-```java
-@Test
-public void aggregate_loading_should_not_cause_n_plus_1() {
-    // Setup test data
-    createOrderWith50Items();
-    
-    // Capture SQL queries
-    SQLStatementCountValidator.reset();
-    
-    // Load aggregate
-    Order order = orderRepository.findById(orderId).get();
-    
-    // Assert: should generate exactly 1 main query (no N+1)
-    assertSelectCount(1);  // Adjust based on your mapping strategy
-}
-```
-
-## Test Coverage Targets
-
-| Layer | Coverage Target | Critical Areas |
-|-------|:-------------:|----------------|
-| Domain (Entity/VO) | ≥ 95% | Business rules, invariants |
-| Domain (Service) | ≥ 90% | Orchestration, cross-entity logic |
-| Application | ≥ 80% | Use case orchestration |
-| Infrastructure | ≥ 70% | Repository, Gateway |
-| Adapter | ≥ 60% | Protocol conversion |
-
-## Output
-
-When assisting with this skill, provide:
-- DDD testing strategy document (per layer)
-- Test code templates (value object / aggregate root / repository / domain event)
-- Mock strategy guide
-- CI/CD integration test configuration
-- Test coverage target recommendations
-- N+1 query detection approach
-
-## Test Helpers (Builder Pattern)
-
-Reusable test fixture builders to simplify DDD test setup:
-
-```java
-// Test Helpers — Builder pattern for creating test aggregates
-
-public class OrderTestBuilder {
-    private CustomerId customerId = CustomerId.from("test-customer");
-    private List<OrderItem> items = new ArrayList<>();
-    private OrderStatus status = OrderStatus.DRAFT;
-
-    public static OrderTestBuilder anOrder() {
-        return new OrderTestBuilder();
-    }
-
-    public OrderTestBuilder withCustomer(CustomerId customerId) {
-        this.customerId = customerId;
-        return this;
-    }
-
-    public OrderTestBuilder withItem(ProductId productId, int qty, Money price) {
-        this.items.add(new OrderItem(productId, Quantity.of(qty), price));
-        return this;
-    }
-
-    public OrderTestBuilder withStatus(OrderStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public Order build() {
-        Order order = Order.create(customerId);
-        items.forEach(item -> order.addItem(item.getProductId(), item.getQuantity(), item.getUnitPrice()));
-        return order;
-    }
-
-    // Pre-built fixtures for common scenarios
-    public static Order buildDraft() { return anOrder().build(); }
-    public static Order buildWithItems() {
-        return anOrder()
-            .withItem(ProductId.from("p1"), 2, Money.cny(10))
-            .withItem(ProductId.from("p2"), 1, Money.cny(25))
-            .build();
-    }
-    public static Order buildPaid() {
-        Order order = buildWithItems();
-        order.pay(mockPaymentGateway);
-        return order;
-    }
-    public static Order buildCancelled() {
-        Order order = buildWithItems();
-        order.cancel("Test cancellation");
-        return order;
-    }
-}
-```
-
-### Sources
-
-### Primary Sources
-- [Unit Testing](https://martinfowler.com/bliki/UnitTest.html) — Martin Fowler
-- [Test Pyramid](https://martinfowler.com/bliki/TestPyramid.html) — Martin Fowler
-- [Test Driven Development: By Example](https://www.oreilly.com/library/view/test-driven-development/0321146530/) — Kent Beck (2002)
-
-### Implementation Guides
-- [Microsoft: DDD Testing Strategy](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
-- [Testcontainers for Java](https://testcontainers.com/guides/)
-- [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html)
-
-## Next Steps
-
-After testing strategy:
-1. [ddd-devops-integration](../ddd-devops-integration/) — CI/CD pipeline integration
-2. [ddd-code-reviewer](../ddd-code-reviewer/) — Test coverage review
-
----
-
-## clean-ddd-hexagonal References
-
-| File | Purpose |
-|------|--------|
-| [references/clean-ddd-hexagonal-testing.md](references/clean-ddd-hexagonal-testing.md) | Testing patterns — unit tests (domain/application), integration tests, architecture tests, naming conventions |
-
-## Skill Boundary
-
+什么时候用：用户询问 DDD 测试策略、聚合根测试、Repository 测试、Mock 策略、CQRS 测试、TDDD、CI/CD 测试集成时触发。
+## Boundary
 ### ✅ 擅长处理
-1. DDD 测试金字塔（60% Domain + 20% Integration + 10% E2E）
-2. 按测试目标选择 Mock 策略
-3. CQRS 和 Event Sourcing 专项测试
-4. 按架构类型的测试策略（Layered/Hexagonal/Clean/COLA）
-
+1. DDD 测试金字塔（60% Domain + 20% Integration + 10% E2E + 10% Architecture）
+2. 各层测试策略：Value Object / Aggregate Root / Domain Service / Repository / Application / Adapter
+3. 按架构类型差异化测试（Layered / Hexagonal / Clean / COLA / CQRS / Event Sourcing）
+4. 测试驱动领域设计（TDDD）方法论
+5. Mock 策略选择（Mock Ports / Capture Events / Real DB）
+6. CI/CD 三阶段流水线 + N+1 查询检测 + ArchUnit 架构测试
+7. 测试覆盖率目标设定 + 分支覆盖率检查
 ### ⚠️ 需要条件
-1. 已有 DDD 项目代码
-2. CI/CD 可运行测试
+1. 已有 DDD 项目代码或正在设计领域模型
+2. 已有测试框架（JUnit / Mockito / Spring Test / Testcontainers）
+3. 理解 DDD 战术模式（Entity / VO / Aggregate / Repository / Domain Event）
+### ❌ 超出范围（不适用场景）
+1. 非 DDD 项目测试 — 标准测试框架（JUnit / pytest / Jest）
+2. 纯前端测试 — Cypress / Playwright / Vitest
+3. 性能 / 负载 / 安全测试 — JMeter / k6 / OWASP ZAP
+4. 语言特定测试教程 — 概念和模式语言无关
+5. 非 DDD 项目的 CI/CD 配置
 
-### ❌ 超出范围
-1. 非 DDD 项目 → 标准测试框架（JUnit/pytest）
-2. 纯前端测试 → 前端专属测试工具
-3. 性能/安全测试 → JMeter/k6/OWASP ZAP
+## Audience
 
+This skill is designed for: **Backend developers** (implementing DDD architectures), **Software architects** (evaluating and selecting patterns), **Tech leads** (reviewing team implementations), and **DDD beginners** (learning domain-driven design fundamentals).
 
-## Security & Stability
+## Rules
 
-- Test code examples are educational. Replace test data with fixtures; never include real PII or credentials.
-- Mock library choices depend on project language and toolchain. This skill describes patterns, not versions.
-- Integration tests connecting to real databases should use Testcontainers, never production databases.
-- No executable scripts bundled. This skill provides testing patterns and strategy guidance.
+1. DDD test pyramid must prioritize Domain layer testing (60% of total tests).
+2. Domain layer tests must never mock Domain Services or Aggregate Roots — only mock external ports.
+3. Repository integration tests must use Testcontainers with real databases, never mocks.
+4. Event Sourcing projects must include event replay and projection tests.
+5. Architecture compliance tests (ArchUnit) must run in CI pipeline.
 
-
-## Gotchas — Common Pitfalls
-
-- **只测 Service 不测 Domain**: DDD 测试的核心是 Domain 层（聚合根 + 领域服务 + 值对象），不是 Application Service。Application Service 测试容易写但价值低，Domain 测试难写但价值高。
-- **Mock 了 Domain Service**: 测试 Application Service 时 Mock 了 Domain Service — 这是最常见的反模式。Domain Service 不应该被 Mock，它包含核心业务逻辑。只 Mock 外部依赖（Repository、外部 API）。
-- **聚合根测试不够全面**: 只测了 happy path。聚合根测试必须覆盖：不变量违反场景、状态转移边界条件、并发冲突模拟。
-- **集成测试等价于 E2E 测试**: 把需要数据库的 Repository 测试和需要 HTTP 的 API 测试都叫"集成测试"。DDD 区分：Repository 集成测试（只测持久化）、API 集成测试（测端口适配器）、E2E（测完整业务流程）。
-- **忘记 Event Sourcing 测试的 Event Replay**: 如果有 Event Sourcing，必须测 Event Replay 后的状态是否正确重建。这是 Event Sourcing 最隐蔽的 bug 来源。
-
-## When NOT to Use This Skill
-
-| ❌ Skip | ✅ Use Instead |
-|---------|---------------|
-| No DDD project | Standard testing frameworks (JUnit, pytest) |
-| Pure frontend testing | Frontend-specific testing tools |
-| Performance/load testing | JMeter, k6, Gatling |
-| Security penetration testing | OWASP ZAP, Burp Suite |
-| Haven't written domain code yet | Write code first, test strategy after |
-| Unit testing basics | Language-specific testing tutorials |
-
-## Security & Stability
-
-- Test code examples are educational. Replace test data with project-specific fixtures. Never include real PII or credentials in test data.
-- Mock library choices (Mockito, MockK, unittest.mock) depend on the project's language and existing toolchain. This skill describes patterns, not specific library versions.
-- Integration tests that connect to real databases should use Testcontainers or in-memory databases, never production databases.
-- No executable scripts bundled. This skill provides testing patterns and strategy guidance.
-
-## 🧭 DDD Skills Journey
-
-> 📍 **You are here: `ddd-testing-strategist` — Step 6: DDD 测试策略**
-
-```mermaid
-flowchart LR
-    S1["Step 1<br/>awesome"] --> S2["Step 2<br/>selector"]
-    S2 --> S3["Step 3<br/>5架构 Skill"]
-    S3 --> S4["Step 4<br/>domain/cqrs/api"]
-    S4 --> S5["Step 5<br/>code-reviewer"]
-    S5 --> S6B["⭐ Step 6<br/>testing-strategist"]
-    S6B --> S7["🏁 Step 7<br/>architecture-doc"]
-
-    style S6B fill:#3b82f6,stroke:#2563eb,color:white,stroke-width:3px
+## DDD 测试金字塔
+DDD 金字塔与经典金字塔的关键区别：Domain 层（VO + AR + DS）占 **60%**，是测试核心。
 ```
+         ╱           E2E Tests           ╲       ← 10%
+        ╱──────── API Integration ────────╲       ← 10%
+       ╱────── Repository Integration ──────╲     ← 10%
+      ╱─────── Application Service ─────────╲    ← 10%
+     ╱──────── Domain Service Tests ──────────╲   ← 15%
+    ╱────────── Aggregate Root Tests ───────────╲  ← 25%
+   ╱──────────── Value Object Tests ──────────────╲ ← 15%
+```
+## 各层测试策略
+### ① Value Object 测试（纯函数）
+```java
+@Test void money_should_prevent_negative_amount() {
+    assertThrows(IllegalArgumentException.class, () -> new Money(-1.0, "CNY")); }
+@Test void money_add_should_sum_same_currency() {
+    assertEquals(new Money(30.0, "CNY"), new Money(10.0, "CNY").add(new Money(20.0, "CNY"))); }
+```
+覆盖：构造验证、运算逻辑、等值比较、不变式。
+### ② Aggregate Root 测试（核心业务逻辑）
+```java
+class OrderPayTest {
+    @Test void pay_changes_status_to_paid_when_draft() { ... }
+    @Test void pay_emits_orderPaidEvent() { ... }
+    @Test void pay_fails_when_already_paid() { ... }
+    @Test void pay_fails_when_cancelled() { ... } }
+```
+覆盖：每个状态转移独立测试类 → happy path + 边界条件 + 不变量 + 事件。
+### ③ Domain Service 测试（Mock Repository，Capture Event）
+```java
+@Test void pricing_service_applies_vip_discount() {
+    when(orderRepository.findById(order.getId())).thenReturn(Optional.of(order));
+    pricingService.calculatePrice(order.getId());
+    assertEquals(new Money(90.0, "CNY"), order.getTotalAmount()); }
+```
+Mock 原则：只 Mock Repository / Gateway（Interface），不 Mock Domain Service 或 Aggregate Root。
+### ④ Application Service + ⑤ Repository + ⑥ Adapter 测试
+```java
+@Test void place_order_creates_and_saves() {
+    var orderId = handler.handle(new PlaceOrderCommand("cust-123", ...));
+    assertNotNull(orderId); }
+@SpringBootTest @Testcontainers
+class OrderRepositoryImplTest {
+    @Test void persists_and_retrieves_complete_aggregate() { ... } }
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class OrderControllerTest {
+    @Test void post_orders_returns_201() { ... }
+    @Test void post_invalid_product_returns_400() { ... } }
+```
+App Service：Mock 所有外部端口。Repository：Testcontainers + 真实 DB。Adapter：MockMvc + 真实 DB。
+## Mock 策略矩阵
+| 测试目标 | Repository | Gateway | EventBus | External |
+|---------|:--------:|:-------:|:-------:|:--------:|
+| Value Object | N/A | N/A | N/A | N/A |
+| Aggregate Root | N/A | N/A | Capture | N/A |
+| Domain Service | Mock | Mock | Capture | Mock |
+| Application Service | Mock | Mock | Mock | Mock |
+| Repository Integration | Real DB | N/A | N/A | N/A |
+| API Integration | Real DB | Mock | Mock | Mock |
+| E2E | Real DB | Real | Real | Real |
+原则：Domain 层不需要 Mock；只 Mock 接口（Port）不 Mock 实现类；领域事件用 Capture 模式。
+## 各架构测试差异
+| 架构 | 测试重心 | 差异说明 |
+|------|---------|---------|
+| **Layered** | Aggregate Root + Repository | Domain 层全量测试（60%+） |
+| **Hexagonal** | Port Mock + Adapter Integration | Mock 接口即 Mock 整个外部 |
+| **Clean** | Entity + UseCase Interactor | UseCase 层 Mock 输出端口 |
+| **COLA** | Domain + App Service | Domain 零依赖；额外测 CQRS 分流 |
+| **CQRS** | Command + Query Read Model | 写模型用聚合测试；读模型直接查视图 |
+| **Event Sourcing** | Event Replay + Projection | 聚合重放测试（必测）；投影读模型测试 |
+## Test-Driven Domain Design（TDDD）
+四步工作流：RED → GREEN → REFACT → REPEAT
+```java
+@Test void tddd_order_should_not_allow_paying_twice() {
+    Order order = Order.create(customerId, items);
+    order.pay(mockGateway);
+    assertThrows(OrderException.class, () -> order.pay(mockGateway)); }
+public void pay(PaymentGateway gateway) {
+    if (this.status == OrderStatus.PAID) throw new OrderException("Already paid");
+    this.status = OrderStatus.PAID;
+    addDomainEvent(new OrderPaidEvent(this.getId())); }
+```
+## 测试覆盖率目标
+| 层 | 目标 | 关键覆盖点 |
+|----|:---:|-----------|
+| Value Object | ≥ 95% | 构造验证、运算逻辑、等值比较 |
+| Aggregate Root | ≥ 95% | 状态转移（每个路径）、领域事件 |
+| Domain Service | ≥ 90% | 跨实体编排、外部数据计算 |
+| Application | ≥ 80% | Use Case 完整路径 + 异常路径 |
+| Repository | ≥ 80% | 聚合完整性、N+1 查询 |
+| Adapter (API) | ≥ 70% | 协议转换、错误映射 |
+建议优先追踪**分支覆盖率**，Domain 层 ≥ 90%。
+## Gotchas — 常见陷阱
+1. **只测 App Service 不测 Domain** — DDD 核心是 Domain 层。
+2. **Mock 了 Domain Service** — Domain Service 不应被 Mock。
+3. **聚合根只测 Happy Path** — 必须覆盖不变式违反和边界条件。
+4. **把 Repository 测试当作 E2E** — Repository 只验证持久化。
+5. **忘记 Event Replay 测试** — 最隐蔽的 bug 来源。
+6. **测试与实现耦合** — 测试行为而非内部细节。
+7. **领域事件不测试** — 每个业务方法应验证事件发布。
+8. **Mock DB 而不用 Testcontainers** — 始终用真实数据库。
+9. **CQRS 不测 Query 端** — Command 和 Query 端策略完全不同。
+10. **N+1 查询不检测** — CI 中集成 SQL 计数检测。
+11. **E2E 测试太多** — 只保留 3-5 个关键旅程。
+12. **忘记 ArchUnit** — 依赖方向合规应自动化检查。
+## FAQ
+| 问题 | 回答 |
+|------|------|
+| 聚合根测试需要 Spring 吗？ | 不需要。纯 POJO，直接用 JUnit + AssertJ。 |
+| Repository 应 Mock 还是真实 DB？ | Domain Service 用 Mock；Repository 用真实 DB。 |
+| CQRS 怎么测 Query 端？ | 直接访问读模型，不需要 Mock。 |
+| Event Sourcing 的必要测试？ | Event Replay：给定事件序列 → 重放 → 验证状态。 |
+| 怎么避免 N+1 查询？ | 集成 SQLStatementCountValidator。 |
+| TDDD 和传统 TDD 的区别？ | TDDD 以"领域行为/状态转移"为单元。 |
+## Keywords
+DDD testing, test pyramid, aggregate root test, value object test, domain service test, repository test, application service test, adapter test, CQRS testing, Event Sourcing test, TDDD, mock strategy, Testcontainers, ArchUnit, N+1 test, domain event test, branch coverage, CI/CD testing, integration test, E2E test, event replay test
+## References
+| 文件 | 用途 |
+|------|------|
+| [references/testing.md](references/testing.md) | 测试金字塔 + 各层 TypeScript 示例 |
+| [references/mock-integration-patterns.md](references/mock-integration-patterns.md) | Mock 实现 + Java 集成测试 |
+| [references/clean-ddd-hexagonal-testing.md](references/clean-ddd-hexagonal-testing.md) | Clean/Hexagonal/DDD 多层测试 |
+| [references/unit-testing-strategies.md](references/unit-testing-strategies.md) | VO/AR/DS 单元测试 + 状态转移 |
+| [references/integration-test-strategies.md](references/integration-test-strategies.md) | Repository/API 集成测试 + N+1 |
+| [references/cqrs-event-sourcing-testing.md](references/cqrs-event-sourcing-testing.md) | CQRS + ES 重放/投影/快照测试 |
+| [references/test-coverage-targets.md](references/test-coverage-targets.md) | 覆盖率目标 + 分支覆盖率 + JaCoCo |
+| [references/ci-cd-test-stages.md](references/ci-cd-test-stages.md) | CI/CD 三阶段 + GitHub Actions |
+| [references/architecture-testing-comparison.md](references/architecture-testing-comparison.md) | 各架构测试差异 + 项目阶段策略 |
+| [references/test-driven-domain-design.md](references/test-driven-domain-design.md) | TDDD 四步工作流 + 完整案例 |
+## Examples
+| 文件 | 用途 |
+|------|------|
+| [examples/domain-test-examples.md](examples/domain-test-examples.md) | VO + AR + DS 完整测试示例 |
+| [examples/app-adapter-test-examples.md](examples/app-adapter-test-examples.md) | App Service + Adapter + E2E |
+| [examples/cqrs-es-test-examples.md](examples/cqrs-es-test-examples.md) | CQRS + ES 重放/投影/快照测试 |
+| [examples/builder-mock-patterns.md](examples/builder-mock-patterns.md) | Builder + Mock Repository/EventPublisher |
+| [examples/architecture-test-examples.md](examples/architecture-test-examples.md) | ArchUnit 架构测试（分层/聚合隔离） |
+## Security & Safety
 
-**← Previous**: [domain-designer](../ddd-domain-designer/) — 有领域模型后才能定测试策略
-**→ Next**: [devops-integration](../ddd-devops-integration/) — 集成测试到 CI/CD
-**🔗 Related**: [code-reviewer](../ddd-code-reviewer/) — 测试覆盖率审查 | [cqrs-architecture](../ddd-cqrs-architecture/) — CQRS 测试
-**🏠 Home**: [awesome](../ddd-architecture-awesome/) — DDD 概念全景
+This skill is pure documentation. It contains no executable scripts, collects no user data, accesses no external services or networks.
 
-💡 DDD 测试金字塔：60% 领域测试（聚合根+领域服务），20% 集成测试（仓储+适配器），10% E2E。
-
-> 📋 See [DESIGN.md](../DESIGN.md) for the complete 16-skill ecosystem map.
+## DDD Skills Journey
+> 📍 **You are here: `ddd-testing-strategist` — Step 6**
+**← Previous**: [domain-designer](../ddd-domain-designer/)
+**→ Next**: [devops-integration](../ddd-devops-integration/)
+**🔗 Related**: [code-reviewer](../ddd-code-reviewer/) | [cqrs-architecture](../ddd-cqrs-architecture/)
+**🏠 Home**: [awesome](../ddd-architecture-awesome/)

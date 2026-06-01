@@ -1,311 +1,212 @@
 ---
 name: ddd-code-reviewer
-description: Provides comprehensive guidance for DDD code review, anti-pattern detection, and compliance scoring. Covers DDD anti-pattern checklist (anemic model, god service, cross-aggregate references, domain layer framework dependencies, etc.), layered compliance matrix with ArchUnit rules, rich domain model validation, code quality scoring across 5 dimensions (layering, domain model quality, naming, structure, test coverage), and structured review report generation. Use when the user asks about code review, DDD review, architecture review, anti-pattern detection, 代码审查, 充血模型检查, or needs to validate DDD code quality.
+description: DDD code review and anti-pattern detection — anemia model detection, layered compliance checking, aggregate design review, rich model verification, scoring system (5 dimensions), and ArchUnit automated validation. Use when user asks about code review, 代码审查, DDD review, 架构审查, anti-pattern detection, 反模式检测, or needs to check if code follows DDD.
 license: Apache-2.0
 ---
 
 # DDD Code Reviewer
 
-DDD code review + anti-pattern detection + compliance scoring — validate your code against DDD best practices.
+DDD 代码审查 + 反模式检测 + 5 维度合规评分。验证代码是否遵循 DDD 最佳实践，输出结构化审查报告。
 
-## When to use this skill
+## Workflow
 
-**ALWAYS use this skill when the user mentions:**
-- "代码审查"、"DDD 审查"、"DDD review"
-- "架构审查"、"architecture review"
-- "反模式检测"、"anti-pattern detection"
-- "检查代码"、"review my code"
-- "充血模型检查"、"rich domain check"
-- "分层合规"、"layering compliance"
-- "代码质量评分"、"code quality score"
+DDD 代码审查三步走：
 
-## DDD Anti-Pattern Checklist
+```
+Step 1: 代码扫描 — 反模式检测清单逐项检查 + 源代码扫描
+Step 2: 评分计算 — 5 维度逐项评分（分层/领域/命名/结构/测试）
+Step 3: 报告输出 — 结构化审查报告（评分 + 反模式列表 + 修复建议）
+```
 
-| Anti-Pattern | Severity | Detection Points |
-|-------------|:--:|-----------------|
-| **Anemic Model** | P0 | Entity has only getters/setters, no business methods |
-| **God Service** | P0 | Single Service > 500 lines, contains all business logic |
-| **Cross-Aggregate Direct Reference** | P0 | Aggregate A's field type is Aggregate B (should be ID reference) |
-| **Domain Layer Framework Dependency** | P0 | Domain layer imports Spring/JPA/MyBatis |
-| **Repository Returns DTO** | P1 | Repository returns non-aggregate-root type |
-| **Controller Business Logic** | P1 | if/else business logic in Controller |
-| **Application Service SQL** | P1 | App layer directly operates Mapper/JdbcTemplate |
-| **Mutable Value Object** | P1 | ValueObject has setters or non-final fields |
-| **Oversized Aggregate** | P2 | Single aggregate > 5 entities |
-| **Circular Dependency** | P0 | A → B → A module circular dependency |
-| **Missing Domain Events** | P2 | Key business actions without domain event publication |
-| **Cross-Aggregate Transaction** | P2 | One transaction spans 2+ aggregates |
+每次审查必须走完三步，输出完整报告。只口述问题不输出文档，团队无法追踪改进。
+
+## When to Use
+
+### 触发词（触发即用）
+
+`代码审查` `DDD review` `反模式检测` `anti-pattern` `贫血模型` `充血模型检查` `架构审查` `分层合规` `代码质量评分` `layering compliance` `rich domain check` `review my DDD code`
+
+### 适用前提
+
+| 条件 | 说明 |
+|------|------|
+| 项目已采用 DDD 思想 | 非 DDD 项目无审查基础 |
+| 有可审查的源代码 | 需提供代码路径或片段 |
+| 期望发现反模式 | 不只是格式检查，更关注领域模型健康度 |
+
+### 不适用场景
+
+| 跳过 | 改用 |
+|------|------|
+| 非 DDD 项目（纯 CRUD） | 标准代码审查（SonarQube / Checkstyle） |
+| 项目尚未引入 DDD | `ddd-architecture-awesome`（先学习 DDD 概念） |
+| 刚写完第一个 DDD 代码 | 先写完再审查 |
+| 需要架构选型 | `ddd-architecture-selector` |
+| 需要架构健康度评估 | `ddd-architecture-evaluator` |
+
+## Audience
+
+This skill is designed for: **Backend developers** (implementing DDD architectures), **Software architects** (evaluating and selecting patterns), **Tech leads** (reviewing team implementations), and **DDD beginners** (learning domain-driven design fundamentals).
+
+## Rules
+
+1. Every code review must include a 5-dimension scoring report.
+2. P0 anti-patterns (anemia model, layer violation, cross-aggregate ref) block merge.
+3. Domain layer must have zero framework dependencies — verified via ArchUnit.
+4. Review reports must include fix suggestions ordered by priority (P0→P1→P2).
+
+## Anti-Pattern Checklist
+
+12 种 DDD 反模式，按 P0（阻塞合并）/P1（下个版本前修复）/P2（持续改进）分级。
+
+- **P0 — 必须修复**: 贫血模型、上帝 Service、跨聚合直接引用、领域层框架依赖、循环依赖、Repository 返回非聚合根
+- **P1 — 应该修复**: Controller 业务逻辑、Application Service 有 SQL、值对象可变
+- **P2 — 持续改进**: 聚合过大、缺少领域事件、跨聚合事务
+
+> 完整反模式速查表见 [references/checklist.md](references/checklist.md)，含 Java 代码示例和修复路径。
 
 ## Layered Compliance Matrix
 
-```
-Check rules (based on ArchUnit):
+分层依赖检查规则（基于 ArchUnit）：
 
-┌──────────────────┬─────┬─────┬─────┬─────┐
-│ Layer / May Depend│ Infra│ Dom │ App │ Adap│
-├──────────────────┼─────┼─────┼─────┼─────┤
-│ Infrastructure   │  ✓  │  ✗  │  ✗  │  ✗  │
-│ Domain           │  ✗  │  ✓  │  ✗  │  ✗  │
-│ Application      │  ✓  │  ✓  │  ✓  │  ✗  │
-│ Adapter          │  ✓  │  ✓  │  ✓  │  ✓  │
-└──────────────────┴─────┴─────┴─────┴─────┘
-
-Domain Layer Zero-Dependency Rule (P0):
-  ✗ import org.springframework.stereotype.Service
-  ✗ import javax.persistence.Entity
-  ✗ import org.apache.ibatis.annotations.Mapper
-  ✓ import java.util.Optional
-  ✓ import java.math.BigDecimal
 ```
+    ┌─────────────────┬─────┬─────┬─────┬─────┐
+    │ 层 / 可依赖     │ Infra│ Dom │ App │ Adap│
+    ├─────────────────┼─────┼─────┼─────┼─────┤
+    │ Infrastructure  │  ✓  │  ✗  │  ✗  │  ✗  │
+    │ Domain          │  ✗  │  ✓  │  ✗  │  ✗  │
+    │ Application     │  ✓  │  ✓  │  ✓  │  ✗  │
+    │ Adapter         │  ✓  │  ✓  │  ✓  │  ✓  │
+    └─────────────────┴─────┴─────┴─────┴─────┘
+```
+
+**Domain 层零依赖规则（P0）**：
+  - ✗ `import org.springframework.stereotype.Service`
+  - ✗ `import javax.persistence.Entity`
+  - ✗ `import org.apache.ibatis.annotations.Mapper`
+  - ✓ `import java.util.Optional`
+  - ✓ `import java.math.BigDecimal`
+
+ArchUnit 完整配置见 [references/archunit-config.md](references/archunit-config.md)。
 
 ## Rich Domain Model Validation
 
-```java
-// ✅ PASSES Review — Rich Domain Model
-public class Order extends AggregateRoot<OrderId> {
-    private OrderStatus status;
-    private List<OrderItem> items;
+Rich models encapsulate behavior in entities (pass); anemic models expose state via getters/setters (fail). Key: behavior in Entity vs behavior in Service.
 
-    public void pay() {                    // Behavior in entity
-        if (!status.canPay()) {
-            throw new OrderException("Cannot pay");
-        }
-        this.status = OrderStatus.PAID;
-        addDomainEvent(new OrderPaidEvent(this.id));
-    }
-}
-
-// ❌ FAILS Review — Anemic Model
-public class Order {
-    private Long id;
-    private String status;                // String instead of Value Object
-    // Only getters/setters, no business methods ← ANTI-PATTERN
-}
-
-public class OrderService {               // God Service
-    @Transactional
-    public void pay(Long orderId) {       // Behavior in Service, not Entity
-        Order order = orderMapper.findById(orderId);
-        if ("DRAFT".equals(order.getStatus())) { // Raw string comparison
-            order.setStatus("PAID");
-            orderMapper.update(order);
-        }
-    }
-}
-```
+> 完整代码示例和重构对比见 [examples/rich-model-refactoring.md](examples/rich-model-refactoring.md)，含 3 个实战案例。
 
 ## Scoring System
 
-### 5 Dimensions
+### 5 维度评分
 
-```
-1. Layering Compliance (30%)
-   - Dependency direction correctness
-   - Layer responsibility singularity
-   - Cross-layer call detection
+| 维度 | 权重 | 检查项 | 满分 |
+|------|:----:|--------|:----:|
+| **1. 分层合规** | 30% | Domain 零依赖、依赖方向、App 无 SQL、Controller 无业务逻辑 | 30 |
+| **2. 领域模型质量** | 30% | 充血模型覆盖率、值对象使用率、聚合设计、领域事件 | 30 |
+| **3. 命名规范** | 15% | 聚合根 = 业务名称、Repository = 标准命名、事件 = 过去式 | 15 |
+| **4. 代码结构** | 15% | 包按聚合组织、类大小、圈复杂度 | 15 |
+| **5. 测试覆盖** | 10% | Domain 层测试覆盖、聚合根行为测试、事件验证 | 10 |
 
-2. Domain Model Quality (30%)
-   - Rich model coverage (entities with business methods / total entities)
-   - Value object usage rate (VOs / primitive-type fields)
-   - Aggregate design rationality
+**总分 = Σ(维度得分 × 权重)**
 
-3. Naming Conventions (15%)
-   - Aggregate root → Order (business name)
-   - Repository → OrderRepository
-   - Domain service → OrderPricingService
-   - Domain event → OrderPaid (past tense)
+### 分数等级
 
-4. Code Structure (15%)
-   - Package organization by aggregate
-   - Class size (aggregate root < 200 lines, service < 100 lines)
-   - Method complexity (cyclomatic complexity < 10)
+| 范围 | 等级 | 含义 | 行动 |
+|:----:|:----:|------|------|
+| ≥ 85 | 🟢 A | 优秀 DDD 实践 | 可上生产 |
+| 70-84 | 🟡 B | 基本合规，有改进空间 | 修 P1 问题 |
+| 50-69 | 🟠 C | 存在明显反模式 | 规划重构 Sprint |
+| < 50 | 🔴 D | 需要大面积重构 | 阻塞合并，必须先重构 |
 
-5. Test Coverage (10%)
-   - Domain layer unit test coverage
-   - Aggregate root test coverage
-
-Total Score = Σ(dimension score × weight)
-```
-
-### Score Interpretation
-
-```
-≥ 85  → 🟢 A: Excellent DDD practice
-70-84 → 🟡 B: Basically compliant, room for improvement
-50-69 → 🟠 C: Obvious anti-patterns present
-< 50  → 🔴 D: Refactoring needed
-```
-
-## ArchUnit Automation
-
-```java
-@AnalyzeClasses(packages = "com.example")
-public class ArchitectureComplianceTest {
-
-    @ArchTest
-    static final ArchRule domain_no_infrastructure =
-        noClasses()
-            .that().resideInAPackage("..domain..")
-            .should().dependOnClassesThat()
-            .resideInAPackage("..infrastructure..")
-            .because("Domain layer must not depend on infrastructure");
-
-    @ArchTest
-    static final ArchRule domain_no_spring =
-        noClasses()
-            .that().resideInAPackage("..domain..")
-            .should().dependOnClassesThat()
-            .resideInAPackage("org.springframework..")
-            .because("Domain layer must have zero framework dependencies");
-
-    @ArchTest
-    static final ArchRule app_no_sql =
-        noClasses()
-            .that().resideInAPackage("..app..")
-            .should().dependOnClassesThat()
-            .resideInAPackage("java.sql..")
-            .because("Application layer should not directly access SQL");
-
-    @ArchTest
-    static final ArchRule controller_no_repository =
-        noClasses()
-            .that().resideInAPackage("..adapter..controller..")
-            .should().dependOnClassesThat()
-            .resideInAPackage("..infrastructure..repository..")
-            .because("Controllers should not directly access repositories");
-}
-```
+评分细则和计算示例见 [references/scoring-criteria.md](references/scoring-criteria.md)、[examples/scoring-example.md](examples/scoring-example.md)。
 
 ## Review Report Template
 
-When generating a review, use this structure:
+每次审查输出结构化报告，包含：
 
 ```markdown
 # DDD Code Review Report
 
-## Overall Score: 78/100 (B级 🟡)
+## Overall Score: 78/100 (🟡 B)
 
-### 1. Layering Compliance (24/30)
-| Check Item | Result | Note |
-|-------------|:--:|------|
-| Domain zero-dependency | ✅ | No framework dependencies |
-| App layer no SQL | ❌ | OrderAppService L45 directly calls Mapper |
-| Dependency direction | ✅ | No reverse dependencies |
+### 分层合规 (24/30)
+| 检查项 | 结果 | 说明 |
+|--------|:----:|------|
+| Domain 零依赖 | ✅ | 无框架依赖 |
+| App 层无 SQL | ❌ | OrderAppService L45 直接调用 Mapper |
+| 依赖方向 | ✅ | 无反向依赖 |
 
-### 2. Domain Model Quality (22/30)
-| Check Item | Result | Note |
-|-------------|:--:|------|
-| Rich domain model | ⚠️ | User entity still anemic |
-| Value objects | ⚠️ | Money/Email done, Phone still String |
+### 领域模型质量 (22/30)
+| 检查项 | 结果 | 说明 |
+|--------|:----:|------|
+| 充血模型 | ⚠️ | User 实体仍为贫血模型 |
+| 值对象 | ⚠️ | Money/Email 已用，Phone 仍为 String |
 
-### 3. Anti-Pattern List
-| Anti-Pattern | Location | Fix Suggestion |
-|-------------|----------|----------------|
-| God Service | OrderService.java:45-320 | Split into OrderPricingService + OrderFulfillmentService |
+### 反模式清单
+| 严重级别 | 反模式 | 位置 | 修复建议 |
+|:------:|--------|------|---------|
+| P0 | 上帝 Service | OrderService.java:45-320 | 拆分为 OrderPricingService + OrderFulfillmentService |
 
-### 4. Improvement Suggestions (by priority)
-1. [P0] Move SQL from OrderAppService to Repository implementation
-2. [P1] Convert User entity to rich domain model
-3. [P2] Add domain events for key business operations
+### 改进建议（按优先级）
+1. [P0] 将 OrderAppService 中的 SQL 移到 Repository 实现
+2. [P1] 将 User 实体改为充血模型
+3. [P2] 为关键业务操作补充领域事件
 ```
 
-## Output
+完整模板见 [references/report-template.md](references/report-template.md)、示例见 [examples/review-report-example.md](examples/review-report-example.md)。
 
-When assisting with this skill, provide:
-- Code review scoring report (5 dimensions + total)
-- Anti-pattern checklist (with locations + fix suggestions)
-- Layered compliance matrix
-- Rich domain model refactoring guide
-- ArchUnit compliance detection scripts
+## Gotchas
+
+常见审查陷阱见 [references/gotchas.md](references/gotchas.md)。
+
+## FAQ
+
+| 问题 | 回答 |
+|------|------|
+| 一次审查要多久？ | 小项目（1-2 聚合）约 30-60 分钟；大项目按模块分次审查 |
+| 评分是主观的吗？ | 每个检查项有明确检测标准（见 references/scoring-criteria.md），可重复、可验证 |
+| ArchUnit 检查必须自己写吗？ | 直接使用 references/archunit-config.md 中的配置，复制到项目即可 |
+| 找到了反模式，改不动怎么办？ | 以 P0 优先修复。P1/P2 记入技术债务，制定偿还计划 |
+| 审查频率建议？ | 代码审查推荐 PR 合并前做。架构级审查推荐每季度一次 |
+| 与非 DDD 架构的审查区别？ | DDD 审查关注领域模型健康度，非 DDD 审查关注代码规范/性能/安全 |
+
+## Security & Safety
+
+This skill is pure documentation. It contains no executable scripts, collects no user data, accesses no external services or networks.
+
+## Keywords
+
+DDD 代码审查、反模式检测、贫血模型、充血模型、上帝 Service、分层合规、依赖方向、ArchUnit、领域事件、值对象不可变、聚合设计、5 维度评分、代码质量门禁
+
+## References
+
+| 文件 | 用途 |
+|------|------|
+| [references/checklist.md](references/checklist.md) | 反模式速查表 — P0/P1/P2 分级 + 修复路径 |
+| [references/scoring-criteria.md](references/scoring-criteria.md) | 5 维度评分细则 — 每项检查的权重和检测方法 |
+| [references/archunit-config.md](references/archunit-config.md) | ArchUnit 完整配置 — Maven/Gradle 依赖 + 全套检查规则 |
+| [references/report-template.md](references/report-template.md) | 审查报告模板 — Markdown + 快速摘要格式 |
+| [references/clean-ddd-hexagonal-layers.md](references/clean-ddd-hexagonal-layers.md) | 四层架构结构详解 — Domain/App/Infra/Presentation |
+| [references/clean-ddd-hexagonal-tactical.md](references/clean-ddd-hexagonal-tactical.md) | DDD 战术模式参考 — Entity/VO/Aggregate/Repository |
+| [references/clean-ddd-hexagonal-testing.md](references/clean-ddd-hexagonal-testing.md) | 测试模式 — 单元测试/集成测试/架构测试 |
+| [references/partme-15-boundaries.md](references/partme-15-boundaries.md) | 微服务边界理论 — 逻辑边界/物理边界/代码边界 |
+| [references/gotchas.md](references/gotchas.md) | 审查常见陷阱 — 跨聚合引用、PO/DTO 混用等 |
+
+## Examples
+
+| 文件 | 用途 |
+|------|------|
+| [examples/review-report-example.md](examples/review-report-example.md) | 完整审查报告示例（62/100 🟠 C 级） |
+| [examples/scoring-example.md](examples/scoring-example.md) | 评分计算全过程 + 修复 ROI 分析 |
+| [examples/rich-model-refactoring.md](examples/rich-model-refactoring.md) | 贫血→充血模型重构：3 个实战案例 |
+| [examples/anti-pattern-fix-guide.md](examples/anti-pattern-fix-guide.md) | 反模式修复路径速查 |
+| [examples/archunit-compliance-test.md](examples/archunit-compliance-test.md) | ArchUnit 合规测试 — P0/P1/P2 门禁实现 |
 
 ## Next Steps
 
-After code review:
-1. [ddd-architecture-evaluator](../ddd-architecture-evaluator/) — Architecture-level assessment
-2. Architecture Skill — Fix directory structure issues
-3. [ddd-testing-strategist](../ddd-testing-strategist/) — Improve test coverage
+审查完成后，根据结果进入后续步骤：
 
----
-
-## clean-ddd-hexagonal References
-
-| File | Purpose |
-|------|--------|
-| [references/clean-ddd-hexagonal-layers.md](references/clean-ddd-hexagonal-layers.md) | Complete four-layer structure for dependency rule validation |
-| [references/clean-ddd-hexagonal-tactical.md](references/clean-ddd-hexagonal-tactical.md) | DDD tactical patterns — Entity, Value Object, Aggregate, Repository anti-pattern reference |
-| [references/clean-ddd-hexagonal-testing.md](references/clean-ddd-hexagonal-testing.md) | Testing patterns for Clean Architecture + DDD + Hexagonal systems |
-
-## Skill Boundary
-
-### ✅ 擅长处理
-1. DDD 项目代码审查：检查反模式（贫血模型/跨聚合引用/框架泄露等）
-2. 分层合规检查：Domain 零依赖、依赖方向校验
-3. 代码质量评分（5 维度 + ArchUnit 规则）
-
-### ⚠️ 需要条件
-1. 项目已采用 DDD：非 DDD 项目无审查基础
-2. 有可审查的源代码：需提供代码路径
-
-### ❌ 超出范围
-1. 非 DDD 项目 → Standard code review (SonarQube/Checkstyle)
-2. 需架构选型 → `ddd-architecture-selector`
-3. 需架构评估 → `ddd-architecture-evaluator`
-
-
-## Security & Stability
-
-- This skill reviews code patterns, not runtime behavior. It does NOT execute code or access systems.
-- Review results may contain file paths and code snippets — visible only in current conversation context.
-- Scoring dimensions are pattern-based — results should be reviewed by human, not treated as automated gate.
-- No executable scripts bundled. All review operations are code reading and analysis.
-
-
-## Gotchas — Common Pitfalls
-
-- **检验遗漏 Report 生成**: 评分完成后必须输出结构化的 Review Report。只口述问题不输出文档，团队无法追踪改进。必须包含：反模式列表 + 违规代码位置 + 修复建议 + 评分。
-- **机械套用规则，忽略业务上下文**: 不是所有 "Service > 500 行" 都是反模式。如果 Service 全是编排（调用 Domain Service），行数多只是编排复杂度，不是 God Service。区分编排厚度 vs 业务逻辑泄露。
-- **漏检跨聚合引用**: 跨聚合引用很隐蔽 — 不只是 `Order.customer`（对象引用），还有 `orderService.getCustomerId()` 返回 Customer 对象。搜索所有跨聚合的方法返回类型。
-- **PO/DTO 混用未检出**: 检查 Repository 返回类型是否为 Domain Aggregate，而不是 JPA Entity 或 DTO。如果 Repository 返回 DTO，Domain 层收到了贫血对象。
-- **只检查主代码，忽略测试**: 测试代码中的反模式同样危险。Mock 了不该 Mock 的（Domain Service 内部调用），该 Mock 的没 Mock（数据库连接）。
-
-## When NOT to Use This Skill
-
-| ❌ Skip | ✅ Use Instead |
-|---------|---------------|
-| Non-DDD project (simple CRUD) | Standard code review (SonarQube, Checkstyle) |
-| Project hasn't adopted DDD yet | `architecture-awesome` (learn DDD first) |
-| Just committed first DDD code | Write code first, review later |
-| Need architecture selection | `architecture-selector` |
-| Want to evaluate architecture fitness (not code) | `architecture-evaluator` |
-
-## Security & Stability
-
-- This skill reviews code patterns, not runtime behavior. It does NOT execute user code, scan for vulnerabilities, or access external systems.
-- Review results may contain file paths and code snippets from the user's project. These are only visible to the user in the current conversation context.
-- Scoring dimensions are based on static analysis patterns — results should be reviewed by a human, not treated as automated gate decisions.
-- No executable scripts bundled. All review operations are code reading and analysis.
-
-## 🧭 DDD Skills Journey
-
-> 📍 **You are here: `ddd-code-reviewer` — Step 5: 代码审查与质量保障**
-
-```mermaid
-flowchart LR
-    S1["Step 1<br/>awesome"] --> S2["Step 2<br/>selector"]
-    S2 --> S3["Step 3<br/>5架构 Skill"]
-    S3 --> S4["Step 4<br/>domain/cqrs/api"]
-    S4 --> S5["⭐ Step 5<br/>code-reviewer"]
-    S5 --> S6["Step 6<br/>辅助能力"]
-    S6 --> S7["🏁 Step 7<br/>architecture-doc"]
-
-    style S5 fill:#3b82f6,stroke:#2563eb,color:white,stroke-width:3px
-```
-
-**← Previous**: [domain-designer](../ddd-domain-designer/) — 审查领域模型质量
-**→ Next**: [architecture-evaluator](../ddd-architecture-evaluator/) — 上升到架构级别评估
-**🔗 Related**: [testing-strategist](../ddd-testing-strategist/) — 测试覆盖率审查 | [architecture-cola](../ddd-architecture-cola/) — COLA 合规检查
-**🏠 Home**: [awesome](../ddd-architecture-awesome/) — DDD 概念全景
-
-💡 12 种反模式 + 5 维度评分。推荐集成到 CI/CD Pipeline 作为质量门禁。
-
-> 📋 See [DESIGN.md](../DESIGN.md) for the complete 16-skill ecosystem map.
+- 架构级别评估 → `ddd-architecture-evaluator`
+- 修复架构目录结构 → 对应架构 Skill（`ddd-architecture-layered` / `ddd-architecture-hexagonal` / `ddd-architecture-cola` 等）
+- 提升测试覆盖率 → `ddd-testing-strategist`
+- 输出架构文档 → `ddd-architecture-doc`

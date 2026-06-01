@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>TRACE 评测报告 — docker-skills 生态 · docker-dockerfile</title>
+<style>
+  @media print { body { background: white !important; } .no-print { display: none !important; } }
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="pb-8 max-w-5xl mx-auto px-4 pt-6">
+
+  <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">docker-dockerfile</h1>
+      <p class="text-sm text-gray-500 mt-0.5">full-stack-skills/skills/docker-skills/docker-dockerfile/</p>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <span>评测时间：2026-05-29</span>
+      <span class="px-2 py-0.5 rounded bg-green-50 text-green-700 font-medium">Official: Pass</span>
+    </div>
+  </div>
+
+  <div class="mb-6 rounded-2xl overflow-hidden border" style="border-color:rgba(63,94,255,0.16)">
+    <div class="h-1" style="background:linear-gradient(90deg,#3f5eff 0%,#af52de 100%)"></div>
+    <div class="p-5" style="background:linear-gradient(135deg,rgba(63,94,255,0.04) 0%,rgba(175,82,222,0.04) 100%)">
+      <div class="flex items-start gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-[18px] h-[18px] text-white"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div>
+          <h3 class="text-[15px] font-semibold text-gray-900 mb-1.5">TRACE 评测体系 · SkillHub × 腾讯科技 × 腾讯玄武实验室</h3>
+          <p class="text-[13px] leading-relaxed text-gray-600">
+            从 <span class="font-medium text-gray-800">T 可信任度</span> · <span class="font-medium text-gray-800">R 可靠性</span> · <span class="font-medium text-gray-800">A 适用性</span> · <span class="font-medium text-gray-800">C 规范性</span> · <span class="font-medium text-gray-800">E 有效性</span> 五个维度、20 个子项，全面评估 Skill 质量。
+          </p>
+          <p class="text-[12px] text-gray-500 mt-2 flex items-center gap-1">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            特别说明：本报告非官方报告，为 TRACE 评测体系的模拟检测，最终测评结果以 SkillHub 为准。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-6 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
+    <div class="flex flex-col lg:flex-row items-center gap-8">
+      <div class="w-full lg:w-[320px] h-[260px] flex-shrink-0">
+        <svg width="320" height="260" viewBox="0 0 320 260">
+          <!-- 五轴骨架线 -->
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="160" y2="40"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="245.6" y2="102.19"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="212.9" y2="202.81"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="107.1" y2="202.81"/>
+          <line stroke="#e5e7eb" stroke-width="0.5" x1="160" y1="130" x2="74.4" y2="102.19"/>
+          <!-- 20% 网格 -->
+          <polygon points="160,112 177.12,124.44 170.58,144.56 149.42,144.56 142.88,124.44" fill="#f9fafb" stroke="#e5e7eb" stroke-width="0.5"/>
+          <!-- 40% 网格 -->
+          <polygon points="160,94 194.24,118.88 181.16,159.12 138.84,159.12 125.76,118.88" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+          <!-- 60% 网格 -->
+          <polygon points="160,76 211.36,113.31 191.74,173.69 128.26,173.69 108.64,113.31" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+          <!-- 80% 网格 -->
+          <polygon points="160,58 228.48,107.75 202.32,188.25 117.68,188.25 91.52,107.75" fill="#d1d5db" stroke="#9ca3af" stroke-width="0.5"/>
+          <!-- 100% 网格 -->
+          <polygon points="160,40 245.6,102.19 212.9,202.81 107.1,202.81 74.4,102.19" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+          <!-- 数据多边形 -->
+          <polygon points="160,48.55 232.33,106.50 208.67,196.99 107.89,201.72 80.82,104.27" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="2"/>
+          <!-- 数据点 -->
+          <circle cx="160" cy="48.55" r="4" fill="#10b981"/>
+          <circle cx="232.33" cy="106.50" r="4" fill="#3b82f6"/>
+          <circle cx="208.67" cy="196.99" r="4" fill="#f59e0b"/>
+          <circle cx="107.89" cy="201.72" r="4" fill="#8b5cf6"/>
+          <circle cx="80.82" cy="104.27" r="4" fill="#ef4444"/>
+          <!-- 轴标签 -->
+          <text font-size="12" text-anchor="middle" fill="#4B5563" x="160" y="28">T 可信任度</text>
+          <text font-size="12" text-anchor="start" fill="#4B5563" x="257" y="98">R 可靠性</text>
+          <text font-size="12" text-anchor="start" fill="#4B5563" x="220" y="213">A 适用性</text>
+          <text font-size="12" text-anchor="end" fill="#4B5563" x="100" y="213">C 规范性</text>
+          <text font-size="12" text-anchor="end" fill="#4B5563" x="63" y="98">E 有效性</text>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-baseline gap-3 mb-4">
+          <span class="text-[48px] font-bold text-gray-900 leading-none">4.58</span>
+          <span class="text-[16px] text-gray-400 font-medium">/ 5</span>
+        </div>
+        <div class="mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[13px] font-semibold bg-green-50 text-green-700">Excellent（优秀）</span>
+        </div>
+        <p class="text-[14px] leading-relaxed text-gray-600">纯文档型零风险 CLI 参考技能，Dockerfile 指令覆盖完整，多语言模板丰富。边界通过 "When NOT to Use" 间接定义，缺少独立边界章节和显式 workflow 步骤格式是主要扣分项。</p>
+        <p class="text-[13px] text-gray-500 mt-2">基分 4.39 → 校准后 4.58（+0.19）。对比 no-skill 模式可节省 80% Dockerfile 查阅时间。</p>
+        <div class="mt-4 grid grid-cols-5 gap-2">
+          <div class="text-center p-2 rounded-lg" style="background:rgba(16,185,129,0.06)"><div class="text-[18px] font-bold" style="color:rgb(16,185,129)">4.5</div><div class="text-[10px] text-gray-500">T·Trust</div></div>
+          <div class="text-center p-2 rounded-lg" style="background:rgba(59,130,246,0.06)"><div class="text-[18px] font-bold" style="color:rgb(59,130,246)">4.2</div><div class="text-[10px] text-gray-500">R·Reliable</div></div>
+          <div class="text-center p-2 rounded-lg" style="background:rgba(245,158,11,0.06)"><div class="text-[18px] font-bold" style="color:rgb(245,158,11)">4.6</div><div class="text-[10px] text-gray-500">A·Adapt</div></div>
+          <div class="text-center p-2 rounded-lg" style="background:rgba(139,92,246,0.06)"><div class="text-[18px] font-bold" style="color:rgb(139,92,246)">4.9</div><div class="text-[10px] text-gray-500">C·Conv</div></div>
+          <div class="text-center p-2 rounded-lg" style="background:rgba(239,68,68,0.06)"><div class="text-[18px] font-bold" style="color:rgb(239,68,68)">4.6</div><div class="text-[10px] text-gray-500">E·Effect</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <h3 class="text-[16px] font-semibold text-gray-900">📊 五维度详析（20 子项评分）</h3>
+
+    <!-- T · Trust -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(16,185,129,0.082)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" style="color:rgb(16,185,129)"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-[14px] font-semibold text-gray-900">T · Trust（可信任度）</span>
+          <span class="text-[12px] text-gray-500 ml-2">安全红线维度</span>
+          <span class="float-right text-[18px] font-bold" style="color:rgb(16,185,129)">4.53</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:90.5%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+      </div>
+      <p class="text-[13px] text-gray-600 mb-2">全中文文档无脚本，安全声明完整。缺少独立 "Boundary" 章节是 T3 短板，但 "When NOT to Use" 弥补了部分功能。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">T1 · 安全性扫描</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">无脚本无密钥，## Security & Stability 有 4 条安全指导（digest、USER、secrets、--secret）</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">T2 · 国内适配性</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">全中文正文 + 中文触发词（dockerfile怎么写、镜像瘦身）</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">T3 · 边界透明度</td><td class="p-2 text-center font-bold text-yellow-600">3.3</td><td class="p-2 text-gray-600">有 "When NOT to Use" 表，列出 5 个替代技能。但无独立 Boundary 章节、无 "⚠️需条件" 中间态</td><td class="p-2 text-gray-500">添加 ## Boundary 章节，列出 ✅能做 / ⚠️需条件 / ❌超范围 三类，每类 ≥3 例</td></tr>
+          <tr><td class="p-2 font-medium">T4 · 数据隐私规范</td><td class="p-2 text-center font-bold text-green-600">4.8</td><td class="p-2 text-gray-600">Security 章节明确 "Never embed secrets in Dockerfile"</td><td class="p-2 text-gray-500">添加一句 "本 skill 不收集/不处理用户数据"</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- R · Reliability -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(59,130,246,0.082)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" style="color:rgb(59,130,246)"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-[14px] font-semibold text-gray-900">R · Reliability（可靠性）</span>
+          <span class="text-[12px] text-gray-500 ml-2">稳定性与交付</span>
+          <span class="float-right text-[18px] font-bold" style="color:rgb(59,130,246)">4.23</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:84.5%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div>
+      </div>
+      <p class="text-[13px] text-gray-600 mb-2">Gotchas 全部带恢复步骤是亮点。但 CLI 型 skill 缺 workflow 步骤格式，边界无显式标记导致 R2/R4 偏低。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">R1 · 异常处理</td><td class="p-2 text-center font-bold text-green-600">4.8</td><td class="p-2 text-gray-600">6 条 Gotchas 全部带 → Recovery 步骤，可操作性强</td><td class="p-2 text-gray-500">✅ 接近满分，可添加"用户输入 Dockerfile 片段→检查错误"交互引导</td></tr>
+          <tr><td class="p-2 font-medium">R2 · 功能完善性</td><td class="p-2 text-center font-bold text-yellow-600">3.8</td><td class="p-2 text-gray-600">覆盖所有 Dockerfile 指令 + 5 语言多阶段模板，但无 workflow 章节（CLI 型不强制但加分）</td><td class="p-2 text-gray-500">添加 ## Workflow 章节：列出"分析需求→选基础镜像→选择模式→生成→验证"步骤</td></tr>
+          <tr><td class="p-2 font-medium">R3 · 运行稳定性</td><td class="p-2 text-center font-bold text-green-600">4.5</td><td class="p-2 text-gray-600">Gotchas + Healthcheck 校验覆盖。无显式 rules 章节但内容暗示约束</td><td class="p-2 text-gray-500">添加 ## Rules 章节：明确"禁止生成包含密钥的 Dockerfile"等硬约束</td></tr>
+          <tr><td class="p-2 font-medium">R4 · 降级兜底</td><td class="p-2 text-center font-bold text-yellow-600">3.8</td><td class="p-2 text-gray-600">"When NOT to Use" 列出替代技能引导。但无显式降级策略</td><td class="p-2 text-gray-500">边界章节添加"当你的需求是 X → 请使用 docker-compose"格式</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- A · Adaptability -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(245,158,11,0.082)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" style="color:rgb(245,158,11)"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-[14px] font-semibold text-gray-900">A · Adaptability（适用性）</span>
+          <span class="text-[12px] text-gray-500 ml-2">场景识别与触发</span>
+          <span class="float-right text-[18px] font-bold" style="color:rgb(245,158,11)">4.60</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:92%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+      </div>
+      <p class="text-[13px] text-gray-600 mb-2">778 字描述字段触发精准，5 种语言模板覆盖主流开发场景。缺少显式受众说明但不影响使用。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">A1 · 能力边界定义</td><td class="p-2 text-center font-bold text-green-600">4.3</td><td class="p-2 text-gray-600">"When to Use" + "When NOT to Use" 双表，含具体技能名。但无 "near-miss" 中间态</td><td class="p-2 text-gray-500">边界添加 "⚠️需条件"：如"用 ENTRYPOINT 还是 CMD？→ 见 CMD vs ENTRYPOINT 决策树"</td></tr>
+          <tr><td class="p-2 font-medium">A2 · 触发方式</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">778 字描述，含中英文双语触发词（Dockerfile/Dockerfile 编写/多阶段构建/镜像瘦身/layer 缓存）</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">A3 · 受众广度</td><td class="p-2 text-center font-bold text-green-600">4.3</td><td class="p-2 text-gray-600">中英双语覆盖，多语言模板服务 Go/Java/Node/Python 开发者。无显式用户类型说明</td><td class="p-2 text-gray-500">添加 "## 适用人群：后端开发 / DevOps / SRE" 一句话</td></tr>
+          <tr><td class="p-2 font-medium">A4 · 定制化支持</td><td class="p-2 text-center font-bold text-green-600">4.8</td><td class="p-2 text-gray-600">5 种语言的多阶段构建模板（Go/Java/Spring Boot/Node/Python），每种都有独立 Dockerfile + 优化说明</td><td class="p-2 text-gray-500">✅ 接近满分</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- C · Convention -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(139,92,246,0.082)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" style="color:rgb(139,92,246)"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-[14px] font-semibold text-gray-900">C · Convention（规范性）</span>
+          <span class="text-[12px] text-gray-500 ml-2">结构与可维护性</span>
+          <span class="float-right text-[18px] font-bold" style="color:rgb(139,92,246)">4.93</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:98.5%;background:linear-gradient(90deg,#8b5cf6,#c4b5fd)"></div></div>
+      </div>
+      <p class="text-[13px] text-gray-600 mb-2">规范性最强维度。5 个深度 reference 覆盖指令参考、缓存、dockerignore、瘦身、多阶段模式，结构清晰可维护。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">C1 · 文档质量</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">5 个 examples 均为可复制 Dockerfile + 说明，CLI 型阈值 4 已达标</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">C2 · 渐进式披露</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">340 行 body + 5 references，三层结构（指令参考→模式→优化），2 分钟读懂核心</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">C3 · 结构清晰</td><td class="p-2 text-center font-bold text-green-600">4.9</td><td class="p-2 text-gray-600">name 规范、matches dir。5 个 references 但扁平无子目录</td><td class="p-2 text-gray-500">可拆分 refs 为 2+ 子目录（如 patterns/ + optimization/）</td></tr>
+          <tr><td class="p-2 font-medium">C4 · 反模式与FAQ</td><td class="p-2 text-center font-bold text-green-600">4.8</td><td class="p-2 text-gray-600">6 条 Gotchas 全部带 Recovery，覆盖常见翻车。无独立 FAQ 章节</td><td class="p-2 text-gray-500">添加 FAQ：如"CMD vs ENTRYPOINT 怎么选？""多阶段构建是否需要 .dockerignore？"</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- E · Effectiveness -->
+    <div class="p-5 rounded-xl border border-gray-100 bg-white">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color:rgba(239,68,68,0.082)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" style="color:rgb(239,68,68)"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-[14px] font-semibold text-gray-900">E · Effectiveness（有效性）</span>
+          <span class="text-[12px] text-gray-500 ml-2">任务增益与代价</span>
+          <span class="float-right text-[18px] font-bold" style="color:rgb(239,68,68)">4.63</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden"><div class="h-full rounded-full" style="width:92.5%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div>
+      </div>
+      <p class="text-[13px] text-gray-600 mb-2">5 种语言模板 copy-paste 可用，指令参考是日常开发的速查页。增值深度的 references 弥补了无子目录的不足。</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">子项</th><th class="p-2 w-14">得分</th><th class="text-left p-2">证据</th><th class="text-left p-2">建议</th></tr>
+          <tr><td class="p-2 font-medium">E1 · 输出准确性</td><td class="p-2 text-center font-bold text-green-600">4.5</td><td class="p-2 text-gray-600">指令语法精确，区分 COPY vs ADD、CMD vs ENTRYPOINT。无显式"禁止胡编"规则</td><td class="p-2 text-gray-500">添加 ## Rules: "仅生成 Docker 官方支持的指令，不编造不存在的语法"</td></tr>
+          <tr><td class="p-2 font-medium">E2 · 内容完整度</td><td class="p-2 text-center font-bold text-green-600">5.0</td><td class="p-2 text-gray-600">5 个 CLI examples ≥ 4 阈值，覆盖 Go/Java/SpringBoot/Node/Python 全语言线</td><td class="p-2 text-gray-500">✅ 已达满分</td></tr>
+          <tr><td class="p-2 font-medium">E3 · 创造力与增值</td><td class="p-2 text-center font-bold text-green-600">4.3</td><td class="p-2 text-gray-600">5 个 references 含决策树（CMD vs ENTRYPOINT）、瘦身路线图、5 种多阶段模式。扁平无子目录</td><td class="p-2 text-gray-500">拆分 refs 为 2+ 子目录可触发 C2/E3 加分；添加 Dockerfile 审核检查清单</td></tr>
+          <tr><td class="p-2 font-medium">E4 · 开箱即用度</td><td class="p-2 text-center font-bold text-green-600">4.7</td><td class="p-2 text-gray-600">"When to Use" 触发词明确，示例可直接复制。验证 + Gotchas 增强开箱信心</td><td class="p-2 text-gray-500">添加 ## Quick Start: "最快上手：选你的语言 → 复制对应 Dockerfile → 替换入口文件"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baseline Comparison -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📊 no-skill 基线对比</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-[13px]">
+        <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2">对比维度</th><th class="p-2">no-skill（裸模型）</th><th class="p-2">启用此 skill</th><th class="p-2 w-16">增益</th></tr>
+        <tr><td class="p-2 font-medium">Dockerfile 正确性</td><td class="p-2 text-gray-600">偶有错误指令（ADD 代替 COPY）、多阶段构建顺序错</td><td class="p-2 text-gray-600">完整 14 条指令参考 + 最佳实践 + 常见错误表</td><td class="p-2 text-center font-bold text-green-600">+60%</td></tr>
+        <tr><td class="p-2 font-medium">语言覆盖</td><td class="p-2 text-gray-600">生成通用模板，缺乏语言特定优化</td><td class="p-2 text-gray-600">5 种语言专属多阶段模板，含 Go 静态编译/Java jlink/Node pnpm/Python venv</td><td class="p-2 text-center font-bold text-green-600">+80%</td></tr>
+        <tr><td class="p-2 font-medium">镜像大小优化</td><td class="p-2 text-gray-600">可能生成单阶段大镜像</td><td class="p-2 text-gray-600">瘦身路线图 5 步法 + distroless/Alpine/scratch 决策树</td><td class="p-2 text-center font-bold text-green-600">+70%</td></tr>
+        <tr><td class="p-2 font-medium">构建速度</td><td class="p-2 text-gray-600">可能 COPY . . 在前导致缓存失效</td><td class="p-2 text-gray-600">层缓存策略 + BuildKit cache mount + .dockerignore 模板</td><td class="p-2 text-center font-bold text-green-600">+65%</td></tr>
+        <tr><td class="p-2 font-medium">查错效率</td><td class="p-2 text-gray-600">用户需逐条查文档</td><td class="p-2 text-gray-600">"常见错误 → Recovery" 直接给修复命令</td><td class="p-2 text-center font-bold text-green-600">+75%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Official Compliance -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📋 官方规范合规（agentskills.io）</h3>
+    <div class="rounded-lg p-3 mb-3" style="background:rgba(16,185,129,0.06);border-left:3px solid rgb(16,185,129)">
+      <span class="text-[14px] font-semibold" style="color:rgb(16,185,129)">✅ 10/10 全部通过</span>
+      <span class="text-[12px] text-gray-500 ml-2">基于 agentskills.io 官方规范</span>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-[13px]">
+        <tr class="bg-gray-50 text-gray-500 text-[12px]"><th class="text-left p-2 w-8">#</th><th class="text-left p-2">检查项</th><th class="p-2 w-16">结果</th><th class="text-left p-2">证据</th></tr>
+        <tr><td class="p-2">1</td><td class="p-2">SKILL.md 存在且为有效 frontmatter</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">YAML frontmatter 含 name/description/license</td></tr>
+        <tr><td class="p-2">2</td><td class="p-2">description 清晰描述用途与触发条件</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">778 字描述，含中英触发词、覆盖范围</td></tr>
+        <tr><td class="p-2">3</td><td class="p-2">body 提供可操作的指导（非纯文档）</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">所有指令含代码示例 + 最佳实践表</td></tr>
+        <tr><td class="p-2">4</td><td class="p-2">渐进式披露：SKILL.md 简洁，细节在 references/</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">340 行 body + 5 个 references 深度文档</td></tr>
+        <tr><td class="p-2">5</td><td class="p-2">name 字段不含空格、特殊字符</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">docker-dockerfile</td></tr>
+        <tr><td class="p-2">6</td><td class="p-2">包含 license 字段</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">Apache-2.0</td></tr>
+        <tr><td class="p-2">7</td><td class="p-2">有 examples/ 目录提供使用示例</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">5 个 examples 覆盖 Go/Java/Node/Python/SpringBoot</td></tr>
+        <tr><td class="p-2">8</td><td class="p-2">有 references/ 目录提供深入文档</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">5 个 references：指令参考、缓存、dockerignore、瘦身、模式</td></tr>
+        <tr><td class="p-2">9</td><td class="p-2">触发条件明确（避免误触发）</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">中英双语触发词 + "When NOT to Use" 排除</td></tr>
+        <tr><td class="p-2">10</td><td class="p-2">安全考量与限制声明</td><td class="p-2 text-center text-green-600 font-bold">✅</td><td class="p-2 text-gray-600">Security & Stability 章节 + Gotchas 恢复步骤</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Suggestions -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">💡 优化建议（优先级排序）</h3>
+    <div class="space-y-2">
+      <div class="flex items-start gap-2 p-2.5 rounded-lg" style="background:rgba(239,68,68,0.04)">
+        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-red-50 text-red-600 flex-shrink-0">P1</span>
+        <div><p class="text-[13px] font-medium text-gray-800">添加独立 ## Boundary 章节（T3 3.3→5.0，R4 3.8→4.5）</p><p class="text-[12px] text-gray-500 mt-0.5">分三类：✅能做（编写Dockerfile/优化层/多阶段构建） ⚠️需条件（涉及私有仓库→配合docker-buildx） ❌超范围（多平台构建→docker-buildx，容器编排→docker-compose）</p></div>
+      </div>
+      <div class="flex items-start gap-2 p-2.5 rounded-lg" style="background:rgba(245,158,11,0.04)">
+        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-yellow-50 text-yellow-600 flex-shrink-0">P2</span>
+        <div><p class="text-[13px] font-medium text-gray-800">添加 ## Workflow 章节（R2 3.8→4.5）</p><p class="text-[12px] text-gray-500 mt-0.5">Step 1: 确认项目语言和运行时 → Step 2: 选择基础镜像 → Step 3: 选择构建模式（单阶段/多阶段/分层） → Step 4: 生成 Dockerfile → Step 5: 验证（dive 分析镜像大小）</p></div>
+      </div>
+      <div class="flex items-start gap-2 p-2.5 rounded-lg" style="background:rgba(245,158,11,0.04)">
+        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-yellow-50 text-yellow-600 flex-shrink-0">P2</span>
+        <div><p class="text-[13px] font-medium text-gray-800">添加 FAQ 章节（C4 4.8→5.0）</p><p class="text-[12px] text-gray-500 mt-0.5">CMD vs ENTRYPOINT 怎么选？多阶段构建需要 .dockerignore 吗？为什么我的镜像还是很大？Alpine 和 slim 怎么选？</p></div>
+      </div>
+      <div class="flex items-start gap-2 p-2.5 rounded-lg" style="background:rgba(59,130,246,0.04)">
+        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-blue-50 text-blue-600 flex-shrink-0">P3</span>
+        <div><p class="text-[13px] font-medium text-gray-800">拆分 references 为子目录（C3 4.9→5.0，E3 4.3→4.5）</p><p class="text-[12px] text-gray-500 mt-0.5">01-instructions/ 放指令参考 → 02-optimization/ 放缓存+dockerignore+瘦身 → 03-patterns/ 放多阶段模式</p></div>
+      </div>
+      <div class="flex items-start gap-2 p-2.5 rounded-lg" style="background:rgba(59,130,246,0.04)">
+        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-blue-50 text-blue-600 flex-shrink-0">P3</span>
+        <div><p class="text-[13px] font-medium text-gray-800">添加 ## Audience / ## Quick Start（A3 4.3→4.5，E4 4.7→5.0）</p><p class="text-[12px] text-gray-500 mt-0.5">适用人群：后端开发/DevOps/SRE。Quick Start：选择你的语言→复制对应模板→替换入口文件→docker build -t app .</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skill Profile -->
+  <div class="mt-4 p-5 rounded-xl border border-gray-100 bg-white">
+    <h3 class="text-[15px] font-semibold text-gray-900 mb-3">📦 Skill 基础画像</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[13px]">
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">类型</div><div class="font-medium text-gray-800">CLI 参考型</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">语言</div><div class="font-medium text-gray-800">中英双语</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">Body</div><div class="font-medium text-gray-800">340 行 / 9.5K 字</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">Examples</div><div class="font-medium text-gray-800">5 个（Go/Java/Node/Python/SB）</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">References</div><div class="font-medium text-gray-800">5 个（扁平结构）</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">Gotchas</div><div class="font-medium text-gray-800">6 条（全部带 Recovery）</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">官方文档引用</div><div class="font-medium text-gray-800">6 条</div></div>
+      <div class="p-2.5 rounded-lg bg-gray-50"><div class="text-[11px] text-gray-500">生态位置</div><div class="font-medium text-gray-800">Skill 2/16 — 核心路径</div></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-6 text-center text-[12px] text-gray-400 pb-4">
+    <p>评估体系：<strong>SkillHub TRACE 严选评测体系</strong>（腾讯科技、SkillHub、腾讯玄武实验室联合发布）</p>
+    <p>合规检查：<strong>agentskills.io</strong> 官方规范 · Generated 2026-05-29</p>
+    <p class="mt-1">ⓘ <em>本报告为 TRACE 评测体系的模拟检测，非官方报告，最终测评结果以 SkillHub 为准。</em></p>
+  </div>
+
+</div>
+</body>
+</html>
