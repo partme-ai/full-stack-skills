@@ -32,13 +32,13 @@ It is a stronger `uview-plus`-specific skill that:
 
 ## Official Documentation
 
-- **uview-plus docs**: https://ijry.github.io/uview-plus/
-- **Quick start**: https://ijry.github.io/uview-plus/components/quickstart.html
-- **Install / setup**: https://ijry.github.io/uview-plus/components/setting.html
-- **Setup rationale**: https://ijry.github.io/uview-plus/components/settingDesc.html
-- **Theme**: https://ijry.github.io/uview-plus/guide/theme.html
-- **Dark mode**: https://ijry.github.io/uview-plus/guide/darkMode.html
-- **Root bridge**: https://ijry.github.io/uview-plus/guide/root.html
+- **uview-plus docs**: https://uview-plus.jiangruyi.com/
+- **Quick start**: https://uview-plus.jiangruyi.com/components/quickstart.html
+- **Install / setup**: https://uview-plus.jiangruyi.com/components/setting.html
+- **Setup rationale**: https://uview-plus.jiangruyi.com/components/settingDesc.html
+- **Theme**: https://uview-plus.jiangruyi.com/guide/theme.html
+- **Dark mode**: https://uview-plus.jiangruyi.com/guide/darkMode.html
+- **Root bridge**: https://uview-plus.jiangruyi.com/guide/root.html
 - Full links and key component docs: [references/official.md](references/official.md)
 
 ## Retrieval and Networking
