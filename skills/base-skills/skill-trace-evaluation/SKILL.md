@@ -1,6 +1,6 @@
 ---
 name: skill-trace-evaluation
-description: Evaluate any Agent Skill using the SkillHub TRACE model — a five-dimension quality framework covering Trust (可信任度), Reliability (可靠性), Adaptability (适用性), Convention (规范性), and Effectiveness (有效性). This skill produces a per-dimension evaluation report with 20 sub-item scores, evidence-based commentary, baseline comparison (no-skill vs with-skill), Official compliance checklist (agentskills.io), and an overall rating (Excellent / Good / Needs improvement). Outputs both Markdown and interactive HTML reports with SVG radar charts. The evaluation conclusion is explicitly based on the SkillHub TRACE evaluation system, co-developed by Tencent Technology, SkillHub, and Tencent Xuanwu Lab. Use when the user asks for TRACE scoring, a T/R/A/C/E evaluation report, quality assessment by dimension, improvement suggestions organized by Trust/Reliability/Adaptability/Convention/Effectiveness. Also use when the user mentions "TRACE 评测", "T/R/A/C/E 评估", "五维度技能评估", "技能质量评测", "TRACE 评分", "生成 TRACE 报告", "TRACE 打分", "根据 TRACE 评估技能", "TRACE 五维画像", "TRACE 基线对比", "TRACE 雷达图", "技能评估报告", "skill evaluation report", "score this skill".
+description: 对任意 Agent Skill 做 TRACE 五维度评测（T/R/A/C/E），输出 Markdown/HTML 报告与雷达图；当用户要求“TRACE 评测/打分/生成 TRACE 报告/五维度评估”或需要改进建议时使用。
 license: Apache-2.0
 ---
 

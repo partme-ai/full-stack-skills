@@ -1,6 +1,6 @@
 ---
 name: plantuml
-description: Provides comprehensive guidance for creating PlantUML diagrams. PlantUML is a component that allows you to create various UML diagrams through simple textual descriptions. From sequence diagrams to deployment diagrams and beyond, PlantUML provides an easy way to create visual representations of complex systems. PlantUML is primarily focused on UML standards and is ideal for UML diagrams, enterprise architecture, C4 models, and diagrams requiring precise UML notation. Use when the user wants to draw, create, generate, make, build, or visualize any UML diagram, architecture diagram, or PlantUML-supported diagram type. This skill covers ALL PlantUML diagram types: UML Diagrams (sequence, use case, class, object, activity, component, deployment, state, timing diagrams), and Non-UML Diagrams (JSON/YAML data, EBNF, regex, network diagrams, Salt wireframes, Archimate, SDL, Ditaa, Gantt, chronology, mindmap, WBS, mathematical notations, ER diagrams, IE diagrams, ER Chen's notation, C4 model diagrams). Always use this skill when the user mentions PlantUML, UML diagrams, or complex architecture diagrams that require precise UML notation or C4 model support.
+description: 使用 PlantUML 输出 UML/架构图（```plantuml``` 代码块或 .puml，含 @startuml/@enduml），适用于类图/时序图/组件图/部署图/状态图/C4 模型等；当用户明确提到 PlantUML/UML/C4/.puml 或需要精确 UML 标注时使用。
 license: Complete terms in LICENSE.txt
 ---
 

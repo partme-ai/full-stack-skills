@@ -1,6 +1,6 @@
 ---
 name: mermaid
-description: Provides comprehensive guidance for creating Mermaid diagrams. Mermaid is a JavaScript-based diagramming and charting tool that uses Markdown-inspired text definitions and a renderer to create and modify complex diagrams. The main purpose of Mermaid is to help documentation catch up with development. Mermaid is particularly well-suited for use in Markdown documents, GitHub, GitLab, wikis, blogs, and other Markdown-based platforms. Use when the user wants to draw, create, generate, make, build, or visualize any diagram, chart, graph, flowchart, architecture diagram, sequence diagram, class diagram, state diagram, Gantt chart, mindmap, timeline, or any other visual diagram in Markdown-friendly format. This skill covers all 23+ Mermaid diagram types including flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, pie charts, quadrant charts, Git graphs, C4 diagrams, mindmaps, timelines, and more. Always use this skill when the user mentions Mermaid, needs diagrams for Markdown documentation, or wants quick diagrams that render directly in Markdown renderers.
+description: 使用 Mermaid 在 Markdown 中生成可渲染图表（```mermaid``` 代码块），适用于流程图/时序图/类图/状态图/ER/Gantt/思维导图/时间线等；当用户提到 Mermaid、Markdown 图表，或需要在 GitHub/GitLab/文档内直接渲染时使用。
 license: Complete terms in LICENSE.txt
 ---
 

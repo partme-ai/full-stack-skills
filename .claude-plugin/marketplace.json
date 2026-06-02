@@ -142,6 +142,15 @@
       ]
     },
     {
+      "name": "java-skills",
+      "description": "Java 编码规范与注释规范（1个技能）：统一 SLF4J+Lombok、判空与工具类优先级、以及 Controller/Service/ServiceImpl/Mapper 注释一致性。",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/java-skills/java-conventions"
+      ]
+    },
+    {
       "name": "nodejs-skills",
       "description": "Node.js 后端框架：Express、Fastify、NestJS、Koa（4个技能）。",
       "source": "./",
