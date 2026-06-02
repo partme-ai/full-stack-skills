@@ -461,7 +461,7 @@
     },
     {
       "name": "stitch-skills",
-      "description": "Stitch MCP 扩展技能（28个技能）：design-md、mcp、react-components、remotion、shadcn-ui、ui-design-spec、uview/uviewpro/vue 组件等。与 skill-group-mapping 一致。",
+      "description": "Stitch MCP 扩展技能（29个技能）：design-md、mcp、react-components、remotion、shadcn-ui、ui-design-spec、uview/uviewpro/uview-plus/vue 组件等。与 skill-group-mapping 一致。",
       "source": "./",
       "strict": false,
       "skills": [
@@ -489,6 +489,7 @@
         "./skills/stitch-skills/stitch-ui-prompt-architect",
         "./skills/stitch-skills/stitch-uview-components",
         "./skills/stitch-skills/stitch-uviewpro-components",
+        "./skills/stitch-skills/stitch-uview-plus-components",
         "./skills/stitch-skills/stitch-vue-bootstrap-components",
         "./skills/stitch-skills/stitch-vue-element-components",
         "./skills/stitch-skills/stitch-vue-layui-components",

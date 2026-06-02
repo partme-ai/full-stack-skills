@@ -6,7 +6,7 @@
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
-![Skills](https://img.shields.io/badge/Skills-25-orange)
+![Skills](https://img.shields.io/badge/Skills-29-orange)
 ![Plugins](https://img.shields.io/badge/Plugins-3-brightgreen)
 
 </div>
@@ -52,7 +52,7 @@
 - **stitch-ui-design-spec-generator**：从模糊需求生成结构化规范（主题、设备、风格）。
 - **stitch-skill-creator**：新场景技能的工厂。
 - **stitch-ued-guide**：UED 指南与视觉词汇。
-- **Stitch → 框架组件**：六个转换技能（Vue 3 + Element/Bootstrap/Layui/Vant，uni-app + uView/uView Pro），将 Stitch 屏幕转为可运行项目。
+- **Stitch → 框架组件**：七个转换技能（Vue 3 + Element/Bootstrap/Layui/Vant，uni-app + uView/uView Pro/uview-plus），将 Stitch 屏幕转为可运行项目。
 - **agents/stitch-ui-designer.md**：Stitch UI 工作流专用 agent。
 
 ### 何时用哪个
@@ -151,6 +151,7 @@ stitch-skills/
 *   **`stitch-vue-vant-components`**: 将 Stitch 屏幕转为 Vue 3 + Vant 4（Vite、.vue SFC、移动优先）。
 *   **`stitch-uview-components`**: 将 Stitch 屏幕转为 uni-app + Vue 2 + uView 2.0（pages/、u-* 组件）。
 *   **`stitch-uviewpro-components`**: 将 Stitch 屏幕转为 uni-app + Vue 3 + uView Pro（pages/、u-* 组件、rpx）。
+*   **`stitch-uview-plus-components`**: 将 Stitch 屏幕转为 uni-app + Vue 3 + `uview-plus`（pages/、`up-*` 组件、主题变量、安全区页壳，以及更强的 popup/upload/tabbar 约束）。
 
 ### 知识技能
 *   **`stitch-ued-guide`**: 被其他技能引用的设计指南、视觉词汇和提示词策略。
@@ -239,6 +240,7 @@ Trae 的 MCP 配置文件路径：
 - “使用 Stitch 和 Bootstrap 风格设计一个响应式的登录页”
 - “使用 Stitch 和 Element Plus 风格设计一个企业级后台管理系统”
 - “使用 Stitch 和 uView Pro 风格设计一个电商首页”
+- “使用 Stitch 和 uview-plus 风格设计一个移动电商首页”
 
 ### 端到端示例：使用 Stitch 实现 登录_PRD.md
 
