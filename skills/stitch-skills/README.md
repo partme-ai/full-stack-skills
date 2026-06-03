@@ -6,7 +6,7 @@
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
-![Skills](https://img.shields.io/badge/Skills-25-orange)
+![Skills](https://img.shields.io/badge/Skills-29-orange)
 ![Plugins](https://img.shields.io/badge/Plugins-3-brightgreen)
 
 </div>
@@ -88,7 +88,7 @@ This repo **subsumes and strengthens** [google-labs-code/stitch-skills](https://
 - **stitch-ui-design-spec-generator**: Structured spec (theme, device, style) from vague requests.
 - **stitch-skill-creator**: Factory for new scenario skills.
 - **stitch-ued-guide**: UED guidelines and visual vocabulary.
-- **Stitch → Framework Components**: Six conversion skills (Vue 3 + Element/Bootstrap/Layui/Vant, uni-app + uView/uView Pro) that turn Stitch screens into runnable projects.
+- **Stitch → Framework Components**: Seven conversion skills (Vue 3 + Element/Bootstrap/Layui/Vant, uni-app + uView/uView Pro/uview-plus) that turn Stitch screens into runnable projects.
 - **agents/stitch-ui-designer.md**: Dedicated agent for Stitch UI workflows.
 
 ### When to Use Which
@@ -188,6 +188,7 @@ stitch-skills/
 *   **`stitch-vue-vant-components`**: Convert Stitch screens to Vue 3 + Vant 4 (Vite, .vue SFC, mobile-first).
 *   **`stitch-uview-components`**: Convert Stitch screens to uni-app + Vue 2 + uView 2.0 (pages/, u-* components).
 *   **`stitch-uviewpro-components`**: Convert Stitch screens to uni-app + Vue 3 + uView Pro (pages/, u-* components, rpx).
+*   **`stitch-uview-plus-components`**: Convert Stitch screens to uni-app + Vue 3 + `uview-plus` (pages/, `up-*` components, theme variables, safe-area-aware shells, and stronger popup/upload/tabbar guidance).
 
 ### Knowledge Skills
 *   **`stitch-ued-guide`**: Design guidelines, visual vocabulary, and prompt strategies used by other skills.
@@ -230,8 +231,10 @@ Example:
 > "Use Stitch and Bootstrap style to design a landing page."
 > "Use Stitch and Element Plus style to design a CRM dashboard."
 > "Use Stitch and uView Pro style to design a mobile app home screen."
+> "Use Stitch and uview-plus style to design a mobile commerce home screen."
 > "Convert the Stitch login screen to a Vue 3 + Element Plus project."
 > "Convert the Stitch dashboard to a uni-app + uView Pro project."
+> "Convert the Stitch product publish screen to a uni-app + uview-plus project."
 
 Expected tool chain:
 
