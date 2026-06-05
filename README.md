@@ -236,18 +236,19 @@ This keeps context footprint minimal while providing deep expertise when require
 
 ## For Claude Code Users
 
-Add the marketplace to Claude Code to discover all skills:
-
-```bash
-claude mcp add full-stack-skills --marketplace https://github.com/partme-ai/full-stack-skills
-```
-
-Or install individual packages:
+Install individual skill packages:
 
 ```bash
 npx skills add full-statck-skills/tauri-skills    # 52 Tauri skills
 npx skills add full-statck-skills/spring-skills   # 7 Spring Boot skills
 npx skills add full-statck-skills/threejs-skills  # 18 Three.js skills
+```
+
+Or manually copy skills to your project:
+
+```bash
+git clone https://github.com/full-statck-skills/<skill-name>.git
+cp -r <skill-name>/skills/* .claude/skills/
 ```
 
 ---
