@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**454 个 Agent Skills。42 个包。一个统一生态。**
+**460+ 个 Agent Skills。42+ 个技能包。一个统一生态。**
 
 *前端 · 后端 · 移动端 · DevOps · AI 设计工具 — 生产级品质，独立安装。*
 

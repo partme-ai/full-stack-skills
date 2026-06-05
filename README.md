@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**454 Agent Skills. 42 Packages. One Ecosystem.**
+**460+ Agent Skills. 40+ Skills Packages. One Ecosystem.**
 
 *Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
 
