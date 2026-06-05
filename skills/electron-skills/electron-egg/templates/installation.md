@@ -3,7 +3,7 @@
 ## npm Installation
 
 ```bash
-npm install electron-egg
+npm install ee-core
 ```
 
 ## Project Initialization

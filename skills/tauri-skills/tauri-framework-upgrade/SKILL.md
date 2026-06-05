@@ -38,6 +38,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/start/migrate/
 - https://v2.tauri.app/start/migrate/from-tauri-1/
 - https://v2.tauri.app/start/migrate/from-tauri-2-beta/

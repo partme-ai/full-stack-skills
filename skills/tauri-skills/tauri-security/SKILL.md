@@ -37,6 +37,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/security/capabilities/
 - https://v2.tauri.app/security/scope/
 - https://v2.tauri.app/security/acl/

@@ -35,6 +35,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://crates.io/crates/tauri-wasm
 - https://v2.tauri.app/develop/calling-rust/#wasm
 - https://github.com/p1mo/tauri-wasm

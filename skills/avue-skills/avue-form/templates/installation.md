@@ -3,7 +3,7 @@
 ## npm Installation
 
 ```bash
-npm install @avue/form
+npm install @smallwei/avue
 ```
 
 ## Global Registration
@@ -11,8 +11,8 @@ npm install @avue/form
 ```javascript
 // main.js
 import Vue from 'vue'
-import Avue from '@avue/form'
-import '@avue/form/lib/theme-default/index.css'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 Vue.use(Avue)
 ```
@@ -21,10 +21,10 @@ Vue.use(Avue)
 
 ```javascript
 // Import default theme
-import '@avue/form/lib/theme-default/index.css'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 // Or import custom theme
-import '@avue/form/lib/theme-custom/index.css'
+import '@smallwei/avue/lib/theme-custom/index.css'
 ```
 
 ## Complete Setup
@@ -33,8 +33,8 @@ import '@avue/form/lib/theme-custom/index.css'
 // main.js
 import Vue from 'vue'
 import App from './App.vue'
-import Avue from '@avue/form'
-import '@avue/form/lib/theme-default/index.css'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 Vue.use(Avue)
 

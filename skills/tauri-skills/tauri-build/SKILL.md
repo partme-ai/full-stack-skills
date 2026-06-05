@@ -35,6 +35,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/distribute/
 - https://v2.tauri.app/distribute/app-store/
 - https://v2.tauri.app/distribute/appimage/
@@ -42,6 +43,7 @@ license: Complete terms in LICENSE.txt
 - https://v2.tauri.app/distribute/crabnebula-cloud/
 - https://v2.tauri.app/distribute/debian/
 - https://v2.tauri.app/distribute/dmg/
+- https://v2.tauri.app/distribute/flatpak/
 - https://v2.tauri.app/distribute/google-play/
 - https://v2.tauri.app/distribute/macos-application-bundle/
 - https://v2.tauri.app/distribute/microsoft-store/

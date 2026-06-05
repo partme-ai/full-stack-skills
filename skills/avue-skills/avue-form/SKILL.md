@@ -87,19 +87,19 @@ Avue-form is a Vue form component library that provides rich form controls and c
 **Using npm**:
 
 ```bash
-npm install @avue/form
+npm install @smallwei/avue
 ```
 
 **Using yarn**:
 
 ```bash
-yarn add @avue/form
+yarn add @smallwei/avue
 ```
 
 **Using pnpm**:
 
 ```bash
-pnpm add @avue/form
+pnpm add @smallwei/avue
 ```
 
 ### 3. Basic Setup
@@ -107,8 +107,8 @@ pnpm add @avue/form
 ```javascript
 // main.js
 import Vue from 'vue'
-import Avue from '@avue/form'
-import '@avue/form/lib/theme-default/index.css'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 Vue.use(Avue)
 ```

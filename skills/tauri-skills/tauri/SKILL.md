@@ -75,3 +75,7 @@ Use this skill as the **primary entry point** for any Tauri-related request. It 
 ## Keywords
 
 Tauri, tauri v2, rust, desktop app, mobile app, plugins, capabilities, permissions, system tray, notifications, file system, database, sql, http, websocket, updater, sidecar, ipc, events, commands, window customization
+
+## References
+
+- https://v2.tauri.app/llms.txt

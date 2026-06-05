@@ -35,6 +35,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/concept/
 - https://v2.tauri.app/concept/architecture/
 - https://v2.tauri.app/concept/process-model/

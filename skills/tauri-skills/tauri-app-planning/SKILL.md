@@ -34,3 +34,7 @@ This skill acts as a Senior Architect for Tauri projects. It guides the user fro
 
 - **Technical Design Document**: A Markdown document outlining the stack, plugins, and architecture.
 - **Todo List**: A structured list of tasks to build the project.
+
+## References
+
+- https://v2.tauri.app/llms.txt

@@ -90,26 +90,26 @@ Electron EGG is a desktop application development framework based on Electron an
 **Using npm**:
 
 ```bash
-npm install electron-egg
+npm install ee-core
 ```
 
 **Using yarn**:
 
 ```bash
-yarn add electron-egg
+yarn add ee-core
 ```
 
 **Using pnpm**:
 
 ```bash
-pnpm add electron-egg
+pnpm add ee-core
 ```
 
 ### 3. Basic Setup
 
 ```javascript
 // main.js
-const { Application } = require('electron-egg')
+const { Application } = require('ee-core')
 
 const app = new Application({
   // Configuration

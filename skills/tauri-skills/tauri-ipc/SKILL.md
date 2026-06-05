@@ -35,6 +35,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/concept/inter-process-communication/
 - https://v2.tauri.app/develop/calling-rust/
 - https://v2.tauri.app/develop/calling-frontend/
