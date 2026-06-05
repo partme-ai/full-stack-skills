@@ -44,6 +44,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/develop/
 - https://v2.tauri.app/develop/debug/
 - https://v2.tauri.app/develop/tests/

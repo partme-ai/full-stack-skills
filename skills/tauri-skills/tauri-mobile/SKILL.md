@@ -47,8 +47,11 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/mobile/
 - https://v2.tauri.app/mobile/development/
+- https://v2.tauri.app/learn/mobile-file-associations/
+- https://v2.tauri.app/learn/mobile-multiwindow/
 
 ## Keywords
 

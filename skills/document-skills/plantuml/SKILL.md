@@ -1,6 +1,6 @@
 ---
 name: plantuml
-description: "Create PlantUML diagrams for UML and architecture documentation including sequence, class, component, deployment, state, activity, use case, and timing diagrams plus non-UML types like C4 models, ER diagrams, Gantt charts, mindmaps, network diagrams, and wireframes. Use when the user mentions PlantUML, needs UML diagrams, wants enterprise architecture diagrams, or requires precise UML notation or C4 model support."
+description: 使用 PlantUML 输出 UML/架构图（```plantuml``` 代码块或 .puml，含 @startuml/@enduml），适用于类图/时序图/组件图/部署图/状态图/C4 模型等；当用户明确提到 PlantUML/UML/C4/.puml 或需要精确 UML 标注时使用。
 license: Complete terms in LICENSE.txt
 ---
 

@@ -18,13 +18,13 @@ This example demonstrates how to install Avue-form.
 
 ```bash
 # Using npm
-npm install @avue/form
+npm install @smallwei/avue
 
 # Using yarn
-yarn add @avue/form
+yarn add @smallwei/avue
 
 # Using pnpm
-pnpm add @avue/form
+pnpm add @smallwei/avue
 ```
 
 ### Example: Global Registration
@@ -32,8 +32,8 @@ pnpm add @avue/form
 ```javascript
 // main.js
 import Vue from 'vue'
-import Avue from '@avue/form'
-import '@avue/form/lib/theme-default/index.css'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 Vue.use(Avue)
 ```
@@ -42,10 +42,10 @@ Vue.use(Avue)
 
 ```javascript
 // Import default theme
-import '@avue/form/lib/theme-default/index.css'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 // Or import custom theme
-import '@avue/form/lib/theme-custom/index.css'
+import '@smallwei/avue/lib/theme-custom/index.css'
 ```
 
 ### Example: Complete Setup
@@ -54,8 +54,8 @@ import '@avue/form/lib/theme-custom/index.css'
 // main.js
 import Vue from 'vue'
 import App from './App.vue'
-import Avue from '@avue/form'
-import '@avue/form/lib/theme-default/index.css'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/theme-default/index.css'
 
 Vue.use(Avue)
 
@@ -66,7 +66,7 @@ new Vue({
 
 ### Key Points
 
-- Install @avue/form package
+- Install @smallwei/avue package
 - Register globally with Vue.use()
 - Import CSS styles
 - Ready to use in components

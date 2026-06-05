@@ -18,7 +18,7 @@ This example demonstrates main process usage in Electron EGG.
 
 ```javascript
 // main/index.js
-const { Application } = require('electron-egg')
+const { Application } = require('ee-core')
 
 const app = new Application({
   // Configuration
@@ -31,7 +31,7 @@ app.start()
 
 ```javascript
 // main/index.js
-const { Application } = require('electron-egg')
+const { Application } = require('ee-core')
 
 const app = new Application()
 

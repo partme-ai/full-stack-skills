@@ -24,13 +24,13 @@ This example demonstrates how to install Electron EGG.
 
 ```bash
 # Using npm
-npm install electron-egg
+npm install ee-core
 
 # Using yarn
-yarn add electron-egg
+yarn add ee-core
 
 # Using pnpm
-pnpm add electron-egg
+pnpm add ee-core
 ```
 
 ### Example: Project Initialization

@@ -39,7 +39,7 @@ project/
 
 ```javascript
 // main/index.js
-const { Application } = require('electron-egg')
+const { Application } = require('ee-core')
 
 const app = new Application({
   // Configuration

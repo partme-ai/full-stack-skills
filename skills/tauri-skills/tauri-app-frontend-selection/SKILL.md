@@ -45,6 +45,7 @@ license: Complete terms in LICENSE.txt
 
 ## References
 
+- https://v2.tauri.app/llms.txt
 - https://v2.tauri.app/start/frontend/
 - https://v2.tauri.app/start/frontend/nextjs/
 - https://v2.tauri.app/start/frontend/sveltekit/

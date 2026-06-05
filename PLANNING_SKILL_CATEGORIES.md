@@ -210,6 +210,7 @@ Marketplace (full-stack-skills)
 - `mermaid` - Mermaid 图表绘制（已存在）
 - `drawio-flowchart` - Draw.io 流程图绘制指南
 - `processon-mindmap` - ProcessOn 思维导图指南
+- `processon-diagram-generator` - ProcessOn 智能图表生成（流程图、架构图、时序图等）
 
 ---
 

@@ -142,6 +142,15 @@
       ]
     },
     {
+      "name": "java-skills",
+      "description": "Java 编码规范与注释规范（1个技能）：统一 SLF4J+Lombok、判空与工具类优先级、以及 Controller/Service/ServiceImpl/Mapper 注释一致性。",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/java-skills/java-conventions"
+      ]
+    },
+    {
       "name": "nodejs-skills",
       "description": "Node.js 后端框架：Express、Fastify、NestJS、Koa（4个技能）。",
       "source": "./",
@@ -311,7 +320,7 @@
     },
     {
       "name": "document-skills",
-      "description": "文档与图表：docx、pptx、pdf、xlsx、文档协作、API 文档、全栈产品文档标准（full-stack-doc）、ProcessOn 思维导图、Mermaid、PlantUML（10个技能，与 skill-group-mapping 一致）。",
+      "description": "文档与图表：docx、pptx、pdf、xlsx、文档协作、API 文档、全栈产品文档标准（full-stack-doc）、ProcessOn 思维导图、ProcessOn 图表生成、Mermaid、PlantUML（11个技能，与 skill-group-mapping 一致）。",
       "source": "./",
       "strict": false,
       "skills": [
@@ -323,6 +332,7 @@
         "./skills/document-skills/api-doc-generator",
         "./skills/document-skills/full-stack-doc",
         "./skills/document-skills/processon-mindmap",
+        "./skills/document-skills/processon-diagram-generator",
         "./skills/document-skills/mermaid",
         "./skills/document-skills/plantuml"
       ]

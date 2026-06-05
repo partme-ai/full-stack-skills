@@ -1,6 +1,6 @@
 ---
 name: mermaid
-description: "Create Mermaid diagrams for Markdown documentation including flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, pie charts, mindmaps, timelines, C4 diagrams, and 20+ other diagram types. Use when the user wants to draw, create, or visualize diagrams in Markdown-friendly format, mentions Mermaid, needs diagrams for GitHub/GitLab/wikis, or wants quick diagrams that render directly in Markdown renderers."
+description: 使用 Mermaid 在 Markdown 中生成可渲染图表（```mermaid``` 代码块），适用于流程图/时序图/类图/状态图/ER/Gantt/思维导图/时间线等；当用户提到 Mermaid、Markdown 图表，或需要在 GitHub/GitLab/文档内直接渲染时使用。
 license: Complete terms in LICENSE.txt
 ---
 

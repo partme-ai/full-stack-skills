@@ -13,17 +13,13 @@ lime-echart 是为 UniApp 和 UniAppX 提供 ECharts 图表兼容支持的插件
 2. 点击"使用 HBuilderX 导入插件"或下载插件
 3. 将插件导入到项目的 `uni_modules` 目录
 
-### 方式二：通过 npm 安装
+### 方式二：通过 npm 安装 ECharts 依赖
 
 ```bash
 npm install echarts --save
 ```
 
-然后从插件市场下载 lime-echart 插件，或使用 npm：
-
-```bash
-npm install lime-echart --save
-```
+然后从 [DCloud 插件市场](https://ext.dcloud.net.cn/plugin?id=4899) 下载 lime-echart 插件，放入 `uni_modules` 目录。
 
 ### 方式三：手动安装
 

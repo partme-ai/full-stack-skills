@@ -5,8 +5,8 @@
 ## 一、当前仓库概况
 
 - `skills/` 下共有 **42** 个技能组目录。
-- 仓库内共检出 **421** 个 `SKILL.md` 文件。
-- Marketplace 当前配置了 **40** 个插件，合计 **410** 个技能路径。
+- 仓库内共检出 **422** 个 `SKILL.md` 文件。
+- Marketplace 当前配置了 **40** 个插件，合计 **411** 个技能路径。
 - 已发布插件组：angular-skills、antd-skills、ascii-skills、avue-skills、build-skills、chart-skills、cocos-skills、database-skills、ddd-skills、design-skills、dev-utils-skills、devops-skills、docker-skills、document-skills、drawio-skills、electron-skills、flutter-skills、go-skills、mobile-native-skills、nodejs-skills、nvm-skills、ocrmypdf-skills、openspec-skills、pencil-skills、python-skills、react-skills、social-skills、speckit-skills、spring-skills、stitch-skills、svelte-skills、t2ui-skills、tauri-skills、teaching-skills、testing-skills、uniapp-skills、utility-skills、uview-skills、vue-skills、vue-ui-skills。
 - 文档入口建议优先查看：`README.md`、`docs/skill-group-mapping.md`、`docs/pipeline-stage-to-skills.md`、本文件。
 
@@ -47,7 +47,7 @@ full-stack-skills/
 | `dev-utils-skills` | 12 | 12 | 已发布 | `full-stack-doc` 已迁至 `document-skills` |
 | `devops-skills` | 6 | 6 | 已发布 | — |
 | `docker-skills` | 2 | 2 | 已发布 | — |
-| `document-skills` | 6 | 10 | 已发布 | 含 `full-stack-doc`；仍缺目录：docx、pptx、pdf、xlsx |
+| `document-skills` | 7 | 11 | 已发布 | 含 `full-stack-doc`、`processon-diagram-generator`；仍缺目录：docx、pptx、pdf、xlsx |
 | `drawio-skills` | 2 | 2 | 已发布 | — |
 | `electron-skills` | 3 | 3 | 已发布 | — |
 | `flutter-skills` | 2 | 2 | 已发布 | — |
@@ -85,7 +85,7 @@ full-stack-skills/
 
 ## 五、当前一致性说明
 
-- Marketplace 当前声明 410 个技能路径，其中 406 个可在仓库中直接解析。
+- Marketplace 当前声明 411 个技能路径，其中 407 个可在仓库中直接解析。
 - `document-skills` 当前存在未落地目录引用：`docx`、`pptx`、`pdf`、`xlsx`。
 - `tauri-skills` 目录下已有技能尚未纳入 Marketplace：`tauri-app-updater`。
 
