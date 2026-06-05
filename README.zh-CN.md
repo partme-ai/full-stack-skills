@@ -236,18 +236,19 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 
 ## Claude Code 用户
 
-将市场添加到 Claude Code 以发现所有技能：
-
-```bash
-claude mcp add full-stack-skills --marketplace https://github.com/partme-ai/full-stack-skills
-```
-
-或安装单个包：
+安装单个技能包：
 
 ```bash
 npx skills add full-statck-skills/tauri-skills    # 52 个 Tauri 技能
 npx skills add full-statck-skills/spring-skills   # 7 个 Spring Boot 技能
 npx skills add full-statck-skills/threejs-skills  # 18 个 Three.js 技能
+```
+
+或手动复制技能到项目：
+
+```bash
+git clone https://github.com/full-statck-skills/<skill-name>.git
+cp -r <skill-name>/skills/* .claude/skills/
 ```
 
 ---
