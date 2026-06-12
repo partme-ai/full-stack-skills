@@ -107,6 +107,8 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 | [python-skills](https://github.com/full-statck-skills/python-skills) | 3 | `npx skills add full-statck-skills/python-skills` |
 | [go-skills](https://github.com/full-statck-skills/go-skills) | 2 | `npx skills add full-statck-skills/go-skills` |
 | [java-skills](https://github.com/full-statck-skills/java-skills) | 3 | `npx skills add full-statck-skills/java-skills` |
+| [rust-skills](https://github.com/actionbook/rust-skills) | — | `npx skills add actionbook/rust-skills` |
+| [zig-skills](https://github.com/full-statck-skills/zig-skills) | 5 | `npx skills add full-statck-skills/zig-skills` |
 
 ### Cross-Platform & Desktop (72 skills)
 

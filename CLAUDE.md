@@ -80,52 +80,10 @@ The file `.claude-plugin/marketplace.json` defines which skills are published. E
 
 The `docs/repository-map.md` tracks all known discrepancies between the directory and marketplace.
 
-## Cross-Platform Adapter (`fskill`)
-
-The `adapters/` directory contains a standalone TypeScript CLI (`fskill`) that exports skills for 43 platforms. It converts the repo's `skills/<group>/<skill>/` structure into standard skill directories placed in each platform's expected path.
-
-### Development Commands
-
-```bash
-# Install the CLI globally from the adapters directory
-npm install -g ./adapters
-
-# Or for local development
-cd adapters && npm install && npm link
-
-# Build TypeScript
-cd adapters && npm run build
-
-# Audit skill counts and integrity
-fskill audit
-
-# List all 43 supported platforms
-fskill platforms
-
-# Export skills for all platforms (dry-run first)
-fskill convert --platform all --output ./adapters-output --dry-run
-fskill convert --platform all --output ./adapters-output
-
-# Export for a single platform
-fskill convert --platform claude-code --output ./adapters-output
-
-# Install to current project (defaults to .agents/skills/)
-fskill install
-
-# Install to specific platform with scope
-fskill install --platform cursor --scope project
-fskill install --platform antigravity --scope global
-```
-
-### Adapter source files:
-- `adapters/src/index.ts` — CLI entry point
-- `adapters/src/platform-registry.ts` — 43-platform path matrix
-- `adapters/src/skills.ts` — skill discovery and audit logic
-
 ## Key Documentation Files
 
 - `README.md` — Full project README (Chinese, with marketplace tables, installation guides, scenario-based install paths)
-- `README_EN.md` — English README
+- `README.zh-CN.md` — Detailed Chinese README with full skill catalog and architecture overview
 - `AGENTS.md` — Guidance for AI agents working in this repo (skill creation rules, directory conventions, zip packaging)
 - `AGENTS_EN.md` — English version of AGENTS.md
 - `AGENTS_PROMPT.md` — Role definitions and agent prompts for 50+ roles (product manager, architect, developer, etc.)
@@ -133,6 +91,7 @@ fskill install --platform antigravity --scope global
 - `PLATFORM_GUIDE.md` — Complete platform matrix with install paths for all 43 platforms
 - `QUICKSTART.md` — 5-minute marketplace setup guide for users forking this repo
 - `PLANNING_SKILL_CATEGORIES.md` — Skill category planning and classification
+- `SKILLS_INDEX.md` — Complete index of all in-repo skills organized by category
 - `docs/repository-map.md` — Canonical snapshot of repo structure vs. marketplace state
 - `docs/skill-group-mapping.md` — Mapping of skills to groups
 - `docs/pipeline-stage-to-skills.md` — Pipeline stage (requirements → design → dev → test → deploy) to skills mapping
@@ -144,7 +103,7 @@ fskill install --platform antigravity --scope global
 2. Add optional subdirectories (`references/`, `scripts/`, `examples/`, `assets/`)
 3. If the group plugin already exists in `marketplace.json`, append the skill path to its `skills` array
 4. If it's a new group, add both the plugin entry in `marketplace.json` and update `docs/repository-map.md`
-5. Run `fskill audit` to verify the skill is discoverable
+5. Update `SKILLS_INDEX.md` with the new skill entry
 6. Update README snapshot numbers if counts changed
 
 ## Important Constraints
