@@ -2,58 +2,58 @@
 
 # Full Stack Skills
 
-**460+ Agent Skills. 40+ Skills Packages. One Ecosystem.**
+**460+ 个 Agent Skills。42+ 个技能包。一个统一生态。**
 
-*Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
+*前端 · 后端 · 移动端 · DevOps · AI 设计工具 — 生产级品质，独立安装。*
 
 [![Stars](https://img.shields.io/github/stars/partme-ai/full-stack-skills?style=social)](https://github.com/partme-ai/full-stack-skills)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Compatible-purple)](https://agentskills.io)
 
-English | [简体中文](./README.zh-CN.md)
+[English](./README.md) | 简体中文
 
-[Introduction](#-introduction) ·
-[Install](#-install) ·
-[Skill Catalog](#-skill-catalog) ·
-[Architecture](#-architecture) ·
-[For Claude Code](#-for-claude-code-users) ·
-[Ecosystem](#-ecosystem) ·
-[Contributing](#-contributing)
+[简介](#-简介) ·
+[安装](#-安装) ·
+[技能目录](#-技能目录) ·
+[架构](#-架构) ·
+[Claude Code 用户](#-claude-code-用户) ·
+[生态](#-生态) ·
+[贡献](#-贡献指南)
 
 </div>
 
 ---
 
-## Introduction
+## 简介
 
-**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **42 independently installable packages** under the [full-statck-skills](https://github.com/full-statck-skills) GitHub organization.
+**Full Stack Skills** 是面向 AI 编码智能体的最全面 Agent Skills 集合的导航站。原为 460+ stars 的 monorepo，现已拆分为 [full-statck-skills](https://github.com/full-statck-skills) GitHub 组织下的 **42 个可独立安装的包**。
 
-Each package provides specialized knowledge, workflows, and reference materials that AI agents load on-demand — keeping context footprint minimal while delivering deep domain expertise when needed.
+每个包提供专业知识、工作流和参考资料，AI 智能体按需加载 — 保持上下文占用最小化，同时在需要时提供深度领域专业知识。
 
-> **Migration Complete (June 2026)**: All 454 skills have been migrated to individual repos. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
+> **迁移完成（2026 年 6 月）**：全部 454 个技能已迁移到独立仓库。本仓库现在是目录和导航站。所有现有 stars 和历史记录均保留在此。
 
-### Problems We Solve
+### 我们要解决的问题
 
-| Gap | Problem | Solution |
-|-----|---------|----------|
-| **Context overflow** | Loading all skills at once exceeds token limits | Per-package on-demand loading via `npx skills add` |
-| **Domain expertise** | Generic AI lacks deep framework knowledge | 454 specialized skills across 15 domains |
-| **Discoverability** | Skills scattered across repos, hard to find | This catalog — one README, all packages linked |
-| **Version lock** | Monorepo forces coordinated releases | Each package independently versioned and published |
+| 缺口 | 问题 | 解决方案 |
+|------|------|----------|
+| **上下文溢出** | 一次加载所有技能会超过 token 限制 | 通过 `npx skills add` 按包按需加载 |
+| **领域专业知识** | 通用 AI 缺乏深度框架知识 | 跨 15 个领域的 454 个专业技能 |
+| **可发现性** | 技能分散在各个仓库，难以查找 | 本目录 — 一个 README，所有包链接 |
+| **版本锁定** | monorepo 强制协调发布 | 每个包独立版本管理和发布 |
 
 ---
 
-## Install
+## 安装
 
-Install any skill package with one command:
+一条命令安装任意技能包：
 
 ```bash
-npx skills add full-statck-skills/vue-skills      # Vue.js ecosystem (7 skills)
-npx skills add full-statck-skills/tauri-skills     # Tauri desktop/mobile (52 skills)
-npx skills add full-statck-skills/spring-skills    # Spring Boot ecosystem (7 skills)
+npx skills add full-statck-skills/vue-skills      # Vue.js 生态（7 个技能）
+npx skills add full-statck-skills/tauri-skills     # Tauri 桌面/移动（52 个技能）
+npx skills add full-statck-skills/spring-skills    # Spring Boot 生态（7 个技能）
 ```
 
-Or install a specific skill from a package:
+或安装包中的特定技能：
 
 ```bash
 npx skills add full-statck-skills/vue-skills --skill vue3
@@ -61,47 +61,47 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 
 ---
 
-## Skill Catalog
+## 技能目录
 
-### Frontend Frameworks (15 skills)
+### 前端框架（15 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [vue-skills](https://github.com/full-statck-skills/vue-skills) | 7 | `npx skills add full-statck-skills/vue-skills` |
 | [react-skills](https://github.com/full-statck-skills/react-skills) | 6 | `npx skills add full-statck-skills/react-skills` |
 | [angular-skills](https://github.com/full-statck-skills/angular-skills) | 1 | `npx skills add full-statck-skills/angular-skills` |
 | [svelte-skills](https://github.com/full-statck-skills/svelte-skills) | 1 | `npx skills add full-statck-skills/svelte-skills` |
 
-### Frontend UI Libraries (13 skills)
+### 前端 UI 库（13 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [vue-ui-skills](https://github.com/full-statck-skills/vue-ui-skills) | 4 | `npx skills add full-statck-skills/vue-ui-skills` |
 | [antd-skills](https://github.com/full-statck-skills/antd-skills) | 4 | `npx skills add full-statck-skills/antd-skills` |
 | [uview-skills](https://github.com/full-statck-skills/uview-skills) | 2 | `npx skills add full-statck-skills/uview-skills` |
 | [avue-skills](https://github.com/full-statck-skills/avue-skills) | 3 | `npx skills add full-statck-skills/avue-skills` |
 
-### Build & Tooling (44 skills)
+### 构建与工具（44 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [build-skills](https://github.com/full-statck-skills/build-skills) | 6 | `npx skills add full-statck-skills/build-skills` |
 | [nvm-skills](https://github.com/full-statck-skills/nvm-skills) | 15 | `npx skills add full-statck-skills/nvm-skills` |
 | [vscode-skills](https://github.com/full-statck-skills/vscode-skills) | 4 | `npx skills add full-statck-skills/vscode-skills` |
 | [utility-skills](https://github.com/full-statck-skills/utility-skills) | 7 | `npx skills add full-statck-skills/utility-skills` |
 | [dev-utils-skills](https://github.com/full-statck-skills/dev-utils-skills) | 12 | `npx skills add full-statck-skills/dev-utils-skills` |
 
-### Charts & ASCII Art (15 skills)
+### 图表与 ASCII 艺术（15 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [chart-skills](https://github.com/full-statck-skills/chart-skills) | 2 | `npx skills add full-statck-skills/chart-skills` |
 | [ascii-skills](https://github.com/full-statck-skills/ascii-skills) | 13 | `npx skills add full-statck-skills/ascii-skills` |
 
-### Backend Frameworks (19 skills)
+### 后端框架（19 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [spring-skills](https://github.com/full-statck-skills/spring-skills) | 7 | `npx skills add full-statck-skills/spring-skills` |
 | [nodejs-skills](https://github.com/full-statck-skills/nodejs-skills) | 4 | `npx skills add full-statck-skills/nodejs-skills` |
 | [python-skills](https://github.com/full-statck-skills/python-skills) | 3 | `npx skills add full-statck-skills/python-skills` |
@@ -110,143 +110,143 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 | [rust-skills](https://github.com/actionbook/rust-skills) | — | `npx skills add actionbook/rust-skills` |
 | [zig-skills](https://github.com/full-statck-skills/zig-skills) | 5 | `npx skills add full-statck-skills/zig-skills` |
 
-### Cross-Platform & Desktop (72 skills)
+### 跨平台与桌面（72 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [uniapp-skills](https://github.com/full-statck-skills/uniapp-skills) | 13 | `npx skills add full-statck-skills/uniapp-skills` |
 | [flutter-skills](https://github.com/full-statck-skills/flutter-skills) | 2 | `npx skills add full-statck-skills/flutter-skills` |
 | [electron-skills](https://github.com/full-statck-skills/electron-skills) | 3 | `npx skills add full-statck-skills/electron-skills` |
 | [tauri-skills](https://github.com/full-statck-skills/tauri-skills) | 52 | `npx skills add full-statck-skills/tauri-skills` |
 | [mobile-native-skills](https://github.com/full-statck-skills/mobile-native-skills) | 2 | `npx skills add full-statck-skills/mobile-native-skills` |
 
-### 3D & Game (19 skills)
+### 3D 与游戏（19 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [threejs-skills](https://github.com/full-statck-skills/threejs-skills) | 18 | `npx skills add full-statck-skills/threejs-skills` |
 | [cocos-skills](https://github.com/full-statck-skills/cocos-skills) | 1 | `npx skills add full-statck-skills/cocos-skills` |
 
-### Architecture & Design Patterns (35 skills)
+### 架构与设计模式（35 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [ddd-skills](https://github.com/full-statck-skills/ddd-skills) | 16 | `npx skills add full-statck-skills/ddd-skills` |
 | [design-skills](https://github.com/full-statck-skills/design-skills) | 4 | `npx skills add full-statck-skills/design-skills` |
 | [drawio-skills](https://github.com/full-statck-skills/drawio-skills) | 2 | `npx skills add full-statck-skills/drawio-skills` |
 | [document-skills](https://github.com/full-statck-skills/document-skills) | 8 | `npx skills add full-statck-skills/document-skills` |
 | [ocrmypdf-skills](https://github.com/full-statck-skills/ocrmypdf-skills) | 5 | `npx skills add full-statck-skills/ocrmypdf-skills` |
 
-### Database & Storage (5 skills)
+### 数据库与存储（5 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [database-skills](https://github.com/full-statck-skills/database-skills) | 5 | `npx skills add full-statck-skills/database-skills` |
 
-### DevOps & Containers (22 skills)
+### DevOps 与容器（22 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [devops-skills](https://github.com/full-statck-skills/devops-skills) | 6 | `npx skills add full-statck-skills/devops-skills` |
 | [docker-skills](https://github.com/full-statck-skills/docker-skills) | 16 | `npx skills add full-statck-skills/docker-skills` |
 
-### Testing (9 skills)
+### 测试（9 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [testing-skills](https://github.com/full-statck-skills/testing-skills) | 9 | `npx skills add full-statck-skills/testing-skills` |
 
-### Spec-Driven Development (28 skills)
+### 规范驱动开发（28 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [speckit-skills](https://github.com/full-statck-skills/speckit-skills) | 13 | `npx skills add full-statck-skills/speckit-skills` |
 | [openspec-skills](https://github.com/full-statck-skills/openspec-skills) | 15 | `npx skills add full-statck-skills/openspec-skills` |
 
-### AI Design Tools — MCP (153 skills)
+### AI 设计工具 — MCP（153 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [stitch-skills](https://github.com/full-statck-skills/stitch-skills) | 28 | `npx skills add full-statck-skills/stitch-skills` |
 | [pencil-skills](https://github.com/full-statck-skills/pencil-skills) | 28 | `npx skills add full-statck-skills/pencil-skills` |
 | [t2ui-skills](https://github.com/full-statck-skills/t2ui-skills) | 97 | `npx skills add full-statck-skills/t2ui-skills` |
 
-### Teaching & Learning (3 skills)
+### 教学与学习（3 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [teaching-skills](https://github.com/full-statck-skills/teaching-skills) | 3 | `npx skills add full-statck-skills/teaching-skills` |
 
-### Social & Communication (2 skills)
+### 社交与沟通（2 个技能）
 
-| Package | Skills | Install |
-|---------|--------|---------|
+| 包 | 技能数 | 安装 |
+|---|--------|------|
 | [social-skills](https://github.com/full-statck-skills/social-skills) | 2 | `npx skills add full-statck-skills/social-skills` |
 
 ---
 
-## Architecture
+## 架构
 
-### How Skills Work
+### 技能工作原理
 
-Each skill follows the [Agent Skills Specification](https://agentskills.io):
+每个技能遵循 [Agent Skills 规范](https://agentskills.io)：
 
 ```
 <package>/
 ├── skills/
 │   ├── <skill-name>/
-│   │   ├── SKILL.md          # Required — loaded on-demand by AI agents
-│   │   ├── examples/         # Optional — usage examples
-│   │   ├── references/       # Optional — detailed reference docs
-│   │   └── scripts/          # Optional — executable scripts
+│   │   ├── SKILL.md          # 必需 — AI 智能体按需加载
+│   │   ├── examples/         # 可选 — 使用示例
+│   │   ├── references/       # 可选 — 详细参考文档
+│   │   └── scripts/          # 可选 — 可执行脚本
 │   └── ...
-├── .claude-plugin/           # Plugin metadata
+├── .claude-plugin/           # 插件元数据
 └── README.md
 ```
 
-### On-Demand Loading
+### 按需加载
 
-Skills use **progressive disclosure**:
-1. **At startup**: Only skill names and descriptions are loaded (minimal context)
-2. **On demand**: Full `SKILL.md` is loaded when the agent identifies a relevant task
-3. **Deep dive**: Reference files are read only when explicitly needed
+技能使用**渐进式披露**：
+1. **启动时**：仅加载技能名称和描述（最小上下文）
+2. **按需**：当智能体识别到相关任务时加载完整的 `SKILL.md`
+3. **深入**：仅在明确需要时读取参考文件
 
-This keeps context footprint minimal while providing deep expertise when required.
+这保持上下文占用最小化，同时在需要时提供深度专业知识。
 
-### Package Organization
+### 包组织
 
-| Category | Packages | Total Skills |
-|----------|----------|--------------|
-| Frontend Frameworks | 4 | 15 |
-| Frontend UI Libraries | 4 | 13 |
-| Build & Tooling | 5 | 44 |
-| Charts & ASCII Art | 2 | 15 |
-| Backend Frameworks | 5 | 19 |
-| Cross-Platform & Desktop | 5 | 72 |
-| 3D & Game | 2 | 19 |
-| Architecture & Design | 5 | 35 |
-| Database & Storage | 1 | 5 |
-| DevOps & Containers | 2 | 22 |
-| Testing | 1 | 9 |
-| Spec-Driven Dev | 2 | 28 |
-| AI Design Tools (MCP) | 3 | 153 |
-| Teaching & Learning | 1 | 3 |
-| Social & Communication | 1 | 2 |
-| **Total** | **42** | **454** |
+| 分类 | 包数 | 技能总数 |
+|------|------|----------|
+| 前端框架 | 4 | 15 |
+| 前端 UI 库 | 4 | 13 |
+| 构建与工具 | 5 | 44 |
+| 图表与 ASCII 艺术 | 2 | 15 |
+| 后端框架 | 5 | 19 |
+| 跨平台与桌面 | 5 | 72 |
+| 3D 与游戏 | 2 | 19 |
+| 架构与设计 | 5 | 35 |
+| 数据库与存储 | 1 | 5 |
+| DevOps 与容器 | 2 | 22 |
+| 测试 | 1 | 9 |
+| 规范驱动开发 | 2 | 28 |
+| AI 设计工具（MCP） | 3 | 153 |
+| 教学与学习 | 1 | 3 |
+| 社交与沟通 | 1 | 2 |
+| **总计** | **42** | **454** |
 
 ---
 
-## For Claude Code Users
+## Claude Code 用户
 
-Install individual skill packages:
+安装单个技能包：
 
 ```bash
-npx skills add full-statck-skills/tauri-skills    # 52 Tauri skills
-npx skills add full-statck-skills/spring-skills   # 7 Spring Boot skills
-npx skills add full-statck-skills/threejs-skills  # 18 Three.js skills
+npx skills add full-statck-skills/tauri-skills    # 52 个 Tauri 技能
+npx skills add full-statck-skills/spring-skills   # 7 个 Spring Boot 技能
+npx skills add full-statck-skills/threejs-skills  # 18 个 Three.js 技能
 ```
 
-Or manually copy skills to your project:
+或手动复制技能到项目：
 
 ```bash
 git clone https://github.com/full-statck-skills/<skill-name>.git
@@ -255,39 +255,39 @@ cp -r <skill-name>/skills/* .claude/skills/
 
 ---
 
-## Ecosystem
+## 生态
 
-| Resource | Link |
-|----------|------|
-| **All Packages** | [github.com/full-statck-skills](https://github.com/full-statck-skills) |
-| **Agent Skills Spec** | [agentskills.io](https://agentskills.io) |
+| 资源 | 链接 |
+|------|------|
+| **所有包** | [github.com/full-statck-skills](https://github.com/full-statck-skills) |
+| **Agent Skills 规范** | [agentskills.io](https://agentskills.io) |
 | **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
-| **Skills Directory** | [skills.sh](https://skills.sh) |
+| **Skills 目录** | [skills.sh](https://skills.sh) |
 | **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
 
 ---
 
-## Contributing
+## 贡献指南
 
-We welcome contributions! Each skill package is an independent repo under the [full-statck-skills](https://github.com/full-statck-skills) organization.
+欢迎贡献！每个技能包是 [full-statck-skills](https://github.com/full-statck-skills) 组织下的独立仓库。
 
-1. Fork the relevant package repo
-2. Add your skill following the [Agent Skills Spec](https://agentskills.io)
-3. Submit a PR
+1. Fork 相关包仓库
+2. 按照 [Agent Skills 规范](https://agentskills.io) 添加你的技能
+3. 提交 PR
 
-See [AGENTS.md](AGENTS.md) for detailed guidelines on creating skills.
+详见 [AGENTS.md](AGENTS.md) 创建技能的详细指南。
 
 ---
 
-## License
+## 许可证
 
-Apache 2.0 — see [LICENSE](LICENSE).
+Apache 2.0 — 详见 [LICENSE](LICENSE)。
 
 ---
 
 <div align="center">
 
-**If this project helps you, please give us a ⭐️**
+**如果这个项目对你有帮助，请给我们一个 ⭐️**
 
 Made with ❤️ by PartMe.AI Team
 
