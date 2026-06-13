@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Compatible-purple)](https://agentskills.io)
 
-[English](./README.md) | 简体中文
+[English](./README.en.md)
 
 [简介](#-简介) ·
 [安装](#-安装) ·
