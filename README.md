@@ -65,9 +65,9 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 
 ### 🌟 推荐技能包
 
-| 包 | ⭐ Stars | 技能数 | 说明 | 安装 |
-|---|:------:|:------:|------|------|
-| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | 内容创作（信息图、幻灯片、漫画、封面）、AI 图像生成、YouTube 转录、URL 转 Markdown、翻译、发布 | `npx skills add JimLiu/baoyu-skills` |
+| 包 | ⭐ Stars | 技能数 | 安装 |
+|---|:------:|:------:|------|
+| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | `npx skills add JimLiu/baoyu-skills` |
 
 ### 前端框架（15 个技能）
 
