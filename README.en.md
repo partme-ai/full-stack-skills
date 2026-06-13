@@ -63,6 +63,12 @@ npx skills add full-statck-skills/vue-skills --skill vue3
 
 ## Skill Catalog
 
+### 🌟 Recommended Packages
+
+| Package | ⭐ Stars | Skills | Description | Install |
+|---------|:------:|:------:|-------------|---------|
+| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | Content creation (infographics, slides, comics, covers), AI image gen, YouTube transcript, URL-to-Markdown, translation, publishing | `npx skills add JimLiu/baoyu-skills` |
+
 ### Frontend Frameworks (15 skills)
 
 | Package | Skills | Install |
