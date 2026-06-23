@@ -77,6 +77,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [react-skills](https://github.com/full-stack-skills/react-skills) | 6 | `npx skills add full-stack-skills/react-skills` |
 | [angular-skills](https://github.com/full-stack-skills/angular-skills) | 1 | `npx skills add full-stack-skills/angular-skills` |
 | [svelte-skills](https://github.com/full-stack-skills/svelte-skills) | 1 | `npx skills add full-stack-skills/svelte-skills` |
+| [pixijs-skills](https://github.com/pixijs/pixijs-skills) | 1 | `npx skills add pixijs/pixijs-skills` |
 
 ### 前端 UI 库（13 个技能）
 
