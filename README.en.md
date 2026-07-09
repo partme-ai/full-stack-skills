@@ -271,6 +271,7 @@ cp -r <skill-name>/skills/* .claude/skills/
 | **Skills Directory** | [skills.sh](https://skills.sh) |
 | **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
 | **Addy Osmani's Agent Skills** | [github.com/addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
+| **Browserbase Skills** | [github.com/browserbase/skills](https://github.com/browserbase/skills) |
 
 ---
 
