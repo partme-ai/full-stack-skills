@@ -26,4 +26,4 @@
 
 - 与 stitch-skills、pencil-skills、full-stack-skills 其他技能一并加载，由编排 Agent 或人工按阶段按需调用。
 - 各 speckit-* 的 SKILL.md 保持上游格式；仅在本仓库文档中说明其与全链路阶段的对应关系。
-- 独立仓库 **speckit-skills**（PartMeAI）提供与 speckit-agent-skills 对齐的 10 个技能及 Claude Code/Cursor 插件市场配置，可与 full-stack、t2ui、stitch、pencil 技能一并使用。
+- 独立仓库 **speckit-skills**（PartMe.AI）提供与 speckit-agent-skills 对齐的 10 个技能及 Claude Code/Cursor 插件市场配置，可与 full-stack、t2ui、stitch、pencil 技能一并使用。
