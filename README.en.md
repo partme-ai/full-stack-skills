@@ -104,7 +104,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [chart-skills](https://github.com/full-stack-skills/chart-skills) | 2 | `npx skills add full-stack-skills/chart-skills` |
 | [ascii-skills](https://github.com/full-stack-skills/ascii-skills) | 13 | `npx skills add full-stack-skills/ascii-skills` |
 
-### Backend Frameworks (44 skills)
+### Backend Frameworks (46 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
@@ -113,7 +113,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [python-skills](https://github.com/full-stack-skills/python-skills) | 3 | `npx skills add full-stack-skills/python-skills` |
 | [go-skills](https://github.com/full-stack-skills/go-skills) | 2 | `npx skills add full-stack-skills/go-skills` |
 | [java-skills](https://github.com/full-stack-skills/java-skills) | 3 | `npx skills add full-stack-skills/java-skills` |
-| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 25 | `npx skills add full-stack-skills/rust-skills` |
+| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 26 | `npx skills add full-stack-skills/rust-skills` |
 | [zig-skills](https://github.com/full-stack-skills/zig-skills) | 5 | `npx skills add full-stack-skills/zig-skills` |
 
 ### Cross-Platform & Desktop (72 skills)
@@ -227,7 +227,7 @@ This keeps context footprint minimal while providing deep expertise when require
 | Frontend UI Libraries | 4 | 13 |
 | Build & Tooling | 5 | 44 |
 | Charts & ASCII Art | 2 | 15 |
-| Backend Frameworks | 5 | 44 |
+| Backend Frameworks | 5 | 46 |
 | Cross-Platform & Desktop | 5 | 72 |
 | 3D & Game | 2 | 19 |
 | Architecture & Design | 5 | 35 |
@@ -238,7 +238,7 @@ This keeps context footprint minimal while providing deep expertise when require
 | AI Design Tools (MCP) | 3 | 153 |
 | Teaching & Learning | 1 | 3 |
 | Social & Communication | 1 | 2 |
-| **Total** | **42** | **460** |
+| **Total** | **42** | **462** |
 
 ---
 
