@@ -104,7 +104,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [chart-skills](https://github.com/full-stack-skills/chart-skills) | 2 | `npx skills add full-stack-skills/chart-skills` |
 | [ascii-skills](https://github.com/full-stack-skills/ascii-skills) | 13 | `npx skills add full-stack-skills/ascii-skills` |
 
-### 后端框架（42 个技能）
+### 后端框架（44 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
@@ -113,7 +113,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [python-skills](https://github.com/full-stack-skills/python-skills) | 3 | `npx skills add full-stack-skills/python-skills` |
 | [go-skills](https://github.com/full-stack-skills/go-skills) | 2 | `npx skills add full-stack-skills/go-skills` |
 | [java-skills](https://github.com/full-stack-skills/java-skills) | 3 | `npx skills add full-stack-skills/java-skills` |
-| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 23 | `npx skills add full-stack-skills/rust-skills` |
+| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 25 | `npx skills add full-stack-skills/rust-skills` |
 | [zig-skills](https://github.com/full-stack-skills/zig-skills) | 5 | `npx skills add full-stack-skills/zig-skills` |
 
 ### 跨平台与桌面（72 个技能）
@@ -227,7 +227,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | 前端 UI 库 | 4 | 13 |
 | 构建与工具 | 5 | 44 |
 | 图表与 ASCII 艺术 | 2 | 15 |
-| 后端框架 | 5 | 42 |
+| 后端框架 | 5 | 44 |
 | 跨平台与桌面 | 5 | 72 |
 | 3D 与游戏 | 2 | 19 |
 | 架构与设计 | 5 | 35 |
@@ -238,7 +238,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | AI 设计工具（MCP） | 3 | 153 |
 | 教学与学习 | 1 | 3 |
 | 社交与沟通 | 1 | 2 |
-| **总计** | **42** | **458** |
+| **总计** | **42** | **460** |
 
 ---
 
