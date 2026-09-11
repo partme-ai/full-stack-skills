@@ -43,6 +43,18 @@ specific one that applies:
 Third-party components embedded in this collection (fonts, libraries, bundled media)
 are attributed in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
+> **Skill-level license scheme (unified 2026-09-11).** Every skill declares its
+> license in the `SKILL.md` frontmatter `license:` field, with exactly two values:
+>
+> | Value | Applies to | Count |
+> |---|---|---:|
+> | `Apache-2.0` | First-party skills authored by PartMe.AI | 636 |
+> | `MIT` | Skills whose content derives from, or is authored by, a third party | 35 |
+>
+> The MIT set is itemized in §3.1 and §3.2 below. Skills must not be relicensed to
+> Apache-2.0 if their content originated elsewhere — that is the whole point of the
+> exception list.
+
 > **Important:** a package-level Apache-2.0 declaration covers the package's own
 > content. Individual skills that derive from third-party projects retain their
 > original license — see §3. Downstream redistributors should preserve the
@@ -99,23 +111,34 @@ preserved.**
 | `build-skills` | `rspack` | Bytedance Inc and its affiliates | MIT |
 | `cocos-skills` | `cocos2d-x` | (see skill `LICENSE.txt`) | MIT |
 
-### 3.3 First-party MIT skills (PartMe.AI authored)
+All five carry a per-skill `LICENSE.txt` with the original copyright notice. On
+2026-09-11 their frontmatter `license:` fields were set to `MIT`; `caveman` and
+`codebase-design` had been missing the field entirely, and `rspack` / `cocos2d-x`
+had been pointing at `LICENSE.txt` in a way that obscured the MIT grant.
 
-These skills are authored by PartMe.AI but carry an MIT (rather than Apache-2.0)
-skill-level license. This is an internal inconsistency, not a third-party claim.
+### 3.3 First-party MIT skills — resolved 2026-09-11
 
-| Package | Skills |
-|---|---|
-| `uniapp-skills` | `uniapp-ad`, `uniapp-cloud`, `uniapp-mini`, `uniapp-native-app`, `uniapp-native-plugin`, `uniapp-plugin`, `uniapp-project`, `uniappx-project` (8 skills, © 2024 partme-ai, MIT) |
+**No skills remain in this category.** Eight `uniapp-skills` skills were previously
+authored by PartMe.AI under MIT (`Copyright (c) 2024 partme-ai`) while the package
+README and badge declared Apache-2.0. To remove the inconsistency, the frontmatter
+`license:` field and the per-skill `LICENSE.txt` were converted to Apache-2.0 on
+2026-09-11, matching the package declaration.
 
-### 3.4 Pointer-style declarations
+| Package | Skills | Was | Now |
+|---|---|---|---|
+| `uniapp-skills` | `uniapp-ad`, `uniapp-cloud`, `uniapp-mini`, `uniapp-native-app`, `uniapp-native-plugin`, `uniapp-plugin`, `uniapp-project`, `uniappx-project` | MIT (© partme-ai) | Apache-2.0 |
 
-12 skills carry a short pointer rather than the full license text. They are
-Apache-2.0 by intent; the pointer refers to the package-level `LICENSE`:
+### 3.4 Pointer-style license text
+
+A small number of skills ship a short pointer in their `LICENSE.txt` rather than the
+full license text. They are Apache-2.0 by intent; the pointer refers to the
+package-level `LICENSE`:
 
 - `pencil-skills/skills/pencil-design-from-stitch-html` — `Apache-2.0. See repository LICENSE.`
 - `stitch-skills/skills/stitch-*` — 10 skills, same wording
 - `agent-skills/skills/skill-trace-evaluation`, `skill-official-evaluation` — `Apache-2.0`
+
+Their frontmatter `license:` field reads `Apache-2.0`.
 
 ### 3.5 Skills whose content documents third-party tools
 
@@ -134,6 +157,12 @@ respective owners:
 
 These skills do not copy upstream source code; they provide original guidance and
 link to the upstream documentation as the source of truth.
+
+Three of them — `document-skills/markitdown-awesome`, `markitdown-cli`,
+`markitdown-ocr` — are written directly against Microsoft MarkItDown's CLI source
+(`packages/markitdown/src/markitdown/__main__.py`). They therefore declare
+`license: MIT` and credit the upstream project, rather than being relicensed to
+Apache-2.0. No upstream source code is copied.
 
 ---
 
@@ -185,7 +214,7 @@ link to the upstream documentation as the source of truth.
 | `teaching-skills` | 3 | Apache-2.0 | [↗](https://github.com/full-stack-skills/teaching-skills) |
 | `testing-skills` | 10 | Apache-2.0 | [↗](https://github.com/full-stack-skills/testing-skills) |
 | `threejs-skills` | 18 | Apache-2.0 | [↗](https://github.com/full-stack-skills/threejs-skills) |
-| `uniapp-skills` | 13 | Apache-2.0 (8 MIT skills, §3.3) | [↗](https://github.com/full-stack-skills/uniapp-skills) |
+| `uniapp-skills` | 13 | Apache-2.0 (§3.3 resolved 2026-09-11) | [↗](https://github.com/full-stack-skills/uniapp-skills) |
 | `uview-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/uview-skills) |
 | `vscode-skills` | 4 | Apache-2.0 | [↗](https://github.com/full-stack-skills/vscode-skills) |
 | `vue-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/vue-skills) |
@@ -217,15 +246,16 @@ git clone https://github.com/full-stack-skills/<package>.git
 cat <package>/LICENSE                      # package-level license
 
 # Find skills with a non-default license
-grep -r '^license:' <package>/skills/*/SKILL.md | grep -v 'Apache' | grep -v 'LICENSE.txt'
+grep -r '^license:' <package>/skills/*/SKILL.md | grep -v 'Apache-2.0'
 
 # Inspect a specific skill's license text
 cat <package>/skills/<skill>/LICENSE.txt
 ```
 
-Skill frontmatter declares the license with a `license:` field; when it reads
-`Complete terms in LICENSE.txt`, the authoritative text is the `LICENSE.txt` file
-in the same skill directory.
+Skill frontmatter declares the license with a `license:` field, which is either
+`Apache-2.0` (first-party) or `MIT` (third-party or upstream-derived, §3.1–§3.2).
+For MIT skills the authoritative copyright text is the `LICENSE.txt` file in the
+same skill directory.
 
 ---
 
@@ -242,8 +272,12 @@ Tracked openly so reviewers do not have to discover them independently:
 | 2 `stitch-skills` skills reproduced Apache-2.0 upstream text without attribution | **Fixed 2026-09-11** — per-skill `LICENSE.txt` + source note added (§3.1) |
 | 10 `speckit-skills` skills were near-verbatim from an AGPL-3.0 third-party packaging | **Fixed 2026-09-11** — regenerated from the MIT upstream `github/spec-kit` (§3.1) |
 | READMEs stated "460+ skills / 42 packages" | **Fixed 2026-09-11** — corrected to 671 skills / 47 packages |
-| 8 first-party skills carry MIT instead of Apache-2.0 (§3.3) | Open — internal inconsistency; both are permissive |
-| 12 skills use pointer-style license declarations (§3.4) | Open — intentional brevity; points to package `LICENSE` |
+| 8 first-party skills carry MIT instead of Apache-2.0 (§3.3) | **Fixed 2026-09-11** — converted to Apache-2.0 (frontmatter + `LICENSE.txt`) |
+| 12 skills use pointer-style license declarations (§3.4) | **Fixed 2026-09-11** — frontmatter normalized to `Apache-2.0`; pointer text remains only in `LICENSE.txt` |
+| 296 skills carried no `license:` frontmatter field at all | **Fixed 2026-09-11** — 294 set to `Apache-2.0`; 2 third-party set to `MIT` |
+| 4 different license value spellings (`Complete terms in LICENSE.txt` ×214, `Apache-2.0` ×127, `MIT` ×31, `Apache 2.0` ×1) | **Fixed 2026-09-11** — unified: `Apache-2.0` (636) / `MIT` (35) |
+| `build-skills/rspack` and `cocos-skills/cocos2d-x` pointed at `LICENSE.txt` while their actual license is third-party MIT | **Fixed 2026-09-11** — frontmatter corrected to `MIT` |
+| 5 skills had unparseable YAML frontmatter (unquoted colon inside `description:`) | **Fixed 2026-09-11** — description values quoted |
 
 ## 8. Contact
 
