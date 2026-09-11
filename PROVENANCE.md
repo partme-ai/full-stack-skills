@@ -55,7 +55,37 @@ are attributed in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 Most of the 671 skills in the collection are Apache-2.0. The following skills carry
 a **different** license and must be treated accordingly.
 
-### 3.1 Third-party MIT skills (retain original copyright)
+### 3.1 Upstream-derived skills (content copied or adapted from other projects)
+
+A subset of skills reproduce, or are closely adapted from, skills published by other
+projects. Each such skill carries a **`LICENSE.txt`** in its own directory and a
+**来源声明 / source note** at the top of its `SKILL.md`. The applicable licence is
+the upstream one — not the package's Apache-2.0.
+
+| Package | Skills | Upstream source | Upstream license | Copyright |
+|---|---:|---|---|---|
+| `speckit-skills` | 9 skills (`analyze`, `checklist`, `clarify`, `constitution`, `implement`, `plan`, `specify`, `tasks`, `taskstoissues`) | [`github/spec-kit`](https://github.com/github/spec-kit) | **MIT** | Copyright GitHub, Inc. |
+| `python-skills` | 16 skills (`python-type-safety`, `python-testing-patterns`, `architecture-patterns`, `python-observability`, `python-code-style`, `python-anti-patterns`, `python-error-handling`, `python-background-jobs`, `python-resource-management`, `python-project-structure`, `python-configuration`, `python-resilience`, `python-performance-optimization`, `python-packaging`, `fastapi-templates`, `python-design-patterns`) | [`wshobson/agents`](https://github.com/wshobson/agents) | **MIT** | Copyright (c) 2024 Seth Hobson |
+| `devops-skills` | `spark-optimization` | [`wshobson/agents`](https://github.com/wshobson/agents) | **MIT** | Copyright (c) 2024 Seth Hobson |
+| `stitch-skills` | `stitch-design-md`, `stitch-ui-prompt-architect` | [`google-labs-code/stitch-skills`](https://github.com/google-labs-code/stitch-skills) | **Apache-2.0** | Google LLC and contributors |
+| `agent-skills` | `browser-trace` | [`browserbase/skills`](https://github.com/browserbase/skills) | **MIT** | Copyright (c) 2026 Browserbase, Inc. |
+
+**Note on `speckit-skills` (2026-09-11):** an earlier revision of the 10
+`speckit-*` skills was found to be near-verbatim identical to a third-party packaging
+of the same prompts that is published under AGPL-3.0. Because the *content* originates
+with `github/spec-kit` (MIT), those skills were **regenerated directly from the MIT
+upstream** rather than from the AGPL-3.0 packaging. The current text matches the MIT
+source at 0.96–0.99 similarity and carries the MIT notice. `speckit-baseline` has no
+official Spec Kit counterpart, so its analysis workflow was rewritten as first-party
+content that reuses only the (MIT) spec-structure conventions.
+
+**Redistribution:** for these skills, preserve the `LICENSE.txt` and the source note
+in any copy or substantial portion. Where the upstream license is MIT, that means
+carrying the copyright notice and permission text. Where it is Apache-2.0, that means
+carrying the license text and stating any modifications (this project adapts and
+integrates the upstream content).
+
+### 3.2 Third-party MIT skills (retain original copyright)
 
 These skills were authored by or derived from third-party projects and are
 distributed under their original MIT license. **Their copyright notices must be
@@ -69,7 +99,7 @@ preserved.**
 | `build-skills` | `rspack` | Bytedance Inc and its affiliates | MIT |
 | `cocos-skills` | `cocos2d-x` | (see skill `LICENSE.txt`) | MIT |
 
-### 3.2 First-party MIT skills (PartMe.AI authored)
+### 3.3 First-party MIT skills (PartMe.AI authored)
 
 These skills are authored by PartMe.AI but carry an MIT (rather than Apache-2.0)
 skill-level license. This is an internal inconsistency, not a third-party claim.
@@ -78,7 +108,7 @@ skill-level license. This is an internal inconsistency, not a third-party claim.
 |---|---|
 | `uniapp-skills` | `uniapp-ad`, `uniapp-cloud`, `uniapp-mini`, `uniapp-native-app`, `uniapp-native-plugin`, `uniapp-plugin`, `uniapp-project`, `uniappx-project` (8 skills, © 2024 partme-ai, MIT) |
 
-### 3.3 Pointer-style declarations
+### 3.4 Pointer-style declarations
 
 12 skills carry a short pointer rather than the full license text. They are
 Apache-2.0 by intent; the pointer refers to the package-level `LICENSE`:
@@ -87,9 +117,9 @@ Apache-2.0 by intent; the pointer refers to the package-level `LICENSE`:
 - `stitch-skills/skills/stitch-*` — 10 skills, same wording
 - `agent-skills/skills/skill-trace-evaluation`, `skill-official-evaluation` — `Apache-2.0`
 
-### 3.4 Skills whose content documents third-party tools
+### 3.5 Skills whose content documents third-party tools
 
-Many skills (e.g. `speckit-skills/*`, `openspec-skills/*`, `nvm-skills/*`,
+Many skills (e.g. `openspec-skills/*`, `nvm-skills/*`,
 `document-skills/markitdown-*`) document **how to use** third-party tools and
 services. The skill text is first-party; the referenced tools belong to their
 respective owners:
@@ -114,21 +144,21 @@ link to the upstream documentation as the source of truth.
 
 | Package | Skills | License | Repo |
 |---|---:|---|---|
-| `agent-skills` | 15 | Apache-2.0 (5 MIT skills, §3.1/§3.3) | [↗](https://github.com/full-stack-skills/agent-skills) |
+| `agent-skills` | 15 | Apache-2.0 (1 MIT-derived §3.1; 3 MIT §3.2; 2 pointer §3.4) | [↗](https://github.com/full-stack-skills/agent-skills) |
 | `angular-skills` | 1 | Apache-2.0 | [↗](https://github.com/full-stack-skills/angular-skills) |
 | `antd-skills` | 4 | Apache-2.0 | [↗](https://github.com/full-stack-skills/antd-skills) |
 | `ascii-skills` | 13 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ascii-skills) |
 | `avue-skills` | 3 | Apache-2.0 | [↗](https://github.com/full-stack-skills/avue-skills) |
-| `build-skills` | 7 | Apache-2.0 (1 MIT skill, §3.1) | [↗](https://github.com/full-stack-skills/build-skills) |
+| `build-skills` | 7 | Apache-2.0 (1 MIT skill, §3.2) | [↗](https://github.com/full-stack-skills/build-skills) |
 | `chart-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/chart-skills) |
-| `cocos-skills` | 1 | Apache-2.0 (1 MIT skill, §3.1) | [↗](https://github.com/full-stack-skills/cocos-skills) |
+| `cocos-skills` | 1 | Apache-2.0 (1 MIT skill, §3.2) | [↗](https://github.com/full-stack-skills/cocos-skills) |
 | `database-skills` | 5 | Apache-2.0 | [↗](https://github.com/full-stack-skills/database-skills) |
 | `ddd-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ddd-skills) |
 | `ddd4j-skills` | 62 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ddd4j-skills) |
 | `design-skills` | 9 | Apache-2.0 | [↗](https://github.com/full-stack-skills/design-skills) |
-| `devops-skills` | 10 | Apache-2.0 | [↗](https://github.com/full-stack-skills/devops-skills) |
+| `devops-skills` | 10 | Apache-2.0 (1 MIT-derived skill, §3.1) | [↗](https://github.com/full-stack-skills/devops-skills) |
 | `docker-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/docker-skills) |
-| `document-skills` | 11 | Apache-2.0 (3 MIT skills, §3.4) | [↗](https://github.com/full-stack-skills/document-skills) |
+| `document-skills` | 11 | Apache-2.0 (3 MIT skills, §3.5) | [↗](https://github.com/full-stack-skills/document-skills) |
 | `drawio-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/drawio-skills) |
 | `electron-skills` | 3 | Apache-2.0 | [↗](https://github.com/full-stack-skills/electron-skills) |
 | `firmware-skills` | 20 | Apache-2.0 | [↗](https://github.com/full-stack-skills/firmware-skills) |
@@ -140,14 +170,14 @@ link to the upstream documentation as the source of truth.
 | `nvm-skills` | 15 | Apache-2.0 | [↗](https://github.com/full-stack-skills/nvm-skills) |
 | `ocrmypdf-skills` | 5 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ocrmypdf-skills) |
 | `openspec-skills` | 15 | Apache-2.0 | [↗](https://github.com/full-stack-skills/openspec-skills) |
-| `pencil-skills` | 28 | Apache-2.0 (§3.3 pointer) | [↗](https://github.com/full-stack-skills/pencil-skills) |
-| `python-skills` | 19 | Apache-2.0 | [↗](https://github.com/full-stack-skills/python-skills) |
+| `pencil-skills` | 28 | Apache-2.0 (§3.4 pointer) | [↗](https://github.com/full-stack-skills/pencil-skills) |
+| `python-skills` | 19 | Apache-2.0 (16 MIT-derived skills, §3.1) | [↗](https://github.com/full-stack-skills/python-skills) |
 | `react-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/react-skills) |
 | `rust-skills` | 29 | Apache-2.0 | [↗](https://github.com/full-stack-skills/rust-skills) |
 | `social-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/social-skills) |
-| `speckit-skills` | 13 | Apache-2.0 (§3.4 tool) | [↗](https://github.com/full-stack-skills/speckit-skills) |
+| `speckit-skills` | 13 | Apache-2.0 (10 MIT-derived skills, §3.1) | [↗](https://github.com/full-stack-skills/speckit-skills) |
 | `spring-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/spring-skills) |
-| `stitch-skills` | 29 | Apache-2.0 (§3.3 pointer) | [↗](https://github.com/full-stack-skills/stitch-skills) |
+| `stitch-skills` | 29 | Apache-2.0 (2 Apache-2.0-derived §3.1; 10 pointer §3.4) | [↗](https://github.com/full-stack-skills/stitch-skills) |
 | `svelte-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/svelte-skills) |
 | `swift-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/swift-skills) |
 | `t2ui-skills` | 97 | Apache-2.0 | [↗](https://github.com/full-stack-skills/t2ui-skills) |
@@ -155,7 +185,7 @@ link to the upstream documentation as the source of truth.
 | `teaching-skills` | 3 | Apache-2.0 | [↗](https://github.com/full-stack-skills/teaching-skills) |
 | `testing-skills` | 10 | Apache-2.0 | [↗](https://github.com/full-stack-skills/testing-skills) |
 | `threejs-skills` | 18 | Apache-2.0 | [↗](https://github.com/full-stack-skills/threejs-skills) |
-| `uniapp-skills` | 13 | Apache-2.0 (8 MIT skills, §3.2) | [↗](https://github.com/full-stack-skills/uniapp-skills) |
+| `uniapp-skills` | 13 | Apache-2.0 (8 MIT skills, §3.3) | [↗](https://github.com/full-stack-skills/uniapp-skills) |
 | `uview-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/uview-skills) |
 | `vscode-skills` | 4 | Apache-2.0 | [↗](https://github.com/full-stack-skills/vscode-skills) |
 | `vue-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/vue-skills) |
@@ -205,13 +235,15 @@ Tracked openly so reviewers do not have to discover them independently:
 
 | Item | Status |
 |---|---|
-| `vue-skills/skills/pinia/LICENSE.txt` previously contained a `404: Not Found` fetch artifact | **Fixed 2026-09-11** — replaced with Apache-2.0 text |
-| Package-level `LICENSE` files across 41 packages previously contained third-party notices rather than an Apache-2.0 grant | **Fixed 2026-09-11** — split into `LICENSE` (Apache-2.0) + `THIRD-PARTY-NOTICES.md` |
+| Package-level `LICENSE` files across 41 packages contained third-party notices rather than an Apache-2.0 grant | **Fixed 2026-09-11** — split into `LICENSE` (Apache-2.0) + `THIRD-PARTY-NOTICES.md` |
 | `firmware-skills`, `zig-skills` had no `LICENSE` file | **Fixed 2026-09-11** — Apache-2.0 added |
-| 8 first-party skills carry MIT instead of Apache-2.0 (§3.2) | Open — internal inconsistency; both are permissive |
-| 12 skills use pointer-style license declarations (§3.3) | Open — intentional brevity; points to package `LICENSE` |
-
----
+| `vue-skills/skills/pinia/LICENSE.txt` contained a `404: Not Found` fetch artifact | **Fixed 2026-09-11** — replaced with Apache-2.0 text |
+| 17 upstream-derived skills (`python-skills` ×16, `devops-skills` ×1) carried no upstream attribution, violating the MIT notice requirement | **Fixed 2026-09-11** — per-skill `LICENSE.txt` + source note added (§3.1) |
+| 2 `stitch-skills` skills reproduced Apache-2.0 upstream text without attribution | **Fixed 2026-09-11** — per-skill `LICENSE.txt` + source note added (§3.1) |
+| 10 `speckit-skills` skills were near-verbatim from an AGPL-3.0 third-party packaging | **Fixed 2026-09-11** — regenerated from the MIT upstream `github/spec-kit` (§3.1) |
+| READMEs stated "460+ skills / 42 packages" | **Fixed 2026-09-11** — corrected to 671 skills / 47 packages |
+| 8 first-party skills carry MIT instead of Apache-2.0 (§3.3) | Open — internal inconsistency; both are permissive |
+| 12 skills use pointer-style license declarations (§3.4) | Open — intentional brevity; points to package `LICENSE` |
 
 ## 8. Contact
 
