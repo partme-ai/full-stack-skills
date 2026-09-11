@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**460+ Agent Skills. 40+ Skills Packages. One Ecosystem.**
+**670+ Agent Skills. 47 Skills Packages. One Ecosystem.**
 
 *Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
 
@@ -26,7 +26,7 @@
 
 ## Introduction
 
-**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **42 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
+**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **47 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
 
 Each package provides specialized knowledge, workflows, and reference materials that AI agents load on-demand — keeping context footprint minimal while delivering deep domain expertise when needed.
 

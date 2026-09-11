@@ -52,7 +52,7 @@ are attributed in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
 ## 3. Skill-level license exceptions
 
-Most of the 619 skills in the collection are Apache-2.0. The following skills carry
+Most of the 671 skills in the collection are Apache-2.0. The following skills carry
 a **different** license and must be treated accordingly.
 
 ### 3.1 Third-party MIT skills (retain original copyright)
@@ -109,7 +109,7 @@ link to the upstream documentation as the source of truth.
 
 ## 4. Package inventory
 
-47 packages, 619 skills. Each is an independent repository under the
+47 packages, 671 skills. Each is an independent repository under the
 `full-stack-skills` GitHub organization.
 
 | Package | Skills | License | Repo |

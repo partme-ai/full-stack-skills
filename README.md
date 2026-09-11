@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**460+ 个 Agent Skills。42+ 个技能包。一个统一生态。**
+**670+ 个 Agent Skills。47 个技能包。一个统一生态。**
 
 *前端 · 后端 · 移动端 · DevOps · AI 设计工具 — 生产级品质，独立安装。*
 
@@ -26,7 +26,7 @@
 
 ## 简介
 
-**Full Stack Skills** 是面向 AI 编码智能体的最全面 Agent Skills 集合的导航站。原为 460+ stars 的 monorepo，现已拆分为 [full-stack-skills](https://github.com/full-stack-skills) GitHub 组织下的 **42 个可独立安装的包**。
+**Full Stack Skills** 是面向 AI 编码智能体的最全面 Agent Skills 集合的导航站。原为 460+ stars 的 monorepo，现已拆分为 [full-stack-skills](https://github.com/full-stack-skills) GitHub 组织下的 **47 个可独立安装的包**。
 
 每个包提供专业知识、工作流和参考资料，AI 智能体按需加载 — 保持上下文占用最小化，同时在需要时提供深度领域专业知识。
 
