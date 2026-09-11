@@ -287,7 +287,11 @@ cp -r <skill-name>/skills/* .claude/skills/
 
 ## 许可证
 
-Apache 2.0 — 详见 [LICENSE](LICENSE)。
+本项目采用 **Apache License 2.0** 授权 — 完整授权文本见 [LICENSE](LICENSE)。
+
+- 第三方组件的归属声明（BSD 2-Clause / GPL v3.0 / MIT-CMU / SIL OFL 等）见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。
+- **包级来源与再分发条款**（含少数技能级许可例外）见 [PROVENANCE.md](PROVENANCE.md)。
+- **宿主兼容性说明**（Claude Code / Codex / CodeBuddy / WorkBuddy 等）见 [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md)。
 
 ---
 
