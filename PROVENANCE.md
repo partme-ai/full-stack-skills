@@ -15,7 +15,7 @@ The collection is **not a single monolithic repository**. It is composed of:
 | Layer | Location | Contents |
 |---|---|---|
 | **Hub** | `github.com/partme-ai/full-stack-skills` | Catalog, docs, platform guide. **No skill code.** |
-| **Packages** | `github.com/full-stack-skills/<package>` | 47 independently versioned skill packages, each its own Git repo |
+| **Packages** | `github.com/full-stack-skills/<package>` | 49 independently versioned skill packages (each its own Git repo); `boss-skills` exists in the worktree but is excluded — see §4 |
 | **Skills** | `<package>/skills/<skill-name>/` | One directory per skill, containing `SKILL.md` + optional `references/`, `examples/`, `scripts/`, `assets/` |
 
 Skills are installed individually via the standard Agent Skills mechanism:
@@ -168,8 +168,7 @@ Apache-2.0. No upstream source code is copied.
 
 ## 4. Package inventory
 
-47 packages, 671 skills. Each is an independent repository under the
-`full-stack-skills` GitHub organization.
+49 packages, 693 skills (counted by `find <pkg>/skills -maxdepth 1 -mindepth 1 -type d` on 2026-09-16). The `boss-skills` directory is excluded because it is an old mixed-in personal scratch dir with no `skills/` subfolder. Each is an independent repository under the `full-stack-skills` GitHub organization.
 
 | Package | Skills | License | Repo |
 |---|---:|---|---|
@@ -272,6 +271,7 @@ Tracked openly so reviewers do not have to discover them independently:
 | 2 `stitch-skills` skills reproduced Apache-2.0 upstream text without attribution | **Fixed 2026-09-11** — per-skill `LICENSE.txt` + source note added (§3.1) |
 | 10 `speckit-skills` skills were near-verbatim from an AGPL-3.0 third-party packaging | **Fixed 2026-09-11** — regenerated from the MIT upstream `github/spec-kit` (§3.1) |
 | READMEs stated "460+ skills / 42 packages" | **Fixed 2026-09-11** — corrected to 671 skills / 47 packages |
+| READMEs / `Package inventory` still stated "47 packages / 671 skills" while the upstream worktrees already had **8 unlisted packages** (`agent-skills`, `boss-skills` [excluded as scratch], `ddd4j-skills`, `firmware-skills`, `kotlin-skills`, `processon-skills`, `skills-toolchain`, `swift-skills`) and **3 phantom rows** (`dev-utils-skills`, `mobile-native-skills`, `utility-skills`) | **Fixed 2026-09-16** — `zh`/`en` README + `PROVENANCE §4` corrected to 49 packages / 693 skills; `boss-skills` explicitly excluded with rationale; all 16 category sub-tables now match upstream `main` HEAD counts |
 | 8 first-party skills carry MIT instead of Apache-2.0 (§3.3) | **Fixed 2026-09-11** — converted to Apache-2.0 (frontmatter + `LICENSE.txt`) |
 | 12 skills use pointer-style license declarations (§3.4) | **Fixed 2026-09-11** — frontmatter normalized to `Apache-2.0`; pointer text remains only in `LICENSE.txt` |
 | 296 skills carried no `license:` frontmatter field at all | **Fixed 2026-09-11** — 294 set to `Apache-2.0`; 2 third-party set to `MIT` |

@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**670+ Agent Skills. 47 Skills Packages. One Ecosystem.**
+**690+ Agent Skills. 49 Skill Packages. One Ecosystem.**
 
 *Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
 
@@ -26,18 +26,18 @@
 
 ## Introduction
 
-**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **47 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
+**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **49 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
 
 Each package provides specialized knowledge, workflows, and reference materials that AI agents load on-demand — keeping context footprint minimal while delivering deep domain expertise when needed.
 
-> **Migration Complete (June 2026)**: All 454 skills have been migrated to individual repos. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
+> **Migration Complete (June 2026)**: All 693 skills have been migrated to individual repos. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
 
 ### Problems We Solve
 
 | Gap | Problem | Solution |
 |-----|---------|----------|
 | **Context overflow** | Loading all skills at once exceeds token limits | Per-package on-demand loading via `npx skills add` |
-| **Domain expertise** | Generic AI lacks deep framework knowledge | 454 specialized skills across 15 domains |
+| **Domain expertise** | Generic AI lacks deep framework knowledge | 693 specialized skills across 17 domains |
 | **Discoverability** | Skills scattered across repos, hard to find | This catalog — one README, all packages linked |
 | **Version lock** | Monorepo forces coordinated releases | Each package independently versioned and published |
 
@@ -50,7 +50,7 @@ Install any skill package with one command:
 ```bash
 npx skills add full-stack-skills/vue-skills      # Vue.js ecosystem (7 skills)
 npx skills add full-stack-skills/tauri-skills     # Tauri desktop/mobile (52 skills)
-npx skills add full-stack-skills/spring-skills    # Spring Boot ecosystem (7 skills)
+npx skills add full-stack-skills/t2ui-skills      # t2ui AI design tools (97 skills)
 ```
 
 Or install a specific skill from a package:
@@ -69,14 +69,25 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 |---------|:------:|:------:|---------|
 | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | `npx skills add JimLiu/baoyu-skills` |
 
-### Frontend Frameworks (15 skills)
+### AI Design Tools — MCP (168 skills)
+
+| Package | Skills | Install |
+|---------|--------|---------|
+| [stitch-skills](https://github.com/full-stack-skills/stitch-skills) | 43 | `npx skills add full-stack-skills/stitch-skills` |
+| [pencil-skills](https://github.com/full-stack-skills/pencil-skills) | 28 | `npx skills add full-stack-skills/pencil-skills` |
+| [t2ui-skills](https://github.com/full-stack-skills/t2ui-skills) | 97 | `npx skills add full-stack-skills/t2ui-skills` |
+
+### Frontend Frameworks (66 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [vue-skills](https://github.com/full-stack-skills/vue-skills) | 7 | `npx skills add full-stack-skills/vue-skills` |
-| [react-skills](https://github.com/full-stack-skills/react-skills) | 6 | `npx skills add full-stack-skills/react-skills` |
+| [react-skills](https://github.com/full-stack-skills/react-skills) | 7 | `npx skills add full-stack-skills/react-skills` |
 | [angular-skills](https://github.com/full-stack-skills/angular-skills) | 1 | `npx skills add full-stack-skills/angular-skills` |
-| [svelte-skills](https://github.com/full-stack-skills/svelte-skills) | 1 | `npx skills add full-stack-skills/svelte-skills` |
+| [svelte-skills](https://github.com/full-stack-skills/svelte-skills) | 16 | `npx skills add full-stack-skills/svelte-skills` |
+| [uniapp-skills](https://github.com/full-stack-skills/uniapp-skills) | 13 | `npx skills add full-stack-skills/uniapp-skills` |
+| [swift-skills](https://github.com/full-stack-skills/swift-skills) | 7 | `npx skills add full-stack-skills/swift-skills` |
+| [agent-skills](https://github.com/full-stack-skills/agent-skills) | 15 | `npx skills add full-stack-skills/agent-skills` |
 
 ### Frontend UI Libraries (13 skills)
 
@@ -87,15 +98,13 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [uview-skills](https://github.com/full-stack-skills/uview-skills) | 2 | `npx skills add full-stack-skills/uview-skills` |
 | [avue-skills](https://github.com/full-stack-skills/avue-skills) | 3 | `npx skills add full-stack-skills/avue-skills` |
 
-### Build & Tooling (44 skills)
+### Build & Tooling (26 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
-| [build-skills](https://github.com/full-stack-skills/build-skills) | 6 | `npx skills add full-stack-skills/build-skills` |
+| [build-skills](https://github.com/full-stack-skills/build-skills) | 7 | `npx skills add full-stack-skills/build-skills` |
 | [nvm-skills](https://github.com/full-stack-skills/nvm-skills) | 15 | `npx skills add full-stack-skills/nvm-skills` |
 | [vscode-skills](https://github.com/full-stack-skills/vscode-skills) | 4 | `npx skills add full-stack-skills/vscode-skills` |
-| [utility-skills](https://github.com/full-stack-skills/utility-skills) | 7 | `npx skills add full-stack-skills/utility-skills` |
-| [dev-utils-skills](https://github.com/full-stack-skills/dev-utils-skills) | 12 | `npx skills add full-stack-skills/dev-utils-skills` |
 
 ### Charts & ASCII Art (15 skills)
 
@@ -104,27 +113,27 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [chart-skills](https://github.com/full-stack-skills/chart-skills) | 2 | `npx skills add full-stack-skills/chart-skills` |
 | [ascii-skills](https://github.com/full-stack-skills/ascii-skills) | 13 | `npx skills add full-stack-skills/ascii-skills` |
 
-### Backend Frameworks (46 skills)
+### Backend Frameworks (184 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [spring-skills](https://github.com/full-stack-skills/spring-skills) | 7 | `npx skills add full-stack-skills/spring-skills` |
 | [nodejs-skills](https://github.com/full-stack-skills/nodejs-skills) | 4 | `npx skills add full-stack-skills/nodejs-skills` |
-| [python-skills](https://github.com/full-stack-skills/python-skills) | 3 | `npx skills add full-stack-skills/python-skills` |
+| [python-skills](https://github.com/full-stack-skills/python-skills) | 19 | `npx skills add full-stack-skills/python-skills` |
 | [go-skills](https://github.com/full-stack-skills/go-skills) | 2 | `npx skills add full-stack-skills/go-skills` |
-| [java-skills](https://github.com/full-stack-skills/java-skills) | 3 | `npx skills add full-stack-skills/java-skills` |
-| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 26 | `npx skills add full-stack-skills/rust-skills` |
-| [zig-skills](https://github.com/full-stack-skills/zig-skills) | 5 | `npx skills add full-stack-skills/zig-skills` |
+| [java-skills](https://github.com/full-stack-skills/java-skills) | 39 | `npx skills add full-stack-skills/java-skills` |
+| [kotlin-skills](https://github.com/full-stack-skills/kotlin-skills) | 7 | `npx skills add full-stack-skills/kotlin-skills` |
+| [rust-skills](https://github.com/full-stack-skills/rust-skills) | 29 | `npx skills add full-stack-skills/rust-skills` |
+| [zig-skills](https://github.com/full-stack-skills/zig-skills) | 15 | `npx skills add full-stack-skills/zig-skills` |
+| [ddd4j-skills](https://github.com/full-stack-skills/ddd4j-skills) | 62 | `npx skills add full-stack-skills/ddd4j-skills` |
 
-### Cross-Platform & Desktop (72 skills)
+### Cross-Platform & Desktop (57 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
-| [uniapp-skills](https://github.com/full-stack-skills/uniapp-skills) | 13 | `npx skills add full-stack-skills/uniapp-skills` |
 | [flutter-skills](https://github.com/full-stack-skills/flutter-skills) | 2 | `npx skills add full-stack-skills/flutter-skills` |
 | [electron-skills](https://github.com/full-stack-skills/electron-skills) | 3 | `npx skills add full-stack-skills/electron-skills` |
 | [tauri-skills](https://github.com/full-stack-skills/tauri-skills) | 52 | `npx skills add full-stack-skills/tauri-skills` |
-| [mobile-native-skills](https://github.com/full-stack-skills/mobile-native-skills) | 2 | `npx skills add full-stack-skills/mobile-native-skills` |
 
 ### 3D & Game (19 skills)
 
@@ -133,15 +142,22 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [threejs-skills](https://github.com/full-stack-skills/threejs-skills) | 18 | `npx skills add full-stack-skills/threejs-skills` |
 | [cocos-skills](https://github.com/full-stack-skills/cocos-skills) | 1 | `npx skills add full-stack-skills/cocos-skills` |
 
-### Architecture & Design Patterns (35 skills)
+### Architecture & Design Patterns (50 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [ddd-skills](https://github.com/full-stack-skills/ddd-skills) | 16 | `npx skills add full-stack-skills/ddd-skills` |
-| [design-skills](https://github.com/full-stack-skills/design-skills) | 4 | `npx skills add full-stack-skills/design-skills` |
+| [design-skills](https://github.com/full-stack-skills/design-skills) | 9 | `npx skills add full-stack-skills/design-skills` |
 | [drawio-skills](https://github.com/full-stack-skills/drawio-skills) | 2 | `npx skills add full-stack-skills/drawio-skills` |
-| [document-skills](https://github.com/full-stack-skills/document-skills) | 8 | `npx skills add full-stack-skills/document-skills` |
+| [document-skills](https://github.com/full-stack-skills/document-skills) | 11 | `npx skills add full-stack-skills/document-skills` |
+| [processon-skills](https://github.com/full-stack-skills/processon-skills) | 7 | `npx skills add full-stack-skills/processon-skills` |
 | [ocrmypdf-skills](https://github.com/full-stack-skills/ocrmypdf-skills) | 5 | `npx skills add full-stack-skills/ocrmypdf-skills` |
+
+### Embedded & Firmware (20 skills)
+
+| Package | Skills | Install |
+|---------|--------|---------|
+| [firmware-skills](https://github.com/full-stack-skills/firmware-skills) | 20 | `npx skills add full-stack-skills/firmware-skills` |
 
 ### Database & Storage (5 skills)
 
@@ -149,18 +165,18 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 |---------|--------|---------|
 | [database-skills](https://github.com/full-stack-skills/database-skills) | 5 | `npx skills add full-stack-skills/database-skills` |
 
-### DevOps & Containers (22 skills)
+### DevOps & Containers (26 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
-| [devops-skills](https://github.com/full-stack-skills/devops-skills) | 6 | `npx skills add full-stack-skills/devops-skills` |
+| [devops-skills](https://github.com/full-stack-skills/devops-skills) | 10 | `npx skills add full-stack-skills/devops-skills` |
 | [docker-skills](https://github.com/full-stack-skills/docker-skills) | 16 | `npx skills add full-stack-skills/docker-skills` |
 
-### Testing (9 skills)
+### Testing (10 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
-| [testing-skills](https://github.com/full-stack-skills/testing-skills) | 9 | `npx skills add full-stack-skills/testing-skills` |
+| [testing-skills](https://github.com/full-stack-skills/testing-skills) | 10 | `npx skills add full-stack-skills/testing-skills` |
 
 ### Spec-Driven Development (28 skills)
 
@@ -169,13 +185,11 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [speckit-skills](https://github.com/full-stack-skills/speckit-skills) | 13 | `npx skills add full-stack-skills/speckit-skills` |
 | [openspec-skills](https://github.com/full-stack-skills/openspec-skills) | 15 | `npx skills add full-stack-skills/openspec-skills` |
 
-### AI Design Tools — MCP (153 skills)
+### Toolchain (1 skill)
 
 | Package | Skills | Install |
 |---------|--------|---------|
-| [stitch-skills](https://github.com/full-stack-skills/stitch-skills) | 28 | `npx skills add full-stack-skills/stitch-skills` |
-| [pencil-skills](https://github.com/full-stack-skills/pencil-skills) | 28 | `npx skills add full-stack-skills/pencil-skills` |
-| [t2ui-skills](https://github.com/full-stack-skills/t2ui-skills) | 97 | `npx skills add full-stack-skills/t2ui-skills` |
+| [skills-toolchain](https://github.com/full-stack-skills/skills-toolchain) | 1 | `npx skills add full-stack-skills/skills-toolchain` |
 
 ### Teaching & Learning (3 skills)
 
@@ -223,22 +237,26 @@ This keeps context footprint minimal while providing deep expertise when require
 
 | Category | Packages | Total Skills |
 |----------|----------|--------------|
-| Frontend Frameworks | 4 | 15 |
+| AI Design Tools — MCP | 3 | 168 |
+| Frontend Frameworks | 7 | 66 |
 | Frontend UI Libraries | 4 | 13 |
-| Build & Tooling | 5 | 44 |
+| Build & Tooling | 3 | 26 |
 | Charts & ASCII Art | 2 | 15 |
-| Backend Frameworks | 5 | 46 |
-| Cross-Platform & Desktop | 5 | 72 |
+| Backend Frameworks | 9 | 184 |
+| Cross-Platform & Desktop | 3 | 57 |
 | 3D & Game | 2 | 19 |
-| Architecture & Design | 5 | 35 |
+| Architecture & Design Patterns | 6 | 50 |
+| Embedded & Firmware | 1 | 20 |
 | Database & Storage | 1 | 5 |
-| DevOps & Containers | 2 | 22 |
-| Testing | 1 | 9 |
+| DevOps & Containers | 2 | 26 |
+| Testing | 1 | 10 |
 | Spec-Driven Dev | 2 | 28 |
-| AI Design Tools (MCP) | 3 | 153 |
+| Toolchain | 1 | 1 |
 | Teaching & Learning | 1 | 3 |
 | Social & Communication | 1 | 2 |
-| **Total** | **42** | **462** |
+| **Total** | **49** | **693** |
+
+> 💡 `boss-skills` is an old mixed-in personal scratch directory (no `skills/` subfolder, just loose scripts). It is **not** counted as a skill package.
 
 ---
 
