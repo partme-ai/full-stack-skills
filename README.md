@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**690+ 个 Agent Skills。49 个技能包。一个统一生态。**
+**763 个 Agent Skills。51 个技能包。一个统一生态。**
 
 *前端 · 后端 · 移动端 · DevOps · AI 设计工具 — 生产级品质，独立安装。*
 
@@ -30,14 +30,14 @@
 
 每个包提供专业知识、工作流和参考资料，AI 智能体按需加载 — 保持上下文占用最小化，同时在需要时提供深度领域专业知识。
 
-> **迁移完成（2026 年 6 月）**：全部 693 个技能已迁移到独立仓库。本仓库现在是目录和导航站。所有现有 stars 和历史记录均保留在此。
+> **迁移完成（2026 年 6 月）**：当前 763 个技能均位于独立仓库。本仓库现在是目录和导航站。所有现有 stars 和历史记录均保留在此。
 
 ### 我们要解决的问题
 
 | 缺口 | 问题 | 解决方案 |
 |------|------|----------|
 | **上下文溢出** | 一次加载所有技能会超过 token 限制 | 通过 `npx skills add` 按包按需加载 |
-| **领域专业知识** | 通用 AI 缺乏深度框架知识 | 跨 16 个领域的 693 个专业技能 |
+| **领域专业知识** | 通用 AI 缺乏深度框架知识 | 跨 18 个领域的 763 个专业技能 |
 | **可发现性** | 技能分散在各个仓库，难以查找 | 本目录 — 一个 README，所有包链接 |
 | **版本锁定** | monorepo 强制协调发布 | 每个包独立版本管理和发布 |
 
@@ -51,6 +51,7 @@
 npx skills add full-stack-skills/vue-skills      # Vue.js 生态（7 个技能）
 npx skills add full-stack-skills/tauri-skills     # Tauri 桌面/移动（52 个技能）
 npx skills add full-stack-skills/t2ui-skills      # t2ui AI 设计工具（97 个技能）
+npx skills add full-stack-skills/codeguard-skills # 代码质量与安全治理（68 个技能）
 ```
 
 或安装包中的特定技能：
@@ -77,7 +78,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [pencil-skills](https://github.com/full-stack-skills/pencil-skills) | 28 | `npx skills add full-stack-skills/pencil-skills` |
 | [t2ui-skills](https://github.com/full-stack-skills/t2ui-skills) | 97 | `npx skills add full-stack-skills/t2ui-skills` |
 
-### 前端框架（48 个技能）
+### 前端框架（66 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
@@ -113,7 +114,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [chart-skills](https://github.com/full-stack-skills/chart-skills) | 2 | `npx skills add full-stack-skills/chart-skills` |
 | [ascii-skills](https://github.com/full-stack-skills/ascii-skills) | 13 | `npx skills add full-stack-skills/ascii-skills` |
 
-### 后端框架（119 个技能）
+### 后端框架（184 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
@@ -127,13 +128,14 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [zig-skills](https://github.com/full-stack-skills/zig-skills) | 15 | `npx skills add full-stack-skills/zig-skills` |
 | [ddd4j-skills](https://github.com/full-stack-skills/ddd4j-skills) | 62 | `npx skills add full-stack-skills/ddd4j-skills` |
 
-### 跨平台与桌面（75 个技能）
+### 跨平台与桌面（59 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
 | [flutter-skills](https://github.com/full-stack-skills/flutter-skills) | 2 | `npx skills add full-stack-skills/flutter-skills` |
 | [electron-skills](https://github.com/full-stack-skills/electron-skills) | 3 | `npx skills add full-stack-skills/electron-skills` |
 | [tauri-skills](https://github.com/full-stack-skills/tauri-skills) | 52 | `npx skills add full-stack-skills/tauri-skills` |
+| [mobile-native-skills](https://github.com/full-stack-skills/mobile-native-skills) | 2 | `npx skills add full-stack-skills/mobile-native-skills` |
 
 ### 3D 与游戏（19 个技能）
 
@@ -142,7 +144,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [threejs-skills](https://github.com/full-stack-skills/threejs-skills) | 18 | `npx skills add full-stack-skills/threejs-skills` |
 | [cocos-skills](https://github.com/full-stack-skills/cocos-skills) | 1 | `npx skills add full-stack-skills/cocos-skills` |
 
-### 架构与设计模式（37 个技能）
+### 架构与设计模式（50 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
@@ -185,12 +187,17 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [speckit-skills](https://github.com/full-stack-skills/speckit-skills) | 13 | `npx skills add full-stack-skills/speckit-skills` |
 | [openspec-skills](https://github.com/full-stack-skills/openspec-skills) | 15 | `npx skills add full-stack-skills/openspec-skills` |
 
-### 工具链与个人（2 个技能）
+### 代码质量与治理（68 个技能）
+
+| 包 | 技能数 | 安装 |
+|---|--------|------|
+| [codeguard-skills](https://github.com/full-stack-skills/codeguard-skills) | 68 | `npx skills add full-stack-skills/codeguard-skills` |
+
+### 工具链（1 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
 | [skills-toolchain](https://github.com/full-stack-skills/skills-toolchain) | 1 | `npx skills add full-stack-skills/skills-toolchain` |
-| [boss-skills](https://github.com/full-stack-skills/boss-skills) | 1 | `npx skills add full-stack-skills/boss-skills` |
 
 ### 教学与学习（3 个技能）
 

@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**690+ Agent Skills. 49 Skill Packages. One Ecosystem.**
+**763 Agent Skills. 51 Skill Packages. One Ecosystem.**
 
 *Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
 
@@ -26,18 +26,18 @@
 
 ## Introduction
 
-**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **49 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
+**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **51 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
 
 Each package provides specialized knowledge, workflows, and reference materials that AI agents load on-demand — keeping context footprint minimal while delivering deep domain expertise when needed.
 
-> **Migration Complete (June 2026)**: All 693 skills have been migrated to individual repos. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
+> **Migration Complete (June 2026)**: All 763 current skills live in individual repositories. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
 
 ### Problems We Solve
 
 | Gap | Problem | Solution |
 |-----|---------|----------|
 | **Context overflow** | Loading all skills at once exceeds token limits | Per-package on-demand loading via `npx skills add` |
-| **Domain expertise** | Generic AI lacks deep framework knowledge | 693 specialized skills across 17 domains |
+| **Domain expertise** | Generic AI lacks deep framework knowledge | 763 specialized skills across 18 domains |
 | **Discoverability** | Skills scattered across repos, hard to find | This catalog — one README, all packages linked |
 | **Version lock** | Monorepo forces coordinated releases | Each package independently versioned and published |
 
@@ -51,6 +51,7 @@ Install any skill package with one command:
 npx skills add full-stack-skills/vue-skills      # Vue.js ecosystem (7 skills)
 npx skills add full-stack-skills/tauri-skills     # Tauri desktop/mobile (52 skills)
 npx skills add full-stack-skills/t2ui-skills      # t2ui AI design tools (97 skills)
+npx skills add full-stack-skills/codeguard-skills # Code quality and security governance (68 skills)
 ```
 
 Or install a specific skill from a package:
@@ -127,13 +128,14 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [zig-skills](https://github.com/full-stack-skills/zig-skills) | 15 | `npx skills add full-stack-skills/zig-skills` |
 | [ddd4j-skills](https://github.com/full-stack-skills/ddd4j-skills) | 62 | `npx skills add full-stack-skills/ddd4j-skills` |
 
-### Cross-Platform & Desktop (57 skills)
+### Cross-Platform & Desktop (59 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [flutter-skills](https://github.com/full-stack-skills/flutter-skills) | 2 | `npx skills add full-stack-skills/flutter-skills` |
 | [electron-skills](https://github.com/full-stack-skills/electron-skills) | 3 | `npx skills add full-stack-skills/electron-skills` |
 | [tauri-skills](https://github.com/full-stack-skills/tauri-skills) | 52 | `npx skills add full-stack-skills/tauri-skills` |
+| [mobile-native-skills](https://github.com/full-stack-skills/mobile-native-skills) | 2 | `npx skills add full-stack-skills/mobile-native-skills` |
 
 ### 3D & Game (19 skills)
 
@@ -184,6 +186,12 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 |---------|--------|---------|
 | [speckit-skills](https://github.com/full-stack-skills/speckit-skills) | 13 | `npx skills add full-stack-skills/speckit-skills` |
 | [openspec-skills](https://github.com/full-stack-skills/openspec-skills) | 15 | `npx skills add full-stack-skills/openspec-skills` |
+
+### Code Quality & Governance (68 skills)
+
+| Package | Skills | Install |
+|---------|--------|---------|
+| [codeguard-skills](https://github.com/full-stack-skills/codeguard-skills) | 68 | `npx skills add full-stack-skills/codeguard-skills` |
 
 ### Toolchain (1 skill)
 
