@@ -4,112 +4,94 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Full-Stack-Skills is an open-source Agent Skills marketplace repository — a collection of 421+ skills across 42 groups covering frontend, backend, DevOps, design, documentation, and spec-driven development. Skills are packaged as `SKILL.md` files that Claude Code (and other Agent Skills-compatible platforms) loads on demand to extend its capabilities for specific tasks.
+Full-Stack-Skills is the **navigation hub and catalog** for 460+ Agent Skills across 42 independently installable packages. Originally a monorepo, all skills were migrated to individual repos in the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization in June 2026. This repo now serves as:
 
-The repository serves dual roles:
-- **Authoring environment**: Where skills are created, edited, and maintained following the [Agent Skills specification](https://agentskills.io/)
-- **Marketplace source**: Published via `.claude-plugin/marketplace.json` for installation through Claude Code's `/plugin` system
+- **Catalog**: README tables linking to all skill packages with install commands
+- **Documentation**: Agent specs, platform guides, role definitions, ecosystem mappings
+- **Quality gate**: CI workflows that review SKILL.md changes on PRs
 
-Language convention (inherited from parent workspace): **Chinese** for documentation, comments, and commit messages.
+There is no application code, build system, or test suite in this repo. It is a documentation-only repository.
 
-## Skill Directory Structure
-
-Skills follow a strict two-level grouping:
+## Repository Structure
 
 ```
-skills/<group>-skills/<skill-name>/SKILL.md
+full-stack-skills/
+├── README.md              # Main catalog (Chinese) — skill tables, install commands, architecture
+├── README.en.md           # English catalog
+├── AGENTS.md              # Guidance for AI agents working in this repo (skill creation rules)
+├── AGENTS_EN.md           # English version
+├── AGENTS_PROMPT.md       # Role definitions and prompts for 50+ agent roles
+├── ROLE_DEFINITIONS.md    # Structured role definitions with responsibilities and skill assignments
+├── PLATFORM_GUIDE.md      # Platform matrix with install paths for all 43 platforms
+├── QUICKSTART.md          # 5-minute marketplace setup guide
+├── AWESOME_AGENT_SKILLS.md # Curated list of external agent skill collections
+├── PLANNING_SKILL_CATEGORIES.md # Skill category planning and classification
+├── SKILLS_INDEX.md        # Legacy index (paths reference old monorepo structure, now stale)
+├── EVALUATION_REPORT.md   # Skill quality evaluation report
+├── docs/                  # Detailed mapping and ecosystem documents
+├── agents/                # Agent skill specs (agent-skills-spec.md, etc.)
+├── spec/                  # Skill specification documents
+├── media/                 # Screenshots and demo assets
+└── .github/workflows/     # CI for SKILL.md quality review on PRs
 ```
 
-Each skill directory may optionally contain:
-- `examples/` — usage examples
-- `references/` — longer reference material (keeps SKILL.md under 500 lines)
-- `scripts/` — executable automation scripts
-- `assets/` — images, templates, and other resources
-- `templates/` — code templates
+## How Skills Are Installed
 
-### Naming Conventions
+Skills are no longer in this repo. Users install from the individual package repos:
 
-- **Skill directory**: `kebab-case` (e.g., `vue3`, `spring-boot`, `tauri-app-creator`)
-- **SKILL.md**: Always uppercase, exact filename `SKILL.md`
-- **Scripts**: `kebab-case.sh` with `#!/bin/bash` shebang, `set -e`, status to stderr, machine-readable output to stdout
-- **Zip files**: Must match directory name exactly (`{skill-name}.zip`)
-
-## SKILL.md Format
-
-Every skill file requires YAML frontmatter with `name` and `description`:
-
-```markdown
----
-name: {skill-name}
-description: {One sentence describing trigger conditions. Be specific so Claude can determine when to activate.}
----
-
-# {Skill Title}
-
-{Brief description of what the skill does and when to use it.}
+```bash
+npx skills add full-stack-skills/vue-skills          # Install a full package
+npx skills add full-stack-skills/vue-skills --skill vue3  # Install a single skill
 ```
 
-Key frontmatter rules:
-- `name` must match the directory name
-- `description` is the primary trigger mechanism — Claude uses it to decide whether to load the skill. Write it to describe *when* to use the skill, not just what it is
-- Keep SKILL.md under 500 lines; move reference material to `references/`
-
-## Marketplace Configuration
-
-The file `.claude-plugin/marketplace.json` defines which skills are published. Each plugin maps to a skill group:
-
-```json
-{
-  "name": "full-stack-skills",
-  "plugins": [
-    {
-      "name": "vue-skills",
-      "description": "...",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/vue-skills/vue2",
-        "./skills/vue-skills/vue3"
-      ]
-    }
-  ]
-}
+Or via Claude Code's plugin system:
+```
+/plugin marketplace add partme-ai/full-stack-skills
 ```
 
-**Important distinction**: `skills/` directory is the source of truth for what exists in the repo; `marketplace.json` is the source of truth for what is published. Currently 2 groups exist in-repo but are not published: `threejs-skills` (18 skills) and `vscode-skills` (4 skills). When adding new skills, update both the directory and marketplace.json together.
+## Ecosystem Map
 
-The `docs/repository-map.md` tracks all known discrepancies between the directory and marketplace.
+| Repo | Role |
+|------|------|
+| **full-stack-skills** (this repo) | Catalog, docs, ecosystem mappings |
+| [full-stack-skills/*](https://github.com/full-stack-skills) | 42 individual skill packages (vue-skills, tauri-skills, etc.) |
+| [t2ui-skills](https://github.com/partme-ai/t2ui-skills) | PRD → ASCII UI translation, Stitch/Pencil design languages |
+| [stitch-skills](https://github.com/partme-ai/stitch-skills) | Stitch design language → prototypes |
+| [pencil-skills](https://github.com/partme-ai/pencil-skills) | Pencil design language → product diagrams (.pen) |
+| [tauri-skills](https://github.com/partme-ai/tauri-skills) | Tauri cross-platform desktop/mobile development |
 
-## Key Documentation Files
+The pipeline stage → skill mapping is in `docs/pipeline-stage-to-skills.md`. External skill library discovery sources are in `docs/external-skills.md`.
 
-- `README.md` — Full project README (Chinese, with marketplace tables, installation guides, scenario-based install paths)
-- `README.zh-CN.md` — Detailed Chinese README with full skill catalog and architecture overview
-- `AGENTS.md` — Guidance for AI agents working in this repo (skill creation rules, directory conventions, zip packaging)
-- `AGENTS_EN.md` — English version of AGENTS.md
-- `AGENTS_PROMPT.md` — Role definitions and agent prompts for 50+ roles (product manager, architect, developer, etc.)
-- `ROLE_DEFINITIONS.md` — Structured role definitions with responsibilities, tools, and skill assignments
-- `PLATFORM_GUIDE.md` — Complete platform matrix with install paths for all 43 platforms
-- `QUICKSTART.md` — 5-minute marketplace setup guide for users forking this repo
-- `PLANNING_SKILL_CATEGORIES.md` — Skill category planning and classification
-- `SKILLS_INDEX.md` — Complete index of all in-repo skills organized by category
-- `docs/repository-map.md` — Canonical snapshot of repo structure vs. marketplace state
-- `docs/skill-group-mapping.md` — Mapping of skills to groups
-- `docs/pipeline-stage-to-skills.md` — Pipeline stage (requirements → design → dev → test → deploy) to skills mapping
-- `docs/skills-ecosystem.md` — Overview of the broader skills ecosystem across related repos
+## CI Workflows
 
-## Adding a New Skill
+Two GitHub Actions run on PRs that modify `**/SKILL.md` files:
 
-1. Create `skills/<group>-skills/<skill-name>/SKILL.md` with proper frontmatter
-2. Add optional subdirectories (`references/`, `scripts/`, `examples/`, `assets/`)
-3. If the group plugin already exists in `marketplace.json`, append the skill path to its `skills` array
-4. If it's a new group, add both the plugin entry in `marketplace.json` and update `docs/repository-map.md`
-5. Update `SKILLS_INDEX.md` with the new skill entry
-6. Update README snapshot numbers if counts changed
+1. **skill-review.yml** — Runs [tesslio/skill-review-and-optimize](https://github.com/tesslio/skill-review-and-optimize) to score SKILL.md quality and post AI-suggested improvements as a PR comment
+2. **skill-optimize-apply.yml** — When a contributor comments `/apply-optimize` on a PR, commits the AI-suggested improvements directly to the branch
+
+## When Working in This Repo
+
+### Editing documentation
+- Language convention: **Chinese** for README, comments, and commit messages. English versions exist as `*.en.md` or `*_EN.md` counterparts.
+- README skill counts and package tables are the primary user-facing content — keep them accurate.
+- `docs/repository-map.md` tracks discrepancies between what exists in-repo and what's in the marketplace (now mostly historical since migration).
+
+### Creating or editing skills
+Skills live in individual package repos now, not here. If you need to work on a skill:
+1. Clone the relevant package repo (e.g., `git clone https://github.com/full-stack-skills/vue-skills`)
+2. Skills follow the Agent Skills spec: `skills/<skill-name>/SKILL.md` with YAML frontmatter (`name`, `description`)
+3. SKILL.md must be under 500 lines; reference material goes in `references/`
+4. `description` is the trigger mechanism — write it to describe *when* the skill activates, not just what it is
+
+### Stale files
+Several files reference the old monorepo structure and are no longer accurate:
+- `SKILLS_INDEX.md` — references `skills/` paths that no longer exist
+- `QUICKSTART.md` — references `.claude-plugin/marketplace.json` which was removed during migration
+- `docs/repository-map.md` — describes pre-migration state (42 groups, 422 skills in-repo)
 
 ## Important Constraints
 
-- `skills/pencil-skills/docs/` is treated as supporting documentation, not a skill directory — excluded from conversion
-- The `.gitignore` excludes `.DS_Store`, `__pycache__/`, `.idea/`, `.vscode/`
-- License: Apache 2.0 (repo-level), but `skills/document-skills/{docx,pptx,pdf,xlsx}` are source-available, not open source
-- Skills use progressive disclosure: SKILL.md should be concise, reference material goes in separate files
-- Script paths in SKILL.md should use the absolute mount path format: `/mnt/skills/user/{skill-name}/scripts/{script}.sh`
+- License: Apache 2.0 (repo-level)
+- `ruvector.db` and `agentdb.rvf` are generated artifacts (Ruflo code intelligence), not source files
+- The `media/` directory contains demo screenshots referenced by README
+- `.gitignore` excludes `.DS_Store`, `__pycache__/`, `.idea/`, `.vscode/`

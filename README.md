@@ -90,6 +90,7 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [uniapp-skills](https://github.com/full-stack-skills/uniapp-skills) | 13 | `npx skills add full-stack-skills/uniapp-skills` |
 | [swift-skills](https://github.com/full-stack-skills/swift-skills) | 7 | `npx skills add full-stack-skills/swift-skills` |
 | [agent-skills](https://github.com/full-stack-skills/agent-skills) | 15 | `npx skills add full-stack-skills/agent-skills` |
+| [pixijs-skills](https://github.com/pixijs/pixijs-skills) | 1 | `npx skills add pixijs/pixijs-skills` |
 
 ### 前端 UI 库（13 个技能）
 
@@ -300,6 +301,9 @@ cp -r <skill-name>/skills/* .claude/skills/
 | **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
 | **Skills 目录** | [skills.sh](https://skills.sh) |
 | **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
+| **Addy Osmani's Agent Skills** | [github.com/addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
+| **Browserbase Skills** | [github.com/browserbase/skills](https://github.com/browserbase/skills) |
+| **Google Skills** | [github.com/google/skills](https://github.com/google/skills) |
 
 ---
 
