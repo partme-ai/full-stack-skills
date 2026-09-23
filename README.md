@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**763 个 Agent Skills。51 个技能包。一个统一生态。**
+**768 个 Agent Skills。52 个技能包。一个统一生态。**
 
 *前端 · 后端 · 移动端 · DevOps · AI 设计工具 — 生产级品质，独立安装。*
 
@@ -26,18 +26,18 @@
 
 ## 简介
 
-**Full Stack Skills** 是面向 AI 编码智能体的最全面 Agent Skills 集合的导航站。原为 460+ stars 的 monorepo，现已拆分为 [full-stack-skills](https://github.com/full-stack-skills) GitHub 组织下的 **51 个可独立安装的包**。
+**Full Stack Skills** 是面向 AI 编码智能体的最全面 Agent Skills 集合的导航站。原为 460+ stars 的 monorepo，现已拆分为 [full-stack-skills](https://github.com/full-stack-skills) GitHub 组织下的 **52 个可独立安装的包**。
 
 每个包提供专业知识、工作流和参考资料，AI 智能体按需加载 — 保持上下文占用最小化，同时在需要时提供深度领域专业知识。
 
-> **迁移完成（2026 年 6 月）**：当前 763 个技能均位于独立仓库。本仓库现在是目录和导航站。所有现有 stars 和历史记录均保留在此。
+> **迁移完成（2026 年 6 月）**：当前 768 个技能均位于独立仓库。本仓库现在是目录和导航站。所有现有 stars 和历史记录均保留在此。
 
 ### 我们要解决的问题
 
 | 缺口 | 问题 | 解决方案 |
 |------|------|----------|
 | **上下文溢出** | 一次加载所有技能会超过 token 限制 | 通过 `npx skills add` 按包按需加载 |
-| **领域专业知识** | 通用 AI 缺乏深度框架知识 | 跨 18 个领域的 763 个专业技能 |
+| **领域专业知识** | 通用 AI 缺乏深度框架知识 | 跨 18 个领域的 768 个专业技能 |
 | **可发现性** | 技能分散在各个仓库，难以查找 | 本目录 — 一个 README，所有包链接 |
 | **版本锁定** | monorepo 强制协调发布 | 每个包独立版本管理和发布 |
 
@@ -52,6 +52,7 @@ npx skills add full-stack-skills/vue-skills      # Vue.js 生态（7 个技能�
 npx skills add full-stack-skills/tauri-skills     # Tauri 桌面/移动（52 个技能）
 npx skills add full-stack-skills/t2ui-skills      # t2ui AI 设计工具（97 个技能）
 npx skills add full-stack-skills/codeguard-skills # 代码质量与安全治理（68 个技能）
+npx skills add full-stack-skills/codereview-skills # 语义审查增强工作流（5 个技能）
 ```
 
 或安装包中的特定技能：
@@ -187,11 +188,14 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [speckit-skills](https://github.com/full-stack-skills/speckit-skills) | 13 | `npx skills add full-stack-skills/speckit-skills` |
 | [openspec-skills](https://github.com/full-stack-skills/openspec-skills) | 15 | `npx skills add full-stack-skills/openspec-skills` |
 
-### 代码质量与治理（68 个技能）
+### 代码质量与治理（73 个技能）
 
 | 包 | 技能数 | 安装 |
 |---|--------|------|
 | [codeguard-skills](https://github.com/full-stack-skills/codeguard-skills) | 68 | `npx skills add full-stack-skills/codeguard-skills` |
+| [codereview-skills](https://github.com/full-stack-skills/codereview-skills) | 5 | `npx skills add full-stack-skills/codereview-skills` |
+
+CodeReview 的五个增强技能不包含 [Alibaba OCR 官方两个技能](https://github.com/alibaba/open-code-review/tree/main/skills)；它们由上游维护，可另行安装，或通过 CodeReview 插件的固定版本快照使用。
 
 ### 工具链（1 个技能）
 
