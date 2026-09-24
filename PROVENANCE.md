@@ -4,7 +4,7 @@ This document records the provenance, licensing, and redistribution terms for th
 `full-stack-skills` collection, so downstream consumers and directory reviewers can
 audit it without guesswork.
 
-_Last updated: 2026-09-11_
+_Last updated: 2026-09-24_
 
 ---
 
@@ -15,7 +15,7 @@ The collection is **not a single monolithic repository**. It is composed of:
 | Layer | Location | Contents |
 |---|---|---|
 | **Hub** | `github.com/partme-ai/full-stack-skills` | Catalog, docs, platform guide. **No skill code.** |
-| **Packages** | `github.com/full-stack-skills/<package>` | 49 independently versioned skill packages (each its own Git repo); `boss-skills` exists in the worktree but is excluded — see §4 |
+| **Packages** | `github.com/full-stack-skills/<package>` | 53 independently versioned skill packages (each its own Git repo); `boss-skills` exists in the worktree but is excluded — see §4 |
 | **Skills** | `<package>/skills/<skill-name>/` | One directory per skill, containing `SKILL.md` + optional `references/`, `examples/`, `scripts/`, `assets/` |
 
 Skills are installed individually via the standard Agent Skills mechanism:
@@ -44,11 +44,13 @@ Third-party components embedded in this collection (fonts, libraries, bundled me
 are attributed in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
 > **Skill-level license scheme (unified 2026-09-11).** Every skill declares its
-> license in the `SKILL.md` frontmatter `license:` field, with exactly two values:
+> license in the `SKILL.md` frontmatter `license:` field, with two canonical values
+> (counts measured 2026-09-24; 9 skills added after the unification are not yet
+> normalized — see §7):
 >
 > | Value | Applies to | Count |
 > |---|---|---:|
-> | `Apache-2.0` | First-party skills authored by PartMe.AI | 636 |
+> | `Apache-2.0` | First-party skills authored by PartMe.AI | 736 |
 > | `MIT` | Skills whose content derives from, or is authored by, a third party | 35 |
 >
 > The MIT set is itemized in §3.1 and §3.2 below. Skills must not be relicensed to
@@ -64,7 +66,7 @@ are attributed in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
 ## 3. Skill-level license exceptions
 
-Most of the 671 skills in the collection are Apache-2.0. The following skills carry
+Most of the 780 skills in the collection are Apache-2.0. The following skills carry
 a **different** license and must be treated accordingly.
 
 ### 3.1 Upstream-derived skills (content copied or adapted from other projects)
@@ -89,7 +91,9 @@ with `github/spec-kit` (MIT), those skills were **regenerated directly from the 
 upstream** rather than from the AGPL-3.0 packaging. The current text matches the MIT
 source at 0.96–0.99 similarity and carries the MIT notice. `speckit-baseline` has no
 official Spec Kit counterpart, so its analysis workflow was rewritten as first-party
-content that reuses only the (MIT) spec-structure conventions.
+content that reuses only the (MIT) spec-structure conventions. As measured 2026-09-24,
+`speckit-baseline`'s frontmatter still reads `license: MIT` even though its content is
+first-party — normalization is tracked in §7.
 
 **Redistribution:** for these skills, preserve the `LICENSE.txt` and the source note
 in any copy or substantial portion. Where the upstream license is MIT, that means
@@ -168,7 +172,7 @@ Apache-2.0. No upstream source code is copied.
 
 ## 4. Package inventory
 
-49 packages, 693 skills (counted by `find <pkg>/skills -maxdepth 1 -mindepth 1 -type d` on 2026-09-16). The `boss-skills` directory is excluded because it is an old mixed-in personal scratch dir with no `skills/` subfolder. Each is an independent repository under the `full-stack-skills` GitHub organization.
+53 packages, 780 skills (counted by `find <pkg>/skills -maxdepth 2 -name SKILL.md` on 2026-09-24). The `boss-skills` directory is excluded because it is an old mixed-in personal scratch dir with no `skills/` subfolder. The README catalog additionally excludes `skills-toolchain`, `teaching-skills` and `social-skills` (decision 2026-09-24), so the catalog advertises 50 packages / 774 skills while this inventory still covers all 53 repositories for licensing purposes. Each is an independent repository under the `full-stack-skills` GitHub organization.
 
 | Package | Skills | License | Repo |
 |---|---:|---|---|
@@ -177,13 +181,16 @@ Apache-2.0. No upstream source code is copied.
 | `antd-skills` | 4 | Apache-2.0 | [↗](https://github.com/full-stack-skills/antd-skills) |
 | `ascii-skills` | 13 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ascii-skills) |
 | `avue-skills` | 3 | Apache-2.0 | [↗](https://github.com/full-stack-skills/avue-skills) |
+| `bt-linux-panel-skills` | 6 | Apache-2.0 | [↗](https://github.com/full-stack-skills/bt-linux-panel-skills) |
 | `build-skills` | 7 | Apache-2.0 (1 MIT skill, §3.2) | [↗](https://github.com/full-stack-skills/build-skills) |
 | `chart-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/chart-skills) |
 | `cocos-skills` | 1 | Apache-2.0 (1 MIT skill, §3.2) | [↗](https://github.com/full-stack-skills/cocos-skills) |
+| `codeguard-skills` | 68 | Apache-2.0 | [↗](https://github.com/full-stack-skills/codeguard-skills) |
+| `codereview-skills` | 5 | Apache-2.0 | [↗](https://github.com/full-stack-skills/codereview-skills) |
 | `database-skills` | 5 | Apache-2.0 | [↗](https://github.com/full-stack-skills/database-skills) |
 | `ddd-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ddd-skills) |
 | `ddd4j-skills` | 62 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ddd4j-skills) |
-| `design-skills` | 9 | Apache-2.0 | [↗](https://github.com/full-stack-skills/design-skills) |
+| `design-skills` | 15 | Apache-2.0 | [↗](https://github.com/full-stack-skills/design-skills) |
 | `devops-skills` | 10 | Apache-2.0 (1 MIT-derived skill, §3.1) | [↗](https://github.com/full-stack-skills/devops-skills) |
 | `docker-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/docker-skills) |
 | `document-skills` | 11 | Apache-2.0 (3 MIT skills, §3.5) | [↗](https://github.com/full-stack-skills/document-skills) |
@@ -194,18 +201,21 @@ Apache-2.0. No upstream source code is copied.
 | `go-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/go-skills) |
 | `java-skills` | 39 | Apache-2.0 | [↗](https://github.com/full-stack-skills/java-skills) |
 | `kotlin-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/kotlin-skills) |
+| `mobile-native-skills` | 2 | ⚠ No Apache-2.0 grant at package level — `LICENSE` holds third-party notices only (§7); 2 skills use the legacy `Complete terms in LICENSE.txt` spelling | [↗](https://github.com/full-stack-skills/mobile-native-skills) |
 | `nodejs-skills` | 4 | Apache-2.0 | [↗](https://github.com/full-stack-skills/nodejs-skills) |
 | `nvm-skills` | 15 | Apache-2.0 | [↗](https://github.com/full-stack-skills/nvm-skills) |
 | `ocrmypdf-skills` | 5 | Apache-2.0 | [↗](https://github.com/full-stack-skills/ocrmypdf-skills) |
 | `openspec-skills` | 15 | Apache-2.0 | [↗](https://github.com/full-stack-skills/openspec-skills) |
 | `pencil-skills` | 28 | Apache-2.0 (§3.4 pointer) | [↗](https://github.com/full-stack-skills/pencil-skills) |
+| `processon-skills` | 7 | Apache-2.0 (all 7 skills missing the `license:` field, §7) | [↗](https://github.com/full-stack-skills/processon-skills) |
 | `python-skills` | 19 | Apache-2.0 (16 MIT-derived skills, §3.1) | [↗](https://github.com/full-stack-skills/python-skills) |
 | `react-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/react-skills) |
 | `rust-skills` | 29 | Apache-2.0 | [↗](https://github.com/full-stack-skills/rust-skills) |
+| `skills-toolchain` | 1 | Apache-2.0 | [↗](https://github.com/full-stack-skills/skills-toolchain) |
 | `social-skills` | 2 | Apache-2.0 | [↗](https://github.com/full-stack-skills/social-skills) |
 | `speckit-skills` | 13 | Apache-2.0 (10 MIT-derived skills, §3.1) | [↗](https://github.com/full-stack-skills/speckit-skills) |
 | `spring-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/spring-skills) |
-| `stitch-skills` | 29 | Apache-2.0 (2 Apache-2.0-derived §3.1; 10 pointer §3.4) | [↗](https://github.com/full-stack-skills/stitch-skills) |
+| `stitch-skills` | 43 | Apache-2.0 (2 Apache-2.0-derived §3.1; 10 pointer §3.4) | [↗](https://github.com/full-stack-skills/stitch-skills) |
 | `svelte-skills` | 16 | Apache-2.0 | [↗](https://github.com/full-stack-skills/svelte-skills) |
 | `swift-skills` | 7 | Apache-2.0 | [↗](https://github.com/full-stack-skills/swift-skills) |
 | `t2ui-skills` | 97 | Apache-2.0 | [↗](https://github.com/full-stack-skills/t2ui-skills) |
@@ -278,6 +288,10 @@ Tracked openly so reviewers do not have to discover them independently:
 | 4 different license value spellings (`Complete terms in LICENSE.txt` ×214, `Apache-2.0` ×127, `MIT` ×31, `Apache 2.0` ×1) | **Fixed 2026-09-11** — unified: `Apache-2.0` (636) / `MIT` (35) |
 | `build-skills/rspack` and `cocos-skills/cocos2d-x` pointed at `LICENSE.txt` while their actual license is third-party MIT | **Fixed 2026-09-11** — frontmatter corrected to `MIT` |
 | 5 skills had unparseable YAML frontmatter (unquoted colon inside `description:`) | **Fixed 2026-09-11** — description values quoted |
+| README / `Package inventory` / `scripts/repositories.txt` stated "52 packages / 768 skills" while the package worktrees held **53 packages / 780 skills** — `bt-linux-panel-skills` and `codereview-skills` missing from `repositories.txt`; `bt-linux-panel-skills` / `codeguard-skills` / `codereview-skills` / `mobile-native-skills` / `processon-skills` / `skills-toolchain` missing from `Package inventory`; `design-skills` understated (9 vs 15); `stitch-skills` understated (29 vs 43); category summary table stale (49 packages / 693 skills) | **Fixed 2026-09-24** — `zh`/`en` README + `PROVENANCE §4` + `scripts/repositories.txt` corrected to 53 packages / 780 skills; `scripts/validate_catalog.py` green; `SKILLS_INDEX.md` regenerated from package repos |
+| 9 skills added after the 2026-09-11 license unification carry a non-normalized `license:` field (`mobile-native-skills/android-kotlin`, `mobile-native-skills/ios-swift` = `Complete terms in LICENSE.txt`; all 7 `processon-skills` skills have no `license:` field) | **Open** — normalize in the package repos, then update the §2 counts |
+| `mobile-native-skills` package-level `LICENSE` contains third-party notices only — no Apache-2.0 grant (same defect class as the 2026-09-11 fix above, recurring in a package added later) | **Open** — split into `LICENSE` (Apache-2.0) + `THIRD-PARTY-NOTICES.md` in the package repo |
+| `speckit-skills/speckit-baseline` frontmatter reads `license: MIT` although its content is first-party (§3.1) | **Open** — normalize to `Apache-2.0` in the package repo, or retain MIT deliberately and amend §3.1 |
 
 ## 8. Contact
 

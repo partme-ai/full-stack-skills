@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Full-Stack-Skills is the **navigation hub and catalog** for 460+ Agent Skills across 42 independently installable packages. Originally a monorepo, all skills were migrated to individual repos in the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization in June 2026. This repo now serves as:
+Full-Stack-Skills is the **navigation hub and catalog** for 774 Agent Skills across 50 independently installable packages. Originally a monorepo, all skills were migrated to individual repos in the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization in June 2026. This repo now serves as:
 
 - **Catalog**: README tables linking to all skill packages with install commands
 - **Documentation**: Agent specs, platform guides, role definitions, ecosystem mappings
@@ -26,7 +26,7 @@ full-stack-skills/
 ├── QUICKSTART.md          # 5-minute marketplace setup guide
 ├── AWESOME_AGENT_SKILLS.md # Curated list of external agent skill collections
 ├── PLANNING_SKILL_CATEGORIES.md # Skill category planning and classification
-├── SKILLS_INDEX.md        # Legacy index (paths reference old monorepo structure, now stale)
+├── SKILLS_INDEX.md        # Per-package skill name index (regenerated from package repos)
 ├── EVALUATION_REPORT.md   # Skill quality evaluation report
 ├── docs/                  # Detailed mapping and ecosystem documents
 ├── agents/                # Agent skill specs (agent-skills-spec.md, etc.)
@@ -54,11 +54,11 @@ Or via Claude Code's plugin system:
 | Repo | Role |
 |------|------|
 | **full-stack-skills** (this repo) | Catalog, docs, ecosystem mappings |
-| [full-stack-skills/*](https://github.com/full-stack-skills) | 42 individual skill packages (vue-skills, tauri-skills, etc.) |
-| [t2ui-skills](https://github.com/partme-ai/t2ui-skills) | PRD → ASCII UI translation, Stitch/Pencil design languages |
-| [stitch-skills](https://github.com/partme-ai/stitch-skills) | Stitch design language → prototypes |
-| [pencil-skills](https://github.com/partme-ai/pencil-skills) | Pencil design language → product diagrams (.pen) |
-| [tauri-skills](https://github.com/partme-ai/tauri-skills) | Tauri cross-platform desktop/mobile development |
+| [full-stack-skills/*](https://github.com/full-stack-skills) | 50 individual skill packages (vue-skills, tauri-skills, etc.) |
+| [t2ui-skills](https://github.com/full-stack-skills/t2ui-skills) | PRD → ASCII UI translation, Stitch/Pencil design languages |
+| [stitch-skills](https://github.com/full-stack-skills/stitch-skills) | Stitch design language → prototypes |
+| [pencil-skills](https://github.com/full-stack-skills/pencil-skills) | Pencil design language → product diagrams (.pen) |
+| [tauri-skills](https://github.com/full-stack-skills/tauri-skills) | Tauri cross-platform desktop/mobile development |
 
 The pipeline stage → skill mapping is in `docs/pipeline-stage-to-skills.md`. External skill library discovery sources are in `docs/external-skills.md`.
 
@@ -85,7 +85,6 @@ Skills live in individual package repos now, not here. If you need to work on a 
 
 ### Stale files
 Several files reference the old monorepo structure and are no longer accurate:
-- `SKILLS_INDEX.md` — references `skills/` paths that no longer exist
 - `QUICKSTART.md` — references `.claude-plugin/marketplace.json` which was removed during migration
 - `docs/repository-map.md` — describes pre-migration state (42 groups, 422 skills in-repo)
 

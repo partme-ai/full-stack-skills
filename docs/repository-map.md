@@ -1,5 +1,7 @@
 # full-stack-skills 仓库结构与技能目录总览
 
+> **历史文档（monorepo 拆分前快照）**：本文所述 `skills/<组>/` 目录、`.claude-plugin/marketplace.json`、`adapters/` 均已随 2026 年 6 月拆分移除；42 技能组 / 422 个 `SKILL.md` 是当时状态。现行目录见 [README.md](../README.md) 技能目录（50 个包 / 774 个技能）与 [SKILLS_INDEX.md](../SKILLS_INDEX.md)。
+
 本文档基于当前仓库内 `skills/` 实际目录和 `.claude-plugin/marketplace.json` 生成，用于作为本仓库的结果型说明文档与目录总览入口。
 
 ## 一、当前仓库概况

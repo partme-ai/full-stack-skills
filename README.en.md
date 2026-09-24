@@ -2,7 +2,7 @@
 
 # Full Stack Skills
 
-**768 Agent Skills. 52 Skill Packages. One Ecosystem.**
+**774 Agent Skills. 50 Skill Packages. One Ecosystem.**
 
 *Frontend · Backend · Mobile · DevOps · AI Design Tools — production-ready, independently installable.*
 
@@ -26,18 +26,18 @@
 
 ## Introduction
 
-**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **52 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
+**Full Stack Skills** is the navigation hub for the most comprehensive collection of Agent Skills for AI coding agents. Originally a monorepo with 460+ stars, we've split into **50 independently installable packages** under the [full-stack-skills](https://github.com/full-stack-skills) GitHub organization.
 
 Each package provides specialized knowledge, workflows, and reference materials that AI agents load on-demand — keeping context footprint minimal while delivering deep domain expertise when needed.
 
-> **Migration Complete (June 2026)**: All 768 current skills live in individual repositories. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
+> **Migration Complete (June 2026)**: All 774 current skills live in individual repositories. This repo is now the catalog & navigation hub. All existing stars and history are preserved here.
 
 ### Problems We Solve
 
 | Gap | Problem | Solution |
 |-----|---------|----------|
 | **Context overflow** | Loading all skills at once exceeds token limits | Per-package on-demand loading via `npx skills add` |
-| **Domain expertise** | Generic AI lacks deep framework knowledge | 768 specialized skills across 18 domains |
+| **Domain expertise** | Generic AI lacks deep framework knowledge | 774 specialized skills across 15 domains |
 | **Discoverability** | Skills scattered across repos, hard to find | This catalog — one README, all packages linked |
 | **Version lock** | Monorepo forces coordinated releases | Each package independently versioned and published |
 
@@ -145,12 +145,12 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [threejs-skills](https://github.com/full-stack-skills/threejs-skills) | 18 | `npx skills add full-stack-skills/threejs-skills` |
 | [cocos-skills](https://github.com/full-stack-skills/cocos-skills) | 1 | `npx skills add full-stack-skills/cocos-skills` |
 
-### Architecture & Design Patterns (50 skills)
+### Architecture & Design Patterns (56 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [ddd-skills](https://github.com/full-stack-skills/ddd-skills) | 16 | `npx skills add full-stack-skills/ddd-skills` |
-| [design-skills](https://github.com/full-stack-skills/design-skills) | 9 | `npx skills add full-stack-skills/design-skills` |
+| [design-skills](https://github.com/full-stack-skills/design-skills) | 15 | `npx skills add full-stack-skills/design-skills` |
 | [drawio-skills](https://github.com/full-stack-skills/drawio-skills) | 2 | `npx skills add full-stack-skills/drawio-skills` |
 | [document-skills](https://github.com/full-stack-skills/document-skills) | 11 | `npx skills add full-stack-skills/document-skills` |
 | [processon-skills](https://github.com/full-stack-skills/processon-skills) | 7 | `npx skills add full-stack-skills/processon-skills` |
@@ -168,12 +168,13 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 |---------|--------|---------|
 | [database-skills](https://github.com/full-stack-skills/database-skills) | 5 | `npx skills add full-stack-skills/database-skills` |
 
-### DevOps & Containers (26 skills)
+### DevOps & Containers (32 skills)
 
 | Package | Skills | Install |
 |---------|--------|---------|
 | [devops-skills](https://github.com/full-stack-skills/devops-skills) | 10 | `npx skills add full-stack-skills/devops-skills` |
 | [docker-skills](https://github.com/full-stack-skills/docker-skills) | 16 | `npx skills add full-stack-skills/docker-skills` |
+| [bt-linux-panel-skills](https://github.com/full-stack-skills/bt-linux-panel-skills) | 6 | `npx skills add full-stack-skills/bt-linux-panel-skills` |
 
 ### Testing (10 skills)
 
@@ -196,24 +197,6 @@ npx skills add full-stack-skills/vue-skills --skill vue3
 | [codereview-skills](https://github.com/full-stack-skills/codereview-skills) | 5 | `npx skills add full-stack-skills/codereview-skills` |
 
 The five CodeReview workflows do not include [Alibaba's two upstream OCR skills](https://github.com/alibaba/open-code-review/tree/main/skills). Install those separately or use the CodeReview plugin's version-pinned snapshot.
-
-### Toolchain (1 skill)
-
-| Package | Skills | Install |
-|---------|--------|---------|
-| [skills-toolchain](https://github.com/full-stack-skills/skills-toolchain) | 1 | `npx skills add full-stack-skills/skills-toolchain` |
-
-### Teaching & Learning (3 skills)
-
-| Package | Skills | Install |
-|---------|--------|---------|
-| [teaching-skills](https://github.com/full-stack-skills/teaching-skills) | 3 | `npx skills add full-stack-skills/teaching-skills` |
-
-### Social & Communication (2 skills)
-
-| Package | Skills | Install |
-|---------|--------|---------|
-| [social-skills](https://github.com/full-stack-skills/social-skills) | 2 | `npx skills add full-stack-skills/social-skills` |
 
 ---
 
@@ -255,18 +238,16 @@ This keeps context footprint minimal while providing deep expertise when require
 | Build & Tooling | 3 | 26 |
 | Charts & ASCII Art | 2 | 15 |
 | Backend Frameworks | 9 | 184 |
-| Cross-Platform & Desktop | 3 | 57 |
+| Cross-Platform & Desktop | 4 | 59 |
 | 3D & Game | 2 | 19 |
-| Architecture & Design Patterns | 6 | 50 |
+| Architecture & Design Patterns | 6 | 56 |
 | Embedded & Firmware | 1 | 20 |
 | Database & Storage | 1 | 5 |
-| DevOps & Containers | 2 | 26 |
+| DevOps & Containers | 3 | 32 |
 | Testing | 1 | 10 |
 | Spec-Driven Dev | 2 | 28 |
-| Toolchain | 1 | 1 |
-| Teaching & Learning | 1 | 3 |
-| Social & Communication | 1 | 2 |
-| **Total** | **49** | **693** |
+| Code Quality & Governance | 2 | 73 |
+| **Total** | **50** | **774** |
 
 > 💡 `boss-skills` is an old mixed-in personal scratch directory (no `skills/` subfolder, just loose scripts). It is **not** counted as a skill package.
 

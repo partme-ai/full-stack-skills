@@ -1,5 +1,7 @@
 # TRACE Evaluation Report
 
+> **历史快照（2026-07，monorepo 拆分前）**：本报告仅覆盖当时的 57 个技能，不代表当前 50 个包 / 774 个技能的全量质量水平。现行技能清单见 [SKILLS_INDEX.md](SKILLS_INDEX.md)。
+
 ## Summary
 
 - **Total Skills Evaluated**: 57

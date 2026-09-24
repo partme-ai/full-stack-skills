@@ -3,10 +3,12 @@ angular-skills
 antd-skills
 ascii-skills
 avue-skills
+bt-linux-panel-skills
 build-skills
 chart-skills
 cocos-skills
 codeguard-skills
+codereview-skills
 database-skills
 ddd-skills
 ddd4j-skills
@@ -31,8 +33,6 @@ processon-skills
 python-skills
 react-skills
 rust-skills
-skills-toolchain
-social-skills
 speckit-skills
 spring-skills
 stitch-skills
@@ -40,7 +40,6 @@ svelte-skills
 swift-skills
 t2ui-skills
 tauri-skills
-teaching-skills
 testing-skills
 threejs-skills
 uniapp-skills

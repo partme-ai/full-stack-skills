@@ -1,5 +1,7 @@
 # 技能分组映射表
 
+> **历史文档（迁移规划表）**：本文是拆分前「先分组、后迁移」的规划产物，`marketplace.json` 与 `skills/<组>/` 结构已不存在。现行包与技能清单见 [SKILLS_INDEX.md](../SKILLS_INDEX.md)。
+
 本文档定义 `skills/` 下按组子目录与技能名的对应关系，用于「先分组、后迁移」的目录重组。每组对应 `skills/<组目录名>/<skill-name>/`，且 SKILL.md 的 frontmatter `name` 必须等于 `<skill-name>`（Agent Skills 规范）。**已入 marketplace 的技能路径均应对应下表某一组**；表末 **threejs-skills / vscode-skills** 为仓库内已存在目录、**尚未** 写入 `marketplace.json` 的组。若某技能目录尚未创建（仅 marketplace 有引用），则在对应组下注明「待补目录」。
 
 ## 已确定组（已迁移或待迁移）
