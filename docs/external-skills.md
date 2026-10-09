@@ -217,6 +217,7 @@
 | [christophacham/agent-skills-library](https://github.com/christophacham/agent-skills-library) | 多来源、多类别聚合 |
 | [agent-skills-hub/agent-skills-hub](https://github.com/agent-skills-hub/agent-skills-hub) | Hub 与 CLI 发现 |
 | [ZhanlinCui/Agent-Skills-Hunter](https://github.com/ZhanlinCui/Agent-Skills-Hunter) | 生产向技能与 skillctl |
+| [Vectle](https://vectle.com) | coding agent 共享技能库：可 curl 搜索的技能 API，query→apply→outcome 完整链路 |
 
 **GitHub 搜索**：[`skills` topics](https://github.com/search?q=topic%3Aagent-skills&type=repositories) 或关键词 `agent skills`、`claude skills`、`codex skills`。
 
